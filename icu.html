@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>contained</title>
+        <meta name="contained" content="noindex">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script> 
+                               <script>
+$(function(){
+//content toggle
+$(".body-content").hide();
+$(".body-title").on("click", function(){
+$(this).next(".body-content").toggle();});
+});  
+
+<body>
+    <div id="div1">
+<h2 class="body-title"><strong>新しいメッセージが（１）通あります！</strong></h2>
+<div class="body-content">
+
+    <div id="innerdiv">
+
+      <strong>特別収容プロトコル:</strong> SCP-CN-994の発生パターンが今もなお未確定なため、SCP-CN-994イベントに対する有効な予防策は未だ確立されていません。現在の収容プロトコルはオブジェクトがもたらす被害を緩和させることに重点が置かれています。新たに影響を受けた職員には毎週心理検査を実施するとともに、自殺兆候の有無を確認しなければなりません。必要があれば影響の減衰のため、記憶処理を実施してください。機動部隊-庚午-23（”不可視”）が影響を受けた職員を救護する目的で常時待機しています。SCP-CN-994の起源や発生頻度等の情報についての研究が現在進行中です。サイト-CN-34の職員は密閉空間に単独でいる状況を可能な限り避けるようにしてください。<br><br>
+
+      <strong>説明:</strong> SCP-CN-994はサイト-CN-34内部で発生する異常現象です。SCP-CN-994イベントが発生すると、影響を受けた人間が所在する密閉空間（閉め切ったオフィスやトイレ等）と外部を連絡している戸や窓が内部から開けなくなります。同時に、密閉空間内の壁面や床、障害物の表面には大量の眼球が徐々に浮かび上がります（以下、SCP-CN-994-1）。現在、SCP-CN-994-1を採取する試みは失敗に終わっています。少数の発生例において、影響を受けた者は使用している電子機器の画面上に大量の無意味な文字符号が出現したり、空間の四方から低く沈んだ衝撃音が発生したと報告しています。影響を受けた空間を外部から強引に開放するとイベントは終了し、SCP-CN-994-1及び空間内の異常は全て消失します。<br><br>
+
+      今の所、影響を受けた人間はおよそ4時間から2週間以内に各種手段を用いて自殺を図ります。この精神影響は記憶処理によって緩和させることが可能です。しかしその後、再び単独で密閉空間にいる状態になった場合、対象は除去された記憶を再度獲得します。これは対象により強烈な自殺衝動を抱かせる結果に繋がります。</div>
+
+     </div>
+
+
+    <script type="text/javascript">
+      var time =10000
+      var ICU = ["出","て","い","け","デ","テ","イ","ケ"]
+      var as ="div1"
+      var counter=0;
+      var flag=0;
+      var content1=document.getElementById("div1").innerHTML
+      
+      document.getElementById("innerdiv").style.display="none"
+      
+      function Random(n)
+      {
+        return Math.floor(Math.random()*n)
+      }
+
+      function sleep(numberMillis)
+      {
+        var now = new Date();
+        var exitTime = now.getTime() + numberMillis;
+        while (true) {
+          now = new Date();
+          if (now.getTime() > exitTime)
+            return;
+        }
+      }
+      
+      function Change(str)
+      {
+        try
+        {
+          var content=str.split("")
+          var cache = Random(content.length)
+
+          for(i=0;i<5;i++){content[cache+i]=ICU[i]}
+          if(time>=100) time=time-1000
+          else counter++
+          if (counter>50000) {throw new Error("stop here");}
+          document.getElementById(as).innerHTML = content.join("")
+          clearInterval(s)
+          var s=setInterval("content1=Change(content1)",time)
+          return content.join("")
+        }
+
+        catch(err)
+        {
+          if(flag==0)
+          {
+            setTimeout("var a=1",10000)
+            document.write("<div>まだ見てるのね、懲りないの？それともこんなもんじゃ足りない？</div>")
+            flag=flag+1
+            sleep(5000)
+          }
+        }
+      }
+
+      function go()
+      {
+       document.getElementById("innerdiv").style.display="block"
+       var s=setInterval("content1=Change(content1)",time)
+      }
+
+
+    </script>
+  </body>
+</html>
+[[/html]]
