@@ -3,8 +3,8 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>contained</title>
-        <meta name="観てるよ" content="noindex">
+        <title>観てるよ</title>
+        <meta name="contained" content="noindex">
 <body style="font-family: monospace;">
    <div id="div1">
 
@@ -35,7 +35,7 @@
 </div>
      </div>
     <script type="text/javascript">
-      var time =10000
+      var time =5000
       var ICU = ["み","て","る","よ"]
       var as ="div1"
       var counter=0;
@@ -68,9 +68,9 @@
           var cache = Random(content.length)
 
           for(i=0;i<10;i++){content[cache+i]=ICU[i]}
-          if(time>=100) time=time-1000
+          if(time>=50) time=time-500
           else counter++
-          if (counter>60000) {throw new Error("stop here");}
+          if (counter>50000) {throw new Error("stop here");}
           document.getElementById(as).innerHTML = content.join("")
           clearInterval(s)
           var s=setInterval("content1=Change(content1)",time)
@@ -81,10 +81,10 @@
         {
           if(flag==0)
           {
-            setTimeout("var a=1",60000)
+            setTimeout("var a=1",50000)
             document.write("<div>よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね</strong>  </div>")
             flag=flag+1
-            sleep(6000)
+            sleep(4000)
            
           }
         }
