@@ -10,18 +10,95 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
     <script src="script.js"></script>
+    <style>
+      /* 기본 스타일 */
+      body {
+        font-family: 'Noto Sans JP', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      
+      header {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+      }
+
+      header .logo {
+        font-size: 24px;
+      }
+
+      .search {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+
+      .nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav ul li {
+        margin: 0 15px;
+      }
+
+      .nav ul li a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      .info {
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+      }
+
+      /* 반응형 디자인 */
+      @media (max-width: 768px) {
+        .search {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav ul {
+          flex-direction: column;
+        }
+
+        .nav ul li {
+          margin: 10px 0;
+        }
+
+        .info {
+          margin: 30px 20px;
+        }
+
+        .logo {
+          font-size: 18px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <header> <!--로고+검색창-->
-        <h1 class="logo"><!--로고가 들어가는 영역-->
-          <a href="index.html"></a>
+    <header> 
+        <h1 class="logo">
+          <a href="index.html">Logo</a>
         </h1>
-        <div  class="search"><!--검색창-->
-          <input class="search-text" type="text"  placeholder="検索語を入力します"  onkeyup="enterkeySearch()"/> <!--placeholder = 검색창 내부에 검색하기 전에 보이는 글자-->
+        <div class="search">
+          <input class="search-text" type="text" placeholder="検索語を入力します" onkeyup="enterkeySearch()"/>
           <button class="search-btn" type="submit"></button>
         </div>
     </header>
-    <div class="nav"><!--메뉴-->
+    <div class="nav">
       <ul>
         <li><a href="#">紹介</a></li>
         <li><a href="#">利用規約</a></li>
@@ -33,16 +110,15 @@
     </div>
     <main>
       <div class="info">
-        <div class="text"> <!--메인 페이지 텍스트-->
+        <div class="text"> 
           <p id="text1">市民の心身の安寧と、回復</p><br>
-          <p id="text2">健康の為日々邁進して参ります</p></div>
+          <p id="text2">健康の為日々邁進して参ります</p>
+        </div>
       </div>
     </main>
-    <footer> <!--바닥 영역-->
+    <footer> 
       <p>© 2011 CU1000 N/A City General Hospital, All rights reserved.</p>
-      <button id="page-top" onclick="backToTop()"> <!--위로 올라가는 버튼-->
-        ▲ TOP
-      </button>
+      <button id="page-top" onclick="backToTop()">▲ TOP</button>
     </footer>
   </body>
 </html>
