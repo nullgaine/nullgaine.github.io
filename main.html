@@ -62,63 +62,111 @@
         background-color: #333;
         color: white;
       }
+/* 기존 CSS는 그대로 유지 */
 
-      /* 반응형 디자인 */
-      @media (max-width: 768px) {
-        .search {
-          flex-direction: column;
-          align-items: center;
-        }
+/* 반응형 디자인을 위한 미디어 쿼리 추가 */
+@media (max-width: 768px) {
+  /* 헤더 수정 */
+  header {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
 
-        .nav ul {
-          flex-direction: column;
-        }
+  header .logo a {
+    width: 200px; /* 로고 크기 축소 */
+    height: auto;
+    margin-left: 0;
+    margin-top: 0;
+  }
 
-        .nav ul li {
-          margin: 10px 0;
-        }
+  /* 검색창 수정 */
+  header .search {
+    right: 0;
+    position: relative;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-        .info {
-          margin: 30px 20px;
-        }
+  header .search-text {
+    width: 80%;
+    margin: 5px 0;
+  }
 
-        .logo {
-          font-size: 18px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header> 
-        <h1 class="logo">
-          <a href="index.html">Logo</a>
-        </h1>
-        <div class="search">
-          <input class="search-text" type="text" placeholder="検索語を入力します" onkeyup="enterkeySearch()"/>
-          <button class="search-btn" type="submit"></button>
-        </div>
-    </header>
-    <div class="nav">
-      <ul>
-        <li><a href="#">紹介</a></li>
-        <li><a href="#">利用規約</a></li>
-        <li><a href="#">図書館</a></li>
-        <li><a href="#">関連情報</a></li>
-        <li><a href="#">連絡所</a></li>
-        <li><a href="#">お問い合わせ</a></li>
-      </ul>
-    </div>
-    <main>
-      <div class="info">
-        <div class="text"> 
-          <p id="text1">市民の心身の安寧と、回復</p><br>
-          <p id="text2">健康の為日々邁進して参ります</p>
-        </div>
-      </div>
-    </main>
-    <footer> 
-      <p>© 2011 CU1000 N/A City General Hospital, All rights reserved.</p>
-      <button id="page-top" onclick="backToTop()">▲ TOP</button>
-    </footer>
-  </body>
-</html>
+  header .search-btn {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    margin-top: 5px;
+  }
+
+  /* 네비게이션 수정 */
+  .nav {
+    width: 100%;
+    height: auto;
+    background-color: #683722;
+    border: none;
+    padding: 10px 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav ul li {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  /* 메인 섹션 수정 */
+  main {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  main .info {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background-image: url('image/main_2.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  main .info .text {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: center;
+  }
+
+  main .info .text p {
+    writing-mode: horizontal-tb;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  /* 푸터 수정 */
+  footer {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  footer #page-top {
+    position: relative;
+    margin-top: 10px;
+    right: 0;
+  }
+}
