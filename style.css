@@ -210,4 +210,112 @@ footer #page-top{
   outline: none;
 }
 
+/* 기존 CSS는 그대로 유지 */
+
+/* 반응형 디자인을 위한 미디어 쿼리 추가 */
+@media (max-width: 768px) {
+  /* 헤더 수정 */
+  header {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  header .logo a {
+    width: 200px; /* 로고 크기 축소 */
+    height: auto;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  /* 검색창 수정 */
+  header .search {
+    right: 0;
+    position: relative;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header .search-text {
+    width: 80%;
+    margin: 5px 0;
+  }
+
+  header .search-btn {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    margin-top: 5px;
+  }
+
+  /* 네비게이션 수정 */
+  .nav {
+    width: 100%;
+    height: auto;
+    background-color: #683722;
+    border: none;
+    padding: 10px 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav ul li {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  /* 메인 섹션 수정 */
+  main {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  main .info {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background-image: url('image/main_2.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  main .info .text {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: center;
+  }
+
+  main .info .text p {
+    writing-mode: horizontal-tb;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  /* 푸터 수정 */
+  footer {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  footer #page-top {
+    position: relative;
+    margin-top: 10px;
+    right: 0;
+  }
+}
 
