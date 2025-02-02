@@ -1,5 +1,6 @@
 /*reset style*/
 
+/* 전체 스타일 영역(reset css) */
 * {
   margin: 0;
   padding: 0;
@@ -17,167 +18,177 @@ li {
   list-style: none;
 }
 
+/* 개별 스타일 지정 영역 */
 
 /*header*/
-
 header {
   width: 100%;
-  height: 420px;
-
-} /* //header */
-
-header .header-top {
-  width: 100%;
-  height: 298px;
+  height: auto;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 } /* //hedaer .header-top */
 
-header .logo {
-  width: 634px;
-  height: 97px;
+/* 로고 */
+header .logo a {
+  width: 200px;
+  height: auto;
+  display: block;
   background-image: url('image/logo.png');
   background-size: cover;
   margin-top: -25px;
   margin-left: 110px;
 }
 
-header .header-top .search {
+/* 검색창 */
+header  .search {
   position: relative;
-  right: 180px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-header .header-top .search-text {
-  margin-right: 110px;
-  width: 348px;
-  height: 62px;
+header .search-text {
+  margin-right: 0;
+  width: 80%;
+  height: 50px;
   border: solid 5px #B7282E;
   border-right: 0;
   padding: 5px;
   margin-right: 0;
   outline: none;
-  float: left;
 }
-header .header-top .search-btn {
-  width: 62px;
-  height: 62px;
-  background-color: #B7282E;
-  background-image: url("image/search_Icon.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  float: right;
+
+header .search-btn {
+  width: 50px;
+  height: 50px;
+  background: #B7282E url("image/search_Icon.png") center center no-repeat;
   outline: none;
   border: 0;
 }
 
-
-/*아래는 메뉴 영역입니다. html색상 코드를 사용해 색상을 변경할 수 있습니다.*/
-header .nav {
+/* 네비게이션 */
+.nav {
   width: 100%;
-  height: 122px;
-  background-color: #683722; /*배경색*/
-  border-width: 5px 0; /*배경선 px= 선 굵기 작성법은  boder: 위아래px 양옆px 혹은 boder:위px 오른쪽px 아래px 왼쪽px 혹은 boder: 위px 양옆px 아래px 로 작성할 수 있습니다.*/
+  height: auto;
+  background-color: #683722;
+  border-width: 5px 0;
   border-style: solid;
   border-color: #dfca86;
-} /* //hedaer nav */
-
-header .nav ul {
-  height: 112px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  padding: 10px 0;
 }
 
-header .nav ul li {
+.nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav ul li {
   color: #fff;
   font-size: 24px;
-
+  margin: 10px;
 }
 
-header>.nav>ul>li::before {
-  content: "|";
-  float: left;
-  display: block;
-  margin: 0 80px;
-}
-
-header>.nav>ul>li:first-child::before {
-  margin-left: 0;
-}
-
-header>.nav>ul>li:last-child:after{
-  content: "|";
-  float: right;
-  display: block;
-  margin-left:80px;
-}
-
-
+/*메인*/
 main {
   width: 100%;
-  height: 974px;
   background-color: #FFF8E7;
   position: relative;
 }
 
-main .info{
-  width: 1401px;
-  height: 729px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -364.5px 0 0 -700.5px;
+main .info {
+  width: 100%;
   background-image: url('image/main_2.png');
   background-size: cover;
+  background-position: center;
+  padding: 50px;
 }
 
 main .info .text {
-  width: 326px;
-  height: 729px;
   position: absolute;
-  background-color: rgb(0, 0, 0, 0.5);
-  right: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  text-align: center;
 }
 
 main .info .text p {
-  writing-mode: vertical-rl;
-  text-align: center;
-  color: #fff;
-  font-size: 36px;
-  text-align: right;
-  position: absolute;
+  writing-mode: horizontal-tb;
+  font-size: 24px;
+  color: white;
 }
 
-main .info .text p#text1 {
-  right: 100px;
-  top: 77px;
-}
-main .info .text p#text2 {
-  right: 162px;
-  top: 128px;
-}
-
-
-
-/*footer*/
-
+/* 푸터 */
 footer {
   width: 100%;
-  height: 137px;
+  height: auto;
   background-color: #B7282E;
-  display: flex;
-  align-items: center;
+  padding: 20px;
+  text-align: center;
 }
 
-footer p {
-  color: #fff;
+footer #page-top {
+  width: 150px;
+  height: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  color: #683722;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 50px;
+  border: none;
+  outline: none;
 }
 
-footer>p:first-child {
-  margin-left: 110px;
+/* 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+  header .logo a {
+    width: 150px;
+  }
+
+  header .search {
+    right: 0;
+    position: relative;
+    margin-top: 10px;
+  }
+
+  header .search-text {
+    width: 80%;
+    height: 40px;
+    margin: 5px 0;
+  }
+
+  header .search-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav ul {
+    flex-direction: column;
+  }
+
+  .nav ul li {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+
+  main .info .text p {
+    font-size: 18px;
+  }
+
+  footer #page-top {
+    width: 130px;
+    height: 40px;
+  }
 }
-
-
-
