@@ -21,10 +21,10 @@
 
     <script>
         const pages = {
-            "病院": {title: "病院の案内", url: "hospital.html"},
-            "診療": {title: "診療内容", url: "medical.html"},
-            "アクセス": {title: "アクセス情報", url: "access.html"},
-            "料金": {title: "診療料金", url: "price.html"},
+            "削除される記録": {title: "間違ったパスです", url: "https://hospinfo-enuei-city.org/d_archive"},
+            "韓国語": {title: "한국어", url: "https://hospinfo-enuei-city.org/ko-dex","https://hospinfo-enuei-city.org/irrumderwelt-k","https://hospinfo-enuei-city.org/notice404-k"},
+            "アクセス": {title: "アクセス情報", url: "https://youtube.com/gaine_0"},
+            "英語": {title: "English", url: "https://hospinfo-enuei-city.org/en-dex","https://hospinfo-enuei-city.org/irrumderwelt-e"},
             "利用規約": {title: "利用規約", url: "https://hospinfo-enuei-city.org/guideline"},
             "図書館": {title: "図書館", url: "https://hospinfo-enuei-city.org/utamihon"}
         };
@@ -40,7 +40,7 @@
             resultsDiv.innerHTML = ""; // 初期化
 
             if (!keyword || !(keyword in pages)) {
-                resultsDiv.innerHTML = "<p>検索結果が見つかりませんでした。</p>";
+                resultsDiv.innerHTML = "<p>そんなのはまだ此処に無いよ。</p>";
                 return;
             }
 
