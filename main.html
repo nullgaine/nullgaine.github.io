@@ -14,9 +14,9 @@
       <div class="header-top">
         <div class="logo">
         </div>
-        <div  class="search">
-          <input class="search-text" type="text"  placeholder="検索語を入力します" onkeyup="enterkeySearch()"/>
-          <button class="search-btn" type="submit"></button>
+        <div class="search">
+          <input class="search-text" type="text" id="searchInput" placeholder="検索語を入力します" onkeyup="enterkeySearch()"/>
+          <button class="search-btn" type="submit" onclick="searchPage()"></button>
         </div>
       </div>
       <div class="nav">
@@ -34,7 +34,8 @@
       <div class="info">
         <div class="text">
           <p id="text1">市民の心身の安寧と、回復</p><br>
-          <p id="text2">健康の為日々邁進して参ります</p></div>
+          <p id="text2">健康の為日々邁進して参ります</p>
+        </div>
       </div>
     </main>
     <footer>
@@ -43,5 +44,32 @@
         <p>▲ TOP</p>
       </div>
     </footer>
+
+    <!-- 🔹 JavaScript (検索機能) -->
+    <script>
+      function searchPage() {
+          const pages = {
+              "病院": "hospital.html",
+              "診療": "medical.html",
+              "アクセス": "access.html",
+              "料金": "price.html",
+              "利用規約": "https://hospinfo-enuei-city.org/guideline",
+              "図書館": "https://hospinfo-enuei-city.org/utamihon"
+          };
+
+          let keyword = document.getElementById("searchInput").value.trim();
+          if (pages[keyword]) {
+              window.location.href = pages[keyword];
+          } else {
+              window.location.href = "notfound.html";
+          }
+      }
+
+      function enterkeySearch(event) {
+          if (event.key === "Enter") {
+              searchPage();
+          }
+      }
+    </script>
   </body>
 </html>
