@@ -41,21 +41,27 @@
             "図書館": {title: "図書館", url: "https://hospinfo-enuei-city.org/utamihon"}
         };
 
+        // クエリパラメータ「q」を取得する関数
         function getQueryParam(name) {
             const params = new URLSearchParams(window.location.search);
             return params.get(name);
         }
 
+        // 検索結果を表示する関数
         function displayResults() {
             const keyword = getQueryParam("q");
             const resultsDiv = document.getElementById("search-results");
             resultsDiv.innerHTML = ""; // 初期化
 
+            console.log('検索キーワード:', keyword); // クエリパラメータを確認
+
+            // キーワードが空か、ページリストにない場合
             if (!keyword || !(keyword in pages)) {
                 resultsDiv.innerHTML = "<p>そんなのはまだ此処に無いよ。</p>";
                 return;
             }
 
+            // 該当するページの情報を表示
             const result = pages[keyword];
             let resultLinks = "";
 
@@ -75,7 +81,10 @@
             `;
         }
 
-        window.onload = displayResults;
+        // ページロード時に検索結果を表示
+        window.onload = function() {
+            displayResults(); // ここで表示関数を呼び出す
+        };
     </script>
 </body>
 </html>
