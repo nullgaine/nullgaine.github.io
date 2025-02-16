@@ -9,14 +9,24 @@
 <body>
     <header>
         <h1>検索結果</h1>
-</header>
-<nav>
-    <ul>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">紹介</a></li>
+            <li><a href="https://hospinfo-enuei-city.org/guideline">利用規約</a></li>
+            <li><a href="https://hospinfo-enuei-city.org/utamihon">図書館</a></li>
+            <li><a href="#">関連情報</a></li>
+            <li><a href="#">連絡所</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+        </ul>
+    </nav>
+    
     <main>
         <div id="search-results">
             <p>検索中...</p>
         </div>
     </main>
+
     <footer>
         <p>© 2011 CU1000 N/A City General Hospital, All rights reserved.</p>
     </footer>
@@ -24,9 +34,9 @@
     <script>
         const pages = {
             "削除される記録": {title: "間違ったパスです", url: "https://hospinfo-enuei-city.org/d_archive"},
-            "韓国語": {title: "한국어", url: "https://hospinfo-enuei-city.org/ko-dex","https://hospinfo-enuei-city.org/irrumderwelt-k","https://hospinfo-enuei-city.org/notice404-k"},
+            "韓国語": {title: "한국어", url: ["https://hospinfo-enuei-city.org/ko-dex", "https://hospinfo-enuei-city.org/irrumderwelt-k", "https://hospinfo-enuei-city.org/notice404-k"]},
             "アクセス": {title: "アクセス情報", url: "https://youtube.com/gaine_0"},
-            "英語": {title: "English", url: "https://hospinfo-enuei-city.org/en-dex","https://hospinfo-enuei-city.org/irrumderwelt-e"},
+            "英語": {title: "English", url: ["https://hospinfo-enuei-city.org/en-dex", "https://hospinfo-enuei-city.org/irrumderwelt-e"]},
             "利用規約": {title: "利用規約", url: "https://hospinfo-enuei-city.org/guideline"},
             "図書館": {title: "図書館", url: "https://hospinfo-enuei-city.org/utamihon"}
         };
@@ -47,17 +57,25 @@
             }
 
             const result = pages[keyword];
+            let resultLinks = "";
+
+            if (Array.isArray(result.url)) {
+                result.url.forEach(url => {
+                    resultLinks += `<li><a href="${url}">${result.title}</a></li>`;
+                });
+            } else {
+                resultLinks = `<li><a href="${result.url}">${result.title}</a></li>`;
+            }
+
             resultsDiv.innerHTML = `
                 <p>「${keyword}」に関する情報はこちら:</p>
                 <ul>
-                    <li><a href="${result.url}">${result.title}</a></li>
+                    ${resultLinks}
                 </ul>
             `;
         }
 
         window.onload = displayResults;
     </script>
-</ul>
-</nav>
 </body>
 </html>
