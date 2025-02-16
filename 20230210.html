@@ -40,7 +40,7 @@
                 if (c < 100) {
                     setTimeout(progress, 30);
                 } else {
-                    document.getElementById("progressbar").innerHTML = `>こちら、世界の外側です。ごきげんよう、内側の方。<br>${bar} 100%<br>`;
+                    document.getElementById("progressbar").innerHTML = `>こちら、世界の外側N/A市です。ごきげんよう、内側の方。<br>${bar} 100%<br>`;
                     document.getElementById("sendBtn").disabled = false;
                     chat2();
                 }
@@ -50,7 +50,7 @@
 
         function chat2() {
             var chatlog = document.getElementById("chatlog");
-            chatlog.innerHTML += "<ins>　　　　:</ins>これマジでできてる？おーい？<ins>1</ins><br>";
+            chatlog.innerHTML += "<ins>　　　　:</ins>これマジでできてる？おーい？<br>";
         }
 
         function send() {
