@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>検索結果</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>検索結果</h1>
+    </header>
+    <main>
+        <div id="search-results">
+            <p>検索中...</p>
+        </div>
+    </main>
+    <footer>
+        <p>© 2011 CU1000 N/A City General Hospital, All rights reserved.</p>
+    </footer>
+
+    <script>
+        const pages = {
+            "病院": {title: "病院の案内", url: "hospital.html"},
+            "診療": {title: "診療内容", url: "medical.html"},
+            "アクセス": {title: "アクセス情報", url: "access.html"},
+            "料金": {title: "診療料金", url: "price.html"},
+            "利用規約": {title: "利用規約", url: "https://hospinfo-enuei-city.org/guideline"},
+            "図書館": {title: "図書館", url: "https://hospinfo-enuei-city.org/utamihon"}
+        };
+
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        function displayResults() {
+            const keyword = getQueryParam("q");
+            const resultsDiv = document.getElementById("search-results");
+            resultsDiv.innerHTML = ""; // 初期化
+
+            if (!keyword || !(keyword in pages)) {
+                resultsDiv.innerHTML = "<p>検索結果が見つかりませんでした。</p>";
+                return;
+            }
+
+            const result = pages[keyword];
+            resultsDiv.innerHTML = `
+                <p>「${keyword}」に関する情報はこちら:</p>
+                <ul>
+                    <li><a href="${result.url}">${result.title}</a></li>
+                </ul>
+            `;
+        }
+
+        window.onload = displayResults;
+    </script>
+</body>
+</html>
