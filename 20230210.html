@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>「箱」簡易接続装置</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #111; color: white; text-align: center; }
+        #addendum { margin: 20px auto; width: 600px; }
+        #chatbox { width: 100%; height: 300px; background: black; color: white; overflow-y: auto; padding: 10px; border: 1px solid white; text-align: left; }
+        input[type="text"] { width: 80%; padding: 5px; }
+        button { padding: 5px 10px; }
+    </style>
+</head>
+<body onload="chat()">
+
+    <h1>箱</h1>
+    <div id="addendum"></div>
+
+    <script>
+        function chat() {
+            var chatroom = `
+                <div id="chatbox">
+                    <pre><span id="progressbar"></span><span id="chatlog"></span></pre>
+                </div>
+                <input type="text" id="chatInput" maxlength="30" placeholder="メッセージを入力">
+                <button id="sendBtn" onclick="send()" disabled>Send</button>
+            `;
+            document.getElementById("addendum").innerHTML = chatroom;
+            document.getElementById("sendBtn").disabled = true;
+
+            var c = 0;
+            function progress() {
+                c++;
+                if (c > 100) c = 100;
+                var bar = "#".repeat(c / 5);
+                var text = `>アクセスが確認されました。接続します。<br>${bar} ${c}%`;
+                document.getElementById("progressbar").innerHTML = text;
+
+                if (c < 100) {
+                    setTimeout(progress, 30);
+                } else {
+                    document.getElementById("progressbar").innerHTML = `>こちら、世界の外側です。ごきげんよう、内側の方。<br>${bar} 100%<br>`;
+                    document.getElementById("sendBtn").disabled = false;
+                    chat2();
+                }
+            }
+            setTimeout(progress, 50);
+        }
+
+        function chat2() {
+            var chatlog = document.getElementById("chatlog");
+            chatlog.innerHTML += "<ins>　　　　:</ins>これマジでできてる？おーい？<ins>1</ins><br>";
+        }
+
+        function send() {
+    var input = document.getElementById("chatInput");
+    var message = input.value.trim();
+    if (message === "") return;
+
+    var chatlog = document.getElementById("chatlog");
+    chatlog.innerHTML += `<ins>あなた:</ins> ${message}<br>`;
+
+    // キーワード反応リスト
+    var responses = {
+        "外峯零": "あ～歌の子。知ってるよ。この街の軸ってことくらいだけど",
+        "外側": "そっか、君って内側のひとだもんね",
+        "人間": "此処にヒトはいないよ、元人間はいるけど",
+        "行き方": "え～来ない方が良いと思うんだけどなあ",
+        "世界": "世界と言っても色々だよ、本当に。",
+        "内側": "内側は「人間が住んでる世界」を僕らのと混ざらない様に、言い分けてるだけだよ",
+        "境界線": "あんまあやふやにならない方が絶対いいかな",
+        "誰": "僕？普通にこの街の住民だけど。名前はそっちの文字で書けないよ",
+        "元人間": "駅員さんと看護師さんかな？僕が知ってるのはそれくらいかな。他にいるかもしれないし、そこまでは流石にわかんないね",
+        "駅": "駅は安全だと思うな",
+        "駅員": "駅員さんね、元人間と思えないくらい力持ち。普段は誰にも優しいんだけどね、そういうやつほどおっかないよ。片腕だけだからって見くびっちゃ駄目だ",
+        "異世界": "君だって僕らからすれば異世界の者だよ？",
+        "言葉": "言葉が通じるのって幸せだよねえ",
+        "こん": "こんにちは！そこは昼かな？",
+        "はじめまして": "あ！よかった！はじめまして！てかよく見つけたねこんなの！",
+        "見えてる": "え、ホント！？じゃあそこの君はひとなんだね！",
+        "赤": "なんだかなあ、空が急に赤く見える時って、あの子が視てるってことらしいよ",
+        "熱的死": "死んだ宇宙はぐしゃぐしゃにしてゴミ箱に捨てるんだ",
+        "空": "赤い時は気を付けなよ、冗談抜きで。普通なら平気だと思うけどさ、何回か見たんだよ。目が合って狂っちゃった内側のひと",
+        "歌": "よく歌うよね～あの子",
+        "時間": "15:30",
+        "休み": "定休日は火曜日と水曜日だよ"
+    };
+
+    // メッセージに反応するかチェック
+    var responseFound = false;
+    Object.keys(responses).forEach(keyword => {
+        if (message.includes(keyword)) {
+            setTimeout(() => {
+                chatlog.innerHTML += `<ins>　　　　:</ins> ${responses[keyword]}<br>`;
+            }, 1000);
+            responseFound = true;
+        }
+    });
+
+    // 何もヒットしなかった場合のランダム応答
+    if (!responseFound) {
+        var randomReplies = [
+            "僕も知らないよ",
+            "何の話？",
+            "ちょっとわからないなあ",
+            "なんて？",
+            "e78fbee59ca8e9968be799bae4b8ade381a7e38199e38082e3818ae5958fe38184e59088e3828fe3819be381afe79bb4e68ea5e3818ae9a198e38184e887b4e38197e381bee38199e38082",
+            "縺ｾ縺?遲斐∴縺檎畑諢上＆繧後※縺?∪縺帙ｓ",
+           "e381bee381a0e7ad94e38188e3818ce794a8e6848fe38195e3828ce381a6e38184e381bee3819be38293e38081e38197e381b0e38289e3818fe3818ae5be85e381a1e3818fe381a0e38195e38184e381bee3819be38082"
+        ];
+        var randomReply = randomReplies[Math.floor(Math.random() * randomReplies.length)];
+        setTimeout(() => {
+            chatlog.innerHTML += `<ins>　　　　:</ins> ${randomReply}<br>`;
+        }, 1000);
+    }
+
+
+            input.value = "";
+        }
+    </script>
+
+</body>
+</html>
