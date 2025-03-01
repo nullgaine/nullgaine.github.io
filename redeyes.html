@@ -103,13 +103,16 @@
     function go() {
         document.getElementById("innerdiv").style.display = "block";
         var s = setInterval("content1=Change(content1)", time);
+        
         setTimeout(function() {
+            // 色を変更する
             var div1 = document.getElementById('div1');
             div1.style.color = 'red';
             div1.style.border = '1px solid red';
             document.querySelector('button').style.color = 'red';
             document.querySelector('button').style.border = '1px solid red';
             document.querySelector('button').style.backgroundColor = 'black';
+            // テキストの侵食を始める
             setInterval(function() {
                 content1 = Change("あかいめがみている");
             }, 1000);
@@ -118,11 +121,12 @@
         setTimeout(function() {
             document.getElementById('innerdiv').style.display = 'none';
             var div1 = document.getElementById('div1');
+            // メッセージをそのまま残す
             div1.innerHTML = 'あかいめがみている';
         }, 20000);
 
         setTimeout(function() {
-            document.getElementById('div1').innerHTML = '覚えとくね';
+            document.getElementById('div1').innerHTML = 'よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね';
         }, 25000);
     }
 </script>
