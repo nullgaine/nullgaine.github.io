@@ -100,29 +100,23 @@
 var time = 1000; // メッセージが変わる間隔
 var ICU = ["赤", "め", "視", "てる"]; // 変化する文字
 var counter = 0;
-var maxChanges = 20; // 最大変更回数
+var maxChanges = 4; // 変更回数
 var redPhase = false;
-var redPhaseStart = 10; // 赤くなるタイミング
+var redPhaseStart = 3; // 赤くなるタイミング
 var intervalID = null;
-var currentText = ""; // 現在の文字列
 
-// メッセージのランダム変更
 function Random(n) {
   return Math.floor(Math.random() * n);
 }
 
-// 文字の変更
 function Change() {
   var element = document.getElementById("innerdiv");
+  var content = element.innerHTML.split("");
+  content.push(ICU[counter]); // ICUの文字を追加
 
-  // 文字を増やしていく
-  if (counter < ICU.length) {
-    currentText += ICU[counter];
-  }
+  // メッセージ更新
+  element.innerHTML = content.join("");
 
-  element.innerHTML = currentText;
-
-  // 赤色変化
   if (!redPhase && counter >= redPhaseStart) {
     document.body.classList.add("red-mode");
     document.querySelector("button").classList.add("red-mode");
@@ -131,25 +125,22 @@ function Change() {
 
   counter++;
 
-  // 最大変更回数に達したら最終メッセージへ
   if (counter >= maxChanges) {
-    clearInterval(intervalID);
+    clearInterval(intervalID); // タイマー停止
     EndMessage();
   }
 }
 
-// 「確認する」ボタンが押されたとき
 function go() {
   document.getElementById("innerdiv").style.display = "block";
-  intervalID = setInterval(Change, time); // 一定時間ごとにメッセージを変更
+  intervalID = setInterval(Change, time);
 }
 
-// メッセージが終了した後の処理
 function EndMessage() {
   document.getElementById("innerdiv").innerHTML = "<div class='glitch' style='font-weight: bold;'>あかい眼が視ている</div>";
   setTimeout(function () {
     document.getElementById("innerdiv").innerHTML = "<div class='glitch' style='font-weight: bold;'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
-  }, 4000); // 4秒後に次のメッセージ
+  }, 4000);
 }
   </script>
 </body>
