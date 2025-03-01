@@ -113,9 +113,14 @@
 // 文字の変更
 function Change() {
   var element = document.getElementById("innerdiv");
+  
+  // 現在の内容を取得
+  var currentContent = element.innerHTML;
+  
+  // ICUを繰り返して追加する
   var repeatedText = ICU.join('').repeat(10);  // ICUを繰り返して表示
-  element.innerHTML = repeatedText;
-
+  element.innerHTML = currentContent + repeatedText;  // 既存のテキストに追加
+  
   // 赤色変化 (指定カウントに到達時)
   if (!redPhase && counter >= redPhaseStart) {
     document.body.classList.add("red-mode");
