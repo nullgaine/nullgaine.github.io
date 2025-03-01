@@ -18,10 +18,39 @@
       color: red;
     }
 
-    .glitch {
-      font-size: 18px;
-      color: red;
+     @keyframes glitch {
+    0% {
+        transform: translate(2px, 2px) skew(0.5deg);
+        opacity: 1;
     }
+    20% {
+        transform: translate(-2px, -2px) skew(0.5deg);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translate(1px, 1px) skew(0.2deg);
+        opacity: 1;
+    }
+    60% {
+        transform: translate(-1px, -1px) skew(0.3deg);
+        opacity: 0.8;
+    }
+    80% {
+        transform: translate(2px, -2px) skew(0.4deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-2px, 2px) skew(0.5deg);
+        opacity: 0.8;
+    }
+}
+
+.glitch {
+    color: #FF0000;
+    animation: glitch 1s infinite alternate;
+    white-space: pre-wrap;
+}
+
 
     #innerdiv {
       display: none;
