@@ -26,6 +26,7 @@
             border: 1px solid #00FF00;
             margin: 20px;
             max-width: 80%;
+            transition: border-color 1s ease, color 1s ease; /* アニメーション追加 */
         }
         button {
             background-color: #00FF00;
@@ -112,16 +113,21 @@
             var now = new Date().getTime();
             var elapsed = now - startTime;
 
+            // 赤色変化のタイミング調整
+            if (elapsed >= redPhaseStart && elapsed < endPhaseStart) {
+                document.body.style.color = "#FF0000";
+                document.querySelector("button").classList.add("red");
+                document.getElementById("messageBox").style.borderColor = "#FF0000";  // 枠の色も変更
+                document.getElementById("messageBox").innerHTML = "<div class='glitch'>赤い眼がみている</div>";  // ここで表示
+                return;
+            }
+
+            // メッセージを消すタイミング調整
             if (elapsed >= endPhaseStart) {
                 EndMessage();
                 return;
             }
-            if (elapsed >= redPhaseStart) {
-                document.body.style.color = "#FF0000";
-                document.querySelector("button").classList.add("red");
-                document.getElementById("messageBox").innerHTML = "";
-                return;
-            }
+
             if (elapsed >= time) {
                 Change(content1);
             }
@@ -129,7 +135,10 @@
 
         function EndMessage() {
             clearInterval(interval);
-            document.body.innerHTML = '<div class="glitch">あかいめが視ている<br>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
+            // 1秒後にメッセージを表示
+            setTimeout(function() {
+                document.body.innerHTML = '<div class="glitch">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
+            }, 1000);  // タイミングをずらす
         }
     </script>
 
