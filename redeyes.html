@@ -26,7 +26,7 @@
             border: 1px solid #00FF00;
             margin: 20px;
             max-width: 80%;
-            transition: border-color 1s ease, color 1s ease; /* アニメーション追加 */
+            transition: border-color 1s ease, color 1s ease;
         }
         button {
             background-color: #00FF00;
@@ -55,7 +55,7 @@
     <div id="div1">
         <div id="messageBox">
             <strong class="no-glitch">新しいメッセージが（１）通あります！</strong><br>
-            <button type="button" class="no-glitch" onclick="go()"> 確認する </button>
+            <button type="button" class="no-glitch" onclick="go()">確認する</button>
             <div id="innerdiv" style="display:none;">
                 ================================================================================================<br>
                 2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
@@ -97,20 +97,18 @@
                     var cache = Random(content.length);
                     content[cache] = ICU[Random(ICU.length)];
                 }
-                document.getElementById("innerdiv").innerHTML = content.join("");  // 変更された内容はinnerdivに表示
+                document.getElementById("innerdiv").innerHTML = content.join("");
             } catch (err) {
                 EndMessage();
             }
         }
 
         function go() {
-            // 最初のメッセージとボタンが重複して表示される問題を防ぐ
-            document.getElementById("messageBox").innerHTML = '<strong class="no-glitch">新しいメッセージが（１）通あります！</strong><br><button type="button" class="no-glitch" onclick="go()">確認する</button>';
+            // ボタンがクリックされた後、ボタンを隠してメッセージの表示を開始
+            document.querySelector("button").style.display = "none";
             document.getElementById("innerdiv").style.display = "block";
             startTime = new Date().getTime();
             interval = setInterval(Update, 50);
-            // ボタンが再度表示されないように
-            document.querySelector("button").disabled = true;
         }
 
         function Update() {
