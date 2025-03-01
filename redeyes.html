@@ -113,19 +113,8 @@
 // 文字の変更
 function Change() {
   var element = document.getElementById("innerdiv");
-  var content = ICU.join('').repeat(10);  // ICUを繰り返して表示
-
-  // ランダムに文字を埋め込む
-  var cache = Random(content.length);
-  var modifiedContent = content.split("");
-
-  for (var i = 0; i < ICU.length; i++) {
-    if (cache + i < modifiedContent.length) {
-      modifiedContent[cache + i] = ICU[i];
-    }
-  }
-
-  element.innerHTML = modifiedContent.join("");
+  var repeatedText = ICU.join('').repeat(10);  // ICUを繰り返して表示
+  element.innerHTML = repeatedText;
 
   // 赤色変化 (指定カウントに到達時)
   if (!redPhase && counter >= redPhaseStart) {
