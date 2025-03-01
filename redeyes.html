@@ -110,44 +110,49 @@
       return Math.floor(Math.random() * n);
     }
 
-// 文字の変更
-function Change() {
-  var element = document.getElementById("innerdiv");
-  
-  // 現在の内容を取得
-  var currentContent = element.innerHTML;
-  
-  // ICUを繰り返して追加する
-  var repeatedText = ICU.join('').repeat(10);  // ICUを繰り返して表示
-  element.innerHTML = currentContent + repeatedText;  // 既存のテキストに追加
-  
-  // 赤色変化 (指定カウントに到達時)
-  if (!redPhase && counter >= redPhaseStart) {
-    document.body.classList.add("red-mode");
-    document.querySelector("button").classList.add("red-mode");
-    redPhase = true;
-  }
+    // 文字の変更
+ function Change() {
+    var element = document.getElementById("innerdiv");
+    var content = element.innerHTML.split("");
+    var cache = Random(content.length);
 
-  counter++;
+    // ICUの文字をランダムな位置に埋め込む
+    for (var i = 0; i < ICU.length; i++) {
+        if (cache + i < content.length) {
+            content[cache + i] = ICU[i];
+        }
+    }
 
-  // 最大変更回数に達したら最終メッセージへ
-  if (counter >= maxChanges) {
-    clearInterval(intervalID); // タイマー停止
-    EndMessage();
-  }
-}
+    // メッセージ更新
+    element.innerHTML = content.join("");
+
+    // 赤色変化 (指定カウントに到達時)
+    if (!redPhase && counter >= redPhaseStart) {
+        document.body.classList.add("red-mode");
+        document.querySelector("button").classList.add("red-mode");
+        redPhase = true;
+    }
+
+    counter++;
+
+    // 最大変更回数に達したら最終メッセージへ
+    if (counter >= maxChanges) {
+        clearInterval(intervalID); // タイマー停止
+        EndMessage();
+      }
+    }
+
     // 「確認する」ボタンが押されたとき
     function go() {
       document.getElementById("innerdiv").style.display = "block"; 
       intervalID = setInterval(Change, time); // 一定時間ごとにメッセージを変更
     }
 
-
     // メッセージが終了した後の処理
 function EndMessage() {
-    document.getElementById("innerdiv").innerHTML = "<div class='glitch' style='font-weight: bold;'>あかい眼が視ている</div>";
+    document.getElementById("innerdiv").innerHTML = ""<div class='glitch' style='font-weight: bold;'>あかい眼が視ている</div>";
     setTimeout(function () {
-        document.getElementById("innerdiv").innerHTML = "<div class='glitch' style='font-weight: bold;'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
+        document.getElementById("innerdiv").innerHTML = ""<div class='glitch' style='font-weight: bold;'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
     }, 4000);  // 4秒後に次のメッセージ
 }
   </script>
