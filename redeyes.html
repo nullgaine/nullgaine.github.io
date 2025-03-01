@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,11 +93,20 @@
         // メッセージの変化
         function Change(str) {
             try {
-                var content = str.split("");
-                var cache = Random(content.length);
-                for (var i = 0; i < ICU.length; i++) {
-                    content[cache + i] = ICU[i]; // 文字を変える
-                }
+        {
+          var content=str.split("")
+          var cache = Random(content.length)
+
+          for(i=0;i<5;i++){content[cache+i]=ICU[i]}
+          if(time>=100) time=time-1000
+          else counter++
+          if (counter>50000) {throw new Error("stop here");}
+          document.getElementById(as).innerHTML = content.join("")
+          clearInterval(s)
+          var s=setInterval("content1=Change(content1)",time)
+          return content.join("")
+        }
+
                 document.getElementById("innerdiv").innerHTML = content.join("");  // 更新
 
                 // 赤色の変化
@@ -107,8 +117,11 @@
                 }
 
                 counter++;
-            } catch (err) {
-                EndMessage();
+            }         catch(err)
+        {
+          if(flag==0)
+          {
+            setTimeout("var a=1",10000)
             }
         }
 
@@ -125,6 +138,8 @@
             document.getElementById("innerdiv").innerHTML = "<div class='glitch'>あかい眼が視ている</div>";
             setTimeout(function () {
                 document.getElementById("innerdiv").innerHTML = "<div class='glitch'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
+            flag=flag+1
+            sleep(5000)
             }, 4000);  // 4秒後に次のメッセージ
         }
     </script>
