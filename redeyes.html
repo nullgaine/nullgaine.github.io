@@ -34,11 +34,6 @@
             background-color: #008000;
         }
 
-        .red-mode {
-            color: #FF0000;
-            border-color: #FF0000;
-        }
-
         .final-message {
             color: #FF0000;
             white-space: pre-wrap;
@@ -67,20 +62,41 @@
 
     <script>
         // タイミング設定
-        var redPhaseStart = 22 * 1000; // 22秒で赤に変わる
+        var redPhaseStart = 18 * 1000; // 18秒で赤に変わる
         var endPhaseStart = 24 * 1000; // 2秒後に最終メッセージ
         var startTime;
 
         function startInvasion() {
-            document.getElementById("confirmButton").style.display = "none"; // ボタンを非表示
-            document.getElementById("innerMessage").style.display = "block"; // メッセージを表示
+            console.log("確認ボタンが押されました。");
+            
+            // ボタンを非表示にしてメッセージを表示
+            var button = document.getElementById("confirmButton");
+            var message = document.getElementById("innerMessage");
+
+            if (button) {
+                button.style.display = "none";
+                console.log("確認ボタンを非表示にしました。");
+            } else {
+                console.error("確認ボタンが見つかりません。");
+            }
+
+            if (message) {
+                message.style.display = "block";
+                console.log("メッセージを表示しました。");
+            } else {
+                console.error("メッセージが見つかりません。");
+            }
+            
             startTime = new Date().getTime(); // 開始時間を取得
             setInterval(update, 50); // 50msごとに更新
+            console.log("侵食が開始されました。");
         }
 
         function update() {
             var now = new Date().getTime();
             var elapsed = now - startTime;
+
+            console.log("経過時間 (ms): " + elapsed);
 
             // 赤色フェーズ
             if (elapsed >= redPhaseStart && elapsed < endPhaseStart) {
@@ -99,6 +115,7 @@
 
         function showFinalMessage() {
             document.body.innerHTML = '<div class="final-message">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
+            console.log("最終メッセージを表示しました。");
         }
     </script>
 
