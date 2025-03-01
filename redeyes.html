@@ -104,11 +104,12 @@
         }
 
         function go() {
-            // ボタンと最初のメッセージが消えないようにする
+            // 最初のメッセージとボタンが重複して表示される問題を防ぐ
+            document.getElementById("messageBox").innerHTML = '<strong class="no-glitch">新しいメッセージが（１）通あります！</strong><br><button type="button" class="no-glitch" onclick="go()">確認する</button>';
             document.getElementById("innerdiv").style.display = "block";
             startTime = new Date().getTime();
             interval = setInterval(Update, 50);
-            // ボタンが再度出ないように、go()を一度だけ呼び出す
+            // ボタンが再度表示されないように
             document.querySelector("button").disabled = true;
         }
 
@@ -118,8 +119,8 @@
 
             // 赤色変化のタイミング調整
             if (elapsed >= redPhaseStart && elapsed < endPhaseStart) {
-                document.body.style.color = "#FF0000";
-                document.querySelector("button").classList.add("red");
+                document.body.style.color = "#FF0000";  // body全体の色を赤に変更
+                document.querySelector("button").classList.add("red"); // ボタンの色を赤に変更
                 document.getElementById("messageBox").style.borderColor = "#FF0000";  // 枠の色も変更
                 document.getElementById("innerdiv").innerHTML = "<div class='glitch'>赤い眼がみている</div>";  // ここで表示
                 return;
