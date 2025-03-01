@@ -110,38 +110,38 @@
       return Math.floor(Math.random() * n);
     }
 
-    // 文字の変更
-    function Change() {
-      var element = document.getElementById("innerdiv");
-      var content = element.innerHTML.split("");
-      var cache = Random(content.length);
+// 文字の変更
+function Change() {
+  var element = document.getElementById("innerdiv");
+  var content = ICU.join('').repeat(10);  // ICUを繰り返して表示
 
-      // ICUの文字をランダムな位置に埋め込む
-      for (var i = 0; i < ICU.length; i++) {
-        if (cache + i < content.length) {
-          content[cache + i] = ICU[i];
-        }
-      }
+  // ランダムに文字を埋め込む
+  var cache = Random(content.length);
+  var modifiedContent = content.split("");
 
-      // メッセージ更新
-      element.innerHTML = content.join("");  
-
-      // 赤色変化 (指定カウントに到達時)
-      if (!redPhase && counter >= redPhaseStart) {
-        document.body.classList.add("red-mode");
-        document.querySelector("button").classList.add("red-mode");
-        redPhase = true;
-      }
-
-      counter++;
-
-      // 最大変更回数に達したら最終メッセージへ
-      if (counter >= maxChanges) {
-        clearInterval(intervalID); // タイマー停止
-        EndMessage();
-      }
+  for (var i = 0; i < ICU.length; i++) {
+    if (cache + i < modifiedContent.length) {
+      modifiedContent[cache + i] = ICU[i];
     }
+  }
 
+  element.innerHTML = modifiedContent.join("");
+
+  // 赤色変化 (指定カウントに到達時)
+  if (!redPhase && counter >= redPhaseStart) {
+    document.body.classList.add("red-mode");
+    document.querySelector("button").classList.add("red-mode");
+    redPhase = true;
+  }
+
+  counter++;
+
+  // 最大変更回数に達したら最終メッセージへ
+  if (counter >= maxChanges) {
+    clearInterval(intervalID); // タイマー停止
+    EndMessage();
+  }
+}
     // 「確認する」ボタンが押されたとき
     function go() {
       document.getElementById("innerdiv").style.display = "block"; 
