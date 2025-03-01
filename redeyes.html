@@ -72,71 +72,67 @@
         </div>
     </div>
 
-<script type="text/javascript">
-    var time = 10000;  // メッセージが変わる間隔
-    var ICU = ["赤", "め", "視", "てる"]; // 変わる文字
+ <script type="text/javascript">
+    var time = 10000;
+    var ICU = ["赤", "め", "視", "てる"]; // 変化する文字
     var counter = 0;
     var flag = 0;
     var content1 = document.getElementById("innerdiv").innerHTML; // 初期内容
-    var redPhase = false;  // 赤くなる状態
+    var redPhase = false;
     var redPhaseStart = 12000; // 赤くなるタイミング
-    var finalMessageDelay = 30000; // 最終メッセージの遅延
 
-    // 初期表示で「確認する」を押してもボタンは押せない
-    document.getElementById("innerdiv").style.display = "none";
-
-    // ランダムにインデックスを取得
+    // メッセージのランダム変更
     function Random(n) {
-        return Math.floor(Math.random() * n);
+      return Math.floor(Math.random() * n);
     }
 
-    // メッセージの変化
+    // 文字の変更
     function Change(str) {
-        try {
-            var content = str.split("");
-            var cache = Random(content.length);
+      try {
+        var content = str.split("");
+        var cache = Random(content.length);
 
-            // ICUの文字をランダムな位置に埋め込む
-            for (var i = 0; i < ICU.length; i++) {
-                content[cache + i] = ICU[i];
-            }
-
-            // メッセージの更新
-            document.getElementById("innerdiv").innerHTML = content.join("");  // 更新
-
-            // 赤色の変化
-            if (!redPhase && counter * time >= redPhaseStart) {
-                document.body.classList.add("red-mode");
-                document.querySelector("button").classList.add("red-mode");
-                redPhase = true;
-            }
-
-            counter++;
-        } catch (err) {
-            // エラー時に処理を停止
-            EndMessage();
+        // ICUの文字をランダムな位置に埋め込む
+        for (var i = 0; i < ICU.length; i++) {
+          content[cache + i] = ICU[i];
         }
+
+        // メッセージ更新
+        document.getElementById("innerdiv").innerHTML = content.join("");  
+
+        // 赤色変化
+        if (!redPhase && counter * time >= redPhaseStart) {
+          document.body.classList.add("red-mode");
+          document.querySelector("button").classList.add("red-mode");
+          redPhase = true;
+        }
+
+        counter++;
+      } catch (err) {
+        // エラー時に最終メッセージ
+        EndMessage();
+      }
     }
 
     // 「確認する」ボタンが押されたとき
     function go() {
-        document.getElementById("innerdiv").style.display = "block"; // メッセージ表示
-        setInterval(function () {
-            Change(content1);
-        }, 100);  // メッセージが時間ごとに変わる
+      document.getElementById("innerdiv").style.display = "block"; 
+      var s = setInterval(function () {
+        Change(content1);
+      }, time);  // メッセージが時間ごとに変わる
     }
 
     // メッセージが終了した後の処理
     function EndMessage() {
-        document.getElementById("innerdiv").innerHTML = "<div class='glitch'>あかい眼が視ている</div>";
-        setTimeout(function () {
-            document.getElementById("innerdiv").innerHTML = "<div class='glitch'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
-            flag = flag + 1;
-            setTimeout(function() {
-                // さらに処理を進める（最後の遅延）
-            }, 5000);
-        }, 4000);  // 4秒後に次のメッセージ
+      document.getElementById("innerdiv").innerHTML = "<div class='glitch'>あかい眼が視ている</div>";
+      setTimeout(function () {
+        document.getElementById("innerdiv").innerHTML = "<div class='glitch'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
+        flag = flag + 1;
+        setTimeout(function() {
+          // さらに処理を進める
+        }, 5000);
+      }, 4000);  // 4秒後に次のメッセージ
     }
-</script>
+  </script>
 </body>
 </html>
