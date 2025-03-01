@@ -1,102 +1,130 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>襍､縺?楜</title>
-        <meta name="contained" content="noindex">
-<body style="font-family: monospace;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>襍､縺?楜</title>
+    <meta name="contained" content="noindex">
+    <style>
+        body {
+            font-family: monospace;
+            background-color: black;
+            color: green;
+        }
+        #div1 {
+            color: green;
+            border: 1px solid green;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        #innerdiv {
+            display: none;
+            color: green;
+        }
+        button {
+            color: green;
+            background-color: black;
+            border: 1px solid green;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
    <div id="div1">
+       <strong>新しいメッセージが（１）通あります！</strong><br>
+       <button type="button" onclick="go()"> 確認する </button>
+       <div id="innerdiv">
+           =================================================================================<br>
+           2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
+           =================================================================================<br>
+           荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
+           それってさ、ちょっと酷い話だと思わないこと？<br>
+           ずっとお世話になった荒ら屋も可哀想だし。<br>
+           其処で過ごした時間は無駄じゃなかったし。<br>
+           私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
+           まあもう私同様、存在しない場所になってしまったけどね。<br>
+           この街に来てから偶に訪ねたりするの。<br>
+           だって此処は、存在しなくなったモノが集まる街だから。<br>
+           市街というか、死骸ね。<br>
+           長い間の記憶は残念ながら無いけど、私を構成するにあたって、<br>
+           私の廃墟がすこぶる影響を与えたのは間違いなく事実です。<br>
+           だからね、無駄だなんて思いたくないわ。<br>
+       </div>
+   </div>
 
-<strong>新しいメッセージが（１）通あります！</strong></br>
-    
-    </blockquote>
-    <button type="button" onclick="go()"> 確認する </button>
+<script type="text/javascript">
+    var time = 10000;
+    var ICU = ["み", "て", "る", "よ"];
+    var as = "div1";
+    var counter = 0;
+    var flag = 0;
+    var content1 = document.getElementById("div1").innerHTML;
 
-    <div id="innerdiv">
-================================================================================<br>
-2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
-================================================================================<br>
-荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
-それってさ、ちょっと酷い話だと思わないこと？<br>
-ずっとお世話になった荒ら屋も可哀想だし。<br>
-其処で過ごした時間は無駄じゃなかったし。<br>
-私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
-まあもう私同様、存在しない場所になってしまったけどね。<br>
-この街に来てから偶に訪ねたりするの。<br>
-だって此処は、存在しなくなったモノが集まる街だから。<br>
-市街というか、死骸ね。<br>
-長い間の記憶は残念ながら無いけど、私を構成するにあたって、<br>
-私の廃墟がすこぶる影響を与えたのは間違いなく事実です。<br>
-だからね、無駄だなんて思いたくないわ。<br>
-<br>
-<br>
-<br>
-</div>
-     </div>
+    document.getElementById("innerdiv").style.display = "none";
 
-    <script type="text/javascript">
-      var time =10000
-      var ICU = ["み","て","る","よ"]
-      var as ="div1"
-      var counter=0;
-      var flag=0;
-      var content1=document.getElementById("div1").innerHTML
-      
-      document.getElementById("innerdiv").style.display="none"
-      
-      function Random(n)
-      {
-        return Math.floor(Math.random()*n)
-      }
+    function Random(n) {
+        return Math.floor(Math.random() * n);
+    }
 
-      function sleep(numberMillis)
-      {
+    function sleep(numberMillis) {
         var now = new Date();
         var exitTime = now.getTime() + numberMillis;
         while (true) {
-          now = new Date();
-          if (now.getTime() > exitTime)
-            return;
+            now = new Date();
+            if (now.getTime() > exitTime)
+                return;
         }
-      }
-      
-      function Change(str)
-      {
-        try
-        {
-          var content=str.split("")
-          var cache = Random(content.length)
+    }
 
-          for(i=0;i<4;i++){content[cache+i]=ICU[i]}
-          if(time>=100) time=time-1000
-          else counter++
-          if (counter>50000) {throw new Error("stop here");}
-          document.getElementById(as).innerHTML = content.join("")
-          clearInterval(s)
-          var s=setInterval("content1=Change(content1)",time)
-          return content.join("")
+    function Change(str) {
+        try {
+            var content = str.split("");
+            var cache = Random(content.length);
+
+            for (i = 0; i < 4; i++) { content[cache + i] = ICU[i]; }
+            if (time >= 100) time = time - 1000;
+            else counter++;
+            if (counter > 50000) { throw new Error("stop here"); }
+            document.getElementById(as).innerHTML = content.join("");
+            clearInterval(s);
+            var s = setInterval("content1=Change(content1)", time);
+            return content.join("");
+        } catch (err) {
+            if (flag == 0) {
+                setTimeout(function() {
+                    var a = 1;
+                }, 10000);
+                document.write("<div>よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね</div>");
+                flag = flag + 1;
+                sleep(5000);
+            }
         }
+    }
 
-        catch(err)
-        {
-          if(flag==0)
-          {
-            setTimeout("var a=1",10000)
-            document.write("<div>よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね</div>")
-            flag=flag+1
-            sleep(5000)
-          }
-        }
-      }
+    function go() {
+        document.getElementById("innerdiv").style.display = "block";
+        var s = setInterval("content1=Change(content1)", time);
+        setTimeout(function() {
+            var div1 = document.getElementById('div1');
+            div1.style.color = 'red';
+            div1.style.border = '1px solid red';
+            document.querySelector('button').style.color = 'red';
+            document.querySelector('button').style.border = '1px solid red';
+            document.querySelector('button').style.backgroundColor = 'black';
+            setInterval(function() {
+                content1 = Change("あかいめがみている");
+            }, 1000);
+        }, 12000);
 
-      function go()
-      {
-       document.getElementById("innerdiv").style.display="block"
-       var s=setInterval("content1=Change(content1)",time)
-      }
+        setTimeout(function() {
+            document.getElementById('innerdiv').style.display = 'none';
+            var div1 = document.getElementById('div1');
+            div1.innerHTML = 'あかいめがみている';
+        }, 20000);
 
-
-    </script>
-  </body>
+        setTimeout(function() {
+            document.getElementById('div1').innerHTML = '覚えとくね';
+        }, 25000);
+    }
+</script>
+</body>
 </html>
