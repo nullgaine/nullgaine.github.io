@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>襍､縺?楜</title>
@@ -31,7 +31,7 @@
 <body>
    <div id="div1">
        <strong>新しいメッセージが（１）通あります！</strong><br>
-       <button type="button" onclick="go()"> 確認する </button>
+       <button type="button" id="checkButton"> 確認する </button>
        <div id="innerdiv">
            =================================================================================<br>
            2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
@@ -52,83 +52,67 @@
    </div>
 
 <script type="text/javascript">
-    var time = 10000;
-    var ICU = ["み", "て", "る", "よ"];
-    var as = "div1";
-    var counter = 0;
-    var flag = 0;
-    var content1 = document.getElementById("div1").innerHTML;
+    (function() {
+        let time = 10000;
+        let ICU = ["み", "て", "る", "よ"];
+        let counter = 0;
+        let flag = 0;
+        let content1 = document.getElementById("div1").innerHTML;
+        let div1 = document.getElementById("div1");
+        let button = document.getElementById("checkButton");
+        let innerdiv = document.getElementById("innerdiv");
 
-    document.getElementById("innerdiv").style.display = "none";
+        innerdiv.style.display = "none";
 
-    function Random(n) {
-        return Math.floor(Math.random() * n);
-    }
-
-    function sleep(numberMillis) {
-        var now = new Date();
-        var exitTime = now.getTime() + numberMillis;
-        while (true) {
-            now = new Date();
-            if (now.getTime() > exitTime)
-                return;
+        function random(n) {
+            return Math.floor(Math.random() * n);
         }
-    }
 
-    function Change(str) {
-        try {
-            var content = str.split("");
-            var cache = Random(content.length);
+        function change(str) {
+            let content = str.split("");
+            let cache = random(content.length);
 
-            for (i = 0; i < 4; i++) { content[cache + i] = ICU[i]; }
+            for (let i = 0; i < 4; i++) { content[cache + i] = ICU[i]; }
             if (time >= 100) time = time - 1000;
             else counter++;
-            if (counter > 50000) { throw new Error("stop here"); }
-            document.getElementById(as).innerHTML = content.join("");
-            clearInterval(s);
-            var s = setInterval("content1=Change(content1)", time);
-            return content.join("");
-        } catch (err) {
-            if (flag == 0) {
-                setTimeout(function() {
-                    var a = 1;
-                }, 10000);
-                document.write("<div>よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね</div>");
-                flag = flag + 1;
-                sleep(5000);
+
+            if (counter >= 50) {
+                clearInterval(interval);
+                showFinalMessage();
             }
+
+            div1.innerHTML = content.join("");
+            return content.join("");
         }
-    }
 
-    function go() {
-        document.getElementById("innerdiv").style.display = "block";
-        var s = setInterval("content1=Change(content1)", time);
-        
-        setTimeout(function() {
-            // 色を変更する
-            var div1 = document.getElementById('div1');
-            div1.style.color = 'red';
-            div1.style.border = '1px solid red';
-            document.querySelector('button').style.color = 'red';
-            document.querySelector('button').style.border = '1px solid red';
-            document.querySelector('button').style.backgroundColor = 'black';
-            // テキストの侵食を始める
-            setInterval(function() {
-                content1 = Change("あかいめがみている");
+        function showFinalMessage() {
+            div1.style.color = "red";
+            div1.style.border = "1px solid red";
+            button.style.color = "red";
+            button.style.border = "1px solid red";
+            button.style.backgroundColor = "black";
+            setTimeout(() => {
+                div1.innerHTML = "あかいめがみている";
             }, 1000);
-        }, 12000);
+            setTimeout(() => {
+                div1.innerHTML = "よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね";
+            }, 20000);
+        }
 
-        setTimeout(function() {
-            document.getElementById('innerdiv').style.display = 'none';
-            var div1 = document.getElementById('div1');
-            // メッセージをそのまま残す
-            div1.innerHTML = 'あかいめがみている';
-        }, 20000);
+        function start() {
+            innerdiv.style.display = "block";
+            let interval = setInterval(() => {
+                content1 = change(content1);
+            }, time);
 
-        setTimeout(function() {
-            document.getElementById('div1').innerHTML = 'よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね';
-        }, 25000);
-    }
+            setTimeout(() => {
+                showFinalMessage();
+            }, 12000);
+        }
+
+        button.addEventListener("click", start);
+    })();
 </script>
+
 </body>
 </html>
