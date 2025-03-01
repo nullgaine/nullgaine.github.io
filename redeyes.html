@@ -97,7 +97,7 @@
                     var cache = Random(content.length);
                     content[cache] = ICU[Random(ICU.length)];
                 }
-                document.getElementById("messageBox").innerHTML = content.join("");
+                document.getElementById("innerdiv").innerHTML = content.join("");  // 変更された内容はinnerdivに表示
             } catch (err) {
                 EndMessage();
             }
@@ -118,7 +118,7 @@
                 document.body.style.color = "#FF0000";
                 document.querySelector("button").classList.add("red");
                 document.getElementById("messageBox").style.borderColor = "#FF0000";  // 枠の色も変更
-                document.getElementById("messageBox").innerHTML = "<div class='glitch'>赤い眼がみている</div>";  // ここで表示
+                document.getElementById("innerdiv").innerHTML = "<div class='glitch'>赤い眼がみている</div>";  // ここで表示
                 return;
             }
 
@@ -129,16 +129,16 @@
             }
 
             if (elapsed >= time) {
-                Change(content1);
+                Change(content1); // innerdiv のみに変更を適用
             }
         }
 
         function EndMessage() {
             clearInterval(interval);
-            // 1秒後にメッセージを表示
+            // 5秒後にメッセージを表示
             setTimeout(function() {
                 document.body.innerHTML = '<div class="glitch">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
-            }, 1000);  // タイミングをずらす
+            }, 5000);  // タイミングをずらす
         }
     </script>
 
