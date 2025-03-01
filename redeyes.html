@@ -10,24 +10,17 @@
             color: #00FF00;
             font-family: monospace;
             overflow: hidden;
+            transition: color 1s, background-color 1s;
         }
-        .glitch {
-            color: #FF0000;
-            animation: glitch 1s infinite alternate;
-            white-space: pre-wrap;
-        }
-        @keyframes glitch {
-            0% { text-shadow: 2px 2px red, -2px -2px blue; }
-            50% { text-shadow: -2px -2px red, 2px 2px blue; }
-            100% { text-shadow: 1px 1px red, -1px -1px blue; }
-        }
+
         #messageBox {
             padding: 20px;
             border: 1px solid #00FF00;
             margin: 20px;
             max-width: 80%;
-            transition: border-color 1s ease, color 1s ease;
+            transition: border-color 1s;
         }
+
         button {
             background-color: #00FF00;
             color: black;
@@ -35,113 +28,77 @@
             padding: 10px 20px;
             cursor: pointer;
             font-family: monospace;
-            z-index: 10;
-            position: relative;
         }
+
         button:hover {
             background-color: #008000;
         }
-        .no-glitch {
-            z-index: 10;
-            position: relative;
-        }
+
         .red-mode {
             color: #FF0000;
             border-color: #FF0000;
         }
+
+        .final-message {
+            color: #FF0000;
+            white-space: pre-wrap;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
-    <div id="div1">
-        <div id="messageBox">
-            <strong class="no-glitch">新しいメッセージが（１）通あります！</strong><br>
-            <button type="button" class="no-glitch" id="confirmButton" onclick="go()">確認する</button>
-            <div id="innerdiv" style="display:none;">
-                ================================================================================================<br>
-                2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
-                ================================================================================================<br>
-                荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
-                それってさ、ちょっと酷い話だと思わないこと？<br>
-                ずっとお世話になった荒ら屋も可哀想だし。<br>
-                私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
-                この街に来てから偶に訪ねたりするの。<br>
-                だって此処は、存在しなくなったモノが集まる街だから。<br>
-                市街というか、死骸ね。<br>
-                無駄だなんて思いたくないわ。<br>
-                <br>
-            </div>
+    <div id="messageBox">
+        <strong>新しいメッセージが（１）通あります！</strong><br>
+        <button id="confirmButton" onclick="startInvasion()">確認する</button>
+        <div id="innerMessage" style="display:none;">
+            ================================================================================================<br>
+            2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
+            ================================================================================================<br>
+            荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
+            それってさ、ちょっと酷い話だと思わないこと？<br>
+            ずっとお世話になった荒ら屋も可哀想だし。<br>
+            私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
+            この街に来てから偶に訪ねたりするの。<br>
+            だって此処は、存在しなくなったモノが集まる街だから。<br>
+            市街というか、死骸ね。<br>
+            無駄だなんて思いたくないわ。<br>
         </div>
     </div>
 
-    <script type="text/javascript">
-        var time = 12 * 1000;
-        var ICU = "赤い眼がみている".split("");
-        var counter = 0;
-        var flag = 0;
-        var content1 = document.getElementById("messageBox").innerHTML;
-        var interval;
+    <script>
+        // タイミング設定
+        var redPhaseStart = 22 * 1000; // 22秒で赤に変わる
+        var endPhaseStart = 24 * 1000; // 2秒後に最終メッセージ
         var startTime;
-        var redPhaseStart = 22 * 1000;
-        var endPhaseStart = 45 * 1000;
 
-        document.getElementById("innerdiv").style.display = "none";
-
-        function Random(n) {
-            return Math.floor(Math.random() * n);
+        function startInvasion() {
+            document.getElementById("confirmButton").style.display = "none"; // ボタンを非表示
+            document.getElementById("innerMessage").style.display = "block"; // メッセージを表示
+            startTime = new Date().getTime(); // 開始時間を取得
+            setInterval(update, 50); // 50msごとに更新
         }
 
-        function Change(str) {
-            try {
-                var content = str.split("");
-                for (var i = 0; i < 10; i++) {
-                    var cache = Random(content.length);
-                    content[cache] = ICU[Random(ICU.length)];
-                }
-                document.getElementById("innerdiv").innerHTML = content.join("");
-            } catch (err) {
-                EndMessage();
-            }
-        }
-
-        function go() {
-            // ボタンがクリックされた後、ボタンを非表示にし、メッセージを表示
-            document.getElementById("confirmButton").style.display = "none";
-            document.getElementById("innerdiv").style.display = "block";
-            startTime = new Date().getTime();
-            interval = setInterval(Update, 50);
-        }
-
-        function Update() {
+        function update() {
             var now = new Date().getTime();
             var elapsed = now - startTime;
 
-            // 赤色に変わる処理
+            // 赤色フェーズ
             if (elapsed >= redPhaseStart && elapsed < endPhaseStart) {
-                document.body.style.color = "#FF0000";  // body全体を赤に
-                document.getElementById("messageBox").style.borderColor = "#FF0000";  // 枠を赤に
-                document.querySelector("button").classList.add("red-mode");  // ボタンも赤に
-                document.getElementById("innerdiv").innerHTML = "<div class='glitch'>赤い眼がみている</div>";  // 赤い眼のメッセージ表示
+                document.body.style.color = "#FF0000";  // 文字色を赤に
+                document.getElementById("messageBox").style.borderColor = "#FF0000"; // 枠も赤に
+                document.getElementById("innerMessage").innerHTML = "赤い眼がみている";
                 return;
             }
 
-            // メッセージを消すタイミング調整
+            // 最終メッセージ
             if (elapsed >= endPhaseStart) {
-                EndMessage();
+                showFinalMessage();
                 return;
-            }
-
-            // メッセージの更新
-            if (elapsed >= time) {
-                Change(content1); // innerdiv のみに変更を適用
             }
         }
 
-        function EndMessage() {
-            clearInterval(interval);
-            setTimeout(function() {
-                // 赤色メッセージ終了後、2秒後に表示される
-                document.body.innerHTML = '<div class="glitch">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
-            }, 2000); // メッセージ表示の遅延
+        function showFinalMessage() {
+            document.body.innerHTML = '<div class="final-message">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
         }
     </script>
 
