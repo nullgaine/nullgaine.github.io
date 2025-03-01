@@ -73,18 +73,17 @@
     </div>
 
     <script type="text/javascript">
-        let time = 12000;
-        const ICU = "赤い眼がみている";
-        let counter = 0;
-        let flag = 0;
-        const content1 = document.getElementById("innerdiv").innerHTML;
-        let redPhase = false;
-        const redPhaseStart = 22000;
-        const finalMessageDelay = 45000;
-        const innerdiv = document.getElementById("innerdiv");
-        let interval;
+        var time = 12 * 1000;
+        var ICU = "赤い眼がみている".split("");
+        var counter = 0;
+        var flag = 0;
+        var content1 = document.getElementById("messageBox").innerHTML;
+        var interval;
+        var startTime;
+        var redPhaseStart = 22 * 1000;
+        var endPhaseStart = 45 * 1000;
 
-        innerdiv.style.display = "none";
+        document.getElementById("innerdiv").style.display = "none";
 
         function Random(n) {
             return Math.floor(Math.random() * n);
@@ -92,43 +91,45 @@
 
         function Change(str) {
             try {
-                let content = str.split("");
-                let cache = Random(content.length);
-
-                for (let i = 0; i < ICU.length && cache + i < content.length; i++) {
-                    content[cache + i] = ICU[i];
+                var content = str.split("");
+                for (var i = 0; i < 10; i++) {
+                    var cache = Random(content.length);
+                    content[cache] = ICU[Random(ICU.length)];
                 }
-
-                innerdiv.innerHTML = content.join("");
-
-                if (!redPhase && counter * time >= redPhaseStart) {
-                    document.body.classList.add("red-mode");
-                    redPhase = true;
-                }
-
-                counter++;
-
+                document.getElementById("messageBox").innerHTML = content.join("");
             } catch (err) {
-                if (flag == 0) {
-                    setTimeout(() => {
-                        innerdiv.innerHTML = "<div class='glitch'>あかい眼が視ている</div>";
-                    }, 1000);
-                    setTimeout(() => {
-                        innerdiv.innerHTML = "<div class='glitch'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
-                    }, finalMessageDelay);
-                    flag++;
-                }
+                EndMessage();
             }
         }
 
         function go() {
-            innerdiv.style.display = "block";
-            interval = setInterval(() => {
+            document.getElementById("innerdiv").style.display = "block";
+            startTime = new Date().getTime();
+            interval = setInterval(Update, 50);
+        }
+
+        function Update() {
+            var now = new Date().getTime();
+            var elapsed = now - startTime;
+
+            if (elapsed >= endPhaseStart) {
+                EndMessage();
+                return;
+            }
+            if (elapsed >= redPhaseStart) {
+                document.body.style.color = "#FF0000";
+                document.querySelector("button").classList.add("red");
+                document.getElementById("messageBox").innerHTML = "";
+                return;
+            }
+            if (elapsed >= time) {
                 Change(content1);
-            }, 100);
-            setTimeout(() => {
-                clearInterval(interval);
-            }, 40000); // Set a time limit to stop the interval
+            }
+        }
+
+        function EndMessage() {
+            clearInterval(interval);
+            document.body.innerHTML = '<div class="glitch">あかいめが視ている<br>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
         }
     </script>
 
