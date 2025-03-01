@@ -1,120 +1,136 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <title>襍､縺?楜</title>
     <meta name="contained" content="noindex">
     <style>
         body {
-            font-family: monospace;
             background-color: black;
-            color: green;
+            color: #00FF00;
+            font-family: monospace;
+            overflow: hidden;
         }
-        #div1 {
-            color: green;
-            border: 1px solid green;
-            padding: 10px;
-            margin-top: 20px;
+        .glitch {
+            color: #FF0000;
+            animation: glitch 1s infinite alternate;
+            white-space: pre-wrap;
         }
-        #innerdiv {
-            display: none;
-            color: green;
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px red, -2px -2px blue; }
+            50% { text-shadow: -2px -2px red, 2px 2px blue; }
+            100% { text-shadow: 1px 1px red, -1px -1px blue; }
+        }
+        #messageBox {
+            padding: 20px;
+            border: 1px solid #00FF00;
+            margin: 20px;
+            max-width: 80%;
         }
         button {
-            color: green;
-            background-color: black;
-            border: 1px solid green;
-            padding: 5px 10px;
+            background-color: #00FF00;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: monospace;
+            z-index: 10;
+            position: relative;
+        }
+        button:hover {
+            background-color: #008000;
+        }
+        .no-glitch {
+            z-index: 10;
+            position: relative;
+        }
+        .red-mode {
+            color: #FF0000;
+            border-color: #FF0000;
         }
     </style>
 </head>
 <body>
-   <div id="div1">
-       <strong>新しいメッセージが（１）通あります！</strong><br>
-       <button type="button" id="checkButton"> 確認する </button>
-       <div id="innerdiv">
-           =================================================================================<br>
-           2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
-           =================================================================================<br>
-           荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
-           それってさ、ちょっと酷い話だと思わないこと？<br>
-           ずっとお世話になった荒ら屋も可哀想だし。<br>
-           其処で過ごした時間は無駄じゃなかったし。<br>
-           私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
-           まあもう私同様、存在しない場所になってしまったけどね。<br>
-           この街に来てから偶に訪ねたりするの。<br>
-           だって此処は、存在しなくなったモノが集まる街だから。<br>
-           市街というか、死骸ね。<br>
-           長い間の記憶は残念ながら無いけど、私を構成するにあたって、<br>
-           私の廃墟がすこぶる影響を与えたのは間違いなく事実です。<br>
-           だからね、無駄だなんて思いたくないわ。<br>
-       </div>
-   </div>
+    <div id="div1">
+        <div id="messageBox">
+            <strong class="no-glitch">新しいメッセージが（１）通あります！</strong><br>
+            <button type="button" class="no-glitch" onclick="go()"> 確認する </button>
+            <div id="innerdiv" style="display:none;">
+                ================================================================================================<br>
+                2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
+                ================================================================================================<br>
+                荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
+                それってさ、ちょっと酷い話だと思わないこと？<br>
+                ずっとお世話になった荒ら屋も可哀想だし。<br>
+                私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
+                この街に来てから偶に訪ねたりするの。<br>
+                だって此処は、存在しなくなったモノが集まる街だから。<br>
+                市街というか、死骸ね。<br>
+                無駄だなんて思いたくないわ。<br>
+                <br>
+            </div>
+        </div>
+    </div>
 
-<script type="text/javascript">
-    (function() {
-        let time = 10000;
-        let ICU = ["み", "て", "る", "よ"];
+    <script type="text/javascript">
+        let time = 12000;
+        const ICU = "赤い眼がみている";
         let counter = 0;
         let flag = 0;
-        let content1 = document.getElementById("div1").innerHTML;
-        let div1 = document.getElementById("div1");
-        let button = document.getElementById("checkButton");
-        let innerdiv = document.getElementById("innerdiv");
+        const content1 = document.getElementById("innerdiv").innerHTML;
+        let redPhase = false;
+        const redPhaseStart = 22000;
+        const finalMessageDelay = 45000;
+        const innerdiv = document.getElementById("innerdiv");
+        let interval;
 
         innerdiv.style.display = "none";
 
-        function random(n) {
+        function Random(n) {
             return Math.floor(Math.random() * n);
         }
 
-        function change(str) {
-            let content = str.split("");
-            let cache = random(content.length);
+        function Change(str) {
+            try {
+                let content = str.split("");
+                let cache = Random(content.length);
 
-            for (let i = 0; i < 4; i++) { content[cache + i] = ICU[i]; }
-            if (time >= 100) time = time - 1000;
-            else counter++;
+                for (let i = 0; i < ICU.length && cache + i < content.length; i++) {
+                    content[cache + i] = ICU[i];
+                }
 
-            if (counter >= 50) {
-                clearInterval(interval);
-                showFinalMessage();
+                innerdiv.innerHTML = content.join("");
+
+                if (!redPhase && counter * time >= redPhaseStart) {
+                    document.body.classList.add("red-mode");
+                    redPhase = true;
+                }
+
+                counter++;
+
+            } catch (err) {
+                if (flag == 0) {
+                    setTimeout(() => {
+                        innerdiv.innerHTML = "<div class='glitch'>あかい眼が視ている</div>";
+                    }, 1000);
+                    setTimeout(() => {
+                        innerdiv.innerHTML = "<div class='glitch'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
+                    }, finalMessageDelay);
+                    flag++;
+                }
             }
-
-            div1.innerHTML = content.join("");
-            return content.join("");
         }
 
-        function showFinalMessage() {
-            div1.style.color = "red";
-            div1.style.border = "1px solid red";
-            button.style.color = "red";
-            button.style.border = "1px solid red";
-            button.style.backgroundColor = "black";
-
-            setTimeout(() => {
-                div1.innerHTML = "あかいめがみている";
-            }, 1000);
-
-            setTimeout(() => {
-                div1.innerHTML = "よっぽど憶えられたいらしい、随分と変わったお方だこと。良いでしょう、おぼえておくね";
-            }, 5000);
-        }
-
-        function start() {
+        function go() {
             innerdiv.style.display = "block";
-            let interval = setInterval(() => {
-                content1 = change(content1);
-            }, time);
-
+            interval = setInterval(() => {
+                Change(content1);
+            }, 100);
             setTimeout(() => {
-                showFinalMessage();
-            }, 12000);
+                clearInterval(interval);
+            }, 40000); // Set a time limit to stop the interval
         }
-
-        button.addEventListener("click", start);
-    })();
-</script>
+    </script>
 
 </body>
 </html>
