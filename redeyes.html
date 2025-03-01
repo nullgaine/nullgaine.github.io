@@ -118,13 +118,17 @@
       intervalID = setInterval(Change, time); // 一定時間ごとにメッセージを変更
     }
 
+
     // メッセージが終了した後の処理
-    function EndMessage() {
-      document.getElementById("innerdiv").innerHTML = "<div class='glitch'>あかい眼が視ている</div>";
-      setTimeout(function () {
+function EndMessage() {
+    document.getElementById("innerdiv").innerHTML = "<div class='glitch'>あかい眼が視ている</div>";
+    setTimeout(function () {
         document.getElementById("innerdiv").innerHTML = "<div class='glitch'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
-      }, 4000);  // 4秒後に次のメッセージ
-    }
+    }, 4000);  // 4秒後に次のメッセージ
+}
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>
