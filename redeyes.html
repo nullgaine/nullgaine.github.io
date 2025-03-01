@@ -3,121 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <title>襍､縺?楜</title>
-    <meta name="contained" content="noindex">
     <style>
         body {
             background-color: black;
             color: #00FF00;
             font-family: monospace;
             overflow: hidden;
-            transition: color 1s, background-color 1s;
         }
-
-        #messageBox {
-            padding: 20px;
-            border: 1px solid #00FF00;
-            margin: 20px;
-            max-width: 80%;
-            transition: border-color 1s;
-        }
-
-        button {
-            background-color: #00FF00;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: monospace;
-        }
-
-        button:hover {
-            background-color: #008000;
-        }
-
-        .final-message {
+        .red-mode {
             color: #FF0000;
+            border-color: #FF0000;
+        }
+        .glitch {
+            color: #FF0000;
+            animation: glitch 1s infinite alternate;
             white-space: pre-wrap;
-            padding: 20px;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px red, -2px -2px blue; }
+            50% { text-shadow: -2px -2px red, 2px 2px blue; }
+            100% { text-shadow: 1px 1px red, -1px -1px blue; }
         }
     </style>
 </head>
 <body>
-    <div id="messageBox">
-        <strong>新しいメッセージが（１）通あります！</strong><br>
-        <button id="confirmButton" onclick="startInvasion()">確認する</button>
-        <div id="innerMessage" style="display:none;">
-            ================================================================================================<br>
-            2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
-            ================================================================================================<br>
-            荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
-            それってさ、ちょっと酷い話だと思わないこと？<br>
-            ずっとお世話になった荒ら屋も可哀想だし。<br>
-            私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
-            この街に来てから偶に訪ねたりするの。<br>
-            だって此処は、存在しなくなったモノが集まる街だから。<br>
-            市街というか、死骸ね。<br>
-            無駄だなんて思いたくないわ。<br>
+    <div id="div1">
+        <div id="messageBox">
+            <strong>新しいメッセージが（１）通あります！</strong><br>
+            <button type="button" onclick="go()">確認する</button>
+            <div id="innerdiv" style="display:none;">
+                ================================================================================================<br>
+                2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
+                ================================================================================================<br>
+                荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
+                それってさ、ちょっと酷い話だと思わないこと？<br>
+                ずっとお世話になった荒ら屋も可哀想だし。<br>
+                私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
+                この街に来てから偶に訪ねたりするの。<br>
+                だって此処は、存在しなくなったモノが集まる街だから。<br>
+                市街というか、死骸ね。<br>
+                無駄だなんて思いたくないわ。<br>
+                <br>
+            </div>
         </div>
     </div>
 
-    <script>
-        // タイミング設定
-        var redPhaseStart = 18 * 1000; // 18秒で赤に変わる
-        var endPhaseStart = 24 * 1000; // 2秒後に最終メッセージ
-        var startTime;
+    <script type="text/javascript">
+        var time = 1000;
+        var ICU = ["み","て","る","よ"];
+        var counter = 0;
+        var maxCounter = 50; // 最大実行回数
+        var interval;
+        var content1 = document.getElementById("innerdiv").innerHTML;
 
-        function startInvasion() {
-            console.log("確認ボタンが押されました。");
-            
-            // ボタンを非表示にしてメッセージを表示
-            var button = document.getElementById("confirmButton");
-            var message = document.getElementById("innerMessage");
+        document.getElementById("innerdiv").style.display = "none";
 
-            if (button) {
-                button.style.display = "none";
-                console.log("確認ボタンを非表示にしました。");
-            } else {
-                console.error("確認ボタンが見つかりません。");
-            }
-
-            if (message) {
-                message.style.display = "block";
-                console.log("メッセージを表示しました。");
-            } else {
-                console.error("メッセージが見つかりません。");
-            }
-            
-            startTime = new Date().getTime(); // 開始時間を取得
-            setInterval(update, 50); // 50msごとに更新
-            console.log("侵食が開始されました。");
+        function Random(n) {
+            return Math.floor(Math.random() * n);
         }
 
-        function update() {
-            var now = new Date().getTime();
-            var elapsed = now - startTime;
+        function Change() {
+            try {
+                var content = content1.split("");
+                var cache = Random(content.length);
 
-            console.log("経過時間 (ms): " + elapsed);
+                for (var i = 0; i < ICU.length && cache + i < content.length; i++) {
+                    content[cache + i] = ICU[i];
+                }
 
-            // 赤色フェーズ
-            if (elapsed >= redPhaseStart && elapsed < endPhaseStart) {
-                document.body.style.color = "#FF0000";  // 文字色を赤に
-                document.getElementById("messageBox").style.borderColor = "#FF0000"; // 枠も赤に
-                document.getElementById("innerMessage").innerHTML = "赤い眼がみている";
-                return;
-            }
+                document.getElementById("innerdiv").innerHTML = content.join("");
 
-            // 最終メッセージ
-            if (elapsed >= endPhaseStart) {
-                showFinalMessage();
-                return;
+                counter++;
+                if (counter >= maxCounter) {
+                    throw new Error("Max count reached");
+                }
+
+                // 時間を短くしすぎない
+                time = Math.max(time - 100, 50);
+
+            } catch (err) {
+                clearInterval(interval);
+                ShowFinalMessage();
             }
         }
 
-        function showFinalMessage() {
-            document.body.innerHTML = '<div class="final-message">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
-            console.log("最終メッセージを表示しました。");
+        function go() {
+            document.getElementById("innerdiv").style.display = "block";
+            interval = setInterval(Change, time);
+            setTimeout(() => {
+                document.body.classList.add("red-mode");
+            }, 10000); // 10秒後に赤色に変化
+        }
+
+        function ShowFinalMessage() {
+            document.getElementById("innerdiv").innerHTML = '<div class="glitch">あかい眼が視ている</div>';
+            setTimeout(() => {
+                document.getElementById("innerdiv").innerHTML = '<div class="glitch">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
+            }, 2000); // 2秒後に次のメッセージを表示
         }
     </script>
-
 </body>
 </html>
