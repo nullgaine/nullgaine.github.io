@@ -104,9 +104,12 @@
         }
 
         function go() {
+            // ボタンと最初のメッセージが消えないようにする
             document.getElementById("innerdiv").style.display = "block";
             startTime = new Date().getTime();
             interval = setInterval(Update, 50);
+            // ボタンが再度出ないように、go()を一度だけ呼び出す
+            document.querySelector("button").disabled = true;
         }
 
         function Update() {
@@ -135,10 +138,10 @@
 
         function EndMessage() {
             clearInterval(interval);
-            // 5秒後にメッセージを表示
+            // 1秒後にメッセージを表示
             setTimeout(function() {
                 document.body.innerHTML = '<div class="glitch">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
-            }, 5000);  // タイミングをずらす
+            }, 1000);  // タイミングをずらす
         }
     </script>
 
