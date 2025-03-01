@@ -55,7 +55,7 @@
     <div id="div1">
         <div id="messageBox">
             <strong class="no-glitch">新しいメッセージが（１）通あります！</strong><br>
-            <button type="button" class="no-glitch" onclick="go()">確認する</button>
+            <button type="button" class="no-glitch" id="confirmButton" onclick="go()">確認する</button>
             <div id="innerdiv" style="display:none;">
                 ================================================================================================<br>
                 2025年2月30日 23:10:51　　　　　　　　　　　　　　　　　　　　　  作成　外峯 零<br>
@@ -104,8 +104,8 @@
         }
 
         function go() {
-            // ボタンがクリックされた後、ボタンを隠してメッセージの表示を開始
-            document.querySelector("button").style.display = "none";
+            // ボタンがクリックされた後、ボタンを非表示にし、メッセージを表示
+            document.getElementById("confirmButton").style.display = "none";
             document.getElementById("innerdiv").style.display = "block";
             startTime = new Date().getTime();
             interval = setInterval(Update, 50);
@@ -115,12 +115,12 @@
             var now = new Date().getTime();
             var elapsed = now - startTime;
 
-            // 赤色変化のタイミング調整
+            // 赤色に変わる処理
             if (elapsed >= redPhaseStart && elapsed < endPhaseStart) {
-                document.body.style.color = "#FF0000";  // body全体の色を赤に変更
-                document.querySelector("button").classList.add("red"); // ボタンの色を赤に変更
-                document.getElementById("messageBox").style.borderColor = "#FF0000";  // 枠の色も変更
-                document.getElementById("innerdiv").innerHTML = "<div class='glitch'>赤い眼がみている</div>";  // ここで表示
+                document.body.style.color = "#FF0000";  // body全体を赤に
+                document.getElementById("messageBox").style.borderColor = "#FF0000";  // 枠を赤に
+                document.querySelector("button").classList.add("red-mode");  // ボタンも赤に
+                document.getElementById("innerdiv").innerHTML = "<div class='glitch'>赤い眼がみている</div>";  // 赤い眼のメッセージ表示
                 return;
             }
 
@@ -130,6 +130,7 @@
                 return;
             }
 
+            // メッセージの更新
             if (elapsed >= time) {
                 Change(content1); // innerdiv のみに変更を適用
             }
@@ -137,10 +138,10 @@
 
         function EndMessage() {
             clearInterval(interval);
-            // 1秒後にメッセージを表示
             setTimeout(function() {
+                // 赤色メッセージ終了後、2秒後に表示される
                 document.body.innerHTML = '<div class="glitch">よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>';
-            }, 1000);  // タイミングをずらす
+            }, 2000); // メッセージ表示の遅延
         }
     </script>
 
