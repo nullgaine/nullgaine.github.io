@@ -1,4 +1,4 @@
-/*reset style*/
+/* 기존 스타일 */
 * {
   margin: 0;
   padding: 0;
@@ -8,18 +8,12 @@
   font-weight: 400;
   font-style: normal;
 }
-a, a:link, a:visited {
-  color: inherit;
-  text-decoration: none;
-}
-li {
-  list-style: none;
-}
-/*header*/
+
+/* 헤더 */
 header {
   width: 100%;
   height: 420px;
-} /* //header */
+}
 header .header-top {
   width: 100%;
   height: 298px;
@@ -27,7 +21,8 @@ header .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-} /* //hedaer .header-top */
+}
+
 header .logo {
   width: 634px;
   height: 97px;
@@ -36,10 +31,12 @@ header .logo {
   margin-top: -25px;
   margin-left: 110px;
 }
+
 header .header-top .search {
   position: relative;
   right: 180px;
 }
+
 header .header-top .search-text {
   margin-right: 110px;
   width: 348px;
@@ -51,6 +48,7 @@ header .header-top .search-text {
   outline: none;
   float: left;
 }
+
 header .header-top .search-btn {
   width: 62px;
   height: 62px;
@@ -62,15 +60,16 @@ header .header-top .search-btn {
   outline: none;
   border: 0;
 }
-/*아래는 메뉴 영역입니다. html색상 코드를 사용해 색상을 변경할 수 있습니다.*/
+
+/* 네비게이션 */
 header .nav {
   width: 100%;
   height: 122px;
-  background-color: #683722; /*배경색*/
-  border-width: 5px 0; /*배경선 px= 선 굵기 작성법은  boder: 위아래px 양옆px 혹은 boder:위px 오른쪽px 아래px 왼쪽px 혹은 boder: 위px 양옆px 아래px 로 작성할 수 있습니다.*/
+  background-color: #683722;
+  border-width: 5px 0;
   border-style: solid;
   border-color: #dfca86;
-} /* //hedaer nav */
+}
 header .nav ul {
   height: 112px;
   display: flex;
@@ -90,19 +89,22 @@ header>.nav>ul>li::before {
 header>.nav>ul>li:first-child::before {
   margin-left: 0;
 }
-header>.nav>ul>li:last-child:after{
+header>.nav>ul>li:last-child:after {
   content: "|";
   float: right;
   display: block;
-  margin-left:80px;
+  margin-left: 80px;
 }
+
+/* 메인 */
 main {
   width: 100%;
   height: 974px;
   background-color: #FFF8E7;
   position: relative;
 }
-main .info{
+
+main .info {
   width: 1401px;
   height: 729px;
   position: absolute;
@@ -112,6 +114,7 @@ main .info{
   background-image: url('image/main_2.png');
   background-size: cover;
 }
+
 main .info .text {
   width: 326px;
   height: 729px;
@@ -119,49 +122,26 @@ main .info .text {
   background-color: rgb(0, 0, 0, 0.5);
   right: 0;
 }
+
 main .info .text p {
   writing-mode: vertical-rl;
   text-align: center;
   color: #fff;
   font-size: 36px;
-  text-align: right;
   position: absolute;
 }
+
 main .info .text p#text1 {
   right: 100px;
   top: 77px;
 }
+
 main .info .text p#text2 {
   right: 162px;
   top: 128px;
 }
-body #search-results {
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
 
-body #search-results ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-body #search-results li {
-    margin: 10px 0;
-}
-
-body #search-results a {
-    text-decoration: none;
-    color: #0073e6;
-    font-weight: bold;
-}
-
-body #search-results a:hover {
-    text-decoration: underline;
-}
-/*footer*/
+/* 푸터 */
 footer {
   width: 100%;
   height: 137px;
@@ -174,4 +154,56 @@ footer p {
 }
 footer>p:first-child {
   margin-left: 110px;
+}
+
+/* 반응형 스타일 (모바일용) */
+@media (max-width: 768px) {
+  header .header-top {
+    flex-direction: column;
+    align-items: center;
+  }
+  header .logo {
+    width: 300px;
+    height: auto;
+    margin: 0;
+  }
+  header .header-top .search {
+    position: static;
+    width: 100%;
+    margin: 10px 0;
+  }
+  header .header-top .search-text {
+    width: 100%;
+    margin-right: 0;
+  }
+  header .header-top .search-btn {
+    width: 50px;
+    height: 50px;
+  }
+  header .nav ul {
+    flex-direction: column;
+    padding-top: 10px;
+  }
+  header .nav ul li {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+  main .info {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    position: relative;
+  }
+  main .info .text {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  main .info .text p {
+    font-size: 24px;
+    position: relative;
+    writing-mode: horizontal-tb;
+    margin-top: 10px;
+  }
 }
