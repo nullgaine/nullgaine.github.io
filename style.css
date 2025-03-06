@@ -1,5 +1,4 @@
-/*reset style*/
-
+/* Reset Style */
 * {
   margin: 0;
   padding: 0;
@@ -9,176 +8,116 @@
   font-weight: 400;
   font-style: normal;
 }
+
 a, a:link, a:visited {
   color: inherit;
   text-decoration: none;
 }
+
 li {
   list-style: none;
 }
 
-
-/*header*/
-
+/* Header */
 header {
   width: 100%;
-  height: 420px;
-
-} /* //header */
-
-header .header-top {
-  width: 100%;
-  height: 298px;
+  height: auto;
+  padding: 20px;
   background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-} /* //hedaer .header-top */
-
-header .logo {
-  width: 634px;
-  height: 97px;
-  background-image: url('image/logo.png');
-  background-size: cover;
-  margin-top: -25px;
-  margin-left: 110px;
 }
 
-header .header-top .search {
-  position: relative;
-  right: 180px;
+header h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-header .header-top .search-text {
-  margin-right: 110px;
-  width: 348px;
-  height: 62px;
-  border: solid 5px #B7282E;
-  border-right: 0;
-  padding: 5px;
-  margin-right: 0;
-  outline: none;
-  float: left;
-}
-header .header-top .search-btn {
-  width: 62px;
-  height: 62px;
-  background-color: #B7282E;
-  background-image: url("image/search_Icon.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  float: right;
-  outline: none;
-  border: 0;
-}
-
-
-/*아래는 메뉴 영역입니다. html색상 코드를 사용해 색상을 변경할 수 있습니다.*/
-header .nav {
+/* Navigation Menu */
+nav {
   width: 100%;
-  height: 122px;
-  background-color: #683722; /*배경색*/
-  border-width: 5px 0; /*배경선 px= 선 굵기 작성법은  boder: 위아래px 양옆px 혹은 boder:위px 오른쪽px 아래px 왼쪽px 혹은 boder: 위px 양옆px 아래px 로 작성할 수 있습니다.*/
-  border-style: solid;
-  border-color: #dfca86;
-} /* //hedaer nav */
+  background-color: #683722;
+  border-top: 5px solid #dfca86;
+  border-bottom: 5px solid #dfca86;
+}
 
-header .nav ul {
-  height: 112px;
+nav ul {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  padding: 10px 0;
 }
 
-header .nav ul li {
+nav li {
   color: #fff;
-  font-size: 24px;
-
+  font-size: 20px;
+  margin: 0 20px;
+  position: relative;
 }
 
-header>.nav>ul>li::before {
+nav li:not(:first-child)::before {
   content: "|";
-  float: left;
-  display: block;
-  margin: 0 80px;
+  margin-right: 20px;
+  color: #fff;
 }
 
-header>.nav>ul>li:first-child::before {
-  margin-left: 0;
-}
-
-header>.nav>ul>li:last-child:after{
-  content: "|";
-  float: right;
-  display: block;
-  margin-left:80px;
-}
-
-
+/* Main Content */
 main {
   width: 100%;
-  height: 974px;
+  min-height: calc(100vh - 250px); /* 화면 전체 높이에서 헤더와 푸터 높이 차감 */
   background-color: #FFF8E7;
-  position: relative;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
-main .info{
-  width: 1401px;
-  height: 729px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -364.5px 0 0 -700.5px;
-  background-image: url('image/main_2.png');
-  background-size: cover;
+#search-results {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 800px;
+  margin: 20px auto;
 }
 
-main .info .text {
-  width: 326px;
-  height: 729px;
-  position: absolute;
-  background-color: rgb(0, 0, 0, 0.5);
-  right: 0;
+#search-results ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-main .info .text p {
-  writing-mode: vertical-rl;
-  text-align: center;
-  color: #fff;
-  font-size: 36px;
-  text-align: right;
-  position: absolute;
+#search-results li {
+  margin: 10px 0;
 }
 
-main .info .text p#text1 {
-  right: 100px;
-  top: 77px;
-}
-main .info .text p#text2 {
-  right: 162px;
-  top: 128px;
+#search-results a {
+  text-decoration: none;
+  color: #0073e6;
+  font-weight: bold;
 }
 
+#search-results a:hover {
+  text-decoration: underline;
+}
 
-
-/*footer*/
-
+/* Footer */
 footer {
   width: 100%;
   height: 137px;
   background-color: #B7282E;
   display: flex;
   align-items: center;
-}
-
-footer p {
+  justify-content: center;
   color: #fff;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-footer>p:first-child {
-  margin-left: 110px;
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+  nav li {
+    margin: 10px 0;
+    font-size: 18px;
+  }
 }
-
-
-
-
