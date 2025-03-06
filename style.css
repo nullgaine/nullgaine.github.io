@@ -1,177 +1,347 @@
 /*reset style*/
+
+/* 전체 스타일 영역(reset css) */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Noto Serif JP", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+margin: 0;
+padding: 0;
+@@ -19,119 +18,107 @@ li {
 }
-a, a:link, a:visited {
-  color: inherit;
-  text-decoration: none;
-}
-li {
-  list-style: none;
-}
+
+
+/* 개별 스타일 지정 영역 */
+
+
 /*header*/
+
 header {
+  width: 1920px;
   width: 100%;
   height: 420px;
+
 } /* //header */
+
 header .header-top {
   width: 100%;
-  height: 298px;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+height: 298px;
+background-color: #fff;
+display: flex;
+justify-content: space-between;
+align-items: center;
 } /* //hedaer .header-top */
+
+/* 로고 */
+
+header .logo a {
 header .logo {
-  width: 634px;
-  height: 97px;
+width: 634px;
+height: 97px;
+  display: block;
+  background-image: url('image/logo.png'); /*로고 이미지*/
   background-image: url('image/logo.png');
-  background-size: cover;
-  margin-top: -25px;
-  margin-left: 110px;
+background-size: cover;
+margin-top: -25px;
+margin-left: 110px;
 }
+/* //로고 */
+
+/* 검색창 */
+header  .search {
 header .header-top .search {
-  position: relative;
+position: relative;
+  right: 180px; /*검색창 위치 고정 숫자를 높이거나 줄이면 됩니다 right=오른쪽 기준으로 ㅇㅇpx 떨어트려놓음  ,left=왼쪽 기준으로 ㅇㅇpx 떨어트려놓음*/
   right: 180px;
 }
+
+header .search-text {
 header .header-top .search-text {
-  margin-right: 110px;
-  width: 348px;
-  height: 62px;
+margin-right: 110px;
+width: 348px;
+height: 62px;
+  border: solid 5px #B7282E; /* 검색창 선색 */
+  border-right: 0; /*아래.search-btn과 겹쳐 어색한 선을 없앰 */
+  padding: 5px; /*검색창 내부 여유공간*/
   border: solid 5px #B7282E;
   border-right: 0;
   padding: 5px;
-  margin-right: 0;
-  outline: none;
+margin-right: 0;
+outline: none;
+  float: left; /*왼쪽 정렬*/
   float: left;
 }
+header .search-btn {
 header .header-top .search-btn {
-  width: 62px;
-  height: 62px;
+width: 62px;
+height: 62px;
+  background: #B7282E /*배경색*/ url("image/search_Icon.png") /*이미지*/ center center /*x축 y축 정렬*/ no-repeat /*반복 사용 여부 - 현재는 반복하지 않는다 로 선언되어 있음*/;
+  float: right; /*오른쪽 정렬*/
   background-color: #B7282E;
   background-image: url("image/search_Icon.png");
   background-repeat: no-repeat;
   background-position: center center;
   float: right;
-  outline: none;
-  border: 0;
+outline: none;
+border: 0;
 }
+
+/* //검색창 */
+
+
 /*아래는 메뉴 영역입니다. html색상 코드를 사용해 색상을 변경할 수 있습니다.*/
+.nav {
+  width: 1920px;
 header .nav {
   width: 100%;
-  height: 122px;
-  background-color: #683722; /*배경색*/
+height: 122px;
+background-color: #683722; /*배경색*/
+  border-width: 5px 0; /*배경선 px= 선 굵기 작성법은  boder: 위아래px 양옆px 혹은 boder:위px 오른쪽px 아래px 왼쪽px 혹은 boder: 위px 양옆px 아래px 로 작성할 수 있습니다. 현재는 위아래만 적용된 상태*/
   border-width: 5px 0; /*배경선 px= 선 굵기 작성법은  boder: 위아래px 양옆px 혹은 boder:위px 오른쪽px 아래px 왼쪽px 혹은 boder: 위px 양옆px 아래px 로 작성할 수 있습니다.*/
-  border-style: solid;
-  border-color: #dfca86;
+border-style: solid;
+border-color: #dfca86;
+  position: sticky; /*스크롤 시 메뉴 고정 코드*/
+  top: 0;
+  z-index: 99;
 } /* //hedaer nav */
+
+
+/* 메뉴 */
+
+.nav ul {
 header .nav ul {
-  height: 112px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+height: 112px;
+display: flex;
+align-items: center;
+justify-content: center;
 }
+
+.nav ul li {
+  color: #fff;  /*메뉴 글자색*/
 header .nav ul li {
   color: #fff;
-  font-size: 24px;
+font-size: 24px;
+
 }
+
+/* ↓메뉴 사이사이에 들어가는 선의 설정입니다. 색은 글자색 따라감 */
+.nav>ul>li::before {
 header>.nav>ul>li::before {
-  content: "|";
-  float: left;
-  display: block;
-  margin: 0 80px;
+content: "|";
+float: left;
+display: block;
+margin: 0 80px;
+} 
 }
+
+.nav>ul>li:first-child::before {
 header>.nav>ul>li:first-child::before {
-  margin-left: 0;
+margin-left: 0;
 }
+
+.nav>ul>li:last-child:after{
 header>.nav>ul>li:last-child:after{
-  content: "|";
-  float: right;
-  display: block;
-  margin-left:80px;
+content: "|";
+float: right;
+display: block;
+margin-left:80px;
 }
+/* // 선 설정*/
+
+/* //메뉴 */
+
+/*메인*/
+
 main {
+  width: 1920px;
   width: 100%;
-  height: 974px;
+height: 974px;
+  background-color: #FFF8E7; /*메인 배경색*/
   background-color: #FFF8E7;
-  position: relative;
+position: relative;
 }
-main .info{
-  width: 1401px;
-  height: 729px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+
+@@ -141,30 +128,28 @@ main .info{
+position: absolute;
+top: 50%;
+left: 50%;
+  margin: -364.5px 0 0 -700.5px; 
+  /*여기까지 크기 및 위치 조정*/
+  background-image: url('image/main_2.png'); /* 메인 이미지, 변경 시 image 폴더에 이미지를 넣고 "image/여기에 파일명을 확장자명까지 써주세요" */
+  background-size: cover; /* 영역 크기에 이미지를 맞추는 명령어 */
   margin: -364.5px 0 0 -700.5px;
   background-image: url('image/main_2.png');
   background-size: cover;
 }
+
 main .info .text {
-  width: 326px;
-  height: 729px;
-  position: absolute;
+width: 326px;
+height: 729px;
+position: absolute;
+  background-color: rgb(0, 0, 0, 0.5); /*이미지 위에 텍스트가 들어가는 박스 색 각각 rgb 수치와 투명도 순 0, 0, 0 = r=0, g=0, b=0   0.5=오퍼티시 50%*/
   background-color: rgb(0, 0, 0, 0.5);
-  right: 0;
+right: 0;
 }
+
 main .info .text p {
+  writing-mode: vertical-rl; /*일본어 문장처럼 글자 정렬하기*/
   writing-mode: vertical-rl;
-  text-align: center;
+text-align: center;
+  color: #fff; /*글자색*/
+  font-size: 36px; /*글자 크기, 참고로 이 글자들은 과학적으로 위치를 맞춘 게 아니라 대충 그럴듯해 보이게 때려 박아놓은 것이기에 글자 크기를 바꾸면 수치 조정이 필요합니다*/
   color: #fff;
   font-size: 36px;
-  text-align: right;
-  position: absolute;
+text-align: right;
+position: absolute;
 }
+
+/*위치 수치 조정*/
 main .info .text p#text1 {
-  right: 100px;
-  top: 77px;
-}
-main .info .text p#text2 {
-  right: 162px;
-  top: 128px;
-}
-body #search-results {
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-body #search-results ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-body #search-results li {
-    margin: 10px 0;
-}
-
-body #search-results a {
-    text-decoration: none;
-    color: #0073e6;
-    font-weight: bold;
-}
-
-body #search-results a:hover {
-    text-decoration: underline;
-}
+right: 100px;
+top: 77px;
+@@ -179,143 +164,20 @@ main .info .text p#text2 {
 /*footer*/
+
 footer {
+  width: 1920px;
   width: 100%;
-  height: 137px;
+height: 137px;
+  background-color: #B7282E; /*배경색*/
+  position: relative;
   background-color: #B7282E;
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
+
+footer>p:first-child {
+  margin-left: 110px;
 footer p {
-  color: #fff;
+color: #fff;
 }
+
+/*페이지 위로 올라가는 버튼*/
+footer #page-top{
+  width: 149px;
+  height: 59px;
+  font-family: "Noto Sans JP", sans-serif; /*버튼 폰트 유형*/
+  font-size: 16px;
+  color: #683722; /*버튼 글자 색*/
+  background: #fff; /*버튼 색*/
+  border-radius: 20px 20px 0 0;
+  position: absolute;
+  bottom: 0px;
+  right: 41px;
+  text-align: center;
+  line-height: 59px;
+  border: none;
+  outline: none;
 footer>p:first-child {
   margin-left: 110px;
 }
+
+/* 기존 CSS는 그대로 유지 */
+
+/* 반응형 디자인을 위한 미디어 쿼리 추가 */
+@media (max-width: 768px) {
+  /* 헤더 수정 */
+  header {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  header .logo a {
+    width: 200px; /* 로고 크기 축소 */
+    height: auto;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  /* 검색창 수정 */
+  header .search {
+    right: 0;
+    position: relative;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header .search-text {
+    width: 80%;
+    margin: 5px 0;
+  }
+
+  header .search-btn {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    margin-top: 5px;
+  }
+
+  /* 네비게이션 수정 */
+  .nav {
+    width: 100%;
+    height: auto;
+    background-color: #683722;
+    border: none;
+    padding: 10px 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav ul li {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  /* 메인 섹션 수정 */
+  main {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  main .info {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background-image: url('image/main_2.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  main .info .text {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: center;
+  }
+
+  main .info .text p {
+    writing-mode: horizontal-tb;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  /* 푸터 수정 */
+  footer {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  footer #page-top {
+    position: relative;
+    margin-top: 10px;
+    right: 0;
+  }
+}
+
