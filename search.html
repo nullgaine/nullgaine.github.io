@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <h1>検索結果</h1>
     </header>
-    <nav>
+
+    <!-- Navigation -->
+    <nav class="nav">
         <ul>
             <li><a href="#">紹介</a></li>
             <li><a href="https://hospinfo-enuei-city.org/guideline">利用規約</a></li>
@@ -21,17 +24,21 @@
         </ul>
     </nav>
     
+    <!-- Main Content -->
     <main>
         <div id="search-results">
             <p>検索中...</p>
         </div>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>© 2011 CU1000 N/A City General Hospital, All rights reserved.</p>
     </footer>
 
+    <!-- Search Script -->
     <script>
+        // 検索 가능한 페이지 목록
         const pages = {
             "削除される記録": {title: "間違ったパスです", url: "https://hospinfo-enuei-city.org/d_archive"},
             "韓国語": {title: "한국어", url: ["https://hospinfo-enuei-city.org/ko-dex", "https://hospinfo-enuei-city.org/irrumderwelt-k", "https://hospinfo-enuei-city.org/notice404-k"]},
@@ -41,36 +48,36 @@
             "図書館": {title: "図書館", url: "https://hospinfo-enuei-city.org/utamihon"}
         };
 
-        // クエリパラメータ「q」を取得する関数
+        // クエリパラメータ取得関数
         function getQueryParam(name) {
             const params = new URLSearchParams(window.location.search);
             return params.get(name);
         }
 
-        // 検索結果を表示する関数
+        // 検索結果表示関数
         function displayResults() {
             const keyword = getQueryParam("q");
             const resultsDiv = document.getElementById("search-results");
-            resultsDiv.innerHTML = ""; // 初期化
+            resultsDiv.innerHTML = ""; // 초기화
 
-            console.log('検索キーワード:', keyword); // クエリパラメータを確認
+            console.log('検索キーワード:', keyword); // 디버그용
 
-            // キーワードが空か、ページリストにない場合
+            // 검색 키워드가 없거나 페이지 목록에 없는 경우
             if (!keyword || !(keyword in pages)) {
                 resultsDiv.innerHTML = "<p>そんなのはまだ此処に無いよ。</p>";
                 return;
             }
 
-            // 該当するページの情報を表示
+            // 해당하는 검색 결과 표시
             const result = pages[keyword];
             let resultLinks = "";
 
             if (Array.isArray(result.url)) {
-                result.url.forEach(url => {
-                    resultLinks += `<li><a href="${url}">${result.title}</a></li>`;
+                result.url.forEach((url, index) => {
+                    resultLinks += `<li><a href="${url}" target="_blank">${result.title} (${index + 1})</a></li>`;
                 });
             } else {
-                resultLinks = `<li><a href="${result.url}">${result.title}</a></li>`;
+                resultLinks = `<li><a href="${result.url}" target="_blank">${result.title}</a></li>`;
             }
 
             resultsDiv.innerHTML = `
@@ -81,10 +88,8 @@
             `;
         }
 
-        // ページロード時に検索結果を表示
-        window.onload = function() {
-            displayResults(); // ここで表示関数を呼び出す
-        };
+        // 페이지 로드 시 검색 결과 표시
+        window.onload = displayResults;
     </script>
 </body>
 </html>
