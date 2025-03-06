@@ -13,18 +13,13 @@
     <header>
       <div class="header-top">
         <div class="logo">
-          <!-- 로고 이미지 삽입 -->
-          <img src="image/logo.png" alt="병원 로고">
         </div>
         <div class="search">
-          <input class="search-text" type="text" id="searchInput" placeholder="検索語を入力します" onkeyup="enterkeySearch(event)">
-          <button class="search-btn" type="submit" onclick="searchPage()">
-            <!-- 검색 버튼 아이콘 -->
-            <img src="image/search_Icon.png" alt="검색">
-          </button>
+          <input class="search-text" type="text" id="searchInput" placeholder="検索語を入力します" onkeyup="enterkeySearch()"/>
+          <button class="search-btn" type="submit" onclick="searchPage()"></button>
         </div>
       </div>
-      <nav class="nav">
+      <div class="nav">
         <ul>
           <li><a href="#">紹介</a></li>
           <li><a href="https://hospinfo-enuei-city.org/guideline">利用規約</a></li>
@@ -33,7 +28,7 @@
           <li><a href="#">連絡所</a></li>
           <li><a href="#">お問い合わせ</a></li>
         </ul>
-      </nav>
+      </div>
     </header>
     <main>
       <div class="info">
@@ -50,29 +45,29 @@
       </div>
     </footer>
 
-    <!-- JavaScript (検索機能) -->
+    <!-- 🔹 JavaScript (検索機能) -->
     <script>
       function searchPage() {
-        const pages = {
-          "病院": "hospital.html",
-          "診療": "medical.html",
-          "アクセス": "access.html",
-          "料金": "price.html",
-          "利用規約": "https://hospinfo-enuei-city.org/guideline",
-          "図書館": "https://hospinfo-enuei-city.org/utamihon"
-        };
+          const pages = {
+              "病院": "hospital.html",
+              "診療": "medical.html",
+              "アクセス": "access.html",
+              "料金": "price.html",
+              "利用規約": "https://hospinfo-enuei-city.org/guideline",
+              "図書館": "https://hospinfo-enuei-city.org/utamihon"
+          };
 
-        let keyword = document.getElementById("searchInput").value.trim();
-        if (keyword) {
-          window.location.href = `search.html?q=${encodeURIComponent(keyword)}`;
-        }
-      }
+          let keyword = document.getElementById("searchInput").value.trim();
+             if (keyword) {
+        window.location.href = `search.html?q=${encodeURIComponent(keyword)}`;
+    }
+}
 
-      function enterkeySearch(event) {
-        if (event.key === "Enter") {
-          searchPage();
-        }
-      }
+function enterkeySearch(event) {
+    if (event.key === "Enter") {
+        searchPage();
+    }
+}
     </script>
   </body>
 </html>
