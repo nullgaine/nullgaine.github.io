@@ -3,46 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>江縫栄市立総合病院</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
-    <script src="script.js"></script>
   </head>
   <body>
-    <header> <!--로고+검색창-->
-        <h1 class="logo"><!--로고가 들어가는 영역-->
-          <a href="index.html"></a>
-        </h1>
-        <div  class="search"><!--검색창-->
-          <input class="search-text" type="text"  placeholder="検索語を入力します"  onkeyup="enterkeySearch()"/> <!--placeholder = 검색창 내부에 검색하기 전에 보이는 글자-->
+    <header>
+      <div class="header-top">
+        <div class="logo">
+        </div>
+        <div  class="search">
+          <input class="search-text" type="text"  placeholder="検索語を入力します" onkeyup="enterkeySearch()"/>
           <button class="search-btn" type="submit"></button>
         </div>
-    </header>
-    <div class="nav"><!--메뉴-->
-      <ul>
-        <li><a href="#">紹介</a></li>
+      </div>
+      <div class="nav">
+        <ul>
+          <li><a href="#">紹介</a></li>
           <li><a href="https://hospinfo-enuei-city.org/guideline">利用規約</a></li>
           <li><a href="https://hospinfo-enuei-city.org/utamihon">図書館</a></li>
-        <li><a href="#">関連情報</a></li>
-        <li><a href="#">連絡所</a></li>
-        <li><a href="#">お問い合わせ</a></li>
-      </ul>
-    </div>
+          <li><a href="#">関連情報</a></li>
+          <li><a href="#">連絡所</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </header>
     <main>
       <div class="info">
-        <div class="text"> <!--메인 페이지 텍스트-->
+        <div class="text">
           <p id="text1">市民の心身の安寧と、回復</p><br>
           <p id="text2">健康の為日々邁進して参ります</p></div>
       </div>
     </main>
-    <footer> <!--바닥 영역-->
+    <footer>
       <p>© 2011 CU1000 N/A City General Hospital, All rights reserved.</p>
-      <button id="page-top" onclick="backToTop()"> <!--위로 올라가는 버튼-->
-        ▲ TOP
-      </button>
+      <div class="page-top">
+        <p>▲ TOP</p>
+      </div>
     </footer>
   </body>
 </html>
