@@ -7,153 +7,105 @@
 <style type="text/css">
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
          
-        body {
+                body {
             background-color: black;
             color: #00FF00;
-        font-family: 'Press Start 2P', monospace;
+            font-family: 'Press Start 2P', monospace;
             overflow: hidden;
         }
 
-    .red-mode {
-      background-color: black;
-      color: red;
-    }
+        .red-mode {
+            background-color: black;
+            color: red;
+        }
 
-     @keyframes glitch {
-    0% {
-        transform: translate(2px, 2px) skew(0.5deg);
-        opacity: 1;
-    }
-    20% {
-        transform: translate(-2px, -2px) skew(0.5deg);
-        opacity: 0.8;
-    }
-    40% {
-        transform: translate(1px, 1px) skew(0.2deg);
-        opacity: 1;
-    }
-    60% {
-        transform: translate(-1px, -1px) skew(0.3deg);
-        opacity: 0.8;
-    }
-    80% {
-        transform: translate(2px, -2px) skew(0.4deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-2px, 2px) skew(0.5deg);
-        opacity: 0.8;
-    }
-}
+        .glitch {
+            color: #FF0000;
+            animation: glitch 1s infinite alternate;
+            white-space: pre-wrap;
+        }
 
-.glitch {
-    color: #FF0000;
-    animation: glitch 1s infinite alternate;
-    white-space: pre-wrap;
-}
+        @keyframes glitch {
+            0% { transform: translate(2px, 2px) skew(0.5deg); opacity: 1; }
+            20% { transform: translate(-2px, -2px) skew(0.5deg); opacity: 0.8; }
+            40% { transform: translate(1px, 1px) skew(0.2deg); opacity: 1; }
+            60% { transform: translate(-1px, -1px) skew(0.3deg); opacity: 0.8; }
+            80% { transform: translate(2px, -2px) skew(0.4deg); opacity: 1; }
+            100% { transform: translate(-2px, 2px) skew(0.5deg); opacity: 0.8; }
+        }
 
+        #innerdiv {
+            display: none;
+        }
 
-    #innerdiv {
-      display: none;
-    }
+        button {
+            padding: 10px 20px;
+            background-color: #00FF00;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
 
-    button {
-      padding: 10px 20px;
-      background-color: #00FF00;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+        button.red-mode {
+            background-color: red;
+        }
 
-    button.red-mode {
-      background-color: red;
-    }
-
-    button:hover {
-      background-color: #00FF00;
-    }
-  </style>
+        button:hover {
+            background-color: #00FF00;
+        }
+    </style>
 </head>
 <body>
     <div id="div1">
         <div id="messageBox">
             <strong class="no-glitch">新しいメッセージが（１）通あります！</strong><br>
             <button type="button" class="no-glitch" onclick="go()">確認する</button>
-            <div id="innerdiv" style="display:none;">
-                ================================================================================================<br>
-                2025年2月30日 23:10:51 作成 外峯 零<br>
-                ================================================================================================<br>
-                荒ら屋暮らしの頃は覚えてるだけ無駄らしい？<br>
-                それってさ、ちょっと酷い話だと思わないこと？<br>
-                ずっとお世話になった荒ら屋も可哀想だし。<br>
-                私に『廃墟の歌姫』という渾名が付いたのも此処のお陰だし。<br>
-                この街に来てから偶に訪ねたりするの。<br>
-                だって此処は、存在しなくなったモノが集まる街だから。<br>
-                市街というか、死骸ね。<br>
-                無駄だなんて思いたくないわ。<br>
-            </div>
+            <div id="innerdiv" style="display:none;"></div>
         </div>
     </div>
 
-<script type="text/javascript">
-    var time = 1000; // メッセージが変わる間隔 (短縮化)
-    var ICU = ["赤", "め", "視", "てる"]; // 変化する文字
-    var counter = 0;
-    var maxChanges = 20; // 最大変更回数（調整可能）
-    var redPhase = false;
-    var redPhaseStart = 10; // 赤くなるタイミング（回数）
-    var intervalID = null;
+    <script type="text/javascript">
+        var time = 1000; // 更新間隔(ms)
+        var counter = 0;
+        var maxChanges = 20; // 変化の回数
+        var redPhase = false;
+        var redPhaseStart = 10; // 赤モード突入
+        var intervalID = null;
 
-    // メッセージのランダム変更
-    function Random(n) {
-      return Math.floor(Math.random() * n);
-    }
-
-    // 文字の変更
- function Change() {
-    var element = document.getElementById("innerdiv");
-    var content = element.innerHTML.split("");
-    var cache = Random(content.length);
-
-    // ICUの文字をランダムな位置に埋め込む
-    for (var i = 0; i < ICU.length; i++) {
-        if (cache + i < content.length) {
-            content[cache + i] = ICU[i];
+        function go() {
+            document.getElementById("innerdiv").style.display = "block"; 
+            intervalID = setInterval(Change, time);
         }
-    }
 
-    // メッセージ更新
-    element.innerHTML = content.join("");
+        function Change() {
+            var element = document.getElementById("innerdiv");
 
-    // 赤色変化 (指定カウントに到達時)
-    if (!redPhase && counter >= redPhaseStart) {
-        document.body.classList.add("red-mode");
-        document.querySelector("button").classList.add("red-mode");
-        redPhase = true;
-    }
+            // 「赤め視てる」がどんどん増える
+            var message = "";
+            for (var i = 0; i < counter; i++) {
+                message += "赤め視てる";
+                if (i % 4 === 3) message += "<br>"; // 4回ごとに改行
+            }
 
-    counter++;
+            element.innerHTML = message;
 
-    // 最大変更回数に達したら最終メッセージへ
-    if (counter >= maxChanges) {
-        clearInterval(intervalID); // タイマー停止
-        EndMessage();
-      }
-    }
+            if (!redPhase && counter >= redPhaseStart) {
+                document.body.classList.add("red-mode");
+                document.querySelector("button").classList.add("red-mode");
+                redPhase = true;
+            }
 
-    // 「確認する」ボタンが押されたとき
-    function go() {
-      document.getElementById("innerdiv").style.display = "block"; 
-      intervalID = setInterval(Change, time); // 一定時間ごとにメッセージを変更
-    }
+            counter++;
 
-    // メッセージが終了した後の処理
-function EndMessage() {
-    document.getElementById("innerdiv").innerHTML = "<div class='glitch' style='font-weight: bold;'>あかい眼が視ている</div>";
-    setTimeout(function () {
-        document.getElementById("innerdiv").innerHTML = "<div class='glitch' style='font-weight: bold;'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
-    }, 4000);  // 4秒後に次のメッセージ
-}
-  </script>
+            if (counter >= maxChanges) {
+                clearInterval(intervalID);
+                EndMessage();
+            }
+        }
+
+        function EndMessage() {
+            document.getElementById("innerdiv").innerHTML = "<div class='glitch' style='font-weight: bold;'>よっぽど憶えられたいらしい、随分と変わったお方だこと。<br>良いでしょう、おぼえておくね。</div>";
+        }
+    </script>
 </body>
-</html>　
+</html>
