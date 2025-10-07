@@ -1,0 +1,183 @@
+/*reset style*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Serif JP", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+a, a:link, a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+
+
+/*header*/
+
+header {
+  width: 100%;
+  height: 420px;
+
+} /* //header */
+
+header .header-top {
+  width: 100%;
+  height: 298px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} /* //hedaer .header-top */
+
+header .logo {
+  width: 634px;
+  height: 97px;
+  background-image: url('image/logo.png');
+  background-size: cover;
+  margin-top: -25px;
+  margin-left: 110px;
+}
+
+header .header-top .search {
+  position: relative;
+  right: 180px;
+}
+
+header .header-top .search-text {
+  margin-right: 110px;
+  width: 348px;
+  height: 62px;
+  border: solid 5px #B7282E;
+  border-right: 0;
+  padding: 5px;
+  margin-right: 0;
+  outline: none;
+  float: left;
+}
+header .header-top .search-btn {
+  width: 62px;
+  height: 62px;
+  background-color: #B7282E;
+  background-image: url("image/search_Icon.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  float: right;
+  outline: none;
+  border: 0;
+}
+
+
+/*아래는 메뉴 영역입니다. html색상 코드를 사용해 색상을 변경할 수 있습니다.*/
+header .nav {
+  width: 100%;
+  height: 122px;
+  background-color: #683722; /*배경색*/
+  border-width: 5px 0; /*배경선 px= 선 굵기 작성법은  boder: 위아래px 양옆px 혹은 boder:위px 오른쪽px 아래px 왼쪽px 혹은 boder: 위px 양옆px 아래px 로 작성할 수 있습니다.*/
+  border-style: solid;
+  border-color: #dfca86;
+} /* //hedaer nav */
+
+header .nav ul {
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .nav ul li {
+  color: #fff;
+  font-size: 24px;
+
+}
+
+header>.nav>ul>li::before {
+  content: "|";
+  float: left;
+  display: block;
+  margin: 0 80px;
+}
+
+header>.nav>ul>li:first-child::before {
+  margin-left: 0;
+}
+
+header>.nav>ul>li:last-child:after{
+  content: "|";
+  float: right;
+  display: block;
+  margin-left:80px;
+}
+
+
+main {
+  width: 100%;
+  height: 974px;
+  background-color: #FFF8E7;
+  position: relative;
+}
+
+main .info{
+  width: 1401px;
+  height: 729px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -364.5px 0 0 -700.5px;
+  background-image: url('image/main_2.png');
+  background-size: cover;
+}
+
+main .info .text {
+  width: 326px;
+  height: 729px;
+  position: absolute;
+  background-color: rgb(0, 0, 0, 0.5);
+  right: 0;
+}
+
+main .info .text p {
+  writing-mode: vertical-rl;
+  text-align: center;
+  color: #fff;
+  font-size: 36px;
+  text-align: right;
+  position: absolute;
+}
+
+main .info .text p#text1 {
+  right: 100px;
+  top: 77px;
+}
+main .info .text p#text2 {
+  right: 162px;
+  top: 128px;
+}
+
+
+
+/*footer*/
+
+footer {
+  width: 100%;
+  height: 137px;
+  background-color: #B7282E;
+  display: flex;
+  align-items: center;
+}
+
+footer p {
+  color: #fff;
+}
+
+footer>p:first-child {
+  margin-left: 110px;
+}
+
+
+
