@@ -122,15 +122,45 @@ main {
   position: relative;
 }
 
-main .info{
-  width: 1401px;
-  height: 729px;
+/* 画面いっぱい“顔”にする */
+.hero {
+  position: relative;
+  min-height: clamp(420px, 80vh, 900px);
+  display: grid;
+  place-items: center;
+  overflow: clip;
+}
+
+/* 主役画像：はみ出しなく全画面フィット */
+.hero > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* 重要：背景じゃなくても“面”として見せられる */
+  display: block;
+}
+
+/* 上に重ねるコピー（任意） */
+.hero .hero-copy {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -364.5px 0 0 -700.5px;
-  background-image: url('image/main_2.png');
-  background-size: cover;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0,0,0,.35);
+}
+
+.hero .hero-copy h1 {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 600;
+  font-size: clamp(24px, 4vw, 40px);
+  margin: 0 0 .4em;
+}
+
+.hero .hero-copy p {
+  font-size: clamp(14px, 2.2vw, 18px);
+  margin: 0;
 }
 
 main .info .text {
@@ -178,6 +208,7 @@ footer p {
 footer>p:first-child {
   margin-left: 110px;
 }
+
 
 
 
