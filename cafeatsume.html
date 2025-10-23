@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>かふぇあつめ | 小さな喫茶店の色見本（v4 / Sections + Koruri Light）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Koruri Light (for headings/logo) */
+@font-face{
+  font-family:'Koruri Light';
+  src: url('https://cdn.jsdelivr.net/gh/Koruri/Koruri/dist/Koruri-Light.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/Koruri/Koruri/dist/Koruri-Light.woff') format('woff');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+:root{
+  --bg:#f6f3ee;
+  --ink:#473f39;
+  --line:#e1d9cf;
+  --accent:#9a7a55;
+  --card:#fcfaf7;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Noto Serif JP",serif; line-height:1.7;
+}
+header{
+  max-width:1100px; margin:28px auto 8px; padding:20px clamp(16px,4vw,32px);
+  border:1px solid var(--line); border-radius:14px; background:var(--card);
+  box-shadow:0 8px 24px rgba(0,0,0,.04);
+}
+.brand{display:flex;align-items:baseline;gap:.6em;flex-wrap:wrap;}
+.brand .logo{
+  font-family:'Koruri Light', system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  font-weight:300; letter-spacing:.08em; font-size:clamp(24px,5.6vw,40px);
+}
+.brand .dot{color:var(--accent)}
+.sub{margin-top:4px;font-size:clamp(12px,1.8vw,14px);color:#6b625b;}
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;}
+.tag{border:1px dashed var(--accent);color:var(--accent);padding:4px 10px;border-radius:999px;font-size:12px;background:#fff7f0;}
+main{max-width:1100px;margin:0 auto 80px;padding:0 clamp(16px,4vw,32px);}
+.section{
+  font-family:'Koruri Light', system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  font-weight:300; letter-spacing:.08em;
+  font-size:clamp(16px,3.8vw,22px); color:#5b524c;
+  margin:26px 0 8px; display:flex; align-items:center; gap:.6em;
+}
+.hr{height:1px; background:var(--line); border:0; margin:10px 0 18px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-top:12px;}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;box-shadow:0 6px 14px rgba(0,0,0,.04);cursor:pointer;transition:transform .15s;}
+.card:hover{transform:scale(1.02);}
+.swatch{height:140px;border-bottom:1px dashed var(--line);}
+.info{padding:14px 14px 16px}
+.name{font-weight:700;letter-spacing:.04em;font-size:16px;margin-bottom:2px;}
+.meta{font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:12.5px;color:#6f665f;}
+.memo{margin-top:8px;font-size:13px;color:#5b524c;}
+footer{max-width:1100px;margin:24px auto 40px;padding:0 clamp(16px,4vw,32px);color:#7a7067;font-size:12.5px;}
+/* overlay modal */
+.overlay{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.82);animation:fade .25s;z-index:100;
+}
+.popup{
+  width:70vw;height:70vh;border-radius:16px;
+  display:flex;align-items:flex-end;justify-content:center;
+  color:#fff;padding:20px;text-align:center;
+  box-shadow:0 0 40px rgba(0,0,0,.4);
+}
+.popup-info{background:rgba(0,0,0,.35);padding:14px 24px;border-radius:12px;}
+.popup-info h2{margin:0;font-size:28px;letter-spacing:.05em;}
+.popup-info p{margin:6px 0;font-size:14px;}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">かふぇあつめ<span class="dot">.</span></div>
+    <div class="sub">――小さな喫茶店の色見本</div>
+  </div>
+  <div class="toolbar">
+    <span class="tag">コップに入るもの</span>
+    <span class="tag">温度に頼らない甘さ</span>
+    <span class="tag">喫茶メニュー風</span>
+  </div>
+</header>
+
+<main>
+  <!-- Coffee Section -->
+  <h2 class="section">☕ Coffee</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-coffee"></section>
+
+  <!-- Milk & Latte Section -->
+  <h2 class="section">🥛 Milk & Latte</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-milk"></section>
+
+  <!-- Chocolate Section -->
+  <h2 class="section">🍫 Chocolate</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-choco"></section>
+
+  <!-- Cosmic Section -->
+  <h2 class="section">🌌 Cosmic / Others</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-cosmic"></section>
+</main>
+
+<footer>※ カードをクリックすると拡大表示できます。外側クリックで閉じます。</footer>
+
+<script>
+// Datasets by sections
+const coffee = [
+  {name:"Iced Coffee",hex:"#B18F6A",meta:"RGB(177,143,106)",memo:"氷が鳴る音で今朝も始めます。"},
+  {name:"Coffee Liqueúr",hex:"#6A513B",meta:"PANTONE 18-0930 TCX",memo:"夜更かし佇むひそやかな甘さ。"},
+  {name:"Espresso",hex:"#4B382A",meta:"RGB(75,56,42)",memo:"短くて長い一口。"},
+  {name:"Macchiato",hex:"#8D6E63",meta:"RGB(141,110,99)",memo:"点のミルク、焦げた砂糖。"},
+  {name:"Irish Coffee",hex:"#5A3E36",meta:"RGB(90,62,54)",memo:"ウイスキーの余韻、頬の熱。"},
+  {name:"Black Coffee",hex:"#3B302F",meta:"RGB(59,48,47)",memo:"余白の無い一口。"},
+  {name:"Turkish Coffee",hex:"#483F39",meta:"RGB(72,63,57)",memo:"濃く、ゆっくり、底に月。"},
+  {name:"Chicory Coffee",hex:"#4A342E",meta:"RGB(74,52,46)",memo:"古い本のページみたいな香り。"},
+  {name:"Coffee Bean",hex:"#40312F",meta:"RGB(64,49,47)",memo:"掌の豆、土の匂い。"}
+];
+
+const milk = [
+  {name:"Crème Brûlée",hex:"#E4D7C5",pantone:"PANTONE 13-1006 TCX / White Swan (=TPG Crème Brûlée)",memo:"光が焦がすミルクの縁。"},
+  {name:"Café au Lait",hex:"#A67B5B",meta:"RGB(166,123,91)",memo:"午後の日差しとミルクタイム。"},
+  {name:"Latte",hex:"#D3B8A2",meta:"RGB(211,184,162)",memo:"泡の斜面が静かに沈む。"},
+  {name:"Cappuccino",hex:"#B39C82",meta:"RGB(179,156,130)",memo:"縁に残る泡のヘイロー。"},
+  {name:"Caramel Latte",hex:"#C49A6C",meta:"RGB(196,154,108)",memo:"天井の照明がとろける。"},
+  {name:"Affogato",hex:"#E9D8C3",meta:"RGB(233,216,195)",memo:"溶けかけの月が夜が落ちる。"},
+  {name:"Vanilla Cream",hex:"#F3E9DC",meta:"RGB(243,233,220)",memo:"曇りの日の白。"},
+  {name:"Milk Tea",hex:"#C3A38A",meta:"RGB(195,163,138)",memo:"雨の窓と本の紙。"},
+  {name:"Royal Milk Tea",hex:"#CDB7A0",meta:"RGB(205,183,160)",memo:"王冠ではなくブランケット。"},
+  {name:"Chai",hex:"#B58C6C",meta:"RGB(181,140,108)",memo:"スパイスが喉で灯る。"},
+  {name:"Matcha Latte",hex:"#BFD6B8",meta:"RGB(191,214,184)",memo:"深呼吸みたいな緑。"},
+  {name:"Strawberry Milk",hex:"#F6C6D0",meta:"RGB(246,198,208)",memo:"子どもの頃の帰り道。"},
+  {name:"Blue Milk",hex:"#C7D9FF",meta:"RGB(199,217,255)",memo:"深夜の冷蔵庫の灯り。"}
+];
+
+const choco = [
+  {name:"Chocolate Chip",hex:"#685A4E",meta:"RGB(104,90,78)",memo:"焼きたてから一歩冷めた色。"},
+  {name:"Chocolate Brown",hex:"#4E403B",meta:"RGB(78,64,59)",memo:"マグの内側に残る温度。"},
+  {name:"Chocolate Torte",hex:"#382E2D",meta:"RGB(56,46,45)",memo:"重いフォーク、静かな甘さ。"},
+  {name:"Shaved Chocolate",hex:"#543B35",meta:"RGB(84,59,53)",memo:"薄片が舌でほどける。"},
+  {name:"Bitter Chocolate",hex:"#503130",meta:"RGB(80,49,48)",memo:"やさしくない優しさ。"},
+  {name:"Chocolate Truffle",hex:"#612E35",meta:"RGB(97,46,53)",memo:"ほのかな赤み、秘密の一粒。"},
+  {name:"Mocha Bisque",hex:"#8C543A",meta:"RGB(140,84,58)",memo:"午後三時、窓辺の粉砂糖。"},
+  {name:"Mocha Mousse",hex:"#A47864",meta:"RGB(164,120,100)",memo:"人肌に近い甘さ。"},
+  {name:"Hazelnut Mocha",hex:"#8E6E53",meta:"RGB(142,110,83)",memo:"影にも甘さは宿るよ。"}
+];
+
+const cosmic = [
+  {name:"Cosmic Latte",hex:"#FFF8E7",meta:"RGB(255,248,231)",memo:"宇宙の平均色。薄いミルクの白昼夢。"}
+];
+
+function mount(gridId, arr){
+  const grid = document.getElementById(gridId);
+  arr.forEach(it => grid.append(cardTemplate(it)));
+}
+
+function cardTemplate(it){
+  const card=document.createElement('article');card.className="card";
+  const sw=document.createElement('div');sw.className="swatch";sw.style.backgroundColor=it.hex;
+  const info=document.createElement('div');info.className="info";
+  const name=document.createElement('div');name.className="name";name.textContent=it.name;
+  const meta=document.createElement('div');meta.className="meta";meta.textContent=it.pantone||it.meta||it.hex;
+  const memo=document.createElement('div');memo.className="memo";memo.textContent=it.memo||"";
+  info.append(name,meta,memo);card.append(sw,info);
+  card.addEventListener('click',()=>openModal(it));
+  return card;
+}
+
+function openModal(it){
+  const o=document.createElement('div');o.className="overlay";
+  o.innerHTML=`<div class="popup" style="background:${it.hex}"><div class="popup-info"><h2>${it.name}</h2><p>${it.pantone||it.meta||it.hex}</p><p>${it.memo||""}</p></div></div>`;
+  o.addEventListener('click',()=>o.remove());document.body.append(o);
+}
+
+// mount all sections
+mount('sec-coffee', coffee);
+mount('sec-milk', milk);
+mount('sec-choco', choco);
+mount('sec-cosmic', cosmic);
+</script>
+</body>
+</html>

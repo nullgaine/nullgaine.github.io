@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Café Palette</title>
+<!-- Koruri font via jsDelivr -->
+<style>
+@font-face{
+  font-family:'Koruri';
+  src: url('https://cdn.jsdelivr.net/gh/Koruri/Koruri/dist/Koruri-Regular.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/Koruri/Koruri/dist/Koruri-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+:root{
+  --bg:#faf7f2; --ink:#4c433c; --accent:#9a7a55; --line:#e8ded3;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Koruri', system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  line-height:1.75; letter-spacing:.02em;
+}
+.main{
+  min-height:100dvh; display:grid; place-items:center; padding:24px;
+  background:
+    radial-gradient(1200px 800px at 10% -10%, #fff8, #0000),
+    radial-gradient(900px 600px at 120% 120%, #fff6, #0000);
+}
+.card{
+  width:min(860px, 92vw); border:1px solid var(--line); border-radius:16px;
+  background:#fffbf7; padding:40px 24px 28px; text-align:center;
+  box-shadow:0 14px 40px rgba(0,0,0,.06);
+  animation:fadeIn .6s ease-out both;
+}
+.logo{
+  font-size: clamp(28px, 8vw, 56px);
+  font-weight: 700; letter-spacing:.06em;
+}
+.logo .dot{ color:var(--accent) }
+.sub{
+  margin-top:6px; font-size: clamp(12px, 2.6vw, 16px); color:#6e655d;
+}
+.tagline{
+  margin:18px auto 26px; max-width:40em; font-size: clamp(14px, 2.6vw, 18px);
+}
+.hr{ width:120px; height:1px; background:var(--line); margin: 18px auto 8px; }
+.kissa{
+  font-size: 12.5px; color:#7b726a; margin-bottom: 18px;
+}
+.btn{
+  display:inline-block; padding:12px 24px; border-radius:999px;
+  border:1px solid var(--accent); background:var(--accent); color:#fff;
+  text-decoration:none; font-size:16px;
+  box-shadow:0 6px 16px rgba(154,122,85,.25);
+  transition: transform .15s ease, box-shadow .15s ease, filter .3s;
+}
+.btn:hover{ transform: translateY(-1px); box-shadow:0 10px 22px rgba(154,122,85,.28); filter: brightness(1.03); }
+.note{ margin-top:14px; font-size:12.5px; color:#7f766d; }
+@keyframes fadeIn{ from{opacity:0; transform: translateY(6px)} to{opacity:1; transform:none}}
+</style>
+</head>
+<body>
+  <main class="main">
+    <section class="card" aria-label="昼喫茶の扉">
+      <div class="logo">Café Palette<span class="dot">.</span></div>
+      <div class="sub">江縫栄市立総合病院 1F 外付けカフェ</div>
+      <div class="hr"></div>
+      <p class="tagline">曖昧が淹れる<ruby>靉靆<rt>あいたい</rt></ruby>の温度を、あなたへ。</p>
+      <div class="kissa">—— だるい昼下がりに、色を一杯どうぞ。</div>
+      <a class="btn" href="https://hospinfo-enuei-city.org/cafeatsume">☕ 入る</a>
+      <div class="note">クリックすると “かふぇあつめ” の棚へ進みます。</div>
+    </section>
+  </main>
+</body>
+</html>
