@@ -80,3 +80,18 @@ body > .list {
     margin: 20px auto 48px;
   }
 }
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: "Inter", system-ui, sans-serif;
+  transition: background .2s;
+}
+.btn:hover {
+  background: var(--accent-hover);
+}
