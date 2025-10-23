@@ -55,3 +55,28 @@ h2{font-size:22px;margin:26px 0 10px;color:#444}
 a{ color:var(--link); }
 .nav a:hover{ background:#FFF1F6; }
 :focus{ outline:2px solid var(--accent-hover); outline-offset:3px; }
+
+body > h1,
+body > .panel,
+body > .grid,
+body > .list {
+  max-width: 1100px;
+  margin: 26px auto 60px;   /* 中央寄せ＋上下余白 */
+  padding: 0 20px;          /* 両端の余白 */
+}
+
+/* パネル自体の上下間隔も少し広げる */
+.panel {
+  margin: 16px 0;
+}
+
+/* モバイルは左右を少し広めに感じさせる */
+@media (max-width: 640px) {
+  body > h1,
+  body > .panel,
+  body > .grid,
+  body > .list {
+    padding: 0 16px;
+    margin: 20px auto 48px;
+  }
+}
