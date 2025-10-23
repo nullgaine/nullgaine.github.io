@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>連絡所 | 江縫栄市立総合病院</title>
+  <title>縺励ｉ縺帙?邂ｱ | 江縫栄市立総合病院</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div id="header"></div>
-  <main id="main"></main>
+
+<h1>縺励ｉ縺帙?邂ｱ</h1>
+<div class="panel">
+  <p>隨ｬ蝗帙?螢√ｒ郢を繋ぐ窓口です。繧ゅ≧蟆代＠荳也阜隕ｳ縺ｫ豐｡鬆ｭ関するご質問などをお受けします。</p>
+</div>
+  
   <div id="footer"></div>
 
   <script>
@@ -17,7 +22,6 @@
     document.getElementById(id).innerHTML = await res.text();
   }
   loadPart("header", "partials/header.html");
-  loadPart("main", "partials/desk.html");
   loadPart("footer", "partials/footer.html");
   </script>
 </body>
