@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>できる | 江縫栄市立総合病院</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <h1>できる</h1>
+<div class="grid">
+  <div class="card"><h2>配信</h2><p>固定時間、火・水は定休日。</p></div>
+  <div class="card"><h2>歌</h2><p>投稿頻度は負けません。</p></div>
+  <div class="card"><h2>絵</h2><p>依頼受付中。</p></div>
+  <div class="card"><h2>動画</h2><p>依頼受付中、勉強中です。</p></div>
+  <div class="card"><h2>MIX</h2><p>依頼受付中、実績400以上。</p></div>
+  <div class="card"><h2>コラボ</h2><p>気軽にお問い合わせください。</p></div>
+</div>
+  <div id="footer"></div>
+
+  <script>
+  async function loadPart(id, file){
+    const res = await fetch(file);
+    document.getElementById(id).innerHTML = await res.text();
+  }
+  loadPart("header", "partials/header.html");
+  loadPart("footer", "partials/footer.html");
+  </script>
+</body>
+</html>
