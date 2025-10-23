@@ -1,0 +1,1 @@
+Place your full-bleed hero image here as 'hero.jpg' (recommended width >= 1600px).

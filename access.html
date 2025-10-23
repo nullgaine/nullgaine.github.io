@@ -3,12 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>江縫栄市立総合病院</title>
+  <title>アクセス | 江縫栄市立総合病院</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div id="header"></div>
-  <main id="main"></main>
+  <main id="main">
+    <h1>アクセス</h1>
+    <div class="panel">
+      <div class="card" style="height:220px;display:flex;align-items:center;justify-content:center;background:linear-gradient(0deg,#eef3f8,#fafcff)">地図（画像をここに）</div>
+      <p>住所：漆谷県江縫栄市北司零寺2-1-1</p>
+      <p class="note">潟巣町バス「総合病院前」下車すぐ。駐車場200台。</p>
+    </div>
+  </main>
   <div id="footer"></div>
 
   <script>
@@ -17,7 +24,6 @@
     document.getElementById(id).innerHTML = await res.text();
   }
   loadPart("header", "partials/header.html");
-  loadPart("main", "partials/main.html");
   loadPart("footer", "partials/footer.html");
   </script>
 </body>
