@@ -3,12 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>病院概要 | 江縫栄市立総合病院</title>
+  <title>施設概要 | 江縫栄市立総合病院</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div id="header"></div>
-  <main id="main"></main>
+<section class="panel">
+  <h1>施設概要</h1>
+  <p><strong>江縫栄市立総合病院 / N/A City General Hospital</strong></p>
+  <p>所在地：漆谷県江縫栄市北司零寺2-1-1</p>
+</section>
+
+<section class="panel">
+  <h2>施設について</h2>
+  <p>大型病院の形をしている施設です。総9階建の、あらゆる分野から皆様をケアできるよう努めて参ります。</p>
+  <ul class="list">
+    <li>1階：受付・救急搬送（救急搬送診療は市民のみ適用）</li>
+    <li>2階：小児科・子ども病室</li>
+    <li>3階：脳神経外科</li>
+    <li>4階：内科・呼吸器科</li>
+    <li>5階：外科・整形外科</li>
+    <li>6階：救急対応センター（ICU等）</li>
+    <li>7階：婦人科・産婦人科</li>
+    <li>8階：眼科・耳鼻咽喉科</li>
+    <li>9階：物理療法・リハビリテーション施設・入院病室</li>
+  </ul>
+</section>
+
+<section class="panel">
+  <h2>面会時間</h2>
+  <p>入院患者の面会時間は、<strong>土日祝を含め 9:00〜18:00</strong> です。</p>
+</section>
+
+<section class="panel">
+  <h2>お問い合わせ</h2>
+  <p>代表：<a href="mailto:tellyourworld@hospinfo-enuei-city.org">tellyourworld@hospinfo-enuei-city.org</a>（平日9:00〜18:00）</p>
+</section>
+
+  
   <div id="footer"></div>
 
   <script>
@@ -17,7 +49,6 @@
     document.getElementById(id).innerHTML = await res.text();
   }
   loadPart("header", "partials/header.html");
-  loadPart("main", "partials/overview.html");
   loadPart("footer", "partials/footer.html");
   </script>
 </body>
