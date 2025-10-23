@@ -95,3 +95,20 @@ body > .list {
 .btn:hover {
   background: var(--accent-hover);
 }
+
+h2 {
+  font-family: "Koruri Light", sans-serif;
+  font-weight: 300;
+  letter-spacing: .05em;
+  font-size: 20px;
+  margin: 22px 0 8px;
+  color: #444;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.panel h2 {
+  margin-top: 12px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--accent);
+  padding-left: 10px;
+}
