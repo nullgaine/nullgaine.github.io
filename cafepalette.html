@@ -59,6 +59,74 @@ body{
 .btn:hover{ transform: translateY(-1px); box-shadow:0 10px 22px rgba(154,122,85,.28); filter: brightness(1.03); }
 .note{ margin-top:14px; font-size:12.5px; color:#7f766d; }
 @keyframes fadeIn{ from{opacity:0; transform: translateY(6px)} to{opacity:1; transform:none}}
+
+/* 既存の .card 背景をトークン化（上書き） */
+.card{ background: var(--card); }
+
+/* ライト/ダーク両対応の宣言 */
+:root{ color-scheme: light dark; }
+
+/* ダーク自動（青みの夜） */
+@media (prefers-color-scheme: dark){
+  html{
+    --bg:#0f141a;            /* 深い群青 */
+    --ink:#e6edf3;           /* 冷たい白 */
+    --line:#1e2730;
+    --card:#162029;          /* ネイビーがかった黒 */
+    --accent:#7ea8ff;        /* 月光の青 */
+  }
+  .main::before{ opacity:.22 }   /* 星 */
+  .main::after{ opacity:.7 }     /* 月光の筋 */
+}
+
+/* 手動トグル用（ボタンで強制夜） */
+html.theme-dark{
+  --bg:#0f141a; --ink:#e6edf3; --line:#1e2730; --card:#162029; --accent:#7ea8ff;
+  /* 星・月光もON */
+}
+html.theme-dark .main::before{ opacity:.22 }
+html.theme-dark .main::after{ opacity:.7 }
+
+/* 星・月光（要素追加なし。背景の上に重ねる） */
+.main{ position:relative; isolation:isolate; }
+.main::before,
+.main::after{
+  content:""; position:absolute; inset:-30% -30%; pointer-events:none; z-index:0;
+  opacity:0; transition:opacity .4s ease;
+}
+.main::before{
+  background:
+    radial-gradient(2px 2px at 20% 30%, #fff8 50%, transparent 55%),
+    radial-gradient(1.5px 1.5px at 70% 60%, #fff6 50%, transparent 55%),
+    radial-gradient(1.5px 1.5px at 40% 80%, #fff6 50%, transparent 55%),
+    radial-gradient(2px 2px at 85% 20%, #fff9 50%, transparent 55%);
+  filter: blur(.2px);
+  animation: twinkle 12s linear infinite;
+}
+.main::after{
+  background: conic-gradient(from 200deg at 30% 50%,
+              transparent 0 75%, #a7c4ff1f 78% 82%, transparent 85%);
+  filter: blur(14px);
+  transform: translateY(-8%) rotate(-6deg);
+}
+@keyframes twinkle{ to{ transform: rotate(360deg) } }
+
+/* カードを星/月光より前面に */
+.card{ position:relative; z-index:1; }
+
+/* 右下の手動トグル */
+#themeToggle{
+  position:fixed; right:14px; bottom:14px; z-index:9999;
+  padding:8px 12px; border-radius:999px; border:1px solid var(--line);
+  background:transparent; color:var(--ink); cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+#themeToggle:hover{ background:rgba(255,255,255,.06); }
+
+/* 動きを苦手な人向け */
+@media (prefers-reduced-motion: reduce){
+  .main::before,.main::after{ animation:none }
+}
 </style>
 </head>
 <body>
@@ -73,5 +141,19 @@ body{
       <div class="note">クリックすると “かふぇあつめ” の棚へ進みます。</div>
     </section>
   </main>
+<button id="themeToggle" aria-pressed="false" title="昼/夜 切替">夜</button>
+<script>
+  const btn = document.getElementById('themeToggle');
+  const apply = on => {
+    document.documentElement.classList.toggle('theme-dark', on);
+    btn.setAttribute('aria-pressed', on);
+    btn.textContent = on ? '昼' : '夜';
+  };
+  apply(localStorage.getItem('theme') === 'dark');
+  btn.addEventListener('click', ()=>{
+    const on = !document.documentElement.classList.contains('theme-dark');
+    apply(on); localStorage.setItem('theme', on ? 'dark' : 'light');
+  });
+</script>
 </body>
 </html>
