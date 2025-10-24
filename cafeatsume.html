@@ -41,6 +41,22 @@ header{
 .toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;}
 .tag{border:1px dashed var(--accent);color:var(--accent);padding:4px 10px;border-radius:999px;font-size:12px;background:#fff7f0;}
 main{max-width:1100px;margin:0 auto 80px;padding:0 clamp(16px,4vw,32px);}
+/* dot をクリック可能に */
+.brand .dot{
+  cursor:pointer;
+}
+.brand .dot:hover{ text-decoration:underline; text-underline-offset:2px; }
+/* キーボード操作の見え方 */
+.brand .dot:focus{ outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; }
+
+/* Spectreタグ（任意：ヘッダーのタグ列に混ぜる時） */
+.tag-spectre{
+  border-style:solid;
+  color:#7ea8ff; border-color:#7ea8ff; background:transparent;
+  text-decoration:none;
+}
+.tag-spectre:hover{ background:rgba(126,168,255,.08); }
+
 .section{
   font-family:'Koruri Light', system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
   font-weight:300; letter-spacing:.08em;
@@ -121,7 +137,7 @@ html.theme-dark{
 <body>
 <header>
   <div class="brand">
-    <div class="logo">かふぇあつめ<span class="dot">.</span></div>
+    <div class="logo">かふぇあつめ<span class="dot" id="spectreDot" role="link" aria-label="Le Spectre へ" tabindex="0">.</span></div>
     <div class="sub">――小さな喫茶店の色見本</div>
   </div>
   <div class="toolbar">
@@ -307,6 +323,26 @@ const cosmic = [
     o.innerHTML=`<div class="popup" style="background:${it.hex}"><div class="popup-info"><h2>${it.name}</h2><p>${it.pantone||it.meta||it.hex}</p><p>${it.memo||""}</p></div></div>`;
     o.addEventListener('click',()=>o.remove());document.body.append(o);
   }
+
+  (()=>{
+  const dot = document.getElementById('spectreDot');
+  if(!dot) return;
+
+  let last = 0;
+  dot.addEventListener('click', ()=>{
+    const now = Date.now();
+    if(now - last < 400){ location.href = 'lespectre.html'; } // 2回タップで遷移
+    last = now;
+  });
+
+  // キーボードでも
+  dot.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      location.href = 'lespectre.html';
+    }
+  });
+})();
 
   // mount all sections
   mount('sec-coffee', coffee);
