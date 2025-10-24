@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Spectre | 未名の色標</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ===== 基本トークン（昼/夜で切替） ===== */
+:root{
+  --bg:#0f141a; --ink:#e6edf3; --line:#1e2730; --card:#162029;
+  --link:#96b7ff; --accent:#7ea8ff; --accent-hover:#98c1ff;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f3ee; --ink:#473f39; --line:#e1d9cf; --card:#fcfaf7;
+    --link:#9a7a55; --accent:#9a7a55; --accent-hover:#b28b66;
+  }
+}
+html.theme-dark{
+  --bg:#0f141a; --ink:#e6edf3; --line:#1e2730; --card:#162029;
+  --link:#96b7ff; --accent:#7ea8ff; --accent-hover:#98c1ff;
+}
+
+/* ===== ベースUI ===== */
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Serif JP",serif;line-height:1.75;}
+header,footer,main{max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,32px);}
+header{margin:28px auto 8px;padding-top:22px}
+.brand{display:flex;align-items:baseline;gap:.6em;flex-wrap:wrap;}
+.logo{font-family:"Inter",system-ui,sans-serif;font-weight:600;letter-spacing:.06em;font-size:clamp(24px,5.6vw,40px);}
+.logo .dot{color:var(--accent)}
+.sub{margin-top:4px;font-size:clamp(12px,1.8vw,14px);color:#9fb2c2;}
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;}
+.tag{border:1px dashed var(--accent);color:var(--accent);padding:4px 10px;border-radius:999px;font-size:12px;background:transparent;}
+.section{font-family:"Inter",system-ui,sans-serif;font-weight:600;letter-spacing:.02em;font-size:14px;color:#9fb2c2;margin:26px 0 6px;display:flex;align-items:center;gap:.6em;text-transform:uppercase}
+.hr{height:1px;background:var(--line);border:0;margin:8px 0 16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-top:10px;}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;box-shadow:0 6px 14px rgba(0,0,0,.10);cursor:pointer;transition:transform .15s;}
+.card:hover{transform:translateY(-2px);}
+.swatch{height:140px;border-bottom:1px dashed var(--line);}
+.info{padding:14px 14px 16px}
+.name{font-weight:700;letter-spacing:.04em;font-size:16px;margin-bottom:2px;}
+.meta{font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:12.5px;color:#9fb2c2;}
+.memo{margin-top:8px;font-size:13px;color:#c5d3de;}
+footer{color:#9fb2c2;font-size:12.5px;margin:24px auto 40px}
+
+/* オーバーレイ */
+.overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.82);animation:fade .25s;z-index:100;}
+.popup{width:70vw;height:70vh;border-radius:16px;display:flex;align-items:flex-end;justify-content:center;color:#fff;padding:20px;text-align:center;box-shadow:0 0 40px rgba(0,0,0,.4);}
+.popup-info{background:rgba(0,0,0,.35);padding:14px 24px;border-radius:12px;}
+.popup-info h2{margin:0;font-size:28px;letter-spacing:.05em;}
+.popup-info p{margin:6px 0;font-size:14px;}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* 夜気の演出：星＆月光（軽量） */
+main{position:relative;isolation:isolate}
+main::before,main::after{content:"";position:absolute;inset:-30%;pointer-events:none;z-index:0;opacity:.25;}
+main::before{
+  background:
+   radial-gradient(2px 2px at 20% 30%, #fff8 50%, transparent 55%),
+   radial-gradient(1.5px 1.5px at 70% 60%, #fff6 50%, transparent 55%),
+   radial-gradient(1.5px 1.5px at 40% 80%, #fff6 50%, transparent 55%),
+   radial-gradient(2px 2px at 85% 20%, #fff9 50%, transparent 55%);
+  filter:blur(.2px);animation:twinkle 12s linear infinite;
+}
+main::after{
+  background:conic-gradient(from 200deg at 30% 50%,transparent 0 75%,#a7c4ff1f 78% 82%,transparent 85%);
+  filter:blur(14px);transform:translateY(-8%) rotate(-6deg);
+}
+@keyframes twinkle{to{transform:rotate(360deg)}}
+
+/* トグル */
+#themeToggle{position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+#themeToggle:hover{background:rgba(255,255,255,.06);}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">Le Spectre<span class="dot">.</span></div>
+    <div class="sub">―― まだ名を持たぬ色の試料（Unnamed / Unnumbered Shelf）</div>
+  </div>
+  <div class="toolbar">
+    <span class="tag">Fluorescent</span><span class="tag">Carrè</span><span class="tag">Shadowed</span><span class="tag">Ether</span>
+  </div>
+</header>
+
+<main>
+  <!-- Fluorescent -->
+  <h2 class="section">✴ Fluorescent</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-fluo"></section>
+
+  <!-- carré -->
+  <h2 class="section">⟡ Carré</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-carre"></section>
+
+  <!-- Shadowed -->
+  <h2 class="section">◼ Shadowed</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-shadow"></section>
+
+  <!-- Ether -->
+  <h2 class="section">☾ Ether</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-ether"></section>
+</main>
+
+<footer>※ Unnamedは <code>meta:"(Unnamed)"</code> を含めて明示。後から名称が決まったら <code>name</code> を更新してね。</footer>
+
+<button id="themeToggle" aria-pressed="false" title="昼/夜 切替">昼/夜</button>
+<script>
+/* ==== Dataset（例。ここにどんどん注ぐ） ==== */
+/* Fluorescent：印刷系の蛍光など “番号はあるが通称名なし” 想定 */
+const fluorescent = [
+  {name:"(Unnamed)", hex:"#FF7276", meta:"PANTONE 805 C (Unnamed)", memo:"仮HEX。現物見本から調整推奨。"},
+  {name:"(Unnamed)", hex:"#00F5A0", meta:"Fluorescent Green (Unnamed)", memo:"仮HEX／スポイト差し替え前。"}
+];
+
+/* Carrè：広場（名称不在や俗称のみ） */
+const carre = [
+  {name:"(Unnamed)", hex:"#7A6F62", meta:"Metallic Warm Grey (Unnamed)", memo:"仮HEX。光源で色転びあり。"},
+  {name:"(Unnamed)", hex:"#B08D57", meta:"Bronze Ink (Unnamed)", memo:"仮HEX。印刷条件で変動。"}
+];
+
+/* Shadowed：煤け・暗転・陰影の端（名の付かない領域） */
+const shadowed = [
+  {name:"(Unnamed)", hex:"#1B1A1C", meta:"Near-Black (Unnamed)", memo:"仮HEX。モニタ差で青/赤転び。"},
+  {name:"(Unnamed)", hex:"#2A2E35", meta:"Graphite Shadow (Unnamed)", memo:"仮HEX。夜ページの背景基準に近い。"}
+];
+
+/* Ether：霧・光、境界の白（未名の薄色） */
+const ether = [
+  {name:"(Unnamed)", hex:"#EDEBF2", meta:"Vapor Tint (Unnamed)", memo:"仮HEX。紙質で黄/青に寄る。"},
+  {name:"(Unnamed)", hex:"#C7D2E8", meta:"Moon Haze (Unnamed)", memo:"仮HEX。月光の青薄め。"}
+];
+
+/* ==== Render ==== */
+function mount(gridId, arr){
+  const grid = document.getElementById(gridId);
+  arr.forEach(it => grid.append(cardTemplate(it)));
+}
+function cardTemplate(it){
+  const card=document.createElement('article');card.className="card";
+  const sw=document.createElement('div');sw.className="swatch";sw.style.backgroundColor=it.hex;
+  const info=document.createElement('div');info.className="info";
+  const name=document.createElement('div');name.className="name";name.textContent=it.name;
+  const meta=document.createElement('div');meta.className="meta";meta.textContent=it.meta||"(Unnamed)";
+  const memo=document.createElement('div');memo.className="memo";memo.textContent=it.memo||"";
+  info.append(name,meta,memo);card.append(sw,info);
+  card.addEventListener('click',()=>openModal(it));
+  return card;
+}
+function openModal(it){
+  const o=document.createElement('div');o.className="overlay";
+  o.innerHTML=`<div class="popup" style="background:${it.hex}"><div class="popup-info"><h2>${it.name}</h2><p>${it.meta||"(Unnamed)"}</p><p>${it.memo||""}</p></div></div>`;
+  o.addEventListener('click',()=>o.remove());document.body.append(o);
+}
+mount('sec-fluo', fluorescent);
+mount('sec-carre', carre);
+mount('sec-shadow', shadowed);
+mount('sec-ether', ether);
+
+/* ==== Theme toggle ==== */
+const btn = document.getElementById('themeToggle');
+const apply = on => {
+  document.documentElement.classList.toggle('theme-dark', on);
+  btn.setAttribute('aria-pressed', on);
+};
+apply(localStorage.getItem('spectre-theme') === 'dark');
+btn.addEventListener('click', ()=>{
+  const on = !document.documentElement.classList.contains('theme-dark');
+  apply(on); localStorage.setItem('spectre-theme', on ? 'dark' : 'light');
+});
+</script>
+</body>
+</html>
