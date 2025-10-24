@@ -80,10 +80,10 @@ main::after{
 <header>
   <div class="brand">
     <div class="logo">Le Spectre<span class="dot">.</span></div>
-    <div class="sub">―― まだ名を持たぬ色の試料（Unnamed / Unnumbered Shelf）</div>
+    <div class="sub">―― まだ名を持たぬ色の試料</div>
   </div>
   <div class="toolbar">
-    <span class="tag">Fluorescent</span><span class="tag">Carrè</span><span class="tag">Shadowed</span><span class="tag">Ether</span>
+    <span class="tag">Fluorescent</span><span class="tag">Carrè</span><span class="tag">nuit</span><span class="tag">Ether</span>
   </div>
 </header>
 
@@ -98,10 +98,10 @@ main::after{
   <hr class="hr"/>
   <section class="grid" id="sec-carre"></section>
 
-  <!-- Shadowed -->
-  <h2 class="section">◼ Shadowed</h2>
+  <!-- nuit -->
+  <h2 class="section">🍹 Nuit</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-shadow"></section>
+  <section class="grid" id="sec-nuit"></section>
 
   <!-- Ether -->
   <h2 class="section">☾ Ether</h2>
@@ -126,9 +126,9 @@ const carre = [
   {name:"(Unnamed)", hex:"#B08D57", meta:"Bronze Ink (Unnamed)", memo:"仮HEX。印刷条件で変動。"}
 ];
 
-/* Shadowed：煤け・暗転・陰影の端（名の付かない領域） */
-const shadowed = [
-  {name:"(Unnamed)", hex:"#1B1A1C", meta:"Near-Black (Unnamed)", memo:"仮HEX。モニタ差で青/赤転び。"},
+/* Nuit：夜の飲み物 */
+const nuit = [
+  {name:"Cosmopolitan", hex:"#FF7276", meta:"Pantone 805 C (Unnamed)", memo:"宇宙の都に名前は付けられないね。"},
   {name:"(Unnamed)", hex:"#2A2E35", meta:"Graphite Shadow (Unnamed)", memo:"仮HEX。夜ページの背景基準に近い。"}
 ];
 
@@ -161,7 +161,7 @@ function openModal(it){
 }
 mount('sec-fluo', fluorescent);
 mount('sec-carre', carre);
-mount('sec-shadow', shadowed);
+mount('sec-nuit', nuit);
 mount('sec-ether', ether);
 
 /* ==== Theme toggle ==== */
