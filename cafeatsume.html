@@ -168,8 +168,13 @@ html.theme-dark{
   <hr class="hr"/>
   <section class="grid" id="sec-tea"></section>
 
+  <!-- ice Section -->
+  <h2 class="section">🍨 Ice & Extra</h2>
+  <hr class="hr"/>
+  <section class="grid" id="sec-ice"></section>
+
   <!-- Dessert Section -->
-  <h2 class="section">🍨 Dessert</h2>
+  <h2 class="section">🥧 Bakery</h2>
   <hr class="hr"/>
   <section class="grid" id="sec-dessert"></section>
 
@@ -202,6 +207,7 @@ const coffee = [
   {name:"Java",hex:"#433431",meta:"PANTONE 19-1016 TCX",memo:"遠い島の煙い朝。"},
   {name:"French Roast",hex:"#58423F",meta:"PANTONE 19-1012 TCX",memo:"深煎りは言葉少なめ。"},
   {name:"Café Noir",hex:"#4B3621",meta:"RGB(75,54,33)",memo:"看板の灯りが消えたあと。"},
+  {name:"Café au Lait",hex:"#AE8774",meta:"PANTONE 17-1227 TCX",memo:"午後の日差しとミルクタイム。"},
   {name:"Café Crème",hex:"#98714F",meta:"RGB(152,113,79)",memo:"やわらかな苦味に包まれて。"},
   {name:"Macchiato",hex:"#B09079",pantone:"PANTONE 17-1221 TCX",memo:"点のミルク、焦げた砂糖。"},
   {name:"Cappuccino",hex:"#633F32",meta:"PANTONE 19-1220 TCX",memo:"光の輪を残した苦味。"},
@@ -210,14 +216,13 @@ const coffee = [
 
 const milk = [
   {name:"Crème Brûlée",hex:"#E4D7C5",pantone:"PANTONE 13-1006 TPG",memo:"光が焦がすミルクの縁。"},
-  {name:"Café au Lait",hex:"#AE8774",meta:"PANTONE 17-1227 TCX",memo:"午後の日差しとミルクタイム。"},
+  {name:"Oat Milk",hex:"#CEC4BA",meta:"PANTONE 13-0003 TCX",memo:"雨の窓と本の紙。"},
+  {name:"Almond Milk",hex:"#E7E2DA",pantone:"PANTONE 12-4301 TCX",memo:"音のしないやさしさ。"},
   {name:"Lattè",hex:"#C5A582",meta:"PANTONE 15-1220 TCX",memo:"泡の斜面が静かに沈む。"},
   {name:"Affogato",hex:"#A98B71",meta:"RGB(169,139,113)",memo:"溶けかけの月に夜が落ちる。"},
   {name:"Cappuccino Foam",hex:"#F6F3E8",meta:"PANTONE 11-0109 TSX",memo:"ほろ苦さに浮かぶ泡のヘイロー。"},
   {name:"Caramel Cream",hex:"#F4BA94",pantone:"PANTONE 13-1022 TCX",memo:"天井の明かりは飴色。"},
-  {name:"Irish Cream",hex:"#C0AB92",meta:"PANTONE 14-1208 TCX",memo:"遠くから包んでくるぬくもり。"},
-  {name:"Oat Milk",hex:"#CEC4BA",meta:"PANTONE 13-0003 TCX",memo:"雨の窓と本の紙。"},
-  {name:"Almond Milk",hex:"#E7E2DA",pantone:"PANTONE 12-4301 TCX",memo:"音のしないやさしさ。"},
+  {name:"Irish Cream",hex:"#C0AB92",meta:"PANTONE 14-1208 TCX",memo:"遠くから包んでくるぬくもり。"}, 
   {name:"Almond Cream",hex:"#F4C29F",meta:"PANTONE 13-1017 TCX",memo:"のしかかる甘い白。"},
   {name:"Buttercream",hex:"#EFE3C6",pantone:"PANTONE 11-0110 TCX",memo:"横たわる陽だまり。"},
   {name:"Meringue",hex:"#F4EEDC",pantone:"PANTONE 11-0503 TCX",memo:"空気の比率が多い甘さ。"},
@@ -236,7 +241,6 @@ const choco = [
   {name:"Chocolate Lab",hex:"#5B4636",pantone:"PANTONE 19-1214 TCX",memo:"信頼の色、落ち着きの毛並み。"},
   {name:"Chocolate Truffle",hex:"#612E35",meta:"PANTONE 19-1526 TCX",memo:"ほのかな赤み、秘密の一粒。"},
   {name:"Cocoa",hex:"#584536",meta:"PANTONE 19-1119 TCX",memo:"一休みと甘さの編み合わせ。"},
-  {name:"Ganache",hex:"#33292A",pantone:"PANTONE 19-1018 TCX",memo:"重く、静かに艶がある。"},
   {name:"Shaved Chocolate",hex:"#543B35",meta:"PANTONE 19-1215 TCX",memo:"薄片が舌でほどける。"},
   {name:"Bitter Chocolate",hex:"#503130",meta:"PANTONE 19-1317 TCX",memo:"やさしくない優しさ。"},
   {name:"Mocha Bisque",hex:"#8C543A",meta:"PANTONE 18-1140 TCX",memo:"午後三時、窓辺の粉砂糖。"},
@@ -257,16 +261,18 @@ const tea = [
   {name:"Rooibos Tea",hex:"#A23C26",meta:"PANTONE 18-1355 TCX",memo:"陽に透かした赤。"}
 ];
 
-const dessert = [
+const ice = [
   {name:"Vanilla Ice",hex:"#F0EADA",pantone:"PANTONE 11-0104 TCX",memo:"ひんやりした乳白。"},
   {name:"Strawberry Ice",hex:"#E78B90",meta:"PANTONE 16-1720 TCX",memo:"さわやか可愛いのレシピ。"},
   {name:"Vanilla Custard",hex:"#F3E0BE",pantone:"PANTONE 12-0815 TCX",memo:"朝の光を含む甘さ。"},
   {name:"Nutmeg",hex:"#7E5C54",pantone:"PANTONE 18-1326 TCX",memo:"香辛料のぬくもり。"},
   {name:"Cerise",hex:"#DE3163",meta:"RGB(222,49,99)",memo:"よく熟した桜の実。"},
   {name:"Sugar Swizzle",hex:"#F4EEE8",pantone:"PANTONE 11-0607 TCX",memo:"甘さの輝きが星のよう。"},
-  {name:"Baked Apple",hex:"#B34646",pantone:"PANTONE 18-1648 TCX",memo:"焼きりんごの温度。"}, 
-  {name:"Caramel", hex:"#C37C54", meta:"PANTONE 16-1439 TCX", memo:"甘みの塊。"},
   {name:"Rum Raisin", hex:"#583432", meta:"PANTONE 19-1321 TCX", memo:"冷んやりした大人の味。"},
+  {name:"Peach Parfait",hex:"#FCC2AC",pantone:"PANTONE 14-1219 TCX",memo:"完璧な桃味のやさしさ。"}
+];
+
+const dessert = [
   {name:"Macaroon",hex:"#B38B71",meta:"PANTONE 16-1323 TCX",memo:"一口サイズのお月さま。"},
   {name:"Butterscotch", hex:"#E19740", meta:"PANTONE 15-1147 TCX", memo:"フォークで掬う手の温もり。"},
   {name:"Ginger Bread",hex:"#9B5E3E",pantone:"PANTONE 18-1244 TCX",memo:"焼きたての角の香り。"},
@@ -274,12 +280,13 @@ const dessert = [
   {name:"Petit Four",hex:"#88C1D3",pantone:"PANTONE 14-4516 TCX",memo:"切り分けた甘さ。"},
   {name:"Tiramisu",hex:"#7A4E3A",pantone:"PANTONE 19-1233 TCX",memo:"層の影が甘い。"},
   {name:"Decadent Chocolate",hex:"#513235",meta:"PANTONE 19-1625 TCX",memo:"深く潜れる甘さ。"},
-  {name:"Chocolate Cake",hex:"#724F44",meta:"RGB(114,79,68)",memo:"焦げた甘さの記憶。"},
+  {name:"Ganache",hex:"#33292A",pantone:"PANTONE 19-1018 TCX",memo:"重く、静かに艶がある。"},
+  {name:"Baked Apple",hex:"#B34646",pantone:"PANTONE 18-1648 TCX",memo:"焼きりんごの温度。"}, 
+  {name:"Caramel", hex:"#C37C54", meta:"PANTONE 16-1439 TCX", memo:"甘みの塊。"},
   {name:"Red Velvet",hex:"#7F2A3C",pantone:"PANTONE 18-1935 TSX",memo:"その気高い輝きは赤く。"},
   {name:"Pecan Pie",hex:"#7B5947",meta:"PANTONE 18-1125 TCX",memo:"分け与える香ばしさ。"},
   {name:"Peach Pie",hex:"#FFA88B",meta:"PANTONE 14-1325 TSX",memo:"一かけらのお昼。"},
-  {name:"Peach Cobbler",hex:"#FFB080",meta:"PANTONE 14-1231 TPX",memo:"ちょうどよく焼けた昼下がり。"},
-  {name:"Peach Parfait",hex:"#FCC2AC",pantone:"PANTONE 14-1219 TCX",memo:"桃の泡のやさしさ。"}
+  {name:"Peach Cobbler",hex:"#FFB080",meta:"PANTONE 14-1231 TPX",memo:"ちょうどよく焼けた昼下がり。"}
 ];
 
 const cocktail = [
@@ -370,6 +377,7 @@ const cosmic = [
   mount('sec-milk', milk);
   mount('sec-choco', choco);
   mount('sec-tea', tea);
+  mount('sec-ice', ice);
   mount('sec-dessert', dessert);
   mount('sec-cocktail', cocktail);
   mount('sec-cosmic', cosmic);
