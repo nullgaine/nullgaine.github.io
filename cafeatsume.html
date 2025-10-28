@@ -372,10 +372,29 @@ const cosmic = [
     localStorage.setItem('theme', on ? 'dark' : 'light');
   });
 
-  // カード生成
-  // 「mount」関数をこの新しいバージョンに差し替える
+<script>
+// ====== モーダル / カード ======
+function cardTemplate(it){
+  const card=document.createElement('article');card.className="card";
+  const sw=document.createElement('div');sw.className="swatch";sw.style.backgroundColor=it.hex;
+  const info=document.createElement('div');info.className="info";
+  const name=document.createElement('div');name.className="name";name.textContent=it.name;
+  const meta=document.createElement('div');meta.className="meta";meta.textContent=it.pantone||it.meta||it.hex;
+  const memo=document.createElement('div');memo.className="memo";memo.textContent=it.memo||"";
+  info.append(name,meta,memo);card.append(sw,info);
+  card.addEventListener('click',()=>openModal(it));
+  return card;
+}
+function openModal(it){
+  const o=document.createElement('div');o.className="overlay";
+  o.innerHTML=`<div class="popup" style="background:${it.hex}"><div class="popup-info"><h2>${it.name}</h2><p>${it.pantone||it.meta||it.hex}</p><p>${it.memo||""}</p></div></div>`;
+  o.addEventListener('click',()=>o.remove());document.body.append(o);
+}
+
+// ====== 続きを見る付き mount（12枚ずつ） ======
 function mount(gridId, arr, first=12){
   const grid = document.getElementById(gridId);
+  if(!grid) return;
   grid.innerHTML = '';
   let shown = 0;
 
@@ -386,88 +405,81 @@ function mount(gridId, arr, first=12){
 
   render(first);
 
- if(arr.length > shown){
-  const more = document.createElement('button');
-  more.className = 'btn more-btn';
-  more.dataset.for = gridId;            // ← この行を追加
-  more.textContent = `さらに表示（${arr.length - shown}）`;
-  more.style.margin = '10px 0 0';
-  more.onclick = ()=>{
-    render(12);
-    if(shown >= arr.length) more.remove();
-    else more.textContent = `さらに表示（${arr.length - shown}）`;
-  };
-  grid.after(more);
-}
-  function cardTemplate(it){
-    const card=document.createElement('article');card.className="card";
-    const sw=document.createElement('div');sw.className="swatch";sw.style.backgroundColor=it.hex;
-    const info=document.createElement('div');info.className="info";
-    const name=document.createElement('div');name.className="name";name.textContent=it.name;
-    const meta=document.createElement('div');meta.className="meta";meta.textContent=it.pantone||it.meta||it.hex;
-    const memo=document.createElement('div');memo.className="memo";memo.textContent=it.memo||"";
-    info.append(name,meta,memo);card.append(sw,info);
-    card.addEventListener('click',()=>openModal(it));
-    return card;
-  }
-  function openModal(it){
-    const o=document.createElement('div');o.className="overlay";
-    o.innerHTML=`<div class="popup" style="background:${it.hex}"><div class="popup-info"><h2>${it.name}</h2><p>${it.pantone||it.meta||it.hex}</p><p>${it.memo||""}</p></div></div>`;
-    o.addEventListener('click',()=>o.remove());document.body.append(o);
-  }
+  // さらに表示ボタン
+  const old = document.querySelector(`.more-btn[data-for="${gridId}"]`);
+  if (old) old.remove();
 
-  (()=>{
+  if(arr.length > shown){
+    const more = document.createElement('button');
+    more.className = 'btn more-btn';
+    more.dataset.for = gridId; // ← 折りたたみと連動用
+    more.textContent = `さらに表示（${arr.length - shown}）`;
+    more.style.margin = '10px 0 0';
+    more.onclick = ()=>{
+      render(12);
+      if(shown >= arr.length) more.remove();
+      else more.textContent = `さらに表示（${arr.length - shown}）`;
+    };
+    grid.after(more);
+  }
+}
+
+// ====== ドット裏口（そのまま） ======
+(()=>{
   const dot = document.getElementById('spectreDot');
   if(!dot) return;
-
   let last = 0;
   dot.addEventListener('click', ()=>{
     const now = Date.now();
-    if(now - last < 400){ location.href = 'lespectre.html'; } // 2回タップで遷移
+    if(now - last < 400){ location.href = 'lespectre.html'; }
     last = now;
   });
-
-  // キーボードでも
   dot.addEventListener('keydown', (e)=>{
     if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      location.href = 'lespectre.html';
+      e.preventDefault(); location.href = 'lespectre.html';
     }
   });
 })();
 
-  // mount all sections
-  mount('sec-coffee', coffee);
-  mount('sec-milk', milk);
-  mount('sec-choco', choco);
-  mount('sec-tea', tea);
-  mount('sec-ice', ice);
-  mount('sec-dessert', dessert);
-  mount('sec-cocktail', cocktail);
-  mount('sec-cosmic', cosmic);
+// ====== セクション描画 ======
+mount('sec-coffee',   coffee);
+mount('sec-milk',     milk);
+mount('sec-choco',    choco);
+mount('sec-tea',      tea);
+mount('sec-ice',      ice);
+mount('sec-dessert',  dessert);
+mount('sec-cocktail', cocktail);
+mount('sec-cosmic',   cosmic);
 
-  // 折りたたみトグル（▼▲付き）
+// ====== 折りたたみ（▼▶連動＋ボタン連動） ======
 document.querySelectorAll('.section').forEach(h2 => {
-  // ▼マークを追加
-  const arrow = document.createElement('span');
-  arrow.className = 'arrow';
-  arrow.textContent = '▼';
-  h2.appendChild(arrow);
-
+  // ▼マークを追加（重複防止）
+  if(!h2.querySelector('.arrow')){
+    const arrow = document.createElement('span');
+    arrow.className = 'arrow';
+    arrow.textContent = '▼';
+    h2.appendChild(arrow);
+  }
   h2.addEventListener('click', () => {
     const hr = h2.nextElementSibling;
     const grid = hr?.nextElementSibling;
     if (grid && grid.classList.contains('grid')) {
-      // 折りたたみトグル内のクリック処理に追記
-const isCollapsed = grid.classList.toggle('collapsed');
-h2.classList.toggle('collapsed', isCollapsed);
-arrow.textContent = isCollapsed ? '▶' : '▼';
+      const isCollapsed = grid.classList.toggle('collapsed');
+      h2.classList.toggle('collapsed', isCollapsed);
+      const arrow = h2.querySelector('.arrow');
+      if (arrow) arrow.textContent = isCollapsed ? '▶' : '▼';
 
-// ここから ↓ 追加
-const btn = document.querySelector(`.more-btn[data-for="${grid.id}"]`);
-if (btn) btn.style.display = isCollapsed ? 'none' : '';
+      // 「さらに表示」ボタンを連動して隠す/出す
+      const btn = document.querySelector(`.more-btn[data-for="${grid.id}"]`);
+      if (btn) btn.style.display = isCollapsed ? 'none' : '';
     }
   });
+});
+
+// ====== 初期状態で畳まれている棚のボタンも非表示に同期 ======
+document.querySelectorAll('.grid.collapsed').forEach(g=>{
+  const btn = document.querySelector(`.more-btn[data-for="${g.id}"]`);
+  if (btn) btn.style.display = 'none';
 });
 </script>
 </body>
