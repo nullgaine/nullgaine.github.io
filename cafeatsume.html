@@ -351,10 +351,32 @@ const cosmic = [
   });
 
   // カード生成
-  function mount(gridId, arr){
-    const grid = document.getElementById(gridId);
-    arr.forEach(it => grid.append(cardTemplate(it)));
+  // 「mount」関数をこの新しいバージョンに差し替える
+function mount(gridId, arr, first=12){
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = '';
+  let shown = 0;
+
+  const render = (n) => {
+    arr.slice(shown, shown+n).forEach(it => grid.append(cardTemplate(it)));
+    shown += n;
+  };
+
+  render(first);
+
+  if(arr.length > shown){
+    const more = document.createElement('button');
+    more.className = 'btn';
+    more.textContent = `さらに表示（${arr.length - shown}）`;
+    more.style.margin = '10px 0 0';
+    more.onclick = ()=>{
+      render(12);
+      if(shown >= arr.length) more.remove();
+      else more.textContent = `さらに表示（${arr.length - shown}）`;
+    };
+    grid.after(more);
   }
+}
   function cardTemplate(it){
     const card=document.createElement('article');card.className="card";
     const sw=document.createElement('div');sw.className="swatch";sw.style.backgroundColor=it.hex;
