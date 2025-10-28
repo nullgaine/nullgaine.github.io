@@ -132,6 +132,28 @@ html.theme-dark{
     box-shadow:0 2px 8px rgba(0,0,0,.08);
   }
   #themeToggle:hover{ background:rgba(255,255,255,.06); }
+  .section {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color .2s;
+}
+.section:hover {
+  color: var(--accent);
+}
+.section .arrow {
+  font-size: 14px;
+  transition: transform .2s ease;
+  opacity: .6;
+}
+.section.collapsed .arrow {
+  transform: rotate(-90deg);
+  opacity: .4;
+}
+.section + .hr + .grid.collapsed {
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -423,6 +445,25 @@ function mount(gridId, arr, first=12){
   mount('sec-dessert', dessert);
   mount('sec-cocktail', cocktail);
   mount('sec-cosmic', cosmic);
+
+  // 折りたたみトグル（▼▲付き）
+document.querySelectorAll('.section').forEach(h2 => {
+  // ▼マークを追加
+  const arrow = document.createElement('span');
+  arrow.className = 'arrow';
+  arrow.textContent = '▼';
+  h2.appendChild(arrow);
+
+  h2.addEventListener('click', () => {
+    const hr = h2.nextElementSibling;
+    const grid = hr?.nextElementSibling;
+    if (grid && grid.classList.contains('grid')) {
+      const isCollapsed = grid.classList.toggle('collapsed');
+      h2.classList.toggle('collapsed', isCollapsed);
+      arrow.textContent = isCollapsed ? '▶' : '▼';
+    }
+  });
+});
 </script>
 </body>
 </html>
