@@ -20,10 +20,10 @@
   <button type="button" role="tab" id="tab-en" data-lang="en" aria-controls="lang-en" aria-selected="false">English</button>
 </div>
 
-<div class="lang-content" id="lang-ja" hidden> … </div>
+<div class="lang-content" id="lang-ja"> … </div>
 <div class="lang-content" id="lang-ko" hidden> … </div>
 <div class="lang-content" id="lang-en" hidden> … </div>
-
+  
   <!-- === 日本語 === -->
   <div class="lang-content" id="lang-ja" style="display:block">
     <h2>Q1. 「歌ってみた」音源は使ってもいい？</h2>
@@ -98,6 +98,14 @@
 </section>
 
 <style>
+.lang-content{ /* ←表示時の基本 */
+  animation:fade .2s ease-in;
+}
+.lang-content[hidden]{
+  display:none !important;   /* ← 強制的に隠す */
+}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+  
 .lang-tabs{ display:flex; gap:8px; margin:16px 0; }
 .lang-tabs button{
   flex:1; padding:8px 12px; border:1px solid var(--line);
@@ -107,56 +115,55 @@
 .lang-tabs button.active{
   background:var(--accent); color:#fff; border-color:var(--accent);
 }
-.lang-content[hidden]{ display:none; }
-.lang-content{ animation:fade .2s ease-in; }
-@keyframes fade{ from{opacity:0} to{opacity:1} }
 </style>
 
 <script>
 (function(){
-  const tabs = document.querySelectorAll('.lang-tabs [role="tab"]');
+  const tabs = document.querySelectorAll('.lang-tabs [role="tab"], .lang-tabs button[data-lang]');
   const panels = document.querySelectorAll('.lang-content');
-  const keyOrder = ['ja','ko','en'];
+  const order = ['ja','ko','en'];
 
   function show(lang){
-    // ボタン
-    tabs.forEach(btn=>{
-      const active = btn.dataset.lang === lang;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
-      btn.tabIndex = active ? 0 : -1;
+    // タブ更新
+    tabs.forEach(b=>{
+      const active = b.dataset.lang === lang;
+      b.classList.toggle('active', active);
+      if (b.hasAttribute('role')) {
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+        b.tabIndex = active ? 0 : -1;
+      }
     });
-    // パネル
+    // パネル更新（hidden最優先 & 古いinline displayを除去）
     panels.forEach(p=>{
-      p.hidden = (p.id !== 'lang-'+lang);
+      const active = (p.id === 'lang-'+lang);
+      p.hidden = !active;
+      if (active) p.style.removeProperty('display'); // ← display残骸を掃除
     });
-    // 記憶
     try{ localStorage.setItem('termsLang', lang); }catch(e){}
   }
 
   // クリック
-  tabs.forEach(btn=>{
-    btn.addEventListener('click', ()=> show(btn.dataset.lang));
-  });
+  tabs.forEach(b=> b.addEventListener('click', ()=> show(b.dataset.lang)));
 
-  // キーボード（←→で移動）
-  document.querySelector('.lang-tabs').addEventListener('keydown', (e)=>{
-    const current = document.activeElement.closest('[role="tab"]');
-    if(!current) return;
-    let idx = keyOrder.indexOf(current.dataset.lang);
-    if(e.key === 'ArrowRight'){ idx = (idx+1)%keyOrder.length; e.preventDefault(); }
-    if(e.key === 'ArrowLeft'){ idx = (idx-1+keyOrder.length)%keyOrder.length; e.preventDefault(); }
-    if(idx !== -1){
-      const next = document.querySelector(`[data-lang="${keyOrder[idx]}"]`);
+  // キーボード（左右矢印対応・あれば）
+  const tablist = document.querySelector('.lang-tabs');
+  if (tablist) {
+    tablist.addEventListener('keydown', e=>{
+      const cur = document.activeElement.closest('[data-lang]');
+      if(!cur) return;
+      let i = order.indexOf(cur.dataset.lang);
+      if(e.key === 'ArrowRight'){ i = (i+1)%order.length; e.preventDefault(); }
+      if(e.key === 'ArrowLeft'){  i = (i-1+order.length)%order.length; e.preventDefault(); }
+      const next = document.querySelector(`.lang-tabs [data-lang="${order[i]}"]`);
       if(next){ next.focus(); next.click(); }
-    }
-  });
+    });
+  }
 
-  // 初期表示（記憶 or JA）
+  // 初期表示（保存優先→ja）
   let initial = 'ja';
   try{
     const saved = localStorage.getItem('termsLang');
-    if(saved && keyOrder.includes(saved)) initial = saved;
+    if(saved && order.includes(saved)) initial = saved;
   }catch(e){}
   show(initial);
 })();
