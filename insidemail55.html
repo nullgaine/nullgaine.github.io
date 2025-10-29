@@ -3,19 +3,14 @@
 	<title>セキュリティークリアランスを確認してください。</title>
 </head>
 <body style="font-family: monospace;">
-<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="gaine" content="noindex">
-	<title>セキュリティークリアランスを確認してください。</title>
-</head>
-<body style="font-family: monospace;">
+	
+<div class="lang-tabs" role="tablist" aria-label="言語切替">
+  <button type="button" role="tab" id="tab-ja" data-lang="ja" aria-controls="lang-ja" aria-selected="true" class="active">日本語</button>
+  <button type="button" role="tab" id="tab-ko" data-lang="ko" aria-controls="lang-ko" aria-selected="false">한국어</button>
+</div>
 
-  <div class="lang-tabs">
-    <button data-lang="ja" class="active">日本語</button>
-    <button data-lang="ko">한국어</button>
-  </div>
 
-  <!-- === 日本語 === -->
-  <div class="lang-content" id="lang-ja" style="display:block">
+<div class="lang-content" id="lang-ja">
 ================================================================================<br>
 <br>
 19██年10月22日　23:41:45<br>
@@ -84,8 +79,7 @@ Nullのことをご自身達の「娘」として思うことにしているら�
 ================================================================================<br>
   </div>
 
-  <!-- === 韓国語 === -->
-  <div class="lang-content" id="lang-ko">
+<div class="lang-content" id="lang-ko" hidden>
 ================================================================================<br>
 <br>
 19██년 10월 22일 23:41:45<br>
@@ -164,67 +158,64 @@ Null을 자신들의 "딸"로 여기기로 했네.<br>
   </div>
 
 <style>
-.lang-tabs{
-  display:flex; gap:8px; margin:16px 0;
-}
-.lang-tabs button{
-  flex:1; padding:8px 12px; border:1px solid var(--line);
-  border-radius:8px; background:#ddd; cursor:pointer;
+.lang-tabs{ display:flex; gap:8px; margin:16px 0; }
+.lang-tabs [role="tab"]{
+  flex:1; padding:8px 12px; border:1px solid var(--line, #ddd);
+  border-radius:8px; background:#eee; cursor:pointer;
   font-family:"Inter","Noto Sans JP",sans-serif;
 }
-.lang-tabs button.active{
-  background:var(--accent); color:#ddd; border-color:var(--accent);
+.lang-tabs [role="tab"].active{
+  background:var(--accent, #c77); color:#fff; border-color:var(--accent, #c77);
 }
-.lang-content{display:none;animation:fade .2s ease-in;}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+.lang-content{ animation:fade .2s ease-in; }
+.lang-content[hidden]{ display:none !important; } /* ←競合を潰す */
+@keyframes fade{ from{opacity:0} to{opacity:1} }
 </style>
 
 <script>
 (function(){
-  const tabs = document.querySelectorAll('.lang-tabs [role="tab"]');
+  const tabs   = document.querySelectorAll('.lang-tabs [role="tab"]');
   const panels = document.querySelectorAll('.lang-content');
-  const keyOrder = ['ja','ko'];
+  const order  = ['ja','ko'];
 
   function show(lang){
-    // ボタン
-    tabs.forEach(btn=>{
-      const active = btn.dataset.lang === lang;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
-      btn.tabIndex = active ? 0 : -1;
+    // tabs
+    tabs.forEach(t=>{
+      const on = t.dataset.lang === lang;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
     });
-    // パネル
+    // panels（hidden最優先／display残骸を除去）
     panels.forEach(p=>{
-      p.hidden = (p.id !== 'lang-'+lang);
+      const on = (p.id === 'lang-'+lang);
+      p.hidden = !on;
+      if(on) p.style.removeProperty('display');
     });
-    // 記憶
     try{ localStorage.setItem('termsLang', lang); }catch(e){}
   }
 
-  // クリック
-  tabs.forEach(btn=>{
-    btn.addEventListener('click', ()=> show(btn.dataset.lang));
+  // click
+  tabs.forEach(t=> t.addEventListener('click', ()=> show(t.dataset.lang)));
+
+  // ←→でタブ移動
+  document.querySelector('.lang-tabs').addEventListener('keydown', e=>{
+    const cur = document.activeElement.closest('[role="tab"]');
+    if(!cur) return;
+    let i = order.indexOf(cur.dataset.lang);
+    if(e.key === 'ArrowRight'){ i = (i+1)%order.length; e.preventDefault(); }
+    if(e.key === 'ArrowLeft'){  i = (i-1+order.length)%order.length; e.preventDefault(); }
+    const next = document.querySelector(`[role="tab"][data-lang="${order[i]}"]`);
+    if(next){ next.focus(); next.click(); }
   });
 
-  // キーボード（←→で移動）
-  document.querySelector('.lang-tabs').addEventListener('keydown', (e)=>{
-    const current = document.activeElement.closest('[role="tab"]');
-    if(!current) return;
-    let idx = keyOrder.indexOf(current.dataset.lang);
-    if(e.key === 'ArrowRight'){ idx = (idx+1)%keyOrder.length; e.preventDefault(); }
-    if(e.key === 'ArrowLeft'){ idx = (idx-1+keyOrder.length)%keyOrder.length; e.preventDefault(); }
-    if(idx !== -1){
-      const next = document.querySelector(`[data-lang="${keyOrder[idx]}"]`);
-      if(next){ next.focus(); next.click(); }
-    }
-  });
-
-  // 初期表示（記憶 or JA）
+  // 初期表示（保存優先）
   let initial = 'ja';
   try{
     const saved = localStorage.getItem('termsLang');
-    if(saved && keyOrder.includes(saved)) initial = saved;
+    if(saved && order.includes(saved)) initial = saved;
   }catch(e){}
   show(initial);
 })();
 </script>
+</html>
