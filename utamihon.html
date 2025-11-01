@@ -1,6 +1,89 @@
 <!DOCTYPE html>
 <html>
-    
+    <style>
+:root{
+  --bg:#faf7f2; --ink:#3d3833; --line:#e7ded4; --accent:#9a7a55; --card:#ffffff;
+  --muted:#81786f; --chip:#f4ede6;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  line-height:1.8; letter-spacing:.02em;
+}
+
+/* ヘッダー */
+.header{
+  position:sticky; top:0; z-index:5;
+  background:linear-gradient(#fff8, #fff4), var(--bg);
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  max-width:1100px; margin:0 auto; padding:14px 16px;
+  display:grid; grid-template-columns: 1fr auto; gap:12px; align-items:center;
+}
+.title{font-weight:700; letter-spacing:.04em}
+.title small{color:var(--muted); font-weight:500; margin-left:.4em}
+
+/* コントロール */
+.controls{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+.controls .search{
+  min-width:240px; padding:10px 12px; border-radius:10px;
+  border:1px solid var(--line); background:#fff;
+}
+.btn{
+  padding:10px 12px; border-radius:10px; border:1px solid var(--line);
+  background:var(--card); color:var(--ink); cursor:pointer;
+}
+.btn.primary{ border-color:var(--accent); background:var(--accent); color:#fff; }
+
+/* コンテナ */
+.wrap{max-width:1100px; margin:18px auto 64px; padding:0 16px;}
+.notice{
+  border:1px dashed var(--line); background:#fff; border-radius:12px; padding:12px 14px; color:var(--muted);
+}
+
+/* 見出し（あ・か 等） */
+.body-title{
+  margin:18px 0 8px; padding:10px 14px; border:1px solid var(--line);
+  background:var(--card); border-radius:12px; cursor:pointer;
+  display:flex; align-items:center; gap:.6em; user-select:none;
+}
+.body-title::before{content:'▼'; font-size:12px; color:var(--muted)}
+.body-title.collapsed::before{content:'▶'}
+
+.body-content{
+  border:1px solid var(--line); background:#fff; border-radius:12px;
+  padding:12px 14px; margin:8px 0 18px;
+}
+
+/* リンクとテキスト */
+a{color:#704f2a; text-decoration:underline}
+a:hover{opacity:.85}
+h2,h3{margin:0; font-weight:700}
+h3{font-size:14px; color:#6b635b}
+
+/* 検索ハイライト */
+mark{background:#fff3b8; padding:0 .15em; border-radius:.2em}
+
+/* 言語タブ（既にあるページでも使える無害なデフォルト） */
+.lang-tabs{display:flex; gap:8px; margin:16px 0}
+.lang-tabs button{
+  padding:8px 12px; border:1px solid var(--line); border-radius:8px; background:#fff; cursor:pointer;
+}
+.lang-tabs button.active{background:var(--accent); color:#fff; border-color:var(--accent)}
+.lang-content{display:none}
+.lang-content[style*="display:block"]{display:block}
+
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#121010; --ink:#eee7e2; --line:#2b2622; --card:#1a1716; --muted:#b9afa7; --chip:#1f1a17; }
+  a{color:#e3b999}
+  .body-title{background:#1a1716}
+  .notice{background:#1a1716}
+}
+</style>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>歌見本</title>
@@ -85,13 +168,15 @@ URLは既に音源化できているものですので、<span style="color: #e9
 <a href="https://www.youtube.com/watch?v=zcpRhjsxAnY">雨とペトラ</a><br/>
 アヤノの幸福理論<br/>
 <a href="https://www.youtube.com/watch?v=VQrh1qMvUHA">アルビノ</a><br/>
+<a href="https://www.youtube.com/watch?v=S_VR804WwYw">アンダーカバー</a><br/>
 アンチビート<br/>
+<a href="https://www.youtube.com/watch?v=-hhv4zvWaw8">アンチユー</a><br/>
 アンデッドエネミー<br/>
 <a href="https://www.youtube.com/watch?v=OB7XJIQC3hM">アンドロイドガール</a><br/>
 アンドロメダアンドロメダ<br/>
 <a href="https://www.youtube.com/watch?v=1WiljMQf250">アンノウン・マザーグース</a><br/>
 <a href="https://www.youtube.com/watch?v=FzDdcX9Jacg">アンハッピーリフレイン</a><br/>
-アンヘル<br/>
+<a href="https://www.youtube.com/watch?v=-RRX0sg-EOI">アンヘル</a><br/>
 <br/>
 <br/>
 <h3>い</h3><br/>
@@ -99,7 +184,8 @@ URLは既に音源化できているものですので、<span style="color: #e9
 いいや<br/>
 <a href="https://www.youtube.com/watch?v=nutaaYuFDno">家出少年と迷子少女</a><br/>
 いかないで<br/>
-異国人形館殺人事件<br/>
+イガク<br/>
+<a href="https://www.youtube.com/watch?v=YSUMI9a3hsA">異国人形館殺人事件</a><br/>
 イドラのサーカス<br/>
 <a href="https://www.youtube.com/watch?v=dVnPgD_uxWo">一千光年</a><br/>
 <a href="https://www.youtube.com/watch?v=PFn2XDkra7I">言って。</a><br/>
@@ -111,6 +197,7 @@ URLは既に音源化できているものですので、<span style="color: #e9
 祈りの歌<br/>
 <a href="https://www.youtube.com/watch?v=uPY66tBA8tY">祈りは空っぽ</a><br/>
 <a href="https://www.youtube.com/watch?v=N_Huh57hjlU">イフ</a><br/>
+<a href="https://www.youtube.com/watch?v=3H-FyWzxWPc">いますぐ輪廻</a><br/>
 いろは唄<br/>
 インビジブル<br/>
 インフルエンサー・イズ・デッド<br/>
@@ -132,6 +219,7 @@ URLは既に音源化できているものですので、<span style="color: #e9
 <h3>え</h3>
 永遠に幸せになる方法、見つけました。<br/>
 エイリアンエイリアン<br/>
+<a href="https://www.youtube.com/watch?v=AuQrsX67ylI">エゴイスト</a><br/>
 <a href="https://www.youtube.com/watch?v=OnJUK_DOxw4">エネの電脳紀行</a><br/>
 絵本『人柱アリス』<br/>
 <a href="https://www.youtube.com/watch?v=3k8HXv25PFk">エル・ドラド</a><br/>
@@ -144,6 +232,7 @@ URLは既に音源化できているものですので、<span style="color: #e9
         <br/>
 <h3>お</h3><br/>
 <a href="https://www.youtube.com/watch?v=IiQHw6rGUng">オーダーメイド</a><br/>
+<a href="https://www.youtube.com/watch?v=44p1IhwtC2Q">オーバーライド</a><br/>
 置き去り月夜抄<br/>
 <a href="https://www.youtube.com/watch?v=JTbogks4g04">お気に召すまま</a><br/>
 送る詩<br/>
@@ -196,6 +285,7 @@ URLは既に音源化できているものですので、<span style="color: #e9
 君が生きてなくてよかった<br/>
 <a href="https://www.youtube.com/watch?v=Hhzl5gdl4bw">きみも悪い人でよかった</a><br/>
 <a href="https://www.youtube.com/watch?v=4iw3wuP7LAc">きゅうくらりん</a><br/>
+<a href="https://www.youtube.com/watch?v=EZHt5YaCsFg">きゅびずむ</a>・<a href="https://www.youtube.com/watch?v=5QeB5oaWT-E">きゅびびびびずむ</a><br/>
 <a href="https://www.youtube.com/watch?v=PD26R3f-sa0">今日の日はさようなら</a><br/>
 <a href="https://www.youtube.com/watch?v=ZBtjXUJRMZw">キライ・キライ・ジガヒダイ！</a><br/>
         <br/>
@@ -236,8 +326,8 @@ URLは既に音源化できているものですので、<span style="color: #e9
 ゴーストルール<br/>
 <a href="https://www.youtube.com/watch?v=_ePdFHY9IHg">ゴー・トゥ・大都会</a><br/>
 極彩色<br/>
-<a href="https://www.youtube.com/watch?v=azXZs3FYMOg">ココロ<br/>
-心做し<br/>
+<a href="https://www.youtube.com/watch?v=azXZs3FYMOg">ココロ</a><br/>
+<a href="https://www.youtube.com/watch?v=yDitQ831BGQ">心做し</a><br/>
 心よ原始に戻れ<br/>
 <a href="https://www.youtube.com/watch?v=BqD8pdoqJKU">古書屋敷殺人事件</a><br/>
 こちら、幸福安心委員会です。<br/>
@@ -261,6 +351,7 @@ URLは既に音源化できているものですので、<span style="color: #e9
 サイレント・アテンダンス<br/>
 <a href="https://soundcloud.com/not-sotomine/silent-majority">サイレントマジョリティー</a><br/>
 桜ノ雨<br/>
+さだめ<br/>
 サマータイムレコード<br/>
 <a href="https://www.youtube.com/watch?v=FNesli41eKQ">ザムザ</a><br/>
 さよならメモリーズ<br/>
@@ -310,6 +401,7 @@ siGrE<br/>
         <br/>
 <h3>す</h3><br/>
 スイートマジック<br/>
+<a href="https://www.youtube.com/watch?v=OPtmgsr4Tms">スーパーヒーロー</a><br/>
 スキキライ<br/>
 スキスキ絶頂症<br/>
 <a href="https://www.youtube.com/watch?v=XuKWolVH2o4">すきなことだけでいいです</a><br/>
@@ -383,6 +475,7 @@ siGrE<br/>
 <a href="https://www.youtube.com/watch?v=T5WrlmqkFys">ていていしんじゃえ</a><br/>
 <a href="https://www.youtube.com/watch?v=z-w-RypNi0E">帝国少女</a><br/>
 <a href="https://www.youtube.com/watch?v=ugWA3FvHA_I">テオ</a><br/>
+<a href="https://www.youtube.com/watch?v=Bz8iCMvSf0Y">テトリス</a><br/>
 デビルじゃないもん<br/>
 <a href="https://www.youtube.com/watch?v=VosdCKZStlM">てらてら</a><br/>
 <a href="https://www.youtube.com/watch?v=BU3ksAg3ZiM">テレキャスタービーボーイ</a><br/>
@@ -461,6 +554,7 @@ siGrE<br/>
 <a href="https://www.youtube.com/watch?v=3iEskPU-WEo">箱庭のコラル</a><br/>
 <a href="https://www.youtube.com/watch?v=QbNEEw_VhEM">走れ太宰</a><br/>
 <a href="https://www.youtube.com/watch?v=Y4qYwh304v0">ハジメテノオト</a><br/>
+<a href="https://www.youtube.com/watch?v=V2jnRe83Xqg">パジャミィ</a><br/>
 初めての恋が終わる時<br/>
 <a href="https://www.youtube.com/watch?v=-kVSdNC0rls">初音ミクの激唱</a><br/>
 <a href="https://www.youtube.com/watch?v=9aSpaUb7I6M">初音ミクの消失</a><br/>
@@ -476,6 +570,7 @@ siGrE<br/>
 <a href="https://www.youtube.com/watch?v=rIxg-mGWmq0">霽れを待つ</a><br/>
 バレリーコ<br/>
 ハロ／ハワユ<br/>
+<a href="https://www.youtube.com/watch?v=opXVOl3udjU">ハローセカイ</a><br/>
 Hello､ 星を数えて<br/>
 <a href="https://www.youtube.com/watch?v=ahgTu3ql85k">パンこげこげになっちゃった</a><br/>
 <a href="https://www.youtube.com/watch?v=w0bdfm2T5bQ">晩餐歌</a><br/>
@@ -605,6 +700,7 @@ Mrs.Pumpkinの滑稽な夢<br/>
         <br/>
 <h3>ゆ</h3><br/>
 勇気のReason<br/>
+<a href="https://www.youtube.com/watch?v=6oYutZUgRAI">故にユーエンミー</a><br/>
 夕景イエスタデイ<br/>
 <a href="https://www.youtube.com/watch?v=J4as-TqBlk0">幽霊東京</a><br/>
 指切り<br/>
@@ -699,6 +795,7 @@ Mrs.Pumpkinの滑稽な夢<br/>
 ＊ハロー、プラネット。<br/>
 ？←HEARTBEAT<br/>
 ＋♂<br/>
+<a href="https://www.youtube.com/watch?v=tCjQahdj9I0">/// ///</a><br/>
         <br/>
         <br/>
     </div>
@@ -707,6 +804,7 @@ Mrs.Pumpkinの滑稽な夢<br/>
 ACUTE<br/>
 <a href="https://www.youtube.com/watch?v=Rv112hSlt30">alive</a><br/>
 Angelic Angel<br/>
+BACKSTABBER<br/>
 <a href="https://www.youtube.com/watch?v=-UCJ8UnZbdQ">Bad Apple!!</a><br/>
 balloon<br/>
 Beat Eater<br/>
@@ -726,12 +824,14 @@ Cutie Panther<br/>
 Days<br/>
 <a href="https://www.youtube.com/watch?v=XYTa7ifza5A">daze</a><br/>
 dear<br/>
+<a href="https://www.youtube.com/watch?v=vBvDg2neRfo">D/N/A</a><br/>
 Don't be long<br/>
 Dragonsong<br/>
 Drop Pop Candy<br/>
 ECHO<br/>
 ELECT<br/>
 fairytale,<br/>
+<a href="https://www.youtube.com/watch?v=wR7qkbhx1uw">Find the Truth</a><br/>
 <a href="https://www.youtube.com/watch?v=KyPzCpPow_M">Floriography ー勿忘草ー</a><br/>
 <a href="https://www.youtube.com/watch?v=hQLFwB-Up-A">flos</a><br/>
 <a href="https://www.youtube.com/watch?v=YFJI0Mig6Hc">Flyway</a><br/>
@@ -760,6 +860,7 @@ last time to say<br/>
 Leia<br/>
 Lemon<br/>
 LUVORATORRRRRY!<br/>
+<a href="https://www.youtube.com/watch?v=GIW-OMOnlzU">MAGIC</a><br/>
 magnet<br/>
 MOMENT RING<br/>
 moonlit bear<br/>
@@ -798,10 +899,12 @@ soundless voice<br/>
 <a href="https://www.youtube.com/watch?v=NU0N4t9Y3rs">South North Story</a><br/>
 <a href="https://www.youtube.com/watch?v=t6-62YGV5cA">SPiCa</a><br/>
 START:DASH!!<br/>
-<a href="https://soundcloud.com/not-sotomine/still-for-your-love">Still for your love</a><br/>
+<a href="https://www.youtube.com/watch?v=2AImYnvQ-qg">Still for your love</a><br/>
+<a href="https://www.youtube.com/watch?v=83bdTyEXLr8">SToRY</a><br/>
 Sugar Sweet Nightmare<br/>
 <a href="https://www.youtube.com/watch?v=1DC6uhjDScw">Summering</a><br/>
-SUNNY DAY SONG<br/>
+SUNNY DAY SONG
+Surges<br/>
 Sweet Devil<br/>
 <a href="https://www.youtube.com/watch?v=uVsEIwo8I7U">Tell Your World</a><a href="https://www.youtube.com/watch?v=8Cp8hyhXj7g"（MMD）</a><br/>
 <a href="https://www.youtube.com/watch?v=pF1oUyG-pP4">the Wall</a><br/>
@@ -825,6 +928,7 @@ world.search(you);<br/>
 <a href="https://www.youtube.com/watch?v=bg07E08YCbg">you</a><br/>
 <a href="https://www.youtube.com/watch?v=9P97CpyhN6M">your℃</a><br/>
 <a href="https://www.youtube.com/watch?v=ZpNaXAnepNI">Your reality</a><br/>
+<a href="https://www.youtube.com/watch?v=NkvCDKeZLYk">YY</a><br/>
             <br/>
         <br/>
     </div>
@@ -834,4 +938,133 @@ world.search(you);<br/>
         <br/>
         <br/>
     </body>
+
+<script>
+// ===== 画面上部にヘッダー＆操作を差し込む =====
+(function(){
+  // ヘッダーを最上部に生成（既にあれば重複回避）
+  if(!document.querySelector('.header')){
+    const header = document.createElement('div');
+    header.className = 'header';
+    header.innerHTML = `
+      <div class="header-inner">
+        <div class="title">歌見本 <small>— 外峯 零 / Gaine Null</small></div>
+        <div class="controls">
+          <input id="q" class="search" type="search" placeholder="曲名をすばやく検索… (例: 砂の惑星)">
+          <button id="openAll" class="btn">全て開く</button>
+          <button id="closeAll" class="btn">全て閉じる</button>
+          <button id="reset" class="btn">リセット</button>
+        </div>
+      </div>`;
+    document.body.prepend(header);
+  }
+
+  // 最初は閉じておく（導線軽く）
+  const groups = Array.from(document.querySelectorAll('.body-title'));
+  const contents = Array.from(document.querySelectorAll('.body-content'));
+  contents.forEach(c => c.style.display = 'none');
+  groups.forEach(g => g.classList.add('collapsed'));
+
+  // クリックでトグル（既存のjQueryトグルと二重にならないよう統一）
+  groups.forEach((g, i)=>{
+    g.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const c = contents[i];
+      const open = c.style.display !== 'none';
+      c.style.display = open ? 'none' : 'block';
+      g.classList.toggle('collapsed', open);
+    }, {passive:true});
+  });
+
+  // 操作ボタン
+  const openAllBtn  = document.getElementById('openAll');
+  const closeAllBtn = document.getElementById('closeAll');
+  const resetBtn    = document.getElementById('reset');
+  const q           = document.getElementById('q');
+
+  openAllBtn.addEventListener('click', ()=>{
+    contents.forEach(c => c.style.display = 'block');
+    groups.forEach(g => g.classList.remove('collapsed'));
+  });
+  closeAllBtn.addEventListener('click', ()=>{
+    contents.forEach(c => c.style.display = 'none');
+    groups.forEach(g => g.classList.add('collapsed'));
+  });
+  resetBtn.addEventListener('click', ()=>{
+    q.value = '';
+    clearHighlights();
+    // 検索で閉じた/開いたのをリセット
+    contents.forEach(c => c.style.display = 'none');
+    groups.forEach(g => g.classList.add('collapsed'));
+  });
+
+  // ===== ライブ検索（見出しごと絞り込み & ハイライト） =====
+  let lastMarks = [];
+  function clearHighlights(){
+    lastMarks.forEach(m=>{
+      const parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize?.();
+    });
+    lastMarks = [];
+  }
+
+  function highlightIn(node, text){
+    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+    const foundNodes = [];
+    while(walker.nextNode()){
+      const n = walker.currentNode;
+      const idx = n.nodeValue.toLowerCase().indexOf(text.toLowerCase());
+      if(idx !== -1){
+        const span = document.createElement('mark');
+        const before = n.nodeValue.slice(0, idx);
+        const hit = n.nodeValue.slice(idx, idx+text.length);
+        const after = n.nodeValue.slice(idx+text.length);
+        const frag = document.createDocumentFragment();
+        if(before) frag.appendChild(document.createTextNode(before));
+        span.textContent = hit;
+        frag.appendChild(span);
+        if(after) frag.appendChild(document.createTextNode(after));
+        n.parentNode.replaceChild(frag, n);
+        lastMarks.push(span);
+      }
+    }
+  }
+
+  q.addEventListener('input', ()=>{
+    const kw = q.value.trim();
+    clearHighlights();
+    if(!kw){
+      // 何も入力してないときは全部表示（閉じた状態のまま）
+      contents.forEach(c => c.parentElement.style.display = '';
+      );
+      return;
+    }
+    // 各グループを検索して、ヒットのあるものだけ開く
+    contents.forEach((c, i)=>{
+      const text = c.textContent || '';
+      const hit = text.toLowerCase().includes(kw.toLowerCase());
+      c.parentElement.style.display = hit ? '' : 'none';
+      if(hit){
+        // 開く＋ハイライト
+        c.style.display = 'block';
+        groups[i].classList.remove('collapsed');
+        highlightIn(c, kw);
+      }
+    });
+  });
+
+  // 先頭に軽い案内を追加（任意）
+  const firstWrap = document.querySelector('body > div') || document.body;
+  const box = document.createElement('div');
+  box.className = 'wrap';
+  box.innerHTML = `
+    <div class="notice">
+      使い方：上の検索にキーワードを入れると、該当する見出しだけが開いて表示されます。<br>
+      「全て開く / 全て閉じる」で展開をまとめて操作できます。
+    </div>
+  `;
+  document.body.insertBefore(box, document.body.children[1] || null);
+})();
+</script>
 </html>
