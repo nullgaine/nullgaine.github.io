@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fleur de Paix</title>
+<style>
+/* ===== Theme (no background effects) ===== */
+:root{
+  --pink: #ff91af;           /* Baker-Miller Pink */
+  --pink-strong:#ff6c97;
+  --ink:#1a1a1a;
+  --paper:#fff;
+  --glass: rgba(255,255,255,.28);
+  --glass-stroke: rgba(255,255,255,.85);
+  --card-bg: #5C5551;
+  --card-border: #4C4845;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font: 16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, "Noto Sans JP", "Koruri", sans-serif;
+}
+
+/* ===== Header ===== */
+.header{
+  background: var(--pink);
+  color:#3f0e1f;
+  padding: 14px 14px 10px;
+  text-align:center;
+  border-bottom: 3px solid var(--pink-strong);
+}
+.header h1{ margin:0; font-size:1.4rem; font-weight:900; letter-spacing:.02em; }
+.header .tag{ margin:2px 0 0; font-weight:700; font-size:.9rem; opacity:.9; }
+
+/* ===== Grid ===== */
+.grid{
+  padding:14px;
+  background:#4A4643;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap:14px;
+}
+
+/* ===== Card (glass frame) ===== */
+.card{
+  position:relative;
+  border-radius:18px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  overflow:hidden;
+}
+
+/* vessel */
+.vessel{ position:relative; width:100%; aspect-ratio: 5 / 6; display:grid; place-items:center; }
+.vessel svg{ width:78%; height:auto; }
+.vessel[data-shape="teacup"] svg { width: 78%; }
+
+
+/* liquid */
+.liquid{ width:100%; height:100%; }
+
+/* glass stroke */
+.stroke{ fill:none; stroke: var(--glass-stroke); stroke-width:2.1; }
+
+/* info */
+.info{ padding:10px 12px 12px; border-top: 1px solid #3E3A38; background:#3E3A38 }
+.name{ font-weight:900; color:#ffb3c7; }
+.meta,.memo{ margin:.2em 0 0; font-size:.9rem; color:#f2e9ed; }
+.actions{ display:flex; justify-content:flex-end; margin-top:8px; }
+.btn{
+  background: var(--pink);
+  color:white; border:0; border-radius:10px; padding:.44em .7em; font-weight:800;
+}
+
+/* ===== Modal ===== */
+.overlay[hidden]{ display:none }
+.overlay{
+  position:fixed; inset:0; display:grid; place-items:center; background: rgba(0,0,0,.6);
+}
+.popup{
+  position:relative;
+  width:min(640px, 92vw);
+  background:#3E3A38; border-radius:18px; overflow:hidden; border:1px solid #2f2b2a;
+}
+.preview{ padding:16px; display:grid; place-items:center; background:#4A4643; }
+.metaBox{ padding:14px 16px 18px; }
+.close{
+  position:absolute; right:10px; top:10px; width:36px; height:36px;
+  border:none; border-radius:50%; background:#ffd3e1; color:#7a2941; font-size:18px; font-weight:900;
+}
+
+/* Small screens */
+@media (max-width:420px){
+  .grid{ grid-template-columns: repeat(2, 1fr); gap:10px; padding:10px; }
+  .header h1{ font-size:1.2rem }
+}
+
+/* ===== Animations & Lighting ===== */
+
+/* Card: subtle shimmering highlight sweep */
+.card {
+  isolation: isolate;
+}
+.card::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(100deg, rgba(255,255,255,0.0) 20%, rgba(255,255,255,0.12) 35%, rgba(255,255,255,0.0) 50%);
+  transform: translateX(-120%);
+  animation: shineSweep 5.5s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events:none;
+}
+@keyframes shineSweep {
+  0% { transform: translateX(-120%); }
+  35% { transform: translateX(10%); }
+  100% { transform: translateX(120%); }
+}
+
+/* Liquid surface: soft moving gloss band */
+.vessel .liquid-gloss {
+  position:absolute; left:8%; right:8%; top:34%;
+  height:10%;
+  background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,0));
+  border-radius: 50% / 100%;
+  filter: blur(0.5px);
+  animation: surfaceGlow 4s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+  pointer-events:none;
+}
+@keyframes surfaceGlow {
+  from { transform: translateY(0) scaleY(1); opacity: .9; }
+  to   { transform: translateY(2px) scaleY(.95); opacity: .6; }
+}
+
+/* Header gloss */
+.header{
+  position: relative;
+  overflow: hidden;
+}
+.header::after{
+  content:"";
+  position:absolute; top:0; left:-40%;
+  width:40%; height:100%;
+  background: linear-gradient(110deg, rgba(255,255,255,.0) 0%, rgba(255,255,255,.25) 50%, rgba(255,255,255,.0) 100%);
+  transform: skewX(-12deg);
+  animation: headerGloss 7.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes headerGloss {
+  0% { left:-45%; }
+  40% { left:105%; }
+  100% { left:105%; }
+}
+
+/* Modal: scale/opacity pop */
+.overlay.show .popup{
+  transform: scale(.98);
+  opacity: 0;
+}
+.overlay .popup{
+  transform-origin: 50% 43%;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.overlay:not([hidden]).show .popup{
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Tap ripple on .btn.open */
+.btn.open {
+  position: relative;
+  overflow: hidden;
+}
+.btn.open .ripple {
+  position:absolute; width:10px; height:10px;
+  border-radius:50%; background: rgba(255,255,255,.8);
+  transform: translate(-50%,-50%) scale(0);
+  animation: ripple .6s ease-out forwards;
+  pointer-events:none;
+  mix-blend-mode: screen;
+}
+@keyframes ripple {
+  to { transform: translate(-50%,-50%) scale(12); opacity: 0; }
+}
+
+/* Ensure vessels can host overlay gloss div */
+.vessel{ position:relative }
+
+</style>
+</head>
+<body>
+<header class="header">
+  <h1>Fleur de Paix</h1>
+  <p class="tag">テイクアウト専門店</p>
+</header>
+
+<!-- SVG symbols (glass shapes) -->
+<svg aria-hidden="true" width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- Mug (coffee/choco) -->
+<symbol id="shape-mug" viewBox="0 0 120 120">
+  <!-- 角丸長方形ベースに変更 -->
+  <rect id="mug-body" x="18" y="30" width="70" height="80" rx="18" ry="18" />
+  <!-- 取っ手はそのまま（必要なら x/y/半径を微調整） -->
+  <path id="mug-handle"
+        d="M88,44 a16,16 0 1 1 0,32 a10,10 0 0 1 -10,-10 v-12 a10,10 0 0 1 10,-10 z" />
+  <clipPath id="clip-mug"><use href="#mug-body"/></clipPath>
+    </symbol>
+
+    <!-- Teacup -->
+    <symbol id="shape-teacup" viewBox="0 0 120 120">
+      <path id="cup-bowl" d="M18,40 q42,34 84,0 v10 a42,28 0 0 1 -84,0 z" />
+      <path id="cup-handle" d="M95,45 a12,12 0 1 1 0,24 a9,9 0 0 1 0,-18" />
+      <clipPath id="clip-teacup"><use href="#cup-bowl"/></clipPath>
+    
+    <ellipse id="cup-saucer" cx="60" cy="105" rx="46" ry="10" />
+  </symbol>
+
+    <!-- Tumbler -->
+    <symbol id="shape-tumbler" viewBox="0 0 120 140">
+      <path id="tumbler-body" d="M30,18 h60 l-8,104 h-44 z" />
+      <clipPath id="clip-tumbler"><use href="#tumbler-body"/></clipPath>
+    </symbol>
+
+    <!-- Wine glass -->
+    <symbol id="shape-wine" viewBox="0 0 120 160">
+      <path id="wine-bowl" d="M36,28 a24,24 0 0 0 48,0 v12 a36,30 0 0 1 -72,0 z" />
+      <rect id="wine-stem" x="58" y="80" width="4" height="36" rx="2" />
+      <rect id="wine-base" x="36" y="116" width="48" height="4" rx="2" />
+      <clipPath id="clip-wine"><use href="#wine-bowl"/></clipPath>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="grid" id="grid" aria-live="polite"></main>
+
+<!-- Modal -->
+<div class="overlay" id="overlay" hidden>
+  <div class="popup">
+    <button class="close" id="closeBtn" aria-label="閉じる">×</button>
+    <div class="preview" id="preview"></div>
+    <div class="metaBox">
+      <h2 id="mName" style="margin:.2em 0 0;color:#ffb3c7;"></h2>
+      <p id="mHex" style="margin:.2em 0 0;color:#f2e9ed;"></p>
+      <p id="mMemo" style="margin:.2em 0 0;color:#f2e9ed;"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Data (replace with your real data) =====
+const SHAPE_BY_CATEGORY = {
+  coffee:  "mug",
+  choco:   "mug",
+  tea:     "teacup",
+  milk:    "tumbler",
+  cosmic:  "tumbler",
+  cocktail:"wine",
+  dessert: "wine"
+};
+const DRINKS = [
+  { category:"coffee",  name:"Espresso",    hex:"#3B2F2F", memo:"深煎り・短時間抽出" },
+  { category:"milk",    name:"Milk Soda",   hex:"#B8E9FF", memo:"炭酸のパチパチ" },
+  { category:"choco",   name:"Cacao 70",    hex:"#4C2A1F", memo:"ビター寄り" },
+  { category:"tea",     name:"Tomori",hex:"#F0C063", memo:"この街のお茶。" },
+  { category:"tea",     name:"Hibiscus",hex:"#DD3848", memo:"真夏の鮮やかで甘い花。" },
+  { category:"tea",     name:"Rosehip",hex:"#BB1237", memo:"花に水、赤のお茶。" },
+  { category:"dessert", name:"Panna Rosa",  hex:"#FFC7D9", memo:"ピンクのデザート" },
+  { category:"cocktail",name:"Pink Fizz",   hex:"#ff91af", memo:"Baker-Miller Pink" },
+  { category:"cosmic",  name:"Stellar Ice", hex:"#7AD0D6", memo:"宇宙色のソーダ" }
+];
+
+// ===== DOM =====
+const grid = document.getElementById('grid');
+const overlay = document.getElementById('overlay');
+const closeBtn = document.getElementById('closeBtn');
+const pv = document.getElementById('preview');
+const mName = document.getElementById('mName');
+const mHex  = document.getElementById('mHex');
+const mMemo = document.getElementById('mMemo');
+
+function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+function cardTemplate(it){
+  const shape = SHAPE_BY_CATEGORY[it.category] || "tumbler";
+  const idClip = {
+    mug:"clip-mug", teacup:"clip-teacup", tumbler:"clip-tumbler", wine:"clip-wine"
+  }[shape];
+  const idPaths = {
+    mug:    ['mug-body','mug-handle'],
+    teacup: ['cup-saucer','cup-bowl','cup-handle'],
+    tumbler:['tumbler-body'],
+    wine:   ['wine-bowl','wine-stem','wine-base']
+  }[shape];
+
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML = `
+    <div class="vessel" data-shape="${shape}" role="img" aria-label="${escapeHtml(it.name)} in a ${shape}">
+      <svg viewBox="0 0 120 140" class="frame">
+        <g clip-path="url(#${idClip})">
+          <rect class="liquid" x="0" y="40" width="120" height="100" rx="8" fill="${it.hex}"></rect>
+          <path d="M-10,60 q40,-8 80,0 t80,0 v20 h-160z" fill="rgba(255,255,255,.16)"></path>
+        </g>
+        ${idPaths.map(pid => `<use href="#${pid}" class="stroke"></use>`).join('')}
+      </svg>
+    
+      <div class="liquid-gloss" aria-hidden="true"></div>
+    </div>
+    <div class="info">
+      <div class="name">${escapeHtml(it.name)}</div>
+      <div class="meta">${it.hex}</div>
+      ${it.memo ? `<div class="memo">${escapeHtml(it.memo)}</div>` : ""}
+      <div class="actions"><button class="btn open" type="button">見る</button></div>
+    </div>`;
+
+  const openBtn = el.querySelector('.open');
+  openBtn.addEventListener('click', (e)=>{
+    // ripple
+    const r = document.createElement('span');
+    r.className = 'ripple';
+    const rect = openBtn.getBoundingClientRect();
+    r.style.left = (e.clientX - rect.left) + 'px';
+    r.style.top  = (e.clientY - rect.top)  + 'px';
+    openBtn.appendChild(r);
+    setTimeout(()=> r.remove(), 650);
+    // open modal
+    openModal(it, idClip, idPaths);
+  });
+  return el;
+}
+
+function mount(arr){
+  grid.innerHTML = "";
+  arr.forEach(it => grid.appendChild(cardTemplate(it)));
+}
+
+function openModal(it, idClip, idPaths){
+  overlay.classList.add('show');
+  pv.innerHTML = `
+    <svg viewBox="0 0 120 140" style="width:min(420px, 76vw);height:auto">
+      <g clip-path="url(#${idClip})">
+        <rect x="0" y="40" width="120" height="100" rx="8" fill="${it.hex}"></rect>
+        <path d="M-10,60 q40,-8 80,0 t80,0 v20 h-160z" fill="rgba(255,255,255,.18)"></path>
+      </g>
+      ${idPaths.map(pid => `<use href="#${pid}" class="stroke"></use>`).join('')}
+    </svg>`;
+  mName.textContent = it.name;
+  mHex.textContent = it.hex;
+  mMemo.textContent = it.memo || "";
+  overlay.hidden = false;
+  document.documentElement.style.overflow = "hidden";
+}
+function closeModal(){
+  overlay.classList.remove('show');
+  overlay.hidden = true;
+  document.documentElement.style.overflow = "";
+}
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+
+document.addEventListener('DOMContentLoaded', ()=> mount(DRINKS));
+</script>
+</body>
+</html>
