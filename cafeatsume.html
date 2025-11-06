@@ -132,6 +132,126 @@ html.theme-dark{
     box-shadow:0 2px 8px rgba(0,0,0,.08);
   }
   #themeToggle:hover{ background:rgba(255,255,255,.06); }
+
+/* === Caféatsume: gentle animations pack === */
+
+/* Swatch glint (subtle sweep) */
+.card .swatch{ position:relative; overflow:hidden; }
+.card .swatch::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.14) 50%, transparent 80%);
+  transform:translateX(-120%);
+  animation:glint 6s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events:none;
+}
+@keyframes glint{
+  0%{ transform:translateX(-120%); }
+  40%{ transform:translateX(120%); }
+  100%{ transform:translateX(120%); }
+}
+
+/* Modal fade + scale (when element is inserted) */
+.overlay{
+  animation:fadeIn .28s ease forwards;
+}
+.popup{
+  transform:scale(.92);
+  animation:popUp .28s ease forwards;
+  transform-origin:50% 42%;
+}
+@keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+@keyframes popUp{ to{ transform:scale(1); } }
+
+/* Smooth theme/background transitions */
+html{
+  transition: background-color .6s ease, color .6s ease;
+}
+.card{
+  transition: background-color .4s ease, transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{ transform: translateY(-2px); }
+
+/* Header warm gloss (applied to .logo) */
+.logo{
+  position:relative;
+  background:linear-gradient(90deg, #9a7a55, #d6b58b, #9a7a55);
+  background-size:200%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:warmGlow 8s ease-in-out infinite;
+}
+@keyframes warmGlow{
+  0%,100%{ background-position:0%; }
+  50%{ background-position:100%; }
+}
+
+/* Section slide-in */
+.section{
+  opacity:0; transform:translateY(12px);
+  animation:slideFadeIn .6s ease forwards;
+}
+.section:nth-of-type(1){ animation-delay:.05s; }
+.section:nth-of-type(2){ animation-delay:.10s; }
+.section:nth-of-type(3){ animation-delay:.15s; }
+.section:nth-of-type(4){ animation-delay:.20s; }
+.section:nth-of-type(5){ animation-delay:.25s; }
+.section:nth-of-type(6){ animation-delay:.30s; }
+.section:nth-of-type(7){ animation-delay:.35s; }
+@keyframes slideFadeIn{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+
+/* === Add-on Animations: 1,3,4,5 === */
+
+/* 1) Night mode 'lighting' fade */
+html.theme-dark {
+  animation: nightFade .8s ease-in-out;
+}
+@keyframes nightFade {
+  0% { filter: brightness(1.2) saturate(1.05); }
+  100% { filter: brightness(0.9) saturate(0.95); }
+}
+
+/* 3) Logo gentle blink (stack with existing warmGlow) */
+@keyframes gentleBlink {
+  0%, 90%, 100% { opacity: 1; }
+  95% { opacity: 0.85; }
+}
+/* If .logo already has animation, append another */
+.logo {
+  animation: warmGlow 8s ease-in-out infinite, gentleBlink 10s ease-in-out infinite;
+}
+
+/* 4) Dark-mode drifting light particles */
+html.theme-dark body::before {
+  content:"";
+  position:fixed; inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.06) 0 2px, transparent 2px),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,.04) 0 2px, transparent 2px),
+    radial-gradient(circle at 60% 20%, rgba(255,255,255,.05) 0 2px, transparent 2px);
+  background-size: 320px 320px, 360px 360px, 400px 400px;
+  animation: drift 30s linear infinite;
+  pointer-events:none;
+  z-index:0;
+}
+@keyframes drift {
+  to { background-position: 320px 320px, -360px -360px, 400px -400px; }
+}
+
+/* 5) Modal closing 'afterglow' */
+.popup.closing {
+  animation: fadeOut .3s ease forwards;
+}
+@keyframes fadeOut {
+  to { opacity:0; transform:scale(0.97); filter:blur(1px); }
+}
+/* Ensure overlay sits above particles */
+.overlay { position: fixed; z-index: 10; }
+
 </style>
 </head>
 <body>
@@ -431,5 +551,66 @@ function mount(gridId, arr, first=12){
   mount('sec-cocktail', cocktail);
   mount('sec-cosmic', cosmic);
 </script>
+
+<script>
+(function(){
+  // Tag first H1 as .logo if not already
+  const h1 = document.querySelector('h1');
+  if(h1 && !h1.classList.contains('logo')) h1.classList.add('logo');
+  // Tag all sections
+  document.querySelectorAll('section').forEach(sec => {
+    if(!sec.classList.contains('section')) sec.classList.add('section');
+  });
+})();
+</script>
+
+
+<script>
+// Modal close enhancement: add .closing class for afterglow animation
+(function(){
+  function enhanceOverlay(ov){
+    if (!ov) return;
+    const popup = ov.querySelector('.popup');
+    if (!popup) return;
+    // Wrap default close behavior
+    const closeBtns = ov.querySelectorAll('.close');
+    closeBtns.forEach(btn => {
+      if (btn._enhanced) return;
+      btn._enhanced = true;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        popup.classList.add('closing');
+        setTimeout(() => {
+          // Try to hide overlay gracefully
+          ov.hidden = true;
+          popup.classList.remove('closing');
+        }, 300);
+      });
+    });
+    // Click outside popup
+    if (!ov._bgEnhanced){
+      ov._bgEnhanced = true;
+      ov.addEventListener('click', (e) => {
+        if (e.target === ov){
+          popup.classList.add('closing');
+          setTimeout(() => {
+            ov.hidden = true;
+            popup.classList.remove('closing');
+          }, 300);
+        }
+      });
+    }
+  }
+  // Initial attach (if overlay exists at load)
+  enhanceOverlay(document.querySelector('.overlay'));
+
+  // Observe DOM for overlays appearing dynamically
+  const mo = new MutationObserver(() => {
+    enhanceOverlay(document.querySelector('.overlay'));
+  });
+  mo.observe(document.documentElement, {childList: true, subtree: true});
+})();
+</script>
+
 </body>
 </html>
