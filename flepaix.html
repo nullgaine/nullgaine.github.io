@@ -114,19 +114,6 @@ body{
   100% { transform: translateX(120%); }
 }
 
-/* Liquid surface: soft moving gloss band */
-.vessel .liquid-gloss{
-  position:absolute; left:8%; right:8%; top:34%;
-  height:10%;
-  background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,0));
-  border-radius: 50% / 100%; filter: blur(0.5px);
-  animation: surfaceGlow 7s ease-in-out infinite alternate;
-  mix-blend-mode: screen; pointer-events:none;
-}
-@keyframes surfaceGlow{
-  from { transform: translateY(0)  scaleY(1);  opacity: .75; }
-  to   { transform: translateY(2px) scaleY(.96); opacity: .50; }
-}
 
 /* Header gloss */
 .header{ position: relative; overflow: hidden; }
@@ -160,12 +147,6 @@ body{
 
 /* Ensure vessels can host overlay gloss div */
 .vessel{ position:relative }
-
-/* Mobile: hide rim-like effects */
-@media (max-width: 480px){
-  .card{ border: none !important; box-shadow: none !important; }
-  .card::after{ display: none !important; }
-}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
