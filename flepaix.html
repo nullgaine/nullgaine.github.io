@@ -100,94 +100,79 @@ body{
 /* ===== Animations & Lighting ===== */
 
 /* Card: subtle shimmering highlight sweep */
-.card {
-  isolation: isolate;
-}
+.card { isolation: isolate; }
 .card::after{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(100deg, rgba(255,255,255,0.0) 20%, rgba(255,255,255,0.12) 35%, rgba(255,255,255,0.0) 50%);
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(100deg, rgba(255,255,255,0.0) 20%, rgba(255,255,255,0.08) 35%, rgba(255,255,255,0.0) 50%);
   transform: translateX(-120%);
-  animation: shineSweep 5.5s ease-in-out infinite;
-  mix-blend-mode: screen;
-  pointer-events:none;
+  animation: shineSweep 9s ease-in-out infinite;
+  mix-blend-mode: screen; pointer-events:none;
 }
 @keyframes shineSweep {
   0% { transform: translateX(-120%); }
-  35% { transform: translateX(10%); }
+  45% { transform: translateX(10%); }
   100% { transform: translateX(120%); }
 }
 
 /* Liquid surface: soft moving gloss band */
-.vessel .liquid-gloss {
+.vessel .liquid-gloss{
   position:absolute; left:8%; right:8%; top:34%;
   height:10%;
   background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,0));
-  border-radius: 50% / 100%;
-  filter: blur(0.5px);
-  animation: surfaceGlow 4s ease-in-out infinite alternate;
-  mix-blend-mode: screen;
-  pointer-events:none;
+  border-radius: 50% / 100%; filter: blur(0.5px);
+  animation: surfaceGlow 7s ease-in-out infinite alternate;
+  mix-blend-mode: screen; pointer-events:none;
 }
-@keyframes surfaceGlow {
-  from { transform: translateY(0) scaleY(1); opacity: .9; }
-  to   { transform: translateY(2px) scaleY(.95); opacity: .6; }
+@keyframes surfaceGlow{
+  from { transform: translateY(0)  scaleY(1);  opacity: .75; }
+  to   { transform: translateY(2px) scaleY(.96); opacity: .50; }
 }
 
 /* Header gloss */
-.header{
-  position: relative;
-  overflow: hidden;
-}
+.header{ position: relative; overflow: hidden; }
 .header::after{
-  content:"";
-  position:absolute; top:0; left:-40%;
+  content:""; position:absolute; top:0; left:-40%;
   width:40%; height:100%;
   background: linear-gradient(110deg, rgba(255,255,255,.0) 0%, rgba(255,255,255,.25) 50%, rgba(255,255,255,.0) 100%);
   transform: skewX(-12deg);
-  animation: headerGloss 7.5s ease-in-out infinite;
+  animation: headerGloss 12s ease-in-out infinite;
   pointer-events:none;
 }
-@keyframes headerGloss {
+@keyframes headerGloss{
   0% { left:-45%; }
   40% { left:105%; }
-  100% { left:105%; }
+  100%{ left:105%; }
 }
 
 /* Modal: scale/opacity pop */
-.overlay.show .popup{
-  transform: scale(.98);
-  opacity: 0;
-}
-.overlay .popup{
-  transform-origin: 50% 43%;
-  transition: transform .18s ease, opacity .18s ease;
-}
-.overlay:not([hidden]).show .popup{
-  transform: scale(1);
-  opacity: 1;
-}
+.overlay.show .popup{ transform: scale(.98); opacity: 0; }
+.overlay .popup{ transform-origin: 50% 43%; transition: transform .18s ease, opacity .18s ease; }
+.overlay:not([hidden]).show .popup{ transform: scale(1); opacity: 1; }
 
 /* Tap ripple on .btn.open */
-.btn.open {
-  position: relative;
-  overflow: hidden;
+.btn.open { position: relative; overflow: hidden; }
+.btn.open .ripple{
+  position:absolute; width:10px; height:10px; border-radius:50%;
+  background: rgba(255,255,255,.8); transform: translate(-50%,-50%) scale(0);
+  animation: ripple .6s ease-out forwards; pointer-events:none; mix-blend-mode: screen;
 }
-.btn.open .ripple {
-  position:absolute; width:10px; height:10px;
-  border-radius:50%; background: rgba(255,255,255,.8);
-  transform: translate(-50%,-50%) scale(0);
-  animation: ripple .6s ease-out forwards;
-  pointer-events:none;
-  mix-blend-mode: screen;
-}
-@keyframes ripple {
-  to { transform: translate(-50%,-50%) scale(12); opacity: 0; }
-}
+@keyframes ripple { to { transform: translate(-50%,-50%) scale(12); opacity: 0; } }
 
 /* Ensure vessels can host overlay gloss div */
 .vessel{ position:relative }
 
+/* Mobile: hide rim-like effects */
+@media (max-width: 480px){
+  .card{ border: none !important; box-shadow: none !important; }
+  .card::after{ display: none !important; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .card::after,
+  .vessel .liquid-gloss,
+  .header::after{ animation-duration: 20s !important; }
+}
 </style>
 </head>
 <body>
