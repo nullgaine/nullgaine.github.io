@@ -88,7 +88,7 @@ body{
 .metaBox{ padding:14px 16px 18px; }
 .close{
   position:absolute; right:10px; top:10px; width:36px; height:36px;
-  border:none; border-radius:50%; background:#ffd3e1; color:#7a2941; font-size:18px; font-weight:900;
+  border:none; border-radius:50%; background:#3E3A38; color:#2f2b2a; font-size:18px; font-weight:900;
 }
 
 /* Small screens */
@@ -197,6 +197,14 @@ body{
       <rect id="wine-base" x="36" y="116" width="48" height="4" rx="2" />
       <clipPath id="clip-wine"><use href="#wine-bowl"/></clipPath>
     </symbol>
+    
+    <!-- parfait glass -->
+      <symbol id="shape-parfait" viewBox="0 0 120 160">
+      <path id="parfait-bowl" d="M44,20 q16,30 32,0 l-5,55 h-22 z" />
+      <rect id="parfait-stem" x="58" y="75" width="6" height="34" rx="2" />
+      <rect id="parfait-base" x="38" y="112" width="44" height="4" rx="2" />
+      <clipPath id="clip-parfait"><use href="#parfait-bowl"/></clipPath>
+    </symbol>
   </defs>
 </svg>
 
@@ -224,7 +232,7 @@ const SHAPE_BY_CATEGORY = {
   milk:    "tumbler",
   cosmic:  "tumbler",
   cocktail:"wine",
-  dessert: "wine"
+  dessert: "parfait"
 };
 const DRINKS = [
   { category:"coffee",  name:"Espresso",    hex:"#3B2F2F", memo:"深煎り・短時間抽出" },
@@ -252,13 +260,14 @@ function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<
 function cardTemplate(it){
   const shape = SHAPE_BY_CATEGORY[it.category] || "tumbler";
   const idClip = {
-    mug:"clip-mug", teacup:"clip-teacup", tumbler:"clip-tumbler", wine:"clip-wine"
+    mug:"clip-mug", teacup:"clip-teacup", tumbler:"clip-tumbler", wine:"clip-wine", dessert:"clip-parfait" 
   }[shape];
   const idPaths = {
     mug:    ['mug-body','mug-handle'],
     teacup: ['cup-saucer','cup-bowl','cup-handle'],
     tumbler:['tumbler-body'],
     wine:   ['wine-bowl','wine-stem','wine-base']
+    dessert:['parfait-bowl','parfait-stem','parfait-base']
   }[shape];
 
   const el = document.createElement('article');
