@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fleur de Paix</title>
+<title>Fleur de Paix — fixed parfait wiring</title>
 <style>
-/* ===== Theme (no background effects) ===== */
+/* ===== Theme (dark, no bg effects) ===== */
 :root{
-  --pink: #ff91af;           /* Baker-Miller Pink */
+  --pink: #ff91af;
   --pink-strong:#ff6c97;
-  --ink:#1a1a1a;
-  --paper:#fff;
-  --glass: rgba(255,255,255,.28);
+  --ink:#f3eef0;
+  --paper:#4A4643;
   --glass-stroke: rgba(255,255,255,.85);
   --card-bg: #5C5551;
   --card-border: #4C4845;
@@ -37,7 +36,7 @@ body{
 /* ===== Grid ===== */
 .grid{
   padding:14px;
-  background:#4A4643;
+  background:var(--paper);
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap:14px;
@@ -55,14 +54,12 @@ body{
 /* vessel */
 .vessel{ position:relative; width:100%; aspect-ratio: 5 / 6; display:grid; place-items:center; }
 .vessel svg{ width:78%; height:auto; }
-.vessel[data-shape="teacup"] svg { width: 78%; }
-
 
 /* liquid */
 .liquid{ width:100%; height:100%; }
 
 /* glass stroke */
-.stroke{ fill:none; stroke: var(--glass-stroke); stroke-width:2.1; }
+.stroke{ fill:none; stroke: var(--glass-stroke); stroke-width:2.1; filter: drop-shadow(0 1px 0 rgba(255,255,255,.35)); }
 
 /* info */
 .info{ padding:10px 12px 12px; border-top: 1px solid #3E3A38; background:#3E3A38 }
@@ -85,7 +82,7 @@ body{
   background:#3E3A38; border-radius:18px; overflow:hidden; border:1px solid #2f2b2a;
 }
 .preview{ padding:16px; display:grid; place-items:center; background:#4A4643; }
-.metaBox{ padding:14px 16px 18px; }
+.metaBox{ padding:14px 16px 18px; color:#ffb3c7;}
 .close{
   position:absolute; right:10px; top:10px; width:36px; height:36px;
   border:none; border-radius:50%; background:#3E3A38; color:#2f2b2a; font-size:18px; font-weight:900;
@@ -95,64 +92,6 @@ body{
 @media (max-width:420px){
   .grid{ grid-template-columns: repeat(2, 1fr); gap:10px; padding:10px; }
   .header h1{ font-size:1.2rem }
-}
-
-/* ===== Animations & Lighting ===== */
-
-/* Card: subtle shimmering highlight sweep */
-.card { isolation: isolate; }
-.card::after{
-  content:""; position:absolute; inset:0;
-  background: linear-gradient(100deg, rgba(255,255,255,0.0) 20%, rgba(255,255,255,0.08) 35%, rgba(255,255,255,0.0) 50%);
-  transform: translateX(-120%);
-  animation: shineSweep 9s ease-in-out infinite;
-  mix-blend-mode: screen; pointer-events:none;
-}
-@keyframes shineSweep {
-  0% { transform: translateX(-120%); }
-  45% { transform: translateX(10%); }
-  100% { transform: translateX(120%); }
-}
-
-
-/* Header gloss */
-.header{ position: relative; overflow: hidden; }
-.header::after{
-  content:""; position:absolute; top:0; left:-40%;
-  width:40%; height:100%;
-  background: linear-gradient(110deg, rgba(255,255,255,.0) 0%, rgba(255,255,255,.25) 50%, rgba(255,255,255,.0) 100%);
-  transform: skewX(-12deg);
-  animation: headerGloss 12s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes headerGloss{
-  0% { left:-45%; }
-  40% { left:105%; }
-  100%{ left:105%; }
-}
-
-/* Modal: scale/opacity pop */
-.overlay.show .popup{ transform: scale(.98); opacity: 0; }
-.overlay .popup{ transform-origin: 50% 43%; transition: transform .18s ease, opacity .18s ease; }
-.overlay:not([hidden]).show .popup{ transform: scale(1); opacity: 1; }
-
-/* Tap ripple on .btn.open */
-.btn.open { position: relative; overflow: hidden; }
-.btn.open .ripple{
-  position:absolute; width:10px; height:10px; border-radius:50%;
-  background: rgba(255,255,255,.8); transform: translate(-50%,-50%) scale(0);
-  animation: ripple .6s ease-out forwards; pointer-events:none; mix-blend-mode: screen;
-}
-@keyframes ripple { to { transform: translate(-50%,-50%) scale(12); opacity: 0; } }
-
-/* Ensure vessels can host overlay gloss div */
-.vessel{ position:relative }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .card::after,
-  .vessel .liquid-gloss,
-  .header::after{ animation-duration: 20s !important; }
 }
 </style>
 </head>
@@ -166,23 +105,20 @@ body{
 <svg aria-hidden="true" width="0" height="0" style="position:absolute">
   <defs>
     <!-- Mug (coffee/choco) -->
-<symbol id="shape-mug" viewBox="0 0 120 120">
-  <!-- 角丸長方形ベースに変更 -->
-  <rect id="mug-body" x="18" y="30" width="70" height="80" rx="18" ry="18" />
-  <!-- 取っ手はそのまま（必要なら x/y/半径を微調整） -->
-  <path id="mug-handle"
-        d="M88,44 a16,16 0 1 1 0,32 a10,10 0 0 1 -10,-10 v-12 a10,10 0 0 1 10,-10 z" />
-  <clipPath id="clip-mug"><use href="#mug-body"/></clipPath>
+    <symbol id="shape-mug" viewBox="0 0 120 120">
+      <!-- 角丸長方形ベース -->
+      <rect id="mug-body" x="18" y="30" width="70" height="80" rx="18" ry="18" />
+      <path id="mug-handle" d="M88,44 a16,16 0 1 1 0,32 a10,10 0 0 1 -10,-10 v-12 a10,10 0 0 1 10,-10 z" />
+      <clipPath id="clip-mug"><use href="#mug-body"/></clipPath>
     </symbol>
 
     <!-- Teacup -->
     <symbol id="shape-teacup" viewBox="0 0 120 120">
       <path id="cup-bowl" d="M18,40 q42,34 84,0 v10 a42,28 0 0 1 -84,0 z" />
       <path id="cup-handle" d="M95,45 a12,12 0 1 1 0,24 a9,9 0 0 1 0,-18" />
+      <ellipse id="cup-saucer" cx="60" cy="105" rx="46" ry="10" />
       <clipPath id="clip-teacup"><use href="#cup-bowl"/></clipPath>
-    
-    <ellipse id="cup-saucer" cx="60" cy="105" rx="46" ry="10" />
-  </symbol>
+    </symbol>
 
     <!-- Tumbler -->
     <symbol id="shape-tumbler" viewBox="0 0 120 140">
@@ -197,12 +133,12 @@ body{
       <rect id="wine-base" x="36" y="116" width="48" height="4" rx="2" />
       <clipPath id="clip-wine"><use href="#wine-bowl"/></clipPath>
     </symbol>
-    
-    <!-- parfait glass -->
-      <symbol id="shape-parfait" viewBox="0 0 120 160">
-      <path id="parfait-bowl" d="M44,20 q16,30 32,0 l-5,55 h-22 z" />
-      <rect id="parfait-stem" x="58" y="75" width="6" height="34" rx="2" />
-      <rect id="parfait-base" x="38" y="112" width="44" height="4" rx="2" />
+
+    <!-- Parfait glass (new) -->
+    <symbol id="shape-parfait" viewBox="0 0 120 160">
+      <path id="parfait-bowl" d="M40,24 q20,34 40,0 l-6,58 h-28 z" />
+      <rect id="parfait-stem" x="58" y="82" width="4" height="32" rx="2" />
+      <rect id="parfait-base" x="36" y="116" width="48" height="4" rx="2" />
       <clipPath id="clip-parfait"><use href="#parfait-bowl"/></clipPath>
     </symbol>
   </defs>
@@ -216,15 +152,15 @@ body{
     <button class="close" id="closeBtn" aria-label="閉じる">×</button>
     <div class="preview" id="preview"></div>
     <div class="metaBox">
-      <h2 id="mName" style="margin:.2em 0 0;color:#ffb3c7;"></h2>
-      <p id="mHex" style="margin:.2em 0 0;color:#f2e9ed;"></p>
-      <p id="mMemo" style="margin:.2em 0 0;color:#f2e9ed;"></p>
+      <h2 id="mName"></h2>
+      <p id="mHex"></p>
+      <p id="mMemo"></p>
     </div>
   </div>
 </div>
 
 <script>
-// ===== Data (replace with your real data) =====
+// Shapes per category
 const SHAPE_BY_CATEGORY = {
   coffee:  "mug",
   choco:   "mug",
@@ -232,21 +168,24 @@ const SHAPE_BY_CATEGORY = {
   milk:    "tumbler",
   cosmic:  "tumbler",
   cocktail:"wine",
-  dessert: "parfait"
+  dessert: "parfait" // dessert uses parfait glass now
 };
+
+// Sample data
 const DRINKS = [
   { category:"coffee",  name:"Espresso",    hex:"#3B2F2F", memo:"深煎り・短時間抽出" },
   { category:"milk",    name:"Milk Soda",   hex:"#B8E9FF", memo:"炭酸のパチパチ" },
   { category:"choco",   name:"Cacao 70",    hex:"#4C2A1F", memo:"ビター寄り" },
-  { category:"tea",     name:"Tomori",hex:"#F0C063", memo:"この街のお茶。" },
-  { category:"tea",     name:"Hibiscus",hex:"#DD3848", memo:"真夏の鮮やかで甘い花。" },
-  { category:"tea",     name:"Rosehip",hex:"#BB1237", memo:"花に水、赤のお茶。" },
+  { category:"tea",     name:"Tomori",      hex:"#F0C063", memo:"この街のお茶。" },
+  { category:"tea",     name:"Hibiscus",    hex:"#DD3848", memo:"真夏の鮮やかで甘い花。" },
+  { category:"tea",     name:"Rosehip",     hex:"#BB1237", memo:"花に水、赤のお茶。" },
   { category:"dessert", name:"Panna Rosa",  hex:"#FFC7D9", memo:"ピンクのデザート" },
   { category:"cocktail",name:"Pink Fizz",   hex:"#ff91af", memo:"Baker-Miller Pink" },
-  { category:"cosmic",  name:"Stellar Ice", hex:"#7AD0D6", memo:"宇宙色のソーダ" }
+  { category:"cosmic",  name:"Stellar Ice", hex:"#7AD0D6", memo:"宇宙色のソーダ" },
+  { category:"dessert", name:"Strawberry Parfait", hex:"#FFD3E8", memo:"クリームといちごの層" }
 ];
 
-// ===== DOM =====
+// DOM
 const grid = document.getElementById('grid');
 const overlay = document.getElementById('overlay');
 const closeBtn = document.getElementById('closeBtn');
@@ -260,29 +199,27 @@ function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<
 function cardTemplate(it){
   const shape = SHAPE_BY_CATEGORY[it.category] || "tumbler";
   const idClip = {
-    mug:"clip-mug", teacup:"clip-teacup", tumbler:"clip-tumbler", wine:"clip-wine", dessert:"clip-parfait" 
+    mug:"clip-mug", teacup:"clip-teacup", tumbler:"clip-tumbler", wine:"clip-wine", parfait:"clip-parfait"
   }[shape];
   const idPaths = {
     mug:    ['mug-body','mug-handle'],
     teacup: ['cup-saucer','cup-bowl','cup-handle'],
     tumbler:['tumbler-body'],
-    wine:   ['wine-bowl','wine-stem','wine-base']
-    dessert:['parfait-bowl','parfait-stem','parfait-base']
+    wine:   ['wine-bowl','wine-stem','wine-base'],
+    parfait:['parfait-bowl','parfait-stem','parfait-base']
   }[shape];
 
   const el = document.createElement('article');
   el.className = 'card';
   el.innerHTML = `
     <div class="vessel" data-shape="${shape}" role="img" aria-label="${escapeHtml(it.name)} in a ${shape}">
-      <svg viewBox="0 0 120 140" class="frame">
+      <svg viewBox="0 0 120 160" class="frame">
         <g clip-path="url(#${idClip})">
           <rect class="liquid" x="0" y="40" width="120" height="100" rx="8" fill="${it.hex}"></rect>
           <path d="M-10,60 q40,-8 80,0 t80,0 v20 h-160z" fill="rgba(255,255,255,.16)"></path>
         </g>
         ${idPaths.map(pid => `<use href="#${pid}" class="stroke"></use>`).join('')}
       </svg>
-    
-      <div class="liquid-gloss" aria-hidden="true"></div>
     </div>
     <div class="info">
       <div class="name">${escapeHtml(it.name)}</div>
@@ -291,19 +228,7 @@ function cardTemplate(it){
       <div class="actions"><button class="btn open" type="button">見る</button></div>
     </div>`;
 
-  const openBtn = el.querySelector('.open');
-  openBtn.addEventListener('click', (e)=>{
-    // ripple
-    const r = document.createElement('span');
-    r.className = 'ripple';
-    const rect = openBtn.getBoundingClientRect();
-    r.style.left = (e.clientX - rect.left) + 'px';
-    r.style.top  = (e.clientY - rect.top)  + 'px';
-    openBtn.appendChild(r);
-    setTimeout(()=> r.remove(), 650);
-    // open modal
-    openModal(it, idClip, idPaths);
-  });
+  el.querySelector('.open').addEventListener('click', ()=> openModal(it, idClip, idPaths));
   return el;
 }
 
@@ -313,9 +238,8 @@ function mount(arr){
 }
 
 function openModal(it, idClip, idPaths){
-  overlay.classList.add('show');
   pv.innerHTML = `
-    <svg viewBox="0 0 120 140" style="width:min(420px, 76vw);height:auto">
+    <svg viewBox="0 0 120 160" style="width:min(420px, 76vw);height:auto">
       <g clip-path="url(#${idClip})">
         <rect x="0" y="40" width="120" height="100" rx="8" fill="${it.hex}"></rect>
         <path d="M-10,60 q40,-8 80,0 t80,0 v20 h-160z" fill="rgba(255,255,255,.18)"></path>
@@ -329,7 +253,6 @@ function openModal(it, idClip, idPaths){
   document.documentElement.style.overflow = "hidden";
 }
 function closeModal(){
-  overlay.classList.remove('show');
   overlay.hidden = true;
   document.documentElement.style.overflow = "";
 }
