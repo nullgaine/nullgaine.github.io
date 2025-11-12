@@ -257,7 +257,7 @@ html.theme-dark body::before {
 <body>
 <header>
   <div class="brand">
-    <div class="logo">かふぇあつめ<span class="dot" id="spectreDot" role="link" aria-label="Le Spectre へ" tabindex="0">.</span></div>
+    <div class="logo">かふぇあつめ<span class="dot" id="spectreDot" role="link" aria-label="Fleur de Paix へ" tabindex="0">.</span></div>
     <div class="sub">――小さな喫茶店の色見本</div>
   </div>
   <div class="toolbar">
@@ -528,7 +528,7 @@ function mount(gridId, arr, first=12){
   let last = 0;
   dot.addEventListener('click', ()=>{
     const now = Date.now();
-    if(now - last < 400){ location.href = 'lespectre.html'; } // 2回タップで遷移
+    if(now - last < 400){ location.href = 'flepaix.html'; } // 2回タップで遷移
     last = now;
   });
 
@@ -536,7 +536,7 @@ function mount(gridId, arr, first=12){
   dot.addEventListener('keydown', (e)=>{
     if(e.key === 'Enter' || e.key === ' '){
       e.preventDefault();
-      location.href = 'lespectre.html';
+      location.href = 'flepaix.html';
     }
   });
 })();
