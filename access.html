@@ -5,54 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>アクセス | 江縫栄市立総合病院</title>
   <link rel="stylesheet" href="assets/style.css">
-  <style>
-    /* アクセスページ専用の調整 */
-    .panel-access {
-      margin: 1.5rem 0 2rem;
-    }
-    .card-map {
-      max-width: 560px;          /* 元画像サイズに合わせた最大幅 */
-      margin: 0 auto;            /* 中央寄せ */
-      border-radius: 16px;
-      overflow: hidden;          /* 角丸の内側だけ表示 */
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-map img {
-      display: block;
-      width: 100%;
-      height: auto;              /* 縦横比をそのまま保つ */
-    }
-    @media (max-width: 640px) {
-      .card-map {
-        max-width: 100%;         /* スマホでは画面幅いっぱい */
-      }
-    }
-  </style>
+<style>
+.access-wrap {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 2rem 0 3rem;
+  flex-wrap: wrap;
+}
+
+.map-box {
+  flex: 0 0 560px; /* 地図の幅を固定（画像サイズに合わせてる） */
+}
+
+.map-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.map-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.access-text {
+  flex: 1;
+  min-width: 280px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  padding-top: 4px;
+}
+
+.access-text strong {
+  color: #e0668c;
+  font-weight: 800;
+}
+
+/* スマホでは縦並びでOKにする */
+@media (max-width: 768px) {
+  .access-wrap {
+    flex-direction: column;
+  }
+  .map-box {
+    flex-basis: auto;
+  }
+}
+</style>
 </head>
 <body>
   <div id="header"></div>
   <main id="main">
-    <h1>アクセス</h1>
+<h1>アクセス</h1>
 
-    <section class="panel panel-access">
-      <div class="card card-map">
-        <img src="image/map2.png" alt="江縫栄市立総合病院 周辺地図">
-      </div>
-    </section>
+<section class="access-wrap">
+  <div class="map-box">
+    <div class="map-card">
+      <img src="image/map2.png" alt="江縫栄市立総合病院 周辺地図">
+    </div>
+  </div>
 
-    <p>
-      <a href="https://youtube.com/@gaine_0">
-        住所：漆谷県江縫栄市北司零寺2-1-1
-      </a><br>
-      「江縫栄市立総合病院前」駅徒歩2分。駐車場200台。
-    </p>
-    <p class="note">
-      カフェ「Café Palette」江縫栄市立総合病院店。
+  <div class="access-text">
+    <p><strong>住所：漆谷県江縫栄市北司零寺2-1-1</strong></p>
+    <p>「江縫栄市立総合病院前」駅徒歩2分。駐車場200台。</p>
+    <p>カフェ「Café Palette」江縫栄市立総合病院店。  
       <a href="https://gainenull.org/cafepalette">URL</a>
     </p>
+  </div>
+</section>
   </main>
   <div id="footer"></div>
 
