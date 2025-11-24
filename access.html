@@ -4,145 +4,174 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>アクセス | 江縫栄市立総合病院</title>
+
+  <!-- 既存の全体スタイル -->
   <link rel="stylesheet" href="assets/style.css">
-<style>
-.access-wrap {
-  display: flex;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: center;
-  margin: 2rem 0 3rem;
-  flex-wrap: wrap;
-}
 
-.map-box {
-  flex: 0 0 560px; /* 地図の幅を固定（画像サイズに合わせてる） */
-}
+  <!-- アクセスページ専用スタイル -->
+  <style>
+    .access-wrap {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      justify-content: center;
+      margin: 2rem 0 3rem;
+      flex-wrap: wrap;
+    }
 
-.map-card {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
+    .map-box {
+      flex: 0 0 560px; /* 地図画像の想定幅 */
+    }
 
-.map-card img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+    .map-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
 
-.access-text {
-  flex: 1;
-  min-width: 280px;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  padding-top: 4px;
-}
+    .map-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-.access-text strong {
-  color: #e0668c;
-  font-weight: 800;
-}
+    /* ノイズ付与時にフィルタをかける */
+    .map-card.noised img {
+      filter: url(#map-noise);
+    }
 
-/* ピンボタン */
-.map-card {
-  position: relative;  /* 子要素を絶対配置できるように */
-}
+    /* ノイズ発動用のピンボタン */
+    .map-pin {
+      position: absolute;
+      top: 52px;   /* ← 病院ピンに合わせて微調整してね */
+      left: 140px; /* ← ここも */
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
 
-.map-pin {
-  position: absolute;
-  top: 52px;     /* ← ここは目で見て合わせてね */
-  left: 120px;   /* ↑ 同じく調整ポイント */
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background:
-    url("image/mappin.png") center/contain no-repeat;
-  background-color: transparent;
-  cursor: pointer;
-}
+      /* フォールバック（画像なくても見えるように） */
+      background-color: #ff6b9b;
+      box-shadow: 0 0 0 3px #fff, 0 2px 4px rgba(0,0,0,0.25);
 
-/* ノイズ状態のとき、地図画像にフィルタをかける */
-.map-card.noised img {
-  filter: url(#map-noise);
-}
+      /* ピン画像があるならここを書き換え */
+      background-image: url("image/hospital-pin.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
 
-/* スマホでは縦並びでOKにする */
-@media (max-width: 768px) {
-  .access-wrap {
-    flex-direction: column;
-  }
-  .map-box {
-    flex-basis: auto;
-  }
-}
-</style>
+    .access-text {
+      flex: 1;
+      min-width: 260px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      padding-top: 4px;
+    }
+    .access-text strong {
+      color: #e0668c;
+      font-weight: 800;
+    }
+
+    @media (max-width: 768px) {
+      .access-wrap {
+        flex-direction: column;
+      }
+      .map-box {
+        flex-basis: auto;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="header"></div>
+
   <main id="main">
-<h1>アクセス</h1>
+    <h1>アクセス</h1>
 
-<section class="access-wrap">
-  <div class="map-box">
-    <div class="map-card">
-      <img src="image/map2.png" alt="江縫栄市立総合病院 周辺地図">
-    </div>
-  </div>
+    <section class="access-wrap">
+      <div class="map-box">
+        <div class="map-card">
+          <img src="image/map2.png" alt="江縫栄市立総合病院 周辺地図">
 
-  <div class="access-text">
-    <p><strong>住所：漆谷県江縫栄市北司零寺2-1-1</strong></p>
-    <p>「江縫栄市立総合病院前」駅徒歩2分。駐車場200台。</p>
-    <p>カフェ「Café Palette」江縫栄市立総合病院店。  
-      <a href="https://gainenull.org/cafepalette">URL</a>
-    </p>
-  </div>
-</section>
+          <!-- 🩸 このピンに触れると地図がノイズ化する -->
+          <button class="map-pin" type="button" aria-label="江縫栄市立総合病院ピン"></button>
+        </div>
+      </div>
+
+      <div class="access-text">
+        <p><strong>住所：漆谷県江縫栄市北司零寺2-1-1</strong></p>
+        <p>「江縫栄市立総合病院前」駅徒歩2分。駐車場200台。</p>
+        <p>
+          カフェ「Café Palette」江縫栄市立総合病院店。
+          <a href="https://gainenull.org/cafepalette">URL</a>
+        </p>
+      </div>
+    </section>
   </main>
+
   <div id="footer"></div>
 
+  <!-- ノイズ用 SVG フィルタ（ここ大事） -->
+  <svg width="0" height="0" aria-hidden="true"
+       style="position:absolute;left:-9999px;pointer-events:none;">
+    <filter id="map-noise">
+      <!-- 細かい砂嵐ノイズ -->
+      <feTurbulence type="fractalNoise"
+                    baseFrequency="0.9"
+                    numOctaves="2"
+                    seed="3"
+                    result="noise">
+        <!-- baseFrequency を揺らして「走る」感じを出す -->
+        <animate attributeName="baseFrequency"
+                 dur="0.4s"
+                 values="0.9;1.3;0.7;1.1;0.9"
+                 repeatCount="indefinite" />
+      </feTurbulence>
+
+      <!-- ノイズで元画像をゆがめる -->
+      <feDisplacementMap in="SourceGraphic"
+                         in2="noise"
+                         scale="18"
+                         xChannelSelector="R"
+                         yChannelSelector="G" />
+    </filter>
+  </svg>
+
   <script>
-  async function loadPart(id, file){
-    const res = await fetch(file);
-    document.getElementById(id).innerHTML = await res.text();
-  }
-  loadPart("header", "partials/header.html");
-  loadPart("footer", "partials/footer.html");
+    // 共通のヘッダー／フッター読み込み
+    async function loadPart(id, file){
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+    }
+    loadPart("header", "partials/header.html");
+    loadPart("footer", "partials/footer.html");
+
+    // ノイズ制御
+    document.addEventListener("DOMContentLoaded", () => {
+      const card = document.querySelector(".map-card");
+      const pin  = document.querySelector(".map-pin");
+      if (!card || !pin) return;
+
+      // PC：ホバーでノイズON/OFF
+      pin.addEventListener("mouseenter", () => {
+        card.classList.add("noised");
+      });
+      pin.addEventListener("mouseleave", () => {
+        card.classList.remove("noised");
+      });
+
+      // モバイル：タップでトグル
+      pin.addEventListener("click", (e) => {
+        e.preventDefault();
+        card.classList.toggle("noised");
+      });
+    });
   </script>
-
-<script>
-  // 既存の loadPart はそのまま
-  async function loadPart(id, file){
-    const res = await fetch(file);
-    document.getElementById(id).innerHTML = await res.text();
-  }
-  loadPart("header", "partials/header.html");
-  loadPart("footer", "partials/footer.html");
-
-  // ノイズ制御
-  document.addEventListener("DOMContentLoaded", () => {
-    const card = document.querySelector(".map-card");
-    const pin  = document.querySelector(".map-pin");
-    if (!card || !pin) return;
-
-    // PC：ホバーで発動
-    pin.addEventListener("mouseenter", () => {
-      card.classList.add("noised");
-    });
-    pin.addEventListener("mouseleave", () => {
-      card.classList.remove("noised");
-    });
-
-    // モバイル：タップでトグル
-    pin.addEventListener("click", (e) => {
-      e.preventDefault();
-      card.classList.toggle("noised");
-    });
-  });
-</script>
 </body>
 </html>
