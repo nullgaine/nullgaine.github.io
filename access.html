@@ -46,6 +46,31 @@
   font-weight: 800;
 }
 
+/* ピンボタン */
+.map-card {
+  position: relative;  /* 子要素を絶対配置できるように */
+}
+
+.map-pin {
+  position: absolute;
+  top: 52px;     /* ← ここは目で見て合わせてね */
+  left: 120px;   /* ↑ 同じく調整ポイント */
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background:
+    url("Mappin.png") center/contain no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* ノイズ状態のとき、地図画像にフィルタをかける */
+.map-card.noised img {
+  filter: url(#map-noise);
+}
+
 /* スマホでは縦並びでOKにする */
 @media (max-width: 768px) {
   .access-wrap {
@@ -88,5 +113,36 @@
   loadPart("header", "partials/header.html");
   loadPart("footer", "partials/footer.html");
   </script>
+
+<script>
+  // 既存の loadPart はそのまま
+  async function loadPart(id, file){
+    const res = await fetch(file);
+    document.getElementById(id).innerHTML = await res.text();
+  }
+  loadPart("header", "partials/header.html");
+  loadPart("footer", "partials/footer.html");
+
+  // ノイズ制御
+  document.addEventListener("DOMContentLoaded", () => {
+    const card = document.querySelector(".map-card");
+    const pin  = document.querySelector(".map-pin");
+    if (!card || !pin) return;
+
+    // PC：ホバーで発動
+    pin.addEventListener("mouseenter", () => {
+      card.classList.add("noised");
+    });
+    pin.addEventListener("mouseleave", () => {
+      card.classList.remove("noised");
+    });
+
+    // モバイル：タップでトグル
+    pin.addEventListener("click", (e) => {
+      e.preventDefault();
+      card.classList.toggle("noised");
+    });
+  });
+</script>
 </body>
 </html>
