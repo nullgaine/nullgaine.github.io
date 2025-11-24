@@ -5,26 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>アクセス | 江縫栄市立総合病院</title>
   <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* アクセスページ専用の調整 */
+    .panel-access {
+      margin: 1.5rem 0 2rem;
+    }
+    .card-map {
+      max-width: 560px;          /* 元画像サイズに合わせた最大幅 */
+      margin: 0 auto;            /* 中央寄せ */
+      border-radius: 16px;
+      overflow: hidden;          /* 角丸の内側だけ表示 */
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-map img {
+      display: block;
+      width: 100%;
+      height: auto;              /* 縦横比をそのまま保つ */
+    }
+    @media (max-width: 640px) {
+      .card-map {
+        max-width: 100%;         /* スマホでは画面幅いっぱい */
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="header"></div>
   <main id="main">
     <h1>アクセス</h1>
-<div class="panel">
-  <div class="card" style="
-      height:560px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
-      overflow:hidden; /* ← 角丸に沿って画像を切る領域 */
-  ">
-    <img src="image/map2.png" style="width:100%; height:100%; object-fit:cover;">
-  </div>
-</div>
-      <p><a href="https://youtube.com/@gaine_0">住所：漆谷県江縫栄市北司零寺2-1-1</a><br>「江縫栄市立総合病院前」駅徒歩2分。駐車場200台。</p>
-      <p class="note">カフェ「Café Palette」江縫栄市立総合病院店。<a href="https://gainenull.org/cafepalette">URL</a></p>
-    </div>
+
+    <section class="panel panel-access">
+      <div class="card card-map">
+        <img src="image/map2.png" alt="江縫栄市立総合病院 周辺地図">
+      </div>
+    </section>
+
+    <p>
+      <a href="https://youtube.com/@gaine_0">
+        住所：漆谷県江縫栄市北司零寺2-1-1
+      </a><br>
+      「江縫栄市立総合病院前」駅徒歩2分。駐車場200台。
+    </p>
+    <p class="note">
+      カフェ「Café Palette」江縫栄市立総合病院店。
+      <a href="https://gainenull.org/cafepalette">URL</a>
+    </p>
   </main>
   <div id="footer"></div>
 
