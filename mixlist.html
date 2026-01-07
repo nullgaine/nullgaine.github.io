@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MIX（料金・プラン） | 江縫栄市立総合病院</title>
+
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    :root{
+      --accent:#ff6c97;
+      --accent2:#ffd3e1;
+      --line: rgba(255,108,151,.22);
+      --panel: rgba(255,255,255,.92);
+      --ink: #2b2b2b;
+      --muted:#6a5a58;
+      --radius: 16px;
+      --shadow: 0 10px 28px rgba(20,10,10,.08);
+      --max: 1040px;
+    }
+    body{ color:var(--ink); }
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 16px 16px 64px; }
+    .lead{ color:var(--muted); margin:.5rem 0 0; }
+    .noteBox{
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 2px 14px rgba(0,0,0,.04);
+    }
+    .grid{
+      margin-top: 14px;
+      display:grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 960px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    .card .head{
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(0deg, rgba(255,255,255,.96), rgba(255,211,225,.35));
+    }
+    .card h3{ margin:0; font-size: 16px; font-weight: 900; letter-spacing:.02em; }
+    .card p{ margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+    .card .foot{
+      padding: 12px 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .price{ font-weight: 1000; color: #a31e47; letter-spacing:.02em; }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      font-weight: 900;
+      font-size: 13px;
+      color: #7a2941;
+      white-space: nowrap;
+    }
+    .links{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .btnLink{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      text-decoration:none;
+      font-weight: 900;
+      color: #5a2b3a;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .btnLink:hover{ border-color: rgba(255,108,151,.55); }
+    .dot{ width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent2); }
+    .section{ margin-top: 20px; }
+    .section h2{ margin: 0 0 8px; font-size: 18px; font-weight: 1000; }
+    .mini{ font-size: 13px; color: var(--muted); }
+    .hr{ height:1px; background: var(--line); border:0; margin: 18px 0; }
+  </style>
+
+</head>
+<body>
+  <div id="header"></div>
+
+  <main id="main" class="wrap">
+    <h1>MIX（料金・プラン）</h1>
+    
+<p class="lead">常に自分の音源は自分でMIXする14年活動中の歌うたいです。実績400+です。</p>
+<div class="noteBox">
+  <b>注意書き</b><br>
+  ・基本プラン：ピッチ／タイミング補正・ハモり生成・空間・エフェクト・マスタリング<br>
+  ・リテイクを要請する場合がございます。ご了承ください。<br>
+  ・ボーカルデータ提出形式は（MONO/WAV/48000k）にしていただけると嬉しいです。ノイズ除去はしないでください。<br>
+  ・納期は通常1〜2週間程度。お急ぎの場合は要相談で対応可能です。<br>
+  ・Inst以外の1トラックあたり+2000円で会計致します。<br>
+  ・ハモリのガイドは致しません。ご了承ください。<br>
+</div>
+
+<section class="section">
+  <h2>MIX（歌ってみた）</h2>
+  <div class="grid">
+    <article class="card">
+      <div class="head"><h3>ワンコーラス</h3><p>基本プラン・1分未満</p></div>
+      <div class="foot"><span class="badge">最低</span><span class="price">¥2,000〜</span></div>
+    </article>
+    <article class="card">
+      <div class="head"><h3>フルコーラス</h3><p>基本コース。実績400+はこちら。</p></div>
+      <div class="foot"><span class="badge">最低</span><span class="price">¥4,000〜</span></div>
+    </article>
+    <article class="card">
+      <div class="head"><h3>コラボ（複数人）</h3><p>人数・素材の状態で変動あり。要相談枠。</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">¥8,000〜</span></div>
+    </article>
+      <article class="card">
+      <div class="head"><h3>朗読・演技・ナレーション・ボイスドラマなど</h3><p>整音・空白調節・効果音、背景音配置。長さによって要相談枠。</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">¥6,000〜</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <h2>追加オプション</h2>
+  <div class="grid">
+    <article class="card">
+      <div class="head"><h3>ピッチ補正（強）</h3><p>修正量が多い場合・EDMぽい曲調</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">+¥2,000</span></div>
+    </article>
+    <article class="card">
+      <div class="head"><h3>ハモり・コーラス収録</h3><p>私がハモリとコーラスを「収録」致します。ガイドとも生成とも違います。</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">¥2,000～</span></div>
+    </article>
+  </div>
+</section>
+
+<div class="links" style="margin-top:18px">
+  <a class="btnLink" href="yesican.html"><span class="dot" aria-hidden="true"></span>「できる」に戻る</a>
+  <a class="btnLink" href="illustlist.html"><span class="dot" aria-hidden="true"></span>絵の依頼ページへ</a>
+  <a class="btnLink" href="price-video.html"><span class="dot" aria-hidden="true"></span>動画ページへ</a>
+</div>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    async function loadPart(id, file){
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+    }
+    loadPart("header","partials/header.html");
+    loadPart("footer","partials/footer.html");
+  </script>
+
+</body>
+</html>
