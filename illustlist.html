@@ -246,12 +246,12 @@
     </article>
     <article class="card">
       <div class="head"><h3>一枚絵（シンプル）</h3><p>モノクロ＋アクセントカラーのオリジナルスタイル。描写量に応じて変動。</p></div>
-      <div class="foot"><span class="badge">目安</span><span class="price">¥6,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/sample5.png">サンプル</button>
+      <div class="foot"><span class="badge">目安</span><span class="price">¥6,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/sample5.png,image/thumbnail.jpg">サンプル</button>
       </div>
     </article>
     <article class="card">
       <div class="head"><h3>一枚絵（フルカラー）</h3><p>描写量に応じて変動。装飾・小物が多いほど増。</p></div>
-      <div class="foot"><span class="badge">目安</span><span class="price">¥12,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/sample6.png">サンプル</button>
+      <div class="foot"><span class="badge">目安</span><span class="price">¥12,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/sample6.png,image/sample8.png">サンプル</button>
       </div>
     </article>
   </div>
@@ -262,12 +262,12 @@
   <div class="grid">
     <article class="card">
       <div class="head"><h3>立ち絵（半身）</h3><p>配信用・TRPG・動画用。衣装・装飾・小物で変動。</p></div>
-      <div class="foot"><span class="badge">最低</span><span class="price">¥6,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/sample1.png">サンプル</button>
+      <div class="foot"><span class="badge">最低</span><span class="price">¥6,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/sample1.png,image/sample2.png">サンプル</button>
       </div>
     </article>
     <article class="card">
       <div class="head"><h3>立ち絵（全身）</h3><p>配信用・TRPG・動画用。衣装・装飾・小物で変動。</p></div>
-      <div class="foot"><span class="badge">目安</span><span class="price">¥10,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/sample2.png">サンプル</button>
+      <div class="foot"><span class="badge">目安</span><span class="price">¥10,000〜</span>  <button class="sampleBtn" type="button" data-sample="image/nullmodel_low.png,/image/sample7.png">サンプル</button>
       </div>
     </article>
     <article class="card">
@@ -355,86 +355,122 @@
 
 
   
-  <script>
-  (function(){
-    const modal = document.getElementById("sampleModal");
-    const mount = document.getElementById("sampleMount");
-    if (!modal || !mount) return;
+  
 
-    const openNode = (node) => {
-      mount.innerHTML = "";
-      mount.appendChild(node);
-      modal.setAttribute("aria-hidden","false");
-      document.documentElement.style.overflow = "hidden";
+
+<script>
+(function(){
+  const modal = document.getElementById("sampleModal");
+  const mount = document.getElementById("sampleMount");
+  if (!modal || !mount) return;
+
+  let samples = [];
+  let index = 0;
+
+  const open = () => {
+    modal.setAttribute("aria-hidden","false");
+    document.documentElement.style.overflow = "hidden";
+  };
+  const close = () => {
+    modal.setAttribute("aria-hidden","true");
+    mount.innerHTML = "";
+    document.documentElement.style.overflow = "";
+  };
+
+  const render = (title, desc) => {
+    mount.innerHTML = "";
+
+    const wrap = document.createElement("div");
+
+    const img = document.createElement("img");
+    img.className = "modal-media";
+    img.src = samples[index];
+    img.alt = title;
+
+    const nav = document.createElement("div");
+    nav.style.display = "flex";
+    nav.style.alignItems = "center";
+    nav.style.justifyContent = "space-between";
+    nav.style.gap = "12px";
+    nav.style.marginTop = "10px";
+
+    const mkBtn = (txt)=>{
+      const b = document.createElement("button");
+      b.textContent = txt;
+      b.style.border = "1px solid var(--line)";
+      b.style.background = "transparent";
+      b.style.borderRadius = "999px";
+      b.style.padding = "4px 10px";
+      b.style.cursor = "pointer";
+      b.style.fontWeight = "900";
+      return b;
     };
 
-    const close = () => {
-      modal.setAttribute("aria-hidden","true");
-      mount.innerHTML = "";
-      document.documentElement.style.overflow = "";
+    const prev = mkBtn("←");
+    const next = mkBtn("→");
+
+    const counter = document.createElement("div");
+    counter.textContent = `${index+1} / ${samples.length}`;
+    counter.style.fontWeight = "900";
+
+    prev.onclick = ()=>{ index = (index - 1 + samples.length) % samples.length; render(title, desc); };
+    next.onclick = ()=>{ index = (index + 1) % samples.length; render(title, desc); };
+
+    nav.append(prev, counter, next);
+
+    const cap = document.createElement("div");
+    cap.className = "modal-caption";
+    cap.textContent = title;
+
+    const sub = document.createElement("div");
+    sub.className = "modal-sub";
+    sub.textContent = desc;
+
+    img.onerror = ()=>{
+      wrap.innerHTML = `
+        <div class="modal-placeholder">
+          <div>
+            <div>${title}</div>
+            <div class="hint">サンプル画像が見つかりません</div>
+          </div>
+        </div>`;
     };
 
-    // Close: background click / ESC
-    modal.addEventListener("click", (e)=>{
-      const t = e.target;
-      if (t && t.dataset && t.dataset.close) close();
-    });
-    window.addEventListener("keydown", (e)=>{
-      if (e.key === "Escape" && modal.getAttribute("aria-hidden")==="false") close();
-    });
+    wrap.append(img, nav, cap);
+    if (desc) wrap.appendChild(sub);
 
-    // Sample button click
-    document.querySelectorAll(".sampleBtn[data-sample]").forEach((btn)=>{
-      btn.addEventListener("click", (e)=>{
-        e.preventDefault();
-        e.stopPropagation();
+    mount.appendChild(wrap);
+  };
 
-        let src = (btn.getAttribute("data-sample") || "").trim();
-        // 拡張子なしURL／ディレクトリ扱いでも壊れにくくする：先頭 / を補う
-        if (src && !src.startsWith("/") && !src.startsWith("http")) src = "/" + src.replace(/^\.?\//,"");
+  document.querySelectorAll(".sampleBtn[data-sample]").forEach(btn=>{
+    btn.addEventListener("click",(e)=>{
+      e.preventDefault(); e.stopPropagation();
 
-        const card = btn.closest(".card");
-        const title = (card?.querySelector("h3")?.textContent || "SAMPLE").trim();
-        const desc  = (card?.querySelector(".head p")?.textContent || "").trim();
-
-        const wrap = document.createElement("div");
-
-        const img = document.createElement("img");
-        img.className = "modal-media";
-        img.src = src;
-        img.alt = title;
-
-        const cap = document.createElement("div");
-        cap.className = "modal-caption";
-        cap.textContent = title;
-
-        const sub = document.createElement("div");
-        sub.className = "modal-sub";
-        sub.textContent = desc;
-
-        img.addEventListener("error", ()=>{
-          wrap.innerHTML = `
-            <div class="modal-placeholder">
-              <div>
-                <div>${title}</div>
-                <div class="hint">サンプル画像が見つかりません</div>
-                <div class="hint">このボタンの <code>data-sample</code> を <code>/image/xxx.png</code> のように “/ から始める” 形式にすると安定します</div>
-              </div>
-            </div>
-          `;
-          wrap.appendChild(cap);
-          if (desc) wrap.appendChild(sub);
-        }, { once:true });
-
-        wrap.appendChild(img);
-        wrap.appendChild(cap);
-        if (desc) wrap.appendChild(sub);
-
-        openNode(wrap);
+      const raw = btn.getAttribute("data-sample") || "";
+      samples = raw.split(",").map(s=>{
+        s = s.trim();
+        if (!s.startsWith("/") && !s.startsWith("http")) s = "/" + s.replace(/^\.?\//,"");
+        return s;
       });
+      index = 0;
+
+      const card = btn.closest(".card");
+      const title = card?.querySelector("h3")?.textContent?.trim() || "SAMPLE";
+      const desc  = card?.querySelector(".head p")?.textContent?.trim() || "";
+
+      render(title, desc);
+      open();
     });
-  })();
-  </script>
+  });
+
+  modal.addEventListener("click",(e)=>{
+    if (e.target.dataset && e.target.dataset.close) close();
+  });
+  window.addEventListener("keydown",(e)=>{
+    if (e.key==="Escape" && modal.getAttribute("aria-hidden")==="false") close();
+  });
+})();
+</script>
 
 </body>
 </html>
