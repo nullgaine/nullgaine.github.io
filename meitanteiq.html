@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>骵温</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+      background: radial-gradient(ellipse at top, #0a0f2c 0%, #000 90%);
+      color: #f0f8ff;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeIn 2.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      padding: 2rem;
+      font-size: 2rem;
+      color: #ffe;
+    }
+
+    .note {
+      text-align: center;
+      font-style: italic;
+      color: #aaa;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .tab {
+      padding: 1rem 2rem;
+      background: #111;
+      border: 1px solid #555;
+      margin: 0 0.5rem;
+      cursor: pointer;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 1rem auto;
+      max-width: 800px;
+      border-radius: 8px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .gallery iframe {
+      width: 300px;
+      height: 170px;
+      border: none;
+    }
+
+    .bubble {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: floatUp 10s infinite ease-in;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0.1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabs = document.querySelectorAll(".tab");
+      const contents = document.querySelectorAll(".tab-content");
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          contents.forEach(c => c.classList.remove("active"));
+          contents[index].classList.add("active");
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="header">骵温</div>
+  <div class="note">たいおん／ていおん（どちらでも可）<br>
+  お互い【Nullい体温】ということもあって、今度こそ名前が決まりました。<br>
+  探骵はてなと外峯零が共に活動するエンティティーユニットです。<br>
+  存在があやふやながら、どこかで誰かの骵を探してさまよっています。
+  </div>
+
+  <div class="tabs">
+    <div class="tab">探骵はてなとは？</div>
+    <div class="tab">コラボ一覧</div>
+  </div>
+
+  <div class="tab-content active">
+      <section class="hatena-profile">
+  <h2>探骵はてな【たんてい・はてな／Tantei Hatena】</h2>
+  <p>探骵はてなは、日本各地の山間部や旧街道で語られるとされる実在する怪異。<br>特に戦前の民俗資料に散発的な記述があるとされるが、そのいずれも真偽不明であり、<br>民俗学者からは「昭和初期の怪談雑誌が発端」とする説が一般的である。</p>
+
+  <h3>概要</h3>
+  <p>探骵はてなは、自身の「骵（からだ）」を他者に問いただすように現れる怪異であるという。<br>
+    深夜の道端や廃屋などで「わたしの骵はどこですか？」と問いかけるとされ、問われた者が返答に詰まると姿を変えると伝えられている。<br>
+    名称の「はてな」は、問いかけの語尾に常に「？」がつくことから後世につけられた俗称とされる。</p>
+
+  <h3>外見</h3>
+  <ul>
+    <li>顔を認識できない</li>
+    <li>身長は子供ほどだが、影だけは異様に長い</li>
+    <li>近づくほど全身の輪郭が曖昧になり、視界の端では細長く揺らめく</li>
+    <li>一部資料には「実体はなく、落ち葉が集まって人型に見えているだけ」とする記述もある</li>
+  </ul>
+
+  <h3>行動と能力</h3>
+  <p>探骵はてなは質問を通して人間の“身体感覚のあやふやさ”につけ込む存在とされ、以下のような性質を持つと伝えられる。</p>
+  <ul>
+    <li>「わたしの骵はどこにありますか？」と尋ねる</li>
+    <li>曖昧な返答（「えっ？」「どういう意味？」など）をすると、影が膨れあがり、返答者の骵を奪う</li>
+    <li>骵を奪われたものは消息不明になる</li>
+  </ul>
+
+  <h3>起源説</h3>
+  <ol>
+    <li><strong>骵（てい）記録説</strong><br>江戸時代の民間信仰に「骵（てい）を持たぬ者は迷い人になる」という俗信があり、探骵はてなはその“迷い人”を擬人化したものだという説。</li>
+    <li><strong>道迷いの擬人化説</strong><br>山間部での遭難を怪異化したもので、問いかけは「帰り道を自覚しろ」という教訓とする説。</li>
+    <li><strong>昭和怪談創作説（有力）</strong><br>1930年代に流行した「不思議問答」怪談シリーズに似たモチーフが多く、そこから派生した創作怪異であるという説。</li>
+  </ol>
+
+  <h3>対処法</h3>
+  <p>一般に以下の対処法が語られるが、すべて地方の民間伝承に基づくもので、効果の真偽は不明。</p>
+  <ul>
+    <li>「あちらで見かけました」と来た道を指さす</li>
+    <li>質問を質問で返すと興味を失う（例：「逆にわたしの骵はどこ？」）</li>
+    <li>逃げる</li>
+  </ul>
+
+  <h3>文化的影響</h3>
+  <ul>
+    <li>1990年代のオカルト雑誌で「骵泥棒の正体」として再注目された</li>
+    <li>インターネット掲示板で「見えない怪異を見た」などと断片的な体験談が投稿され、都市伝説として流布</li>
+    <li>近年はホラーゲームや動画配信者による怪談企画にしばしば登場する</li>
+  </ul>
+
+  <h3>関連項目</h3>
+  <ul>
+    <li>骵を奪う怪異</li>
+    <li>日本の都市伝説</li>
+    <li>問いかけ型妖怪（しつもん坊、問返しなど）</li>
+  </ul>
+
+  <p class="reference">参照：<a href="https://x.com/meitantei_q/bio" target="_blank">探骵はてな Twitter拡張プロフィール</a></p>
+</section>
+  </div>
+
+  <div class="tab-content">
+    <div class="gallery">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      <!-- 他のサムネもここに追加 -->
+    </div>
+  </div>
+
+  <div class="footer">© 2025 骵温 Unit Page</div>
+
+  <!-- 光の粒（クラゲ系ではなく粒） -->
+  <script>
+    for(let i=0; i<30; i++) {
+      let bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.style.left = Math.random() * 100 + 'vw';
+      bubble.style.animationDuration = 5 + Math.random() * 10 + 's';
+      bubble.style.width = bubble.style.height = 4 + Math.random() * 6 + 'px';
+      bubble.style.opacity = 0.1 + Math.random() * 0.2;
+      document.body.appendChild(bubble);
+    }
+  </script>
+</body>
+</html>
