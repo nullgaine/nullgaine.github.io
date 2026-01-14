@@ -8,17 +8,12 @@
 </head>
 <body>
   <div id="header"></div>
-  <ul class="list">
-  <li><a href="https://gainenull.org/yitori">ニトリ</a></li>
-  <li><a href="https://gainenull.org/nagamebana">詠花</a></li>
-  <li><a href="https://gainenull.org/meitanteiq">骵温</a></li>
-</ul>
-
-  <h2>よく使うページ</h2>
+  
+  <h2>エンティティー</h2>
 <div class="grid">
-  <div class="card"><strong><a href="https://gainenull.org/hours">外来案内</a></strong><p class="note">受付 8:30–11:30（初診）／ 8:30–16:30（再診）</p></div>
-  <div class="card"><strong><a href="https://gainenull.org/cafepalette">カフェ・パレット</a></strong><p class="note">1階のカフェサイトに繋ぎます。</p></div>
-  <div class="card"><strong><a href="https://gainenull.org/yesican">お仕事</a></strong><p class="note">依頼受付中のモノまとめ…</p></div>
+  <div class="card"><strong><a href="https://gainenull.org/yitori">ニトリ</a></strong><p class="note">受付 8:30–11:30（初診）／ 8:30–16:30（再診）</p></div>
+  <div class="card"><strong><a href="https://gainenull.org/nagamebana">詠花</a></strong><p class="note">1階のカフェサイトに繋ぎます。</p></div>
+  <div class="card"><strong><a href="https://gainenull.org/meitanteiq">骵温</a></strong><p class="note">依頼受付中のモノまとめ…</p></div>
 </div>
   
   <div id="footer"></div>
@@ -29,7 +24,6 @@
     document.getElementById(id).innerHTML = await res.text();
   }
   loadPart("header", "partials/header.html");
-  loadPart("main", "partials/main.html");
   loadPart("footer", "partials/footer.html");
   </script>
 </body>
