@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>骵温</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+      background: radial-gradient(ellipse at top, #0a0f2c 0%, #000 90%);
+      color: #f0f8ff;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeIn 2.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      padding: 2rem;
+      font-size: 2rem;
+      color: #ffe;
+    }
+
+    .note {
+      text-align: center;
+      font-style: italic;
+      color: #aaa;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .tab {
+      padding: 1rem 2rem;
+      background: #111;
+      border: 1px solid #555;
+      margin: 0 0.5rem;
+      cursor: pointer;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 1rem auto;
+      max-width: 800px;
+      border-radius: 8px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .gallery iframe {
+      width: 300px;
+      height: 170px;
+      border: none;
+    }
+
+    .bubble {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: floatUp 10s infinite ease-in;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0.1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabs = document.querySelectorAll(".tab");
+      const contents = document.querySelectorAll(".tab-content");
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          contents.forEach(c => c.classList.remove("active"));
+          contents[index].classList.add("active");
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="header">骵温</div>
+  <div class="note">たいおん／ていおん（どちらでも可）</div>
+
+  <div class="tabs">
+    <div class="tab">探骵はてなとは？</div>
+    <div class="tab">コラボ一覧</div>
+  </div>
+
+  <div class="tab-content active">
+    <p>「探骵はてな」は外峯 零と共に活動するエンティティーユニットです。<br>
+    その存在は不確かでありながら、どこかで誰かの骵を探してさまよっています。</p>
+  </div>
+
+  <div class="tab-content">
+    <div class="gallery">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      <!-- 他のサムネもここに追加 -->
+    </div>
+  </div>
+
+  <div class="footer">© 2025 骵温 Unit Page</div>
+
+  <!-- 光の粒（クラゲ系ではなく粒） -->
+  <script>
+    for(let i=0; i<30; i++) {
+      let bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.style.left = Math.random() * 100 + 'vw';
+      bubble.style.animationDuration = 5 + Math.random() * 10 + 's';
+      bubble.style.width = bubble.style.height = 4 + Math.random() * 6 + 'px';
+      bubble.style.opacity = 0.1 + Math.random() * 0.2;
+      document.body.appendChild(bubble);
+    }
+  </script>
+</body>
+</html>
