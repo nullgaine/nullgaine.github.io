@@ -148,8 +148,13 @@
 (function(){
   const screen = document.getElementById("screen");
   const root = document.getElementById("crtRoot");
-  const target = new Date("2026-02-10T00:00:00+09:00");
-  let state = "boot"; // boot, locked, authorized, updating, complete
+
+  // 日付設定
+  const startTime = new Date("2026-02-01T00:00:00+09:00").getTime();
+  const releaseTime = new Date("2026-02-10T00:00:00+09:00").getTime();
+
+  // 状態: boot, locked, locked_ready, authorized, updating, complete
+  let state = "boot";
   let updating = false;
   let progressTimer = null;
   let progress = 0;
@@ -181,6 +186,16 @@
     screen.querySelectorAll(".cursor").forEach(c => c.parentElement.remove());
   }
 
+  // 日付ベースの進捗（0〜100）
+  function getDateProgress(){
+    const now = Date.now();
+    const total = releaseTime - startTime;
+    if (total <= 0) return 100;
+    let p = ((now - startTime) / total) * 100;
+    if (isNaN(p)) p = 0;
+    return Math.max(0, Math.min(100, p));
+  }
+
   function bootSequence(){
     clearScreen();
     const lines = [
@@ -198,35 +213,61 @@
         write(lines[i++]);
         setTimeout(next, 260);
       } else {
-        checkLock();
+        showStatus();
       }
     }
     next();
   }
 
-  function checkLock(){
+  function barFromProgress(p){
+    const blocks = 20;
+    const filled = Math.floor(p / (100/blocks));
+    let bar = "[";
+    for (let i=0;i<blocks;i++){
+      bar += i < filled ? "■" : "□";
+    }
+    bar += "]";
+    return bar;
+  }
+
+  function showStatus(){
     const now = Date.now();
+    const p = getDateProgress();
     writeBlank();
-    if (now < target.getTime()){
+
+    if (now < releaseTime){
+      // 2/1〜2/9 など：LOCKED + IN PROGRESS
       state = "locked";
-      write("STATUS: LOCKED","status-locked");
+      write("STATUS : LOCKED","status-locked");
+      write("UPDATE STATUS : IN PROGRESS");
+      const line = "Progress: " + barFromProgress(p) + " " + String(Math.round(p)).padStart(3," ") + "%";
+      write(line,"progress-line");
       write("Release Date : 2026-02-10");
       writeBlank();
       write("TAP / ENTER = Attempt Authorization","footer-line");
     } else {
-      state = "authorized";
-      write("STATUS: AUTHORIZED","status-authorized");
+      // 解禁後：LOCKED + INSTALL PENDING (100%)
+      state = "locked_ready";
+      write("STATUS : LOCKED","status-locked");
+      write("UPDATE STATUS : INSTALL PENDING (100%)");
+      const line = "Progress: " + barFromProgress(100) + " 100%";
+      write(line,"progress-line");
+      write("Release Date : 2026-02-10");
       writeBlank();
-      write("TAP / ENTER = Execute Update","footer-line");
+      write("TAP / ENTER = Authorize","footer-line");
     }
     addCursor();
   }
 
   function showLockedError(){
     removeCursor();
+    const p = getDateProgress();
     writeBlank();
     write("ERROR: AUTHORIZATION DENIED","error-line");
     writeBlank();
+    write("UPDATE STATUS : IN PROGRESS","muted");
+    const line = "Progress: " + barFromProgress(p) + " " + String(Math.round(p)).padStart(3," ") + "%";
+    write(line,"progress-line");
     write("Release Date : 2026-02-10","muted");
     addCursor();
   }
@@ -244,26 +285,15 @@
     writeBlank();
     const frac = randomFraction9();
     startVersion = "2.9" + frac;
-    write("UPDATING SELF (" + startVersion + " \u2192 3.0)...");
+    write("UPDATING SELF (" + startVersion + " → 3.0)...");
     writeBlank();
     progress = 0;
     progressLine();
     progressTimer = setInterval(tickProgress, 130);
   }
 
-  function barFromProgress(p){
-    const blocks = 20;
-    const filled = Math.floor(p / (100/blocks));
-    let bar = "[";
-    for (let i=0;i<blocks;i++){
-      bar += i < filled ? "\u25A0" : "\u25A1";
-    }
-    bar += "]";
-    return bar;
-  }
-
   function progressLine(){
-    // remove old progress lines
+    // updating中の進捗バーのみ差し替え
     Array.from(screen.querySelectorAll(".progress-line")).forEach(el => el.remove());
     const line = "Progress: " + barFromProgress(progress) + " " + String(progress).padStart(3," ") + "%";
     write(line,"progress-line");
@@ -294,24 +324,42 @@
 
   function handleAction(){
     if (state === "boot") return;
+
     if (state === "locked"){
+      // まだ解禁前：DENIEDを出しつつ進捗見せる
       showLockedError();
       return;
     }
+
+    if (state === "locked_ready"){
+      // 解禁後1回目TAP：AUTHORIZEDへ
+      removeCursor();
+      writeBlank();
+      state = "authorized";
+      write("STATUS : AUTHORIZED","status-authorized");
+      writeBlank();
+      write("TAP / ENTER = Execute Update","footer-line");
+      addCursor();
+      return;
+    }
+
     if (state === "authorized"){
+      // 2回目TAP：UPDATING開始
       startUpdate();
       return;
     }
+
     if (state === "updating"){
-      // ignore taps during update
+      // 更新中は入力無視
       return;
     }
+
     if (state === "complete"){
-      // Replay from authorized state
+      // Replay: 再度起動シーケンスから（現在時刻に応じた状態へ戻す）
       clearInterval(progressTimer);
       progressTimer = null;
       updating = false;
-      state = "authorized";
+      state = "boot";
       bootSequence();
       return;
     }
@@ -329,6 +377,7 @@
   });
 
   bootSequence();
-})();</script>
+})();
+</script>
 </body>
 </html>
