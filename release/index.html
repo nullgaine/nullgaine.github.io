@@ -311,16 +311,32 @@
     progressLine();
   }
 
-  function completeUpdate(){
-    state = "complete";
-    updating = false;
-    writeBlank();
-    write("UPDATE COMPLETE.");
-    write("Version: 3.0","status-authorized");
-    writeBlank();
-    write("TAP / ENTER = Replay Log","footer-line");
-    addCursor();
-  }
+function completeUpdate(){
+  state = "complete";
+  updating = false;
+
+  writeBlank();
+  write("UPDATE COMPLETE.");
+  write("Version: 3.0","status-authorized");
+  writeBlank();
+
+  // リダイレクト表示
+  let seconds = 5;
+  const msg = document.createElement("div");
+  msg.className = "footer-line";
+  msg.textContent = `Redirecting in ${seconds} seconds...`;
+  screen.appendChild(msg);
+
+  const timer = setInterval(() => {
+    seconds--;
+    msg.textContent = `Redirecting in ${seconds} seconds...`;
+
+    if (seconds <= 0){
+      clearInterval(timer);
+      window.location.href = "https://gainenull.org/";
+    }
+  }, 1000);
+}
 
   function handleAction(){
     if (state === "boot") return;
