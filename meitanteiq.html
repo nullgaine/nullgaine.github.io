@@ -75,7 +75,11 @@
       justify-content: center;
       gap: 1rem;
     }
-
+    .break {
+      flex-basis: 100%;
+      width: 0;
+      height: 0;
+    }
     .gallery iframe {
       width: 300px;
       height: 170px;
@@ -406,14 +410,16 @@
 </div>
   </div>
   
-  <div class="tab-content">
-    <div class="gallery">
-      <iframe src="https://www.youtube.com/embed/DOE1RLvNj1o" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/1rmAjeOWNMk" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/tCjQahdj9I0" allowfullscreen></iframe>
-      <!-- 他のサムネもここに追加 -->
-    </div>
+<div class="tab-content">
+  <div class="gallery">
+    <iframe src="https://www.youtube.com/embed/DOE1RLvNj1o" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/1rmAjeOWNMk" allowfullscreen></iframe>
+    <div class="break"></div>
+    <iframe src="https://www.youtube.com/embed/CQ6G8zy1j28" allowfullscreen></iframe>
+    <div class="break"></div>
+    <iframe src="https://www.youtube.com/embed/tCjQahdj9I0" allowfullscreen></iframe>
   </div>
+</div>
 
   <div class="footer">© 2025 骵温 Unit Page</div>
 
