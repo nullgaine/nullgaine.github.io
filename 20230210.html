@@ -12,12 +12,28 @@
         button { padding: 5px 10px; }
     </style>
 </head>
-<body onload="chat()">
+<body onload="init()">
 
     <h1>箱</h1>
     <div id="addendum"></div>
 
     <script>
+        let responses = {};
+
+        // 起動時に外部JSONを読み込む
+        async function init() {
+            try {
+                const response = await fetch('responses.json');
+                responses = await response.json();
+                chat(); // JSON読み込み完了後にチャット開始
+            } catch (error) {
+                console.error("辞書データの読み込みに失敗しました:", error);
+                // 失敗時の予備
+                responses = {"エラー": "データの同期に失敗したみたいだ。"};
+                chat();
+            }
+        }
+
         function chat() {
             var chatroom = `
                 <div id="chatbox">
@@ -27,7 +43,6 @@
                 <button id="sendBtn" onclick="send()" disabled>Send</button>
             `;
             document.getElementById("addendum").innerHTML = chatroom;
-            document.getElementById("sendBtn").disabled = true;
 
             var c = 0;
             function progress() {
@@ -54,92 +69,58 @@
         }
 
         function send() {
-    var input = document.getElementById("chatInput");
-    var message = input.value.trim();
-    if (message === "") return;
+            var input = document.getElementById("chatInput");
+            var message = input.value.trim();
+            if (message === "") return;
 
-    var chatlog = document.getElementById("chatlog");
-    chatlog.innerHTML += `<ins>あなた:</ins> ${message}<br>`;
+            var chatlog = document.getElementById("chatlog");
+            chatlog.innerHTML += `<ins>あなた:</ins> ${message}<br>`;
 
-    // キーワード反応リスト
-    var responses = {
-        "外峯零": "この街の軸。いつだって境目を歩いている、白いモノ。苗字はガイネで、名前はヌルだ。生きてる証明を、面白がってくれるやつだよ",
-        "外側": "そっか、君は内側のひとなんだね",
-        "人間": "どこからどこまでが「人間」かなんて、結構あやふやだと思わないかい？まあ、此処にはいないよ。元人間はいるけど",
-        "行き方": "来ない方が良いと思うんだけどなあ",
-        "世界": "世界と言っても色々だよ、本当に",
-        "内側": "内側は「人間が住んでる世界」を僕らのと混ざらない様に、言い分けてるだけさ",
-        "境界線": "あやふやにならない方が絶対いい",
-        "読": "文字は「読む」ことで形を持つ。逆に言えば、読まれないものは存在しないのかもね",
-        "誰": "答えることができるのは、君が答えを求めているときだけなんだ。だから、今はただの「僕」に過ぎないよ。君次第で答えが変わるかもしれない",
-        "元人間": "駅員さんと看護師さんかな？僕が知ってるのはそれくらい。他にいるかもしれないし、そこまでは流石にわからないね",
-        "駅": "駅は比較的安全だよ。あくまで「比較的」だけど",
-        "存在": "在ろうと思えば在る。無いと思えば無い。そんなところかな、この街は。存在するって、案外曖昧なものさ",
-        "死": "知らない方がいいこともあるよ",
-        "駅員": "駅員さんか。「そこにいるべきもの」だよ。だから安心していい、たぶん",
-        "異世界": "君だって僕らからすれば異世界の者だよ？",
-        "看護師": "彼は内側と外側の境目に立っていたんだ",
-        "言葉": "言葉が通じるのってありがたいことだね、通じるからこそ怖くもあるけども",
-        "おはよ": "おはよう。もう朝かい？それとも今起きた感じ？",
-        "こんに": "こんにちは。そこは昼かな？",
-        "はじめまして": "ああ、はじめまして。君がここに来るのは、必然だったのかもね",
-        "見えてる": "うん、ちゃんと見えているならよかった。見えないふりをすることもできるのにね",
-        "赤": "空が赤い時は、あの子が視てるらしいよ。見返さないほうがいい",
-        "熱的死": "死んだ宇宙はぐしゃぐしゃにして捨てる。どうせ誰も拾わないし、拾えないしね",
-        "空": "空が赤い時は気をつけなよ。本気で。何回も見たんだ、目が合っただけで狂った内側の人を",
-        "情報": "かなり散らばっている様子だよ。拾うかどうかは君次第だ",
-        "歌": "歌は記憶をつなぐ。時間すら超えてね",
-        "時間": "15:30",
-        "時": "此処だと時間なんてちょっとした目安に過ぎない",
-        "書": "書くことで、君は何かを「固定」している",
-        "休み": "定休日は火曜日と水曜日だよ",
-        "怪異": "どこにでもあるよ。認識しないだけでね",
-        "SCP": "うちとは関係ない。まあ、観測はしてるけど",
-        "しらせ": "俺が知ってるしらせが君の知ってるしらせとは限らない",
-        "記憶": "時間の中に置き去りにされた、忘れられないものだ",
-        "忘": "忘れることと、忘れられることは違うんだよ",
-        "曖昧だ": "境界線なんて、引く側の気分次第だからね",
-        "0": "何もないことと、始まりであることは、同じだと思うかい？",
-        "街": "知ってるかい？「外」ってのは、思ってるよりずっと広い",
-        "蚊帳の外": "見えていないのか、見ていないのか。どっちだろうね",
-        "髪": "長さや色に意味を持たせたがるのは、人間の癖だ",
-        "神": "呼び名をつけただけで、理解した気になれるんだから、すごいさ。人間は",
-        "概念": "名前をつけた時点で、それはもう別物になってる",
-        "時代": "流れているんじゃない、積み重なっているんだよ。君にどう見えるかは大事じゃない",
-        "はてな": "はて……それは誰のことかな？",
-        "レテ": "レテ……忘れ物があるのかい？",
-        "箱": "どれが本物かなんて、最初から何一つ決まってないよ"
-    };
+            // --- 判定ロジック開始 ---
+            let reply = "";
 
-    // メッセージに反応するかチェック
-    var responseFound = false;
-    Object.keys(responses).forEach(keyword => {
-        if (message.includes(keyword)) {
+            // 1. フラグ管理：特定の単語を入力したらフラグを立てる
+            if (message.includes("境界線")) {
+                localStorage.setItem('met_boundary', 'true');
+            }
+
+            // 2. フラグによる分岐の例：こんにちは
+            if (message.includes("こんに")) {
+                if (localStorage.getItem('met_boundary')) {
+                    reply = "やあ。境界線の向こう側を覗いた気分はどうだい？";
+                } else {
+                    reply = responses["こんに"];
+                }
+            } 
+            // 3. 通常のキーワード判定（部分一致）
+            else {
+                const matchedKey = Object.keys(responses).find(key => message.includes(key));
+                if (matchedKey) {
+                    reply = responses[matchedKey];
+                }
+            }
+
+            // 4. 何もヒットしない場合のランダム応答
+            if (!reply) {
+                var randomReplies = [
+                    "君、それ、どこで聞いたんだい？知ってることが混じってる",
+                    "……ごめん、その言葉は此処まで届いていないみたいだ",
+                    "いい質問だ。負の遺産かもしれないけど",
+                    "君がそれをどう解釈するか、見ものだ",
+                    "不確かなものに手を出しても大丈夫かい？",
+                    "e78fbee59ca8e9968be799bae4b8ade381a7e38199e38082",
+                    "縺ｾ縺?遲斐∴縺檎畑諢上＆繧後※縺?∪縺帙ｓ"
+                ];
+                reply = randomReplies[Math.floor(Math.random() * randomReplies.length)];
+            }
+
+            // 出力
             setTimeout(() => {
-                chatlog.innerHTML += `<ins>Shirase:</ins> ${responses[keyword]}<br>`;
-            }, 1000);
-            responseFound = true;
-        }
-    });
-
-    // 何もヒットしなかった場合のランダム応答
-    if (!responseFound) {
-        var randomReplies = [
-            "君、それ、どこで聞いたんだい？知ってることが混じってる",
-            "……ごめん、その言葉は此処まで届いていないみたいだ",
-            "いい質問だ。でも答えはないよ",
-            "君がそれをどう解釈するか、見ものだ",
-            "不確かなものに手を出しても大丈夫かい？",
-            "e78fbee59ca8e9968be799bae4b8ade381a7e38199e38082e3818ae5958fe38184e59088e3828fe3819be381afe79bb4e68ea5e3818ae9a198e38184e887b4e38197e381bee38199e38082",
-            "縺ｾ縺?遲斐∴縺檎畑諢上＆繧後※縺?∪縺帙ｓ",
-           "e381bee381a0e7ad94e38188e3818ce794a8e6848fe38195e3828ce381a6e38184e381bee3819be38293e38081e38197e381b0e38289e3818fe3818ae5be85e381a1e3818fe381a0e38195e38184e381bee3819be38082"
-        ];
-        var randomReply = randomReplies[Math.floor(Math.random() * randomReplies.length)];
-        setTimeout(() => {
-            chatlog.innerHTML += `<ins>Shirase:</ins> ${randomReply}<br>`;
-        }, 1000);
-    }
-
+                chatlog.innerHTML += `<ins>Shirase:</ins> ${reply}<br>`;
+                // スクロールを一番下に
+                var obj = document.getElementById("chatbox");
+                obj.scrollTop = obj.scrollHeight;
+            }, 800);
 
             input.value = "";
         }
@@ -147,6 +128,3 @@
 
 </body>
 </html>
-
-
-
