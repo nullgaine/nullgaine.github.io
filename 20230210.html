@@ -6,35 +6,44 @@
     <title>「箱」簡易接続装置</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #111; color: white; text-align: center; }
-        #addendum { margin: 20px auto; width: 600px; }
+        #addendum { margin: 20px auto; width: 600px; min-height: 400px; } /* 高さを確保 */
         #chatbox { width: 100%; height: 300px; background: black; color: white; overflow-y: auto; padding: 10px; border: 1px solid white; text-align: left; }
-        input[type="text"] { width: 80%; padding: 5px; }
-        button { padding: 5px 10px; }
+        input[type="text"] { width: 80%; padding: 5px; background: #222; color: white; border: 1px solid #444; }
+        button { padding: 5px 10px; cursor: pointer; }
+        button:disabled { cursor: not-allowed; opacity: 0.5; }
     </style>
 </head>
 <body onload="init()">
 
     <h1>箱</h1>
-    <div id="addendum"></div>
+    <div id="addendum">
+        </div>
 
     <script>
         let responses = {};
 
-        // 起動時に外部JSONを読み込む
+        // 1. 最初に実行される
         async function init() {
+            // UIを先に作ってしまう（箱が消えるのを防ぐ）
+            setupChatUI();
+
             try {
+                // 外部JSON読み込み
                 const response = await fetch('responses.json');
+                if (!response.ok) throw new Error('Network response was not ok');
                 responses = await response.json();
-                chat(); // JSON読み込み完了後にチャット開始
             } catch (error) {
-                console.error("辞書データの読み込みに失敗しました:", error);
-                // 失敗時の予備
-                responses = {"エラー": "データの同期に失敗したみたいだ。"};
-                chat();
+                console.error("辞書読み込み失敗。内蔵データを使用します:", error);
+                // 読み込めなかった時のための最低限のバックアップ
+                responses = { "こんにちは": "（通信が不安定なようだ……）" };
             }
+            
+            // プログレスバー開始
+            startProgress();
         }
 
-        function chat() {
+        // 2. チャットの見た目を作る
+        function setupChatUI() {
             var chatroom = `
                 <div id="chatbox">
                     <pre><span id="progressbar"></span><span id="chatlog"></span></pre>
@@ -43,47 +52,48 @@
                 <button id="sendBtn" onclick="send()" disabled>Send</button>
             `;
             document.getElementById("addendum").innerHTML = chatroom;
-            // 入力欄でEnterキーが押されたら送信ボタンをクリックする
-　　　　　　　document.getElementById("chatInput").addEventListener("keypress", function(event) {
-  　　　　　  if (event.key === "Enter") {
-    　　 　   event.preventDefault(); // 改行を防ぐ
-  　　   　   document.getElementById("sendBtn").click(); // 送信ボタンを実行
-  　　　　  }
-　　　});
+        }
 
+        // 3. 接続演出
+        function startProgress() {
             var c = 0;
-                function progress() {
+            var progressbar = document.getElementById("progressbar");
+            var btn = document.getElementById("sendBtn");
+            var input = document.getElementById("chatInput");
+
+            function tick() {
                 c++;
                 if (c > 100) c = 100;
-                var bar = "#".repeat(c / 5);
-                var text = `>該当しないアクセスが確認されました。接続します。<br>${bar} ${c}%`;
-                document.getElementById("progressbar").innerHTML = text;
+                var bar = "#".repeat(Math.floor(c / 5));
+                progressbar.innerHTML = `>該当しないアクセスが確認されました。接続します。<br>${bar} ${c}%`;
 
                 if (c < 100) {
-                    setTimeout(progress, 30);
+                    setTimeout(tick, 30);
                 } else {
-                    document.getElementById("progressbar").innerHTML = `>こちら、世界の外側N/A市です。ごきげんよう、内側の方。<br>${bar} 100%<br>`;
-                    
-                    const btn = document.getElementById("sendBtn");
-                    const input = document.getElementById("chatInput");
-                    
+                    progressbar.innerHTML = `>こちら、世界の外側N/A市です。ごきげんよう、内側の方。<br>${bar} 100%<br>`;
                     btn.disabled = false;
                     input.focus();
 
-                    // keypress ではなく keydown を使う（こちらの方が確実です）
-                    input.addEventListener("keydown", function(event) {
-                        // Enterキーが押されたとき（変換中のEnterは除外する）
-                        if (event.key === "Enter" && !event.isComposing) {
-                            event.preventDefault(); // 改行や余計な動作を防止
-                            send(); // 直接send関数を呼ぶ
+                    // --- エンターキーの設定（ここなら確実） ---
+                    input.addEventListener("keydown", function(e) {
+                        if (e.key === "Enter" && !e.isComposing) {
+                            e.preventDefault();
+                            send();
                         }
                     });
+
+                    chat2();
+                }
+            }
+            setTimeout(tick, 50);
+        }
 
         function chat2() {
             var chatlog = document.getElementById("chatlog");
             chatlog.innerHTML += "<ins>Shirase:</ins>ちゃんと届いているかい？<br>";
         }
 
+        // 4. 送信処理
         function send() {
             var input = document.getElementById("chatInput");
             var message = input.value.trim();
@@ -92,23 +102,22 @@
             var chatlog = document.getElementById("chatlog");
             chatlog.innerHTML += `<ins>あなた:</ins> ${message}<br>`;
 
-            // --- 判定ロジック開始 ---
             let reply = "";
 
-            // 1. フラグ管理：特定の単語を入力したらフラグを立てる
+            // フラグ管理
             if (message.includes("境界線")) {
                 localStorage.setItem('met_boundary', 'true');
             }
 
-            // 2. フラグによる分岐の例：こんにちは
+            // 特殊分岐
             if (message.includes("こんに")) {
                 if (localStorage.getItem('met_boundary')) {
                     reply = "やあ。境界線の向こう側を覗いた気分はどうだい？";
                 } else {
-                    reply = responses["こんに"];
+                    reply = responses["こんに"] || "こんにちは。そこは昼かな？";
                 }
             } 
-            // 3. 通常のキーワード判定（部分一致）
+            // 辞書チェック
             else {
                 const matchedKey = Object.keys(responses).find(key => message.includes(key));
                 if (matchedKey) {
@@ -116,34 +125,28 @@
                 }
             }
 
-            // 4. 何もヒットしない場合のランダム応答
+            // ランダム応答
             if (!reply) {
                 var randomReplies = [
                     "君、それ、どこで聞いたんだい？知ってることが混じってる",
                     "……ごめん、その言葉は此処まで届いていないみたいだ",
-                    "いい質問だ。負の遺産かもしれないけど",
+                    "いい質問だ。でも答えはないよ",
                     "君がそれをどう解釈するか、見ものだ",
-                    "不確かなものに手を出しても大丈夫かい？",
-                    "e78fbee59ca8e9968be799bae4b8ade381a7e38199e38082",
                     "縺ｾ縺?遲斐∴縺檎畑諢上＆繧後※縺?∪縺帙ｓ"
                 ];
                 reply = randomReplies[Math.floor(Math.random() * randomReplies.length)];
             }
 
-            // 出力
             setTimeout(() => {
                 chatlog.innerHTML += `<ins>Shirase:</ins> ${reply}<br>`;
-                // スクロールを一番下に
                 var obj = document.getElementById("chatbox");
                 obj.scrollTop = obj.scrollHeight;
             }, 800);
 
             input.value = "";
+            input.focus();
         }
     </script>
 
 </body>
-
 </html>
-
-
