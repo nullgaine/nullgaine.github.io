@@ -43,6 +43,13 @@
                 <button id="sendBtn" onclick="send()" disabled>Send</button>
             `;
             document.getElementById("addendum").innerHTML = chatroom;
+            // 入力欄でEnterキーが押されたら送信ボタンをクリックする
+　　　　　　　document.getElementById("chatInput").addEventListener("keypress", function(event) {
+  　　　　　  if (event.key === "Enter") {
+    　　 　   event.preventDefault(); // 改行を防ぐ
+  　　   　   document.getElementById("sendBtn").click(); // 送信ボタンを実行
+  　　　　  }
+　　　});
 
             var c = 0;
             function progress() {
@@ -127,4 +134,5 @@
     </script>
 
 </body>
+
 </html>
