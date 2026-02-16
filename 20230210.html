@@ -52,7 +52,7 @@
 　　　});
 
             var c = 0;
-            function progress() {
+　　　　　　　function progress() {
                 c++;
                 if (c > 100) c = 100;
                 var bar = "#".repeat(c / 5);
@@ -63,12 +63,21 @@
                     setTimeout(progress, 30);
                 } else {
                     document.getElementById("progressbar").innerHTML = `>こちら、世界の外側N/A市です。ごきげんよう、内側の方。<br>${bar} 100%<br>`;
-                    document.getElementById("sendBtn").disabled = false;
-                    chat2();
-                }
-            }
-            setTimeout(progress, 50);
-        }
+                    
+                    // --- ここから修正 ---
+                    const btn = document.getElementById("sendBtn");
+                    const input = document.getElementById("chatInput");
+                    
+                    btn.disabled = false; // ボタンを有効化
+                    input.focus();        // ついでに入力欄にカーソルを合わせる
+
+                    // Enterキーの設定をここで行う
+                    input.addEventListener("keypress", function(event) {
+                        if (event.key === "Enter") {
+                            event.preventDefault();
+                            btn.click();
+                        }
+                    });
 
         function chat2() {
             var chatlog = document.getElementById("chatlog");
@@ -136,3 +145,4 @@
 </body>
 
 </html>
+
