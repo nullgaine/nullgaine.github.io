@@ -89,18 +89,18 @@ function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// URLパラメータから検索語を受け取る
-window.addEventListener('DOMContentLoaded', () => {
+// URLパラメータから検索語を受け取る（partialとして後から挿入されるので直接実行）
+(function(){
   const params = new URLSearchParams(location.search);
   const q = params.get('q');
   if (q) {
     document.getElementById('q').value = q;
     doSearch();
   }
-});
+})();
 
 // Enterキーでも検索
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.activeElement.id === 'q') doSearch();
+document.getElementById('q').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
 });
 </script>
