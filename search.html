@@ -80,7 +80,23 @@
     const raw = document.getElementById('q').value.trim();
     const q = raw.toLowerCase();
     const out = document.getElementById('results');
+    
+// 特定ワードで裏ルート
+　　　if (raw.includes("生体情報再構築研究室")) {
+　　  triggerHiddenAccess();
+　　  return;
+　　　　}
+    function triggerHiddenAccess(){
+  const pass = prompt("ACCESS RESTRICTED\nPASSWORD:");
 
+  if (!pass) return;
+
+  if (pass.toLowerCase() === "19961207") {
+    window.location.href = "https://gainenull.org/hospivf"; // ←ここ自分のURLに変える
+  } else {
+    alert("読込み失敗、再度お試し下さい");
+  }
+}
     if (!q) { out.innerHTML = ''; return; }
 
     const matched = PAGES.filter(p =>
