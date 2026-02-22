@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>生体情報再構築研究室 - 内部アクセス</title>
+
+<style>
+body {
+  background-color: #3a3a3a;
+  color: #e8d8df;
+  font-family: "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+
+header {
+  background-color: #2f2f2f;
+  padding: 20px;
+  border-bottom: 1px solid #888;
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.container {
+  padding: 40px;
+}
+
+.section {
+  border: 1px solid #888;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  margin-top: 0;
+  font-size: 16px;
+  color: #f0cdd7;
+}
+
+input, button {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #aaa;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f0cdd7;
+  color: #333;
+}
+
+#message {
+  margin-top: 10px;
+  color: #ffb6c1;
+  font-size: 14px;
+}
+
+.log {
+  font-size: 13px;
+  color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>都内生体情報再構築研究室 / Internal Network</h1>
+</header>
+
+<div class="container">
+
+  <div class="section">
+    <h2>アクセス照合</h2>
+
+    <div class="log">
+      対象記録へのアクセスには照合が必要です。
+    </div>
+
+    <input type="password" id="password" placeholder="Identification Code">
+    <br>
+    <button onclick="checkPassword()">照合</button>
+
+    <p id="message"></p>
+  </div>
+
+  <div class="section">
+    <h2>システムログ</h2>
+    <div class="log">
+      ・外部アクセス履歴あり<br>
+      ・不明な参照パターンを検出<br>
+      ・該当データの再照合を推奨
+    </div>
+  </div>
+
+</div>
+
+<script>
+function checkPassword() {
+  const input = document.getElementById("password").value;
+
+  if (input === "internal55") {
+    document.getElementById("message").innerText = "該当記録を確認しました。";
+    setTimeout(() => {
+      window.location.href = "insidemail55.html";
+    }, 800);
+  } else {
+    document.getElementById("message").innerText = "該当記録なし";
+  }
+}
+</script>
+
+</body>
+</html>
