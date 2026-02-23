@@ -244,20 +244,60 @@ body > .list {
   display:flex;
 }
 
-/* スマホ */
+/* ハンバーガー（基本は非表示） */
+.menu-toggle{
+  display:none;
+
+  border:none;
+  background:rgba(255, 145, 175, 0.15);
+  color:var(--accent);
+
+  width:40px;
+  height:40px;
+  border-radius:999px;
+
+  font-size:18px;
+  line-height:40px;
+  text-align:center;
+
+  cursor:pointer;
+
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition:all .2s ease;
+}
+
+/* ホバー */
+.menu-toggle:hover{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* 押したとき */
+.menu-toggle:active{
+  transform:scale(0.92);
+}
+
+
+/* ===== スマホだけ ===== */
 @media (max-width:768px){
 
+  /* ボタン表示 */
   .menu-toggle{
     display:block;
   }
 
+  /* メニュー非表示 */
   .nav-links{
     display:none;
     width:100%;
     flex-direction:column;
+    margin-top:10px;
   }
 
+  /* 開いたとき */
   .nav-links.open{
     display:flex;
   }
+
 }
