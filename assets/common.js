@@ -1,5 +1,5 @@
-<script>
-document.getElementById("menuToggle").onclick = function(){
-  document.getElementById("navMenu").classList.toggle("open");
-}
-</script>
+document.addEventListener("click", function(e){
+  if(e.target.id === "menuToggle"){
+    document.getElementById("navMenu").classList.toggle("open");
+  }
+});
