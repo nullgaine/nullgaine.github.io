@@ -1,12 +1,12 @@
-console.log("JS OK");
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("JS OK");
 
-document.addEventListener("click", function(e) {
-  const toggle = e.target.closest(".menu-toggle");
-
-  if (toggle) {
-    const navLinks = document.querySelector(".nav-links");
-    if (navLinks) {
-      navLinks.classList.toggle("open");
+  document.addEventListener("click", function(e) {
+    if (e.target.closest(".menu-toggle")) {
+      const navLinks = document.querySelector(".nav-links");
+      if (navLinks) {
+        navLinks.classList.toggle("open");
+      }
     }
-  }
+  });
 });
