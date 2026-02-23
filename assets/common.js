@@ -1,12 +1,16 @@
-document.addEventListener("DOMContentLoaded", function() {
-  console.log("JS OK");
+document.addEventListener("click", function(e) {
 
-  document.addEventListener("click", function(e) {
-    if (e.target.closest(".menu-toggle")) {
-      const navLinks = document.querySelector(".nav-links");
-      if (navLinks) {
-        navLinks.classList.toggle("open");
-      }
+  if (e.target.closest(".menu-toggle")) {
+
+    console.log("クリックされた");
+
+    const navLinks = document.querySelector(".nav-links");
+
+    if (navLinks) {
+      navLinks.classList.toggle("open");
+    } else {
+      console.log("nav-linksが見つからない");
     }
-  });
+  }
+
 });
