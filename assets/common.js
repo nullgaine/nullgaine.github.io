@@ -1,3 +1,5 @@
+console.log("JS OK");
+
 document.addEventListener("click", function(e) {
   const toggle = e.target.closest(".menu-toggle");
 
