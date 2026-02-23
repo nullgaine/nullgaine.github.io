@@ -236,21 +236,12 @@ body > .list {
 :focus{outline:2px solid var(--accent-hover);outline-offset:3px;}
 .note{font-size:12px;color:#666;}
 
-/* ハンバーガー */
 .menu-toggle{
   display:none;
-  font-size:22px;
-  background:none;
-  border:none;
-  color:var(--accent);
-  cursor:pointer;
 }
 
-/* リンクまとめ */
 .nav-links{
   display:flex;
-  gap:18px;
-  flex-wrap:wrap;
 }
 
 /* スマホ */
@@ -264,7 +255,6 @@ body > .list {
     display:none;
     width:100%;
     flex-direction:column;
-    margin-top:10px;
   }
 
   .nav-links.open{
