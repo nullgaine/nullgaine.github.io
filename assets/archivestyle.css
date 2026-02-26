@@ -248,9 +248,10 @@ hr{
 ========================= */
 
 .timeline-page .section {
-  margin-top: 24px;
-  padding: 20px;
-  border: 1px solid #888;
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 20px 24px;
+  box-sizing: border-box;
 }
 
 /* 見出しも限定 */
@@ -260,6 +261,7 @@ hr{
 
 /* ===== メモ（少しだけ崩す） ===== */
 .memo {
+  max-width: 720px;
   border-color: #ff91af;
   opacity: 0.85;
 }
@@ -270,6 +272,7 @@ hr{
   line-height: 1.8;
   letter-spacing: 0.5px;
 }
+
 
 
 
