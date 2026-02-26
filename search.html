@@ -80,17 +80,29 @@
     const out = document.getElementById('results');
     
 // 特定ワードで裏ルート
-　　　if (raw.includes("生体情報再構築研究室")) {
-　　  triggerHiddenAccess();
-　　  return;
-　　　　}
-    function triggerHiddenAccess(){
+function checkInput(raw){
+
+  const keywords = [
+    "再構築",
+    "概念核",
+    "Cプロジェクト",
+    "研究"
+  ];
+
+  if (keywords.some(k => raw.includes(k))) {
+    triggerHiddenAccess();
+    return;
+  }
+
+}
+
+function triggerHiddenAccess(){
   const pass = prompt("ACCESS RESTRICTED\nPASSWORD:");
 
   if (!pass) return;
 
   if (pass.toLowerCase() === "akashicive") {
-    window.location.href = "https://gainenull.org/t-iui"; // ←ここ自分のURLに変える
+    window.location.href = "https://gainenull.org/t-iui";
   } else {
     alert("読込み失敗、再度お試し下さい");
   }
