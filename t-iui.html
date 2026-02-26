@@ -114,21 +114,21 @@ function go(url){
 function checkPassword() {
   const input = document.getElementById("password").value.trim().toLowerCase();
 
-  if (input === "projectc") {
+  if (input === "projectc1") {
     go("t-archive-c.html");
   } else if (input === "projectc2") {
     go("t-archive-c2.html");
   } else if (input === "projectc3") {
     go("t-archive-c3.html");
-  } else if (input === "ctimeline") {
+  } else if (["timeline", "まとめ", "沿革", "時系列"].includes(input)) {
     go("t-tlc.html");
   } else if (["006", "20010517", "外峯哉", "sotominehajime"].includes(input)) {
     go("t-archive-006.html");
-  } else if (input === "19890107") {
+  } else if (["19890107", "昭和", "s01"].includes(input)) {
     go("t-aif-s01.html");
-  } else if (input === "19900731") {
+  } else if (["19900731", "平成", "h01"].includes(input)) {
     go("t-aif-h01.html");
-  } else if (input === "概念核") {
+  } else if (["概念核", "論文", "試論", "projectc"].includes(input)) {
     go("t-cc.html");
   } else if (["005", "success", "外峯零", "sotominerei"].includes(input)) {
     go("index.html");
