@@ -203,8 +203,8 @@ hr{
 
 .timeline-page .timeline {
   border-left: 1px solid #888;
-  padding-left: 16px;
-  margin-top: 10px;
+  padding-left: 40px;
+  margin-top: 40px;
   max-width: 720px;
   margin: 40px auto 40px 15%;
 }
@@ -253,8 +253,6 @@ hr{
   margin: 40px auto;
   padding: 20px 24px;
   box-sizing: border-box;
-
-  border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* 見出しも限定 */
@@ -275,6 +273,7 @@ hr{
   line-height: 1.8;
   letter-spacing: 0.5px;
 }
+
 
 
 
