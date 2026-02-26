@@ -107,7 +107,7 @@ button:hover {
 function checkPassword() {
   const input = document.getElementById("password").value;
 
-  if (input === "internalc") {
+  if (input === "projectC") {
     document.getElementById("message").innerText = "該当記録を確認しました。";
     setTimeout(() => {
       window.location.href = "t-archive-c.html";
@@ -117,6 +117,12 @@ function checkPassword() {
     document.getElementById("message").innerText = "該当記録を確認しました。";
     setTimeout(() => {
       window.location.href = "t-archive-aif-s01.html";
+    }, 800);
+
+  if (input === "概念核") {
+    document.getElementById("message").innerText = "該当記録を確認しました。";
+    setTimeout(() => {
+      window.location.href = "t-cc.html";
     }, 800);
     
   } else {
