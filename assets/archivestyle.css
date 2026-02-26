@@ -196,35 +196,59 @@ hr{
   color: #ff91af;
 }
 
-/* ===== タイムライン ===== */
-.timeline {
-  border-left: 1px solid #666;
-  padding-left: 20px;
+/* =========================
+   ■ タイムライン（このページ限定）
+========================= */
+
+.timeline-page .timeline {
+  border-left: 1px solid #888;
+  padding-left: 16px;
+  margin-top: 10px;
+  max-width: 720px;
 }
 
-.entry {
-  margin-bottom: 20px;
+.timeline-page .timeline-item {
+  margin-bottom: 18px;
+  line-height: 1.7;
   position: relative;
 }
 
-.entry::before {
-  content: "■";
-  position: absolute;
-  left: -14px;
+.timeline-page .timeline .year {
+  display: block;
+  font-size: 15px;
   color: #ff91af;
-  font-size: 10px;
+  margin-bottom: 6px;
 }
 
-.year {
+.timeline-page .timeline .desc {
   font-size: 14px;
-  color: #ff91af;
-  margin-bottom: 4px;
+  color: #ddd;
+  margin-bottom: 12px;
 }
 
-.desc {
-  font-size: 13px;
-  color: #ddd;
-  line-height: 1.6;
+.timeline-page .timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -21px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff91af;
+}
+
+/* =========================
+   ■ 付記（このページ限定）
+========================= */
+
+.timeline-page .section {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #888;
+}
+
+/* 見出しも限定 */
+.timeline-page h2 {
+  font-size: 16px;
 }
 
 /* ===== メモ（少しだけ崩す） ===== */
@@ -239,3 +263,4 @@ hr{
   line-height: 1.8;
   letter-spacing: 0.5px;
 }
+
