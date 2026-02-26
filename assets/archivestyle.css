@@ -138,4 +138,60 @@ hr{
 
 .warn{
   color:#ff6b6b;
+
+}
+
+/* ===== 論文用スタイル ===== */
+.paper {
+  max-width: 720px;
+  margin: 60px auto;
+  line-height: 1.8;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+}
+
+/* タイトル */
+.paper h1 {
+  font-size: 18px;
+  color: #ff91af;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+/* セクションタイトル */
+.paper h2 {
+  font-size: 15px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  color: #ff91af;
+  border-bottom: 1px solid #555;
+  padding-bottom: 6px;
+  font-weight: normal;
+}
+
+/* 段落 */
+.paper p {
+  margin-bottom: 16px;
+  color: #ddd;
+}
+
+/* リスト */
+.paper ul {
+  margin: 10px 0 20px 20px;
+}
+
+.paper li {
+  margin-bottom: 6px;
+}
+
+/* 注釈 */
+.paper .note {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 20px;
+}
+
+/* 強調 */
+.paper .highlight {
+  color: #ff91af;
 }
