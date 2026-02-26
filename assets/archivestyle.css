@@ -81,6 +81,10 @@ p{
 .highlight{
   color: var(--accent);
 }
+.a {
+  color: #e8d8df;
+  text-decoration: none;
+}
 
 /* ========= INPUT ========= */
 input, button {
@@ -273,6 +277,7 @@ hr{
   line-height: 1.8;
   letter-spacing: 0.5px;
 }
+
 
 
 
