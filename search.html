@@ -79,41 +79,19 @@
     const q = raw.toLowerCase();
     const out = document.getElementById('results');
     
+
 // 特定ワードで裏ルート
-function checkInput(raw){
-
-  const cleaned = raw.toLowerCase().trim();
-
-  const keywords = [
-    "再構築",
-    "概念核",
-    "cプロジェクト",
-    "研究"
-  ];
-
-  if (keywords.some(k => cleaned.includes(k.toLowerCase()))) {
-    triggerHiddenAccess();
-  }
-}
-
-function triggerHiddenAccess(){
+　　　if (raw.includes("プロジェクトC")) {
+　　  triggerHiddenAccess();
+　　  return;
+　　　　}
+    function triggerHiddenAccess(){
   const pass = prompt("ACCESS RESTRICTED\nPASSWORD:");
 
   if (!pass) return;
 
   if (pass.toLowerCase() === "akashicive") {
-    window.location.href = "https://gainenull.org/t-iui";
-  } else {
-    alert("読込み失敗、再度お試し下さい");
-  }
-}
-function triggerHiddenAccess(){
-  const pass = prompt("ACCESS RESTRICTED\nPASSWORD:");
-
-  if (!pass) return;
-
-  if (pass.toLowerCase() === "akashicive") {
-    window.location.href = "https://gainenull.org/t-iui";
+    window.location.href = "https://gainenull.org/t-iui"; // ←ここ自分のURLに変える
   } else {
     alert("読込み失敗、再度お試し下さい");
   }
