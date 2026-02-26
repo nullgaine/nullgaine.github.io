@@ -112,13 +112,13 @@ function go(url){
 }
 
 function checkPassword() {
-  const input = document.getElementById("password").value;
+  const input = document.getElementById("password").value.trim().toLowerCase();
 
-  if (input === "projectC") {
+  if (input === "projectc") {
     go("t-archive-c.html");
-  } else if (input === "projectC2") {
+  } else if (input === "projectc2") {
     go("t-archive-c2.html");
-  } else if (input === "projectC3") {
+  } else if (input === "projectc3") {
     go("t-archive-c3.html");
   } else if (input === "19890107") {
     go("t-aif-s01.html");
