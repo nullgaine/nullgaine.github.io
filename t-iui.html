@@ -104,45 +104,28 @@ button:hover {
 </div>
 
 <script>
+function go(url){
+  document.getElementById("message").innerText = "該当記録を確認しました。";
+  setTimeout(() => {
+    window.location.href = url;
+  }, 800);
+}
+
 function checkPassword() {
   const input = document.getElementById("password").value;
 
   if (input === "projectC") {
-    document.getElementById("message").innerText = "該当記録を確認しました。";
-    setTimeout(() => {
-      window.location.href = "t-archive-c.html";
-    }, 800);
-
-  if (input === "projectC2") {
-    document.getElementById("message").innerText = "該当記録を確認しました。";
-    setTimeout(() => {
-      window.location.href = "t-archive-c2.html";
-    }, 800);
-
-  if (input === "projectC3") {
-    document.getElementById("message").innerText = "該当記録を確認しました。";
-    setTimeout(() => {
-      window.location.href = "t-archive-c3.html";
-    }, 800);
-
-  if (input === "19890107") {
-    document.getElementById("message").innerText = "該当記録を確認しました。";
-    setTimeout(() => {
-      window.location.href = "t-aif-s01.html";
-    }, 800);
-
-  if (input === "19900731") {
-    document.getElementById("message").innerText = "該当記録を確認しました。";
-    setTimeout(() => {
-      window.location.href = "t-aif-h01.html";
-    }, 800);
-
-  if (input === "概念核") {
-    document.getElementById("message").innerText = "該当記録を確認しました。";
-    setTimeout(() => {
-      window.location.href = "t-cc.html";
-    }, 800);
-    
+    go("t-archive-c.html");
+  } else if (input === "projectC2") {
+    go("t-archive-c2.html");
+  } else if (input === "projectC3") {
+    go("t-archive-c3.html");
+  } else if (input === "19890107") {
+    go("t-aif-s01.html");
+  } else if (input === "19900731") {
+    go("t-aif-h01.html");
+  } else if (input === "概念核") {
+    go("t-cc.html");
   } else {
     document.getElementById("message").innerText = "該当記録なし";
   }
