@@ -1,0 +1,141 @@
+/* ========= ROOT ========= */
+:root{
+  --bg:#3a3a3a;
+  --panel:#2f2f2f;
+  --card:#404040;
+
+  --text:#e8d8df;
+  --muted:#aaa;
+
+  --accent:#ff91af;
+  --accent-soft:rgba(255,145,175,0.1);
+
+  --border:#888;
+  --border-soft:#555;
+}
+
+/* ========= BASE ========= */
+*{
+  box-sizing:border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Helvetica Neue", sans-serif;
+  margin: 0;
+  line-height:1.7;
+}
+
+/* ========= HEADER ========= */
+header {
+  background-color: var(--panel);
+  padding: 20px;
+  border-bottom: 1px solid var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+/* ========= LAYOUT ========= */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* ========= SECTION ========= */
+.section {
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 24px;
+  background: rgba(0,0,0,0.15);
+  transition: 0.2s;
+}
+
+.section:hover{
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.section h2 {
+  margin-top: 0;
+  font-size: 15px;
+  color: var(--accent);
+  letter-spacing:0.05em;
+}
+
+/* ========= TEXT ========= */
+p{
+  margin: 0 0 10px;
+}
+
+.log {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.highlight{
+  color: var(--accent);
+}
+
+/* ========= INPUT ========= */
+input, button {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #444;
+  color: #fff;
+  border: 1px solid var(--border-soft);
+}
+
+button {
+  cursor: pointer;
+  transition:0.2s;
+}
+
+button:hover {
+  background-color: var(--accent);
+  color: #2a2a2a;
+}
+
+/* ========= MESSAGE ========= */
+#message {
+  margin-top: 10px;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* ========= DIVIDER ========= */
+hr{
+  border:none;
+  border-top:1px solid var(--border-soft);
+  margin:40px 0;
+}
+
+/* ========= MOBILE ========= */
+@media (max-width:600px){
+  .container{
+    padding:24px 16px;
+  }
+}
+
+/* ========= ETC ========= */
+
+.label{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+
+.code{
+  font-family: monospace;
+  background: rgba(0,0,0,0.3);
+  padding:4px 6px;
+}
+
+.warn{
+  color:#ff6b6b;
+}
