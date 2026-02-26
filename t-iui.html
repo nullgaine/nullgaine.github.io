@@ -120,12 +120,16 @@ function checkPassword() {
     go("t-archive-c2.html");
   } else if (input === "projectc3") {
     go("t-archive-c3.html");
+  } else if (["006", "20010517", "外峯哉", "sotominehajime"].includes(input)) {
+    go("t-archive-006.html");
   } else if (input === "19890107") {
     go("t-aif-s01.html");
   } else if (input === "19900731") {
     go("t-aif-h01.html");
   } else if (input === "概念核") {
     go("t-cc.html");
+  } else if (["005", "success", "外峯零", "sotominerei"].includes(input)) {
+    go("index.html");
   } else {
     document.getElementById("message").innerText = "該当記録なし";
   }
