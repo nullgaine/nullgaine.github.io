@@ -112,6 +112,13 @@ function checkPassword() {
     setTimeout(() => {
       window.location.href = "t-archive-c.html";
     }, 800);
+
+  if (input === "AIF-S01") {
+    document.getElementById("message").innerText = "該当記録を確認しました。";
+    setTimeout(() => {
+      window.location.href = "t-archive-aif-s01.html";
+    }, 800);
+    
   } else {
     document.getElementById("message").innerText = "該当記録なし";
   }
