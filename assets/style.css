@@ -124,18 +124,26 @@ h1,h2{overflow-wrap:anywhere;word-break:normal;}
   margin-right:6px;
   background:#f5f7fa;
 }
-.list{
+.list {
   border:1px solid var(--line);
   border-radius:12px;
   background:var(--card);
   padding:12px;
+
+  list-style: none;
+  padding-left: 0;
+  margin: 0; /* これも入れると安定 */
 }
+
 .list li{
   padding:8px 6px;
   border-top:1px dashed var(--line);
   font-size:14px;
 }
-.list li:first-child{border-top:0}
+
+.list li:first-child{
+  border-top:0;
+}
 
 /* ====== ボタン ====== */
 .btn{
