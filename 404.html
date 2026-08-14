@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>404 | 江縫栄市立総合病院</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    .error-page {
+      min-height: calc(100vh - 180px);
+      display: grid;
+      place-items: center;
+    }
+    .error-panel {
+      width: 100%;
+      max-width: 760px;
+    }
+    .error-code {
+      margin: 0 0 8px;
+      color: var(--danger);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(18px, 4vw, 28px);
+      letter-spacing: .08em;
+    }
+    .error-log {
+      margin: 24px 0;
+      padding: 16px;
+      overflow-wrap: anywhere;
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      background: #fffafc;
+      color: #685b60;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .error-actions .btn.secondary {
+      border-color: var(--line);
+      background: #fff;
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="error-page">
+    <section class="panel error-panel">
+      <p class="error-code">ERROR 404 / RECORD NOT FOUND</p>
+      <h1>該当する記録は見つかりませんでした。</h1>
+      <p>
+        削除済み、未作成、移動済み、または現在の閲覧権限では
+        参照できない可能性があります。
+      </p>
+
+      <div class="error-log" aria-label="照会結果">
+        REQUEST: <span id="request-path">UNKNOWN</span><br>
+        STATUS: NOT FOUND<br>
+        LOOKUP_RESULT: NULL<br>
+        OBSERVATION: CONTINUES
+      </div>
+
+      <div class="error-actions">
+        <a class="btn" href="/search">サイト内を検索</a>
+        <a class="btn secondary" href="/main">病院案内へ戻る</a>
+        <a class="btn secondary" href="/">観察記録へ戻る</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/common.js"></script>
+  <script>
+    document.getElementById("request-path").textContent = location.pathname;
+
+    async function loadPart(id, file) {
+      const res = await fetch(file);
+      if (!res.ok) return;
+      document.getElementById(id).innerHTML = await res.text();
+    }
+
+    loadPart("header", "/partials/header.html");
+    loadPart("footer", "/partials/footer.html");
+  </script>
+</body>
+</html>
