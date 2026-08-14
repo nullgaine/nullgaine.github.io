@@ -11,39 +11,244 @@
       min-height: calc(100vh - 180px);
       display: grid;
       place-items: center;
+      padding-block: clamp(28px, 6vw, 72px);
     }
+
     .error-panel {
+      --record-red: #b7282e;
+      position: relative;
       width: 100%;
-      max-width: 760px;
+      max-width: 860px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #d8cec6;
+      border-radius: 3px;
+      background: #fff;
+      box-shadow: 0 16px 44px rgba(49, 38, 34, .08);
     }
+
+    .error-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: var(--record-red);
+    }
+
+    .record-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 28px 12px 32px;
+      border-bottom: 1px solid #ded5cd;
+      background: #f4f0eb;
+      color: #554a45;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: .1em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .record-header span:last-child {
+      color: var(--record-red);
+      white-space: nowrap;
+    }
+
+    .error-body {
+      padding: clamp(28px, 5vw, 52px) clamp(26px, 6vw, 64px) 34px;
+    }
+
     .error-code {
-      margin: 0 0 8px;
-      color: var(--danger);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      color: var(--record-red);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: clamp(18px, 4vw, 28px);
-      letter-spacing: .08em;
+      font-size: clamp(15px, 2.4vw, 19px);
+      font-weight: 600;
+      letter-spacing: .12em;
+      line-height: 1.5;
     }
+
+    .error-code::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e4d9d2;
+    }
+
+    .error-title {
+      max-width: 720px;
+      margin: 0 0 16px;
+      font-size: clamp(27px, 4.2vw, 35px);
+      line-height: 1.55;
+      letter-spacing: .035em;
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+
+    .error-description {
+      max-width: 690px;
+      margin: 0;
+      color: #5f5651;
+      font-size: 15px;
+      line-height: 1.95;
+    }
+
     .error-log {
-      margin: 24px 0;
-      padding: 16px;
-      overflow-wrap: anywhere;
-      border: 1px dashed var(--line);
-      border-radius: 10px;
-      background: #fffafc;
-      color: #685b60;
+      margin: 30px 0 28px;
+      border: 1px solid #d8cec6;
+      border-top: 3px solid var(--record-red);
+      background: #fbfaf8;
+      color: #473e3a;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 12px;
+      line-height: 1.6;
     }
+
+    .error-log-title {
+      margin: 0;
+      padding: 9px 14px;
+      border-bottom: 1px solid #ded5cd;
+      background: #f1ece7;
+      color: #74665f;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+    }
+
+    .error-log dl {
+      display: grid;
+      grid-template-columns: minmax(120px, 165px) 1fr;
+      margin: 0;
+    }
+
+    .error-log dt,
+    .error-log dd {
+      margin: 0;
+      padding: 9px 14px;
+      border-bottom: 1px solid #e7dfd8;
+      overflow-wrap: anywhere;
+    }
+
+    .error-log dt {
+      border-right: 1px solid #e7dfd8;
+      color: #796b64;
+      letter-spacing: .05em;
+    }
+
+    .error-log dd {
+      background: rgba(255, 255, 255, .65);
+    }
+
+    .error-log dt:last-of-type,
+    .error-log dd:last-of-type {
+      border-bottom: 0;
+    }
+
+    .status-null {
+      color: var(--record-red);
+      font-weight: 700;
+    }
+
     .error-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
+    .error-actions .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 17px;
+      border: 1px solid var(--record-red);
+      border-radius: 2px;
+      background: var(--record-red);
+      color: #fff;
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 13px;
+      line-height: 1.4;
+      text-decoration: none;
+      transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+    }
+
+    .error-actions .btn:hover {
+      border-color: #902027;
+      background: #902027;
+      text-decoration: none;
+    }
+
     .error-actions .btn.secondary {
-      border-color: var(--line);
+      border-color: #cfc4bc;
       background: #fff;
-      color: var(--ink);
+      color: #473e3a;
+    }
+
+    .error-actions .btn.secondary:hover {
+      border-color: var(--record-red);
+      background: #fff7f7;
+      color: var(--record-red);
+    }
+
+    @media (max-width: 640px) {
+      .error-page {
+        display: block;
+        min-height: auto;
+        padding-block: 20px 44px;
+      }
+
+      .record-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+        padding: 11px 20px 11px 24px;
+      }
+
+      .error-body {
+        padding: 28px 22px 24px 25px;
+      }
+
+      .error-code {
+        letter-spacing: .07em;
+      }
+
+      .error-title {
+        font-size: clamp(25px, 8.6vw, 32px);
+        line-height: 1.5;
+      }
+
+      .error-description br {
+        display: none;
+      }
+
+      .error-log dl {
+        grid-template-columns: 1fr;
+      }
+
+      .error-log dt {
+        padding-bottom: 2px;
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+      .error-log dd {
+        padding-top: 2px;
+      }
+
+      .error-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .error-actions .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -51,25 +256,39 @@
   <div id="header"></div>
 
   <main class="error-page">
-    <section class="panel error-panel">
-      <p class="error-code">ERROR 404 / RECORD NOT FOUND</p>
-      <h1>該当する記録は見つかりませんでした。</h1>
-      <p>
-        削除済み、未作成、移動済み、または現在の閲覧権限では
-        参照できない可能性があります。
-      </p>
-
-      <div class="error-log" aria-label="照会結果">
-        REQUEST: <span id="request-path">UNKNOWN</span><br>
-        STATUS: NOT FOUND<br>
-        LOOKUP_RESULT: NULL<br>
-        OBSERVATION: CONTINUES
+    <section class="panel error-panel" aria-labelledby="error-title">
+      <div class="record-header">
+        <span>江縫栄市立総合病院 / 記録照会端末</span>
+        <span>DOCUMENT 404-NULL</span>
       </div>
 
-      <div class="error-actions">
-        <a class="btn" href="/search">サイト内を検索</a>
-        <a class="btn secondary" href="/main">病院案内へ戻る</a>
-        <a class="btn secondary" href="/">観察記録へ戻る</a>
+      <div class="error-body">
+        <p class="error-code">ERROR 404 / RECORD NOT FOUND</p>
+        <h1 class="error-title" id="error-title">該当する記録は見つかりませんでした。</h1>
+        <p class="error-description">
+          削除済み、未作成、移動済み、または現在の閲覧権限では<br>
+          参照できない可能性があります。
+        </p>
+
+        <div class="error-log" aria-label="照会結果">
+          <p class="error-log-title">RECORD LOOKUP RESULT</p>
+          <dl>
+            <dt>REQUEST</dt>
+            <dd id="request-path">UNKNOWN</dd>
+            <dt>STATUS</dt>
+            <dd>NOT FOUND</dd>
+            <dt>LOOKUP_RESULT</dt>
+            <dd class="status-null">NULL</dd>
+            <dt>OBSERVATION</dt>
+            <dd>CONTINUES</dd>
+          </dl>
+        </div>
+
+        <nav class="error-actions" aria-label="エラーページから移動">
+          <a class="btn" href="/search">サイト内を検索</a>
+          <a class="btn secondary" href="/main">病院案内へ戻る</a>
+          <a class="btn secondary" href="/">観察記録へ戻る</a>
+        </nav>
       </div>
     </section>
   </main>
