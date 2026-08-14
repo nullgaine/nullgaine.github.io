@@ -284,3 +284,51 @@ hr{
 
 
 
+
+
+/* ========= RESEARCH NAVIGATION ========= */
+.research-nav {
+  width: 100%;
+  max-width: 900px;
+  margin: 18px auto 0;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.research-home-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid var(--border-soft);
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.16);
+  font-size: 13px;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.research-home-link:hover,
+.research-home-link:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.research-record-link {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .research-nav {
+    margin-top: 14px;
+    padding: 0 16px;
+  }
+
+  .research-home-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
