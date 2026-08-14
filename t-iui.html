@@ -1,147 +1,288 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>東京生体情報再構築研究室 - 内部アクセス</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>東京生体情報再構築研究室 - 内部アクセス</title>
+  <link rel="stylesheet" href="assets/archivestyle.css">
+  <style>
+    .research-search-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      margin-top: 12px;
+    }
 
-<style>
-body {
-  background-color: #3a3a3a;
-  color: #e8d8df;
-  font-family: "Helvetica Neue", sans-serif;
-  margin: 0;
-}
+    .research-search-form input,
+    .research-search-form button {
+      width: 100%;
+      margin: 0;
+    }
 
-header {
-  background-color: #2f2f2f;
-  padding: 20px;
-  border-bottom: 1px solid #ff91af;
-}
+    .search-hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
 
-h1 {
-  margin: 0;
-  font-size: 18px;
-  letter-spacing: 1px;
-}
+    .record-results {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
 
-a {
-  color: #e8d8df;
-  text-decoration: none;
-}
-  
-.container {
-  padding: 40px;
-}
+    .record-result {
+      display: grid;
+      grid-template-columns: minmax(96px, 140px) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--border-soft);
+      color: var(--text);
+      text-decoration: none;
+      transition: .2s;
+    }
 
-.section {
-  border: 1px solid #888;
-  padding: 20px;
-  margin-bottom: 20px;
-}
+    .record-result:hover,
+    .record-result:focus-visible {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
 
-.section h2 {
-  margin-top: 0;
-  font-size: 16px;
-  color: #ff91af;
-}
+    .record-code {
+      color: var(--accent);
+      font-family: monospace;
+      overflow-wrap: anywhere;
+    }
 
-input, button {
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #444;
-  color: #fff;
-  border: 1px solid #aaa;
-}
+    .record-title {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 14px;
+      font-weight: 500;
+    }
 
-button {
-  cursor: pointer;
-}
+    .record-meta {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
 
-button:hover {
-  background-color: #ff91af;
-  color: #2a2a2a;
-}
+    #message {
+      min-height: 1.7em;
+    }
 
-#message {
-  margin-top: 10px;
-  color: #ff91af;
-  font-size: 14px;
-}
-
-.log {
-  font-size: 13px;
-  color: #aaa;
-}
-</style>
+    @media (max-width: 600px) {
+      .research-search-form,
+      .record-result {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <h1>東京生体情報再構築研究室 / Internal Network</h1>
+  </header>
 
-<header>
-  <h1>東京生体情報再構築研究室 / Internal Network</h1>
-</header>
+  <main class="container">
+    <section class="section">
+      <h2>記録検索</h2>
+      <p class="log">記録番号、年代、分類、または関連語を入力してください。完全一致でなくても照合できます。</p>
 
-<div class="container">
+      <form class="research-search-form" id="record-search" role="search">
+        <input type="search" id="query" placeholder="例：AIF-S01 / 1989 / 概念核 / 外峯" aria-label="記録検索語" autocomplete="off">
+        <button type="submit">照合</button>
+      </form>
 
-  <div class="section">
-    <h2>アクセス照合</h2>
+      <p class="search-hint">空白で区切ると複数条件で絞り込めます。表記の全角・半角、空白、ハイフンは区別しません。</p>
+      <p id="message" aria-live="polite"></p>
+      <ul class="record-results" id="results" hidden></ul>
+    </section>
 
-    <div class="log">
-      対象記録へのアクセスには照合が必要です。
-    </div>
+    <section class="section">
+      <h2>システムログ</h2>
+      <div class="log">
+        ・外部アクセス履歴あり<br>
+        ・不明な参照パターンを検出<br>
+        ・<a href="t-use.html">本DBの使い方を確認</a>
+      </div>
+    </section>
+  </main>
 
-    <input type="password" id="password" placeholder="Identification Code">
-    <br>
-    <button onclick="checkPassword()">照合</button>
+  <script>
+    const RECORDS = [
+      {
+        code: "C-PROJECT/01",
+        title: "概念核研究計画 内部技術記録",
+        meta: "1992年時点 / 内部記録",
+        url: "t-archive-c.html",
+        keywords: ["projectc1", "プロジェクトC", "Cプロジェクト", "概念核", "研究計画", "人工授精", "細胞", "1992"]
+      },
+      {
+        code: "C-PROJECT/02",
+        title: "人工授精第一成功例 補足観察記録",
+        meta: "AIF-S01参照 / 非公開",
+        url: "t-archive-c2.html",
+        keywords: ["projectc2", "補足観察", "第一成功例", "記録不整合", "人工授精", "AIF-S01", "1989"]
+      },
+      {
+        code: "C-PROJECT/03",
+        title: "対照個体・抹消記録",
+        meta: "AIF-S01 / AIF-H01 / 復元断片",
+        url: "t-archive-c3.html",
+        keywords: ["projectc3", "対象", "対照個体", "抹消", "全記録層", "AIF-S01", "AIF-H01"]
+      },
+      {
+        code: "TIMELINE",
+        title: "プロジェクト年表",
+        meta: "1978–2001 / 沿革",
+        url: "t-tlc.html",
+        keywords: ["timeline", "まとめ", "沿革", "時系列", "年表", "1978", "1983", "1988", "1989", "1990", "1993", "2001", "外峯夫妻"]
+      },
+      {
+        code: "AIF-S01",
+        title: "細胞再構成実験（概念核試論）",
+        meta: "1988年度計画 / 1989年1月7日",
+        url: "t-aif-s01.html",
+        keywords: ["s01", "19890107", "昭和", "男児", "人工授精", "体外受精", "概念同期", "対照個体"]
+      },
+      {
+        code: "AIF-H01",
+        title: "概念擬人化個体生成試行 最終報告",
+        meta: "1990年7月31日 / 非公開記録",
+        url: "t-aif-h01.html",
+        keywords: ["h01", "19900731", "平成", "女児", "人工授精", "概念因子", "失敗例", "対照個体"]
+      },
+      {
+        code: "CC論",
+        title: "概念核仮説と細胞再構成技術 試論",
+        meta: "1987年 / 論文抜粋",
+        url: "t-cc.html",
+        keywords: ["projectc", "概念核", "論文", "試論", "人工授精", "細胞再構成", "1987"]
+      },
+      {
+        code: "006",
+        title: "非対象個体観測記録 006",
+        meta: "2001年5月17日 / Temporary Assignment",
+        url: "t-archive-006.html",
+        keywords: ["20010517", "2001", "外峯哉", "sotominehajime", "実弟", "非対象", "腎症候群", "観察"]
+      },
+      {
+        code: "STMN-1993",
+        title: "外峯夫妻 来訪記録",
+        meta: "1993年 / 復元待ち",
+        url: "t-stmn.html",
+        keywords: ["stmn", "外峯夫妻", "来訪", "1993", "保護者", "面談"]
+      },
+      {
+        code: "005",
+        title: "対象個体 005 / 外峯 零",
+        meta: "概念統合個体 / 成功例",
+        url: "index.html",
+        keywords: ["success", "外峯零", "sotominerei", "概念統合", "成功", "10月2日"]
+      },
+      {
+        code: "HELP",
+        title: "本DBの使い方",
+        meta: "検索上の注意",
+        url: "t-use.html",
+        keywords: ["help", "使い方", "検索", "照合", "キーワード", "日付", "ファイル名"]
+      }
+    ];
 
-    <p id="message"></p>
-  </div>
+    function normalize(value) {
+      return value
+        .normalize("NFKC")
+        .toLowerCase()
+        .replace(/[\s　_\-‐‑‒–—―./:・,，、]+/g, "");
+    }
 
-  <div class="section">
-    <h2>システムログ</h2>
-    <div class="log">
-      ・外部アクセス履歴あり<br>
-      ・不明な参照パターンを検出<br>
-      ・<a href="https://gainenull.org/t-use">該当データの再照合を推奨</a>
-    </div>
-  </div>
+    function getScore(record, raw) {
+      const query = normalize(raw);
+      const tokens = raw
+        .normalize("NFKC")
+        .toLowerCase()
+        .split(/[\s　,，、/・]+/)
+        .map(normalize)
+        .filter(Boolean);
+      const fields = [record.code, record.title, record.meta].concat(record.keywords);
+      const normalizedFields = fields.map(normalize);
+      const corpus = normalize(fields.join(" "));
 
-</div>
+      if (!tokens.length || !tokens.every(token => corpus.includes(token))) return 0;
 
-<script>
-function go(url){
-  document.getElementById("message").innerText = "該当記録を確認しました。";
-  setTimeout(() => {
-    window.location.href = url;
-  }, 800);
-}
+      let score = 10;
+      normalizedFields.forEach(field => {
+        if (field === query) score = Math.max(score, 120);
+        else if (field.startsWith(query)) score = Math.max(score, 80);
+        else if (field.includes(query)) score = Math.max(score, 50);
+      });
+      return score;
+    }
 
-function checkPassword() {
-  const input = document.getElementById("password").value.trim().toLowerCase();
+    function renderResults(matches, raw) {
+      const results = document.getElementById("results");
+      const message = document.getElementById("message");
+      results.replaceChildren();
 
-  if (input === "projectc1") {
-    go("t-archive-c.html");
-  } else if (input === "projectc2") {
-    go("t-archive-c2.html");
-  } else if (input === "projectc3") {
-    go("t-archive-c3.html");
-  } else if (["timeline", "まとめ", "沿革", "時系列"].includes(input)) {
-    go("t-tlc.html");
-  } else if (["006", "20010517", "外峯哉", "sotominehajime"].includes(input)) {
-    go("t-archive-006.html");
-  } else if (["19890107", "昭和", "s01"].includes(input)) {
-    go("t-aif-s01.html");
-  } else if (["19900731", "平成", "h01"].includes(input)) {
-    go("t-aif-h01.html");
-  } else if (["概念核", "論文", "試論", "projectc"].includes(input)) {
-    go("t-cc.html");
-  } else if (["005", "success", "外峯零", "sotominerei"].includes(input)) {
-    go("index.html");
-  } else {
-    document.getElementById("message").innerText = "該当記録なし";
-  }
-}
-</script>
+      if (!matches.length) {
+        results.hidden = true;
+        message.textContent = "該当記録なし：別の記録番号、年代、または関連語で再照合してください。";
+        return;
+      }
 
+      message.textContent = "照合結果：" + matches.length + "件";
+      results.hidden = false;
+
+      matches.forEach(({ record }) => {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        const code = document.createElement("span");
+        const detail = document.createElement("span");
+        const title = document.createElement("strong");
+        const meta = document.createElement("small");
+
+        link.className = "record-result";
+        link.href = record.url;
+        code.className = "record-code";
+        code.textContent = record.code;
+        title.className = "record-title";
+        title.textContent = record.title;
+        meta.className = "record-meta";
+        meta.textContent = record.meta;
+
+        detail.append(title, meta);
+        link.append(code, detail);
+        item.append(link);
+        results.append(item);
+      });
+    }
+
+    document.getElementById("record-search").addEventListener("submit", event => {
+      event.preventDefault();
+      const raw = document.getElementById("query").value.trim();
+      const results = document.getElementById("results");
+      const message = document.getElementById("message");
+
+      if (!raw) {
+        results.replaceChildren();
+        results.hidden = true;
+        message.textContent = "検索語を入力してください。";
+        return;
+      }
+
+      const matches = RECORDS
+        .map(record => ({ record, score: getScore(record, raw) }))
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score || a.record.code.localeCompare(b.record.code, "ja"));
+
+      renderResults(matches, raw);
+    });
+  </script>
 </body>
 </html>
