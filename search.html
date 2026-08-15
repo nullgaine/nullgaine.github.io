@@ -13,135 +13,206 @@
   <main>
     <section class="panel" role="search">
       <h1>サイト内検索</h1>
-      <p class="note">ページタイトルやキーワードで検索できます。</p>
+      <p class="note">ページタイトルや本文中のキーワードで検索できます。</p>
       <div class="searchbox" style="margin-top:12px">
         <input id="q" type="search" placeholder="キーワードを入力" aria-label="検索語" autocomplete="off">
         <button class="btn" onclick="doSearch()">検索</button>
       </div>
     </section>
 
-
-<div id="results" style="margin-top:8px"></div>
-
-
+    <div id="results" style="margin-top:8px" aria-live="polite"></div>
   </main>
 
   <div id="footer"></div>
   <script src="common.js"></script>
   <script>
-  async function loadPart(id, file){
+  async function loadPart(id, file) {
     const res = await fetch(file);
     document.getElementById(id).innerHTML = await res.text();
   }
   loadPart("header", "partials/header.html");
   loadPart("footer", "partials/footer.html");
 
-  const PAGES = [
-    { title:"江縫栄市立総合病院", url:"main", desc:"病院トップページ。救急から在宅まで。" },
-    { title:"お知らせ", url:"news", desc:"最新のご案内・記録情報" },
-    { title:"依頼", url:"yesican", desc:"依頼受付中のお仕事まとめ。" },
-    { title:"外来案内", url:"hours", desc:"受付時間・外来スケジュール。" },
-    { title:"利用規約", url:"terms", desc:"サイト利用規約。" },
-    { title:"アクセス", url:"access", desc:"病院へのアクセス・地図。" },
-    { title:"お問い合わせ", url:"contact", desc:"お問い合わせフォーム。" },
-    { title:"施設概要", url:"overview", desc:"病院の施設概要。" },
-    { title:"図書館", url:"library", desc:"院内図書館ページ。" },
-    { title:"リンク", url:"links", desc:"関連サイトへのリンク集。" },
-    { title:"外峯", url:"index", desc:"外峯零アーカイブ" },
-    { title:"絵", url:"illustlist", desc:"イラストの料金・プラン一覧。" },
-    { title:"MIX", url:"mixlist", desc:"MIX依頼の料金・プラン一覧。" },
-    { title:"歌見本", url:"utamihon", desc:"歌の見本・サンプル集。" },
-    { title:"カフェ", url:"cafepalette", desc:"1階のカフェ。" },
-    { title:"カフェ", url:"flepaix", desc:"Fleur de Paix。" },
+  const EXTRA_PAGES = [
     { title:"動画", url:"https://youtu.be/gxxHFZWzS3g", desc:"2025年12月33日のテレビ録画" },
     { title:"動画", url:"https://youtu.be/PLdH7i8ruPY", desc:"2025年2月30日の動画記録" },
-    { title:"動画", url:"https://youtu.be/dxfWWPZmtv0", desc:"2024年6月31日の緊急放送記録" },
-    { title:"wiki", url:"krwiki", desc:"가이네 누르。韓国語版ページ。" },
-    { title:"削除すべき記録", url:"d_archive", desc:"web非公開アーカイブ" },
-    { title:"記録55", url:"insidemail55", desc:"内部メールアーカイブ" },
-    { title:"記録404", url:"notice404", desc:"お知らせアーカイブ" },
-    { title:"記録404", url:"notice404-k", desc:"お知らせアーカイブ" },
-    { title:"最悪", url:"irrtumderwelt", desc:"災厄アーカイブ" },
-    { title:"最悪", url:"irrtumderwelt-e", desc:"災厄アーカイブ" },
-    { title:"最悪", url:"irrtumderwelt-k", desc:"災厄アーカイブ" },
-    { title:"骵温", url:"meitanteiq", desc:"骵温公式まとめページ。" },
-    { title:"赤い眼", url:"redeyes", desc:"赤い眼が内側を見ている" },
-    { title:"しらせ", url:"prebox", desc:"akashive" },
-    { title:"外峯", url:"en-dex", desc:"外峯零アーカイブ" },
-    { title:"外峯", url:"ko-dex", desc:"外峯零アーカイブ" },
-    { title:"災厄", url:"SVkHPHfDxRE", desc:"赤い眼が内側を見ている" },
-    { title:"アップデート", url:"release/index", desc:"AINOS97BIOS Update Utility。3周年特設。" },
-    { title:"サイト内検索", url:"search", desc:"サイト内検索ページ。" }
+    { title:"動画", url:"https://youtu.be/dxfWWPZmtv0", desc:"2024年6月31日の緊急放送記録" }
   ];
 
-  function doSearch() {
-    const raw = document.getElementById('q').value.trim();
-    const q = raw.toLowerCase();
-    const out = document.getElementById('results');
-    
+  let searchIndexPromise;
 
-// 特定ワードで裏ルート
-　　　if (raw.includes("プロジェクトC")) {
-　　  triggerHiddenAccess();
-　　  return;
-　　　　}
-    function triggerHiddenAccess(){
-  const pass = prompt("ACCESS RESTRICTED\nPASSWORD:");
+  function normalizeText(value) {
+    return String(value || "")
+      .normalize("NFKC")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
 
-  if (!pass) return;
+  function normalizeForSearch(value) {
+    return normalizeText(value).toLocaleLowerCase();
+  }
 
-  const PROJECT_C_VIDEO_ID = "Unv6s1LU9rg";
-
-  function isValidAccessKey(value) {
-    const input = value.trim();
-
-    if (input.toLowerCase() === "akashive" || input === PROJECT_C_VIDEO_ID) {
-      return true;
+  async function loadSearchIndex() {
+    if (!searchIndexPromise) {
+      searchIndexPromise = fetch("search-index.json", { cache: "no-cache" })
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then(data => Array.isArray(data.pages) ? data.pages : []);
     }
+    return searchIndexPromise;
+  }
 
-    try {
-      const urlText = /^https?:\/\//i.test(input) ? input : `https://${input}`;
-      const url = new URL(urlText);
-      const host = url.hostname.replace(/^www\./, "").toLowerCase();
+  function searchableText(page) {
+    return normalizeForSearch([
+      page.title,
+      page.url,
+      page.text,
+      page.excerpt,
+      page.desc,
+      ...(Array.isArray(page.keywords) ? page.keywords : [])
+    ].filter(Boolean).join(" "));
+  }
 
-      if (host === "youtu.be") {
-        return url.pathname.split("/").filter(Boolean)[0] === PROJECT_C_VIDEO_ID;
+  function countOccurrences(text, term) {
+    if (!term) return 0;
+    let count = 0;
+    let position = 0;
+    while ((position = text.indexOf(term, position)) !== -1) {
+      count += 1;
+      position += term.length;
+      if (count >= 20) break;
+    }
+    return count;
+  }
+
+  function resultScore(page, query, terms, haystack) {
+    const title = normalizeForSearch(page.title);
+    const url = normalizeForSearch(page.url);
+    let score = 0;
+
+    if (title === query) score += 200;
+    else if (title.includes(query)) score += 100;
+    if (url.includes(query)) score += 30;
+
+    for (const term of terms) {
+      if (title.includes(term)) score += 25;
+      score += Math.min(countOccurrences(haystack, term), 10);
+    }
+    return score;
+  }
+
+  function createExcerpt(page, terms) {
+    const source = normalizeText(page.text || page.excerpt || page.desc || "");
+    if (!source) return "";
+
+    const normalized = source.toLocaleLowerCase();
+    const positions = terms
+      .map(term => normalized.indexOf(term))
+      .filter(position => position >= 0);
+    const matchPosition = positions.length ? Math.min(...positions) : 0;
+    const start = Math.max(0, matchPosition - 45);
+    const end = Math.min(source.length, matchPosition + 135);
+
+    return `${start > 0 ? "…" : ""}${source.slice(start, end).trim()}${end < source.length ? "…" : ""}`;
+  }
+
+  function pageHref(url) {
+    const value = String(url || "");
+    if (/^https?:\/\//i.test(value)) return value;
+    return `https://gainenull.org/${value.replace(/^\/+/, "")}`;
+  }
+
+  function triggerHiddenAccess() {
+    const pass = prompt("ACCESS RESTRICTED\nPASSWORD:");
+    if (!pass) return;
+
+    const PROJECT_C_VIDEO_ID = "Unv6s1LU9rg";
+
+    function isValidAccessKey(value) {
+      const input = value.trim();
+
+      if (input.toLowerCase() === "akashive" || input === PROJECT_C_VIDEO_ID) {
+        return true;
       }
 
-      if (host === "youtube.com" || host === "m.youtube.com") {
-        return url.searchParams.get("v") === PROJECT_C_VIDEO_ID;
+      try {
+        const urlText = /^https?:\/\//i.test(input) ? input : `https://${input}`;
+        const url = new URL(urlText);
+        const host = url.hostname.replace(/^www\./, "").toLowerCase();
+
+        if (host === "youtu.be") {
+          return url.pathname.split("/").filter(Boolean)[0] === PROJECT_C_VIDEO_ID;
+        }
+
+        if (host === "youtube.com" || host === "m.youtube.com") {
+          return url.searchParams.get("v") === PROJECT_C_VIDEO_ID;
+        }
+      } catch (_) {
+        return false;
       }
-    } catch (_) {
+
       return false;
     }
 
-    return false;
+    if (isValidAccessKey(pass)) {
+      window.location.href = "https://gainenull.org/t-iui";
+    } else {
+      alert("読込み失敗、再度お試し下さい");
+    }
   }
 
-  if (isValidAccessKey(pass)) {
-    window.location.href = "https://gainenull.org/t-iui";
-  } else {
-    alert("読込み失敗、再度お試し下さい");
-  }
-}
-    if (!q) { out.innerHTML = ''; return; }
+  async function doSearch() {
+    const raw = document.getElementById("q").value.trim();
+    const query = normalizeForSearch(raw);
+    const out = document.getElementById("results");
 
-    const matched = PAGES.filter(p =>
-      p.title.toLowerCase().includes(q) ||
-      p.desc.toLowerCase().includes(q) ||
-      p.url.toLowerCase().includes(q)
-    );
+    if (raw.includes("プロジェクトC")) {
+      triggerHiddenAccess();
+      return;
+    }
+
+    if (!query) {
+      out.innerHTML = "";
+      return;
+    }
+
+    out.innerHTML = '<p class="note" style="padding:8px 0">検索しています…</p>';
+
+    let indexedPages;
+    try {
+      indexedPages = await loadSearchIndex();
+    } catch (error) {
+      console.error("Search index could not be loaded", error);
+      out.innerHTML = '<p class="note" style="padding:8px 0">検索データを読み込めませんでした。時間をおいて再度お試しください。</p>';
+      return;
+    }
+
+    const terms = query.split(/\s+/).filter(Boolean);
+    const matched = [...indexedPages, ...EXTRA_PAGES]
+      .map(page => {
+        const haystack = searchableText(page);
+        if (!terms.every(term => haystack.includes(term))) return null;
+        return {
+          page,
+          score: resultScore(page, query, terms, haystack),
+          excerpt: createExcerpt(page, terms)
+        };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.score - a.score || a.page.title.localeCompare(b.page.title, "ja"));
 
     if (matched.length === 0) {
       out.innerHTML = `<p class="note" style="padding:8px 0">「${escHtml(raw)}」に一致するページは見つかりませんでした。</p>`;
       return;
     }
 
-    const items = matched.map(p => `
+    const items = matched.map(({ page, excerpt }) => `
       <li style="padding:12px 8px;border-top:1px dashed var(--line)">
-        <a href="https://gainenull.org/${p.url}" style="font-size:15px;font-weight:bold">${escHtml(p.title)}</a>
-        <p class="note" style="margin:2px 0 0">${escHtml(p.desc)}</p>
-      </li>`).join('');
+        <a href="${escHtml(pageHref(page.url))}" style="font-size:15px;font-weight:bold">${escHtml(page.title)}</a>
+        ${excerpt ? `<p class="note" style="margin:2px 0 0">${escHtml(excerpt)}</p>` : ""}
+      </li>`).join("");
 
     out.innerHTML = `
       <p class="note" style="margin-bottom:6px">「${escHtml(raw)}」の検索結果：${matched.length}件</p>
@@ -150,23 +221,24 @@
       </ul>`;
   }
 
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  function escHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 
-  // URLパラメータから検索語を受け取る
   const params = new URLSearchParams(location.search);
-  const initQ = params.get('q');
+  const initQ = params.get("q");
   if (initQ) {
-    document.getElementById('q').value = initQ;
+    document.getElementById("q").value = initQ;
     doSearch();
   }
 
-  // Enterキーでも検索
-  document.getElementById('q').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doSearch();
+  document.getElementById("q").addEventListener("keydown", event => {
+    if (event.key === "Enter") doSearch();
   });
   </script>
-
 </body>
 </html>
