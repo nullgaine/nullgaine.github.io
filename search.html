@@ -100,9 +100,9 @@
     }
 
     try {
-      const urlText = /^https?:\\/\\//i.test(input) ? input : `https://${input}`;
+      const urlText = /^https?:\/\//i.test(input) ? input : `https://${input}`;
       const url = new URL(urlText);
-      const host = url.hostname.replace(/^www\\./, "").toLowerCase();
+      const host = url.hostname.replace(/^www\./, "").toLowerCase();
 
       if (host === "youtu.be") {
         return url.pathname.split("/").filter(Boolean)[0] === PROJECT_C_VIDEO_ID;
