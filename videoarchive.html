@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="N/A市内で回収・保存された映像記録の閲覧ページです。">
+  <title>N/A市映像記録保管庫</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/videoarchive.css">
+</head>
+<body class="video-archive-page">
+  <div id="header"></div>
+
+  <main class="video-archive-shell">
+    <section class="archive-masthead" aria-labelledby="archive-title">
+      <div class="archive-heading">
+        <p class="archive-kicker">N/A CITY / AUDIOVISUAL RECORDS DIVISION</p>
+        <h1 id="archive-title">N/A市映像記録保管庫</h1>
+        <p class="archive-lead">市内で回収・保存された映像記録を、登録番号順に閲覧できます。</p>
+      </div>
+      <dl class="archive-status" aria-label="保管庫の状態">
+        <div><dt>TERMINAL</dt><dd>NA-AV-01</dd></div>
+        <div><dt>RECORDS</dt><dd>0003</dd></div>
+        <div><dt>STATUS</dt><dd class="status-online">ONLINE</dd></div>
+      </dl>
+    </section>
+
+    <section class="archive-toolbar" aria-label="映像記録の検索">
+      <label class="archive-search">
+        <span>記録照合</span>
+        <input id="video-search" type="search" placeholder="日付・分類・ファイル名で検索" autocomplete="off">
+      </label>
+      <p class="archive-count" id="archive-count" aria-live="polite">表示記録：3 / 3</p>
+    </section>
+
+    <section class="video-record-grid" id="video-records" aria-label="映像記録一覧">
+      <article class="video-record record-emergency" id="record-20240631" data-category="city" data-search="2024 6 31 20240631250472 緊急放送 市内放送 警報 emergency">
+        <div class="record-strip">
+          <span>NA-BC/20240631</span>
+          <span class="record-state">EMERGENCY</span>
+        </div>
+        <button class="record-poster" type="button" data-video-id="dxfWWPZmtv0" data-video-title="【緊急放送】20240631250472.mp4" aria-label="緊急放送記録を再生">
+          <img src="https://i.ytimg.com/vi/dxfWWPZmtv0/hqdefault.jpg" alt="緊急放送記録のサムネイル" loading="lazy">
+          <span class="record-rec" aria-hidden="true"><i></i> REC</span>
+          <span class="record-play" aria-hidden="true">再生</span>
+          <span class="record-timecode" aria-hidden="true">2024 / 06 / 31</span>
+        </button>
+        <div class="record-body">
+          <p class="record-label">緊急放送 / CITY BROADCAST</p>
+          <h2>20240631250472.mp4</h2>
+          <p class="record-description">2024年6月31日に記録された緊急放送。</p>
+          <div class="record-actions">
+            <button class="record-view" type="button" data-video-id="dxfWWPZmtv0" data-video-title="【緊急放送】20240631250472.mp4">映像を閲覧</button>
+            <a href="https://www.youtube.com/watch?v=dxfWWPZmtv0" target="_blank" rel="noopener">外部で開く</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="video-record" id="record-20250230" data-category="city" data-search="2025 2 30 2025023010854250475 市内 映像記録 observation">
+        <div class="record-strip">
+          <span>NA-OBS/20250230</span>
+          <span class="record-state">ARCHIVED</span>
+        </div>
+        <button class="record-poster" type="button" data-video-id="PLdH7i8ruPY" data-video-title="2025023010854250475.mp4" aria-label="2025年2月30日の映像記録を再生">
+          <img src="https://i.ytimg.com/vi/PLdH7i8ruPY/hqdefault.jpg" alt="2025年2月30日の映像記録のサムネイル" loading="lazy">
+          <span class="record-rec" aria-hidden="true"><i></i> REC</span>
+          <span class="record-play" aria-hidden="true">再生</span>
+          <span class="record-timecode" aria-hidden="true">2025 / 02 / 30</span>
+        </button>
+        <div class="record-body">
+          <p class="record-label">市内記録 / OBSERVATION</p>
+          <h2>2025023010854250475.mp4</h2>
+          <p class="record-description">2025年2月30日付で保管された映像記録。</p>
+          <div class="record-actions">
+            <button class="record-view" type="button" data-video-id="PLdH7i8ruPY" data-video-title="2025023010854250475.mp4">映像を閲覧</button>
+            <a href="https://www.youtube.com/watch?v=PLdH7i8ruPY" target="_blank" rel="noopener">外部で開く</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="video-record" id="record-20251233" data-category="city" data-search="2025 12 33 20251233155081350097 テレビ録画 市内 television capture">
+        <div class="record-strip">
+          <span>NA-TV/20251233</span>
+          <span class="record-state">CAPTURED</span>
+        </div>
+        <button class="record-poster" type="button" data-video-id="gxxHFZWzS3g" data-video-title="20251233155081350097.mp4" aria-label="2025年12月33日のテレビ録画を再生">
+          <img src="https://i.ytimg.com/vi/gxxHFZWzS3g/hqdefault.jpg" alt="2025年12月33日のテレビ録画のサムネイル" loading="lazy">
+          <span class="record-rec" aria-hidden="true"><i></i> REC</span>
+          <span class="record-play" aria-hidden="true">再生</span>
+          <span class="record-timecode" aria-hidden="true">2025 / 12 / 33</span>
+        </button>
+        <div class="record-body">
+          <p class="record-label">テレビ録画 / TV CAPTURE</p>
+          <h2>20251233155081350097.mp4</h2>
+          <p class="record-description">2025年12月33日付のテレビ録画データ。</p>
+          <div class="record-actions">
+            <button class="record-view" type="button" data-video-id="gxxHFZWzS3g" data-video-title="20251233155081350097.mp4">映像を閲覧</button>
+            <a href="https://www.youtube.com/watch?v=gxxHFZWzS3g" target="_blank" rel="noopener">外部で開く</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="archive-empty" id="archive-empty" hidden>該当する映像記録は見つかりませんでした。</p>
+
+    <section class="archive-footnote" aria-label="閲覧上の注意">
+      <p><span>NOTICE</span> 記録上の日付および分類は、回収時のファイル情報をそのまま使用しています。</p>
+      <a href="main.html">江縫栄市立総合病院へ戻る</a>
+    </section>
+  </main>
+
+  <dialog class="video-dialog" id="video-dialog" aria-labelledby="video-dialog-title">
+    <div class="dialog-bar">
+      <div>
+        <span>PLAYBACK TERMINAL</span>
+        <strong id="video-dialog-title">映像記録</strong>
+      </div>
+      <button id="video-dialog-close" type="button" aria-label="映像を閉じる">×</button>
+    </div>
+    <div class="dialog-screen">
+      <iframe id="video-player" title="N/A市映像記録" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </dialog>
+
+  <div id="footer"></div>
+  <script src="common.js"></script>
+  <script src="videoarchive.js"></script>
+  <script>
+    async function loadPart(id, file) {
+      const response = await fetch(file);
+      document.getElementById(id).innerHTML = await response.text();
+    }
+    loadPart("header", "partials/header.html");
+    loadPart("footer", "partials/footer.html");
+  </script>
+</body>
+</html>
