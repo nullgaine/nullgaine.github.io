@@ -22,11 +22,17 @@
 <section class="panel">
   <h2>救急から在宅まで。</h2>
   <p class="note">江縫栄の“昼”と“夜”をつなぐ総合病院です。</p>
-  <div class="searchbox" role="search">
+  <form class="searchbox" role="search" id="site-search-form">
     <input id="q" type="search" placeholder="サイト内を検索" aria-label="検索語">
-    <a class="btn" href="#" onclick="go()">検索</a>
-  </div>
-  <script>function go(){const v=document.getElementById('q').value;location.href='search.html?q='+encodeURIComponent(v)}</script>
+    <button class="btn" type="submit">検索</button>
+  </form>
+  <script>
+    document.getElementById('site-search-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const v = document.getElementById('q').value;
+      location.href = 'search.html?q=' + encodeURIComponent(v);
+    });
+  </script>
  <div style="margin-top:12px; margin-bottom:12px;">
     <span class="badge"><a href="https://gainenull.org/release">3周年特設</a></span>
     <span class="badge">逕滉ｽ捺ュ蝣ｱ蜀肴ｧ狗ｯ臥?皮ｩｶ謇?</span>
