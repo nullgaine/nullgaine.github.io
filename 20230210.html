@@ -1,152 +1,510 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>「箱」簡易接続装置</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #111; color: white; text-align: center; }
-        #addendum { margin: 20px auto; width: 600px; min-height: 400px; } /* 高さを確保 */
-        #chatbox { width: 100%; height: 300px; background: black; color: white; overflow-y: auto; padding: 10px; border: 1px solid white; text-align: left; }
-        input[type="text"] { width: 80%; padding: 5px; background: #222; color: white; border: 1px solid #444; }
-        button { padding: 5px 10px; cursor: pointer; }
-        button:disabled { cursor: not-allowed; opacity: 0.5; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「箱」簡易接続装置</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --terminal-bg: #050505;
+      --terminal-panel: #0b0b0b;
+      --terminal-text: #f2f2f2;
+      --terminal-muted: #8d978d;
+      --terminal-line: #777;
+      --terminal-accent: #b9cab9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 28px 14px;
+      background: #111;
+      color: var(--terminal-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(28px, 7vw, 48px);
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-indent: 0.28em;
+    }
+
+    #addendum {
+      width: min(100%, 680px);
+      min-height: 400px;
+      margin: 0 auto;
+    }
+
+    #chatbox {
+      width: 100%;
+      height: min(56vh, 420px);
+      min-height: 300px;
+      overflow-y: auto;
+      padding: 16px;
+      border: 1px solid var(--terminal-line);
+      background: var(--terminal-bg);
+      color: var(--terminal-text);
+      text-align: left;
+      scrollbar-color: #555 #111;
+    }
+
+    #progressbar {
+      display: block;
+      margin: 0 0 12px;
+      color: var(--terminal-accent);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    #chatlog {
+      display: grid;
+      gap: 9px;
+    }
+
+    .chat-line {
+      margin: 0;
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .chat-line.user {
+      color: #d7d7d7;
+    }
+
+    .chat-line.shirase {
+      color: #fff;
+    }
+
+    .speaker {
+      margin-right: 0.55em;
+      color: var(--terminal-accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    #chatForm {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    #chatForm label {
+      color: var(--terminal-muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+
+    #chatInput {
+      width: 100%;
+      min-width: 0;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid #555;
+      border-radius: 0;
+      outline: none;
+      background: #1a1a1a;
+      color: var(--terminal-text);
+      font: inherit;
+    }
+
+    #chatInput:focus {
+      border-color: #aaa;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+    }
+
+    #sendBtn {
+      min-height: 40px;
+      padding: 8px 14px;
+      border: 1px solid #777;
+      border-radius: 0;
+      background: #ddd;
+      color: #111;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    #sendBtn:hover:not(:disabled),
+    #sendBtn:focus-visible:not(:disabled) {
+      background: #fff;
+    }
+
+    #sendBtn:disabled,
+    #chatInput:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #connectionStatus {
+      min-height: 1.5em;
+      margin: 8px 0 0;
+      color: var(--terminal-muted);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-align: left;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      #chatbox {
+        height: 58vh;
+        min-height: 280px;
+        padding: 12px;
+      }
+
+      #chatForm {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      #chatForm label {
+        grid-column: 1 / -1;
+        text-align: left;
+      }
+    }
+  </style>
 </head>
-<body onload="init()">
-
+<body>
+  <main>
     <h1>箱</h1>
-    <div id="addendum">
+    <div id="addendum" aria-busy="true"></div>
+  </main>
+
+  <script>
+    "use strict";
+
+    let responses = {};
+    let responseIndex = [];
+
+    const TOPIC_ALIASES = {
+      "プロジェクトC": [
+        "PROJECT C", "C-PROJECT", "PROJECT-C", "C PROJECT",
+        "Cプロジェクト", "プロジェクトシー", "計画C", "C計画"
+      ],
+      "暗証番号": ["パスワード", "PASSWORD", "合言葉", "アクセスキー", "鍵"],
+      "誰": ["あなたは誰", "君は誰", "何者", "名前", "名前は", "名前を教えて"],
+      "外峯零": ["外峯", "零さん", "れいさん", "SOTOMINE REI"],
+      "こんに": ["こんにちは", "こんちは"],
+      "ヒント": ["助けて", "わからない", "分からない", "教えて"]
+    };
+
+    const CONTEXT_REPLIES = {
+      "境界線": "境界線そのものより、誰が、何のために引いたかを気にした方がいい。",
+      "外峯零": "本人のことを僕の答えだけで決めるのはやめた方がいい。彼女は、決められた形に収まるものじゃないからね。",
+      "概念核": "その言葉を知っているなら、次に探すべきなのは研究計画の方だ。ここで掘り返す話じゃない。",
+      "暗証番号": "番号そのものを僕に聞いても答えないよ。鍵は、鍵だと名乗っているとは限らない。"
+    };
+
+    const PROJECT_C_HINTS = [
+      "その名前を知っているなら、ここでする質問じゃない。病院の検索窓へ、今の言葉をそのまま入れてみるといい。",
+      "入口の先で止められたかい？　なら、1988年の実験前説明映像を探すんだ。鍵は説明の内容そのものじゃない。",
+      "まだわからない？　動画URLの末尾にある11文字。それを、要求された場所へ示してみなよ。"
+    ];
+
+    const FOLLOW_UP_TERMS = [
+      "詳しく", "もう少し", "続き", "それは", "どういう意味",
+      "どういうこと", "なぜ", "なんで", "教えて", "ヒント"
+    ];
+
+    document.addEventListener("DOMContentLoaded", init);
+
+    async function init() {
+      setupChatUI();
+      let dictionaryLoaded = true;
+
+      try {
+        const response = await fetch("responses.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        responses = await response.json();
+      } catch (error) {
+        dictionaryLoaded = false;
+        console.error("辞書読み込み失敗。内蔵データを使用します:", error);
+        responses = {
+          "こんに": "（通信が不安定なようだ……）",
+          "ヒント": "……今はうまく拾えない。少し時間を置いてくれるかい？"
+        };
+      }
+
+      buildResponseIndex();
+      startProgress(dictionaryLoaded);
+    }
+
+    function setupChatUI() {
+      const chatroom = `
+        <div id="chatbox">
+          <div id="progressbar" aria-hidden="true"></div>
+          <div id="chatlog" role="log" aria-live="polite" aria-relevant="additions text"></div>
         </div>
+        <form id="chatForm">
+          <label for="chatInput">INPUT</label>
+          <input type="text" id="chatInput" maxlength="60" placeholder="メッセージを入力" autocomplete="off" disabled>
+          <button type="submit" id="sendBtn" disabled>送信</button>
+        </form>
+        <p id="connectionStatus" aria-live="polite">DICTIONARY: LOADING / CONNECTION: STANDBY</p>
+      `;
 
-    <script>
-        let responses = {};
+      const addendum = document.getElementById("addendum");
+      addendum.innerHTML = chatroom;
 
-        // 1. 最初に実行される
-        async function init() {
-            // UIを先に作ってしまう（箱が消えるのを防ぐ）
-            setupChatUI();
+      document.getElementById("chatForm").addEventListener("submit", event => {
+        event.preventDefault();
+        send();
+      });
+    }
 
-            try {
-                // 外部JSON読み込み
-                const response = await fetch('responses.json');
-                if (!response.ok) throw new Error('Network response was not ok');
-                responses = await response.json();
-            } catch (error) {
-                console.error("辞書読み込み失敗。内蔵データを使用します:", error);
-                // 読み込めなかった時のための最低限のバックアップ
-                responses = { "こんにちは": "（通信が不安定なようだ……）" };
-            }
-            
-            // プログレスバー開始
-            startProgress();
+    function startProgress(dictionaryLoaded) {
+      let progress = 0;
+      const progressbar = document.getElementById("progressbar");
+      const button = document.getElementById("sendBtn");
+      const input = document.getElementById("chatInput");
+      const status = document.getElementById("connectionStatus");
+
+      function tick() {
+        progress = Math.min(progress + 1, 100);
+        const bar = "#".repeat(Math.floor(progress / 5));
+        progressbar.textContent = `>該当しないアクセスが確認されました。接続します。\n${bar} ${progress}%`;
+
+        if (progress < 100) {
+          setTimeout(tick, 30);
+          return;
         }
 
-        // 2. チャットの見た目を作る
-        function setupChatUI() {
-            var chatroom = `
-                <div id="chatbox">
-                    <pre><span id="progressbar"></span><span id="chatlog"></span></pre>
-                </div>
-                <input type="text" id="chatInput" maxlength="30" placeholder="メッセージを入力">
-                <button id="sendBtn" onclick="send()" disabled>Send</button>
-            `;
-            document.getElementById("addendum").innerHTML = chatroom;
+        progressbar.textContent = `>こちら、世界の外側N/A市です。ごきげんよう、内側の方。\n${bar} 100%\n`;
+        button.disabled = false;
+        input.disabled = false;
+        input.focus();
+        status.textContent = dictionaryLoaded
+          ? "DICTIONARY: ONLINE / CONNECTION: ESTABLISHED / ENTER: SEND"
+          : "DICTIONARY: DEGRADED / CONNECTION: ESTABLISHED / ENTER: SEND";
+        document.getElementById("addendum").setAttribute("aria-busy", "false");
+        appendLine("Shirase", "ちゃんと届いているかい？", "shirase");
+      }
+
+      setTimeout(tick, 50);
+    }
+
+    function normalize(value) {
+      return String(value || "")
+        .normalize("NFKC")
+        .toLocaleLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/[_\-‐‑‒–—―./:・,，、!?！？"'「」『』（）()\[\]{}]/g, "");
+    }
+
+    function buildResponseIndex() {
+      const candidates = [];
+
+      Object.keys(responses).forEach(topic => {
+        const term = normalize(topic);
+        if (term) candidates.push({ topic, term, priority: 2 });
+      });
+
+      Object.entries(TOPIC_ALIASES).forEach(([topic, aliases]) => {
+        aliases.forEach(alias => {
+          const term = normalize(alias);
+          if (term) candidates.push({
+            topic,
+            term,
+            priority: topic === "ヒント" ? 0 : 1
+          });
+        });
+      });
+
+      responseIndex = candidates.sort((a, b) =>
+        b.priority - a.priority || b.term.length - a.term.length
+      );
+    }
+
+    function editDistance(a, b) {
+      const row = Array.from({ length: b.length + 1 }, (_, index) => index);
+
+      for (let i = 1; i <= a.length; i += 1) {
+        let previous = row[0];
+        row[0] = i;
+
+        for (let j = 1; j <= b.length; j += 1) {
+          const saved = row[j];
+          row[j] = Math.min(
+            row[j] + 1,
+            row[j - 1] + 1,
+            previous + (a[i - 1] === b[j - 1] ? 0 : 1)
+          );
+          previous = saved;
         }
+      }
 
-        // 3. 接続演出
-        function startProgress() {
-            var c = 0;
-            var progressbar = document.getElementById("progressbar");
-            var btn = document.getElementById("sendBtn");
-            var input = document.getElementById("chatInput");
+      return row[b.length];
+    }
 
-            function tick() {
-                c++;
-                if (c > 100) c = 100;
-                var bar = "#".repeat(Math.floor(c / 5));
-                progressbar.innerHTML = `>該当しないアクセスが確認されました。接続します。<br>${bar} ${c}%`;
+    function findTopic(message) {
+      const normalizedMessage = normalize(message);
+      if (!normalizedMessage) return "";
 
-                if (c < 100) {
-                    setTimeout(tick, 30);
-                } else {
-                    progressbar.innerHTML = `>こちら、世界の外側N/A市です。ごきげんよう、内側の方。<br>${bar} 100%<br>`;
-                    btn.disabled = false;
-                    input.focus();
+      const direct = responseIndex.find(entry => normalizedMessage.includes(entry.term));
+      if (direct) return direct.topic;
 
-                    // --- エンターキーの設定（ここなら確実） ---
-                    input.addEventListener("keydown", function(e) {
-                        if (e.key === "Enter" && !e.isComposing) {
-                            e.preventDefault();
-                            send();
-                        }
-                    });
+      if (normalizedMessage.length > 12) return "";
 
-                    chat2();
-                }
-            }
-            setTimeout(tick, 50);
-        }
+      const nearest = responseIndex
+        .filter(entry => entry.term.length >= 2)
+        .map(entry => ({ ...entry, distance: editDistance(normalizedMessage, entry.term) }))
+        .sort((a, b) => a.distance - b.distance || b.term.length - a.term.length)[0];
 
-        function chat2() {
-            var chatlog = document.getElementById("chatlog");
-            chatlog.innerHTML += "<ins>Shirase:</ins>ちゃんと届いているかい？<br>";
-        }
+      if (!nearest) return "";
+      const allowance = nearest.term.length >= 8 ? 2 : 1;
+      return nearest.distance <= allowance ? nearest.topic : "";
+    }
 
-        // 4. 送信処理
-        function send() {
-            var input = document.getElementById("chatInput");
-            var message = input.value.trim();
-            if (message === "") return;
+    function getStoredValue(key) {
+      try {
+        return sessionStorage.getItem(key);
+      } catch (_) {
+        return null;
+      }
+    }
 
-            var chatlog = document.getElementById("chatlog");
-            chatlog.innerHTML += `<ins>あなた:</ins> ${message}<br>`;
+    function setStoredValue(key, value) {
+      try {
+        sessionStorage.setItem(key, String(value));
+      } catch (_) {
+        // Storage is optional. The conversation still works without it.
+      }
+    }
 
-            let reply = "";
+    function getPersistentValue(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (_) {
+        return null;
+      }
+    }
 
-            // フラグ管理
-            if (message.includes("境界線")) {
-                localStorage.setItem('met_boundary', 'true');
-            }
+    function setPersistentValue(key, value) {
+      try {
+        localStorage.setItem(key, String(value));
+      } catch (_) {
+        // Storage is optional. The conversation still works without it.
+      }
+    }
 
-            // 特殊分岐
-            if (message.includes("こんに")) {
-                if (localStorage.getItem('met_boundary')) {
-                    reply = "やあ。境界線の向こう側を覗いた気分はどうだい？";
-                } else {
-                    reply = responses["こんに"] || "こんにちは。そこは昼かな？";
-                }
-            } 
-            // 辞書チェック
-            else {
-                const matchedKey = Object.keys(responses).find(key => message.includes(key));
-                if (matchedKey) {
-                    reply = responses[matchedKey];
-                }
-            }
+    function isFollowUp(message) {
+      const normalizedMessage = normalize(message);
+      return FOLLOW_UP_TERMS.some(term => normalizedMessage.includes(normalize(term)));
+    }
 
-            // ランダム応答
-            if (!reply) {
-                var randomReplies = [
-                    "君、それ、どこで聞いたんだい？知ってることが混じってる",
-                    "……ごめん、その言葉は此処まで届いていないみたいだ",
-                    "いい質問だ。でも答えはないよ",
-                    "君がそれをどう解釈するか、見ものだ",
-                    "縺ｾ縺?遲斐∴縺檎畑諢上＆繧後※縺?∪縺帙ｓ"
-                ];
-                reply = randomReplies[Math.floor(Math.random() * randomReplies.length)];
-            }
+    function nextProjectCHint() {
+      const current = Number(getStoredValue("shirase_project_c_hint") || 0);
+      const level = Number.isFinite(current) ? Math.min(Math.max(current, 0), PROJECT_C_HINTS.length - 1) : 0;
+      setStoredValue("shirase_project_c_hint", Math.min(level + 1, PROJECT_C_HINTS.length - 1));
+      return PROJECT_C_HINTS[level];
+    }
 
-            setTimeout(() => {
-                chatlog.innerHTML += `<ins>Shirase:</ins> ${reply}<br>`;
-                var obj = document.getElementById("chatbox");
-                obj.scrollTop = obj.scrollHeight;
-            }, 800);
+    function contextualReply(topic) {
+      if (topic === "プロジェクトC") return nextProjectCHint();
+      if (CONTEXT_REPLIES[topic]) return CONTEXT_REPLIES[topic];
+      if (responses[topic]) {
+        return `「${topic}」の続きを聞いているのかい？　同じ答えを言い換えても、情報が増えるとは限らないよ。`;
+      }
+      return "";
+    }
 
-            input.value = "";
-            input.focus();
-        }
-    </script>
+    function chooseReply(message) {
+      const normalizedMessage = normalize(message);
+      let topic = findTopic(message);
+      const lastTopic = getStoredValue("shirase_last_topic") || "";
 
+      if ((topic === "ヒント" || isFollowUp(message)) && lastTopic) {
+        topic = lastTopic;
+        const contextual = contextualReply(topic);
+        if (contextual) return { topic, reply: contextual };
+      }
+
+      if (topic === "プロジェクトC") {
+        return { topic, reply: nextProjectCHint() };
+      }
+
+      if (normalizedMessage.includes(normalize("こんに"))) {
+        const reply = getPersistentValue("met_boundary")
+          ? "やあ。境界線の向こう側を覗いた気分はどうだい？"
+          : responses["こんに"] || "こんにちは。そこは昼かな？";
+        return { topic: "こんに", reply };
+      }
+
+      if (topic && responses[topic]) {
+        return { topic, reply: responses[topic] };
+      }
+
+      const questionReplies = [
+        "君、それ、どこで聞いたんだい？　知ってることが混じってる。",
+        "いい質問だ。でも、答えがある質問とは限らないよ。",
+        "君がそれをどう解釈するか、見ものだ。"
+      ];
+      const statementReplies = [
+        "……ごめん、その言葉は此処まで届いていないみたいだ。",
+        "今の言葉は記録しておくよ。意味を持つかは、まだわからないけど。",
+        "縺ｾ縺?遲斐∴縺檎畑諢上＆繧後※縺?∪縺帙ｓ"
+      ];
+      const pool = /[?？]|(?:なに|何|どう|なぜ|どこ|誰)/.test(message)
+        ? questionReplies
+        : statementReplies;
+      return { topic: "", reply: pool[Math.floor(Math.random() * pool.length)] };
+    }
+
+    function appendLine(speaker, text, className) {
+      const chatlog = document.getElementById("chatlog");
+      const line = document.createElement("p");
+      line.className = `chat-line ${className}`;
+
+      const label = document.createElement("span");
+      label.className = "speaker";
+      label.textContent = `${speaker}:`;
+
+      const message = document.createElement("span");
+      message.textContent = text;
+
+      line.append(label, message);
+      chatlog.append(line);
+      scrollToLatest();
+    }
+
+    function scrollToLatest() {
+      const chatbox = document.getElementById("chatbox");
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function send() {
+      const input = document.getElementById("chatInput");
+      const message = input.value.trim();
+      if (!message || input.disabled) return;
+
+      appendLine("あなた", message, "user");
+
+      if (normalize(message).includes(normalize("境界線"))) {
+        setPersistentValue("met_boundary", "true");
+      }
+
+      const result = chooseReply(message);
+      if (result.topic) setStoredValue("shirase_last_topic", result.topic);
+
+      input.value = "";
+      input.focus();
+
+      setTimeout(() => {
+        appendLine("Shirase", result.reply, "shirase");
+      }, 800);
+    }
+  </script>
 </body>
 </html>
