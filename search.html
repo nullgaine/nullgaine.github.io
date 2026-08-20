@@ -237,7 +237,10 @@
   }
 
   document.getElementById("q").addEventListener("keydown", event => {
-    if (event.key === "Enter") doSearch();
+    if (event.key === "Enter" && !event.isComposing) {
+      event.preventDefault();
+      doSearch();
+    }
   });
   </script>
 </body>
