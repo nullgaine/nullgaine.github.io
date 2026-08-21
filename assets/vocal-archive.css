@@ -1,0 +1,312 @@
+/* 歌唱記録照合端末。旧ページの内容を残したまま、保管庫の外観へ接続する。 */
+.vocal-page{
+  min-height:100%;
+  background:
+    linear-gradient(rgba(39,37,34,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(39,37,34,.025) 1px,transparent 1px),
+    var(--bg);
+  background-size:28px 28px;
+  color:var(--ink);
+  font-family:var(--serif)!important;
+  letter-spacing:0;
+}
+
+.vocal-toolbar{
+  position:sticky;
+  top:0;
+  z-index:40;
+  border-bottom:1px solid var(--line-dark);
+  background:rgba(251,250,247,.96);
+  box-shadow:0 6px 20px rgba(47,41,35,.1);
+  backdrop-filter:blur(9px);
+}
+.vocal-toolbar-inner{
+  display:grid;
+  width:min(1180px,calc(100% - 40px));
+  margin:0 auto;
+  padding:10px 0;
+  grid-template-columns:auto minmax(240px,1fr) auto;
+  align-items:center;
+  gap:10px;
+}
+.vocal-home{
+  padding-right:15px;
+  border-right:1px solid var(--line);
+  color:var(--ink);
+  font:11px/1.5 var(--mono);
+  letter-spacing:.06em;
+  white-space:nowrap;
+}
+.vocal-home::before{margin-right:7px;color:var(--accent);content:"←"}
+.vocal-search-wrap{position:relative;display:block}
+.vocal-search-label{
+  position:absolute;
+  top:50%;
+  left:12px;
+  color:var(--muted);
+  font:9px/1 var(--mono);
+  letter-spacing:.12em;
+  transform:translateY(-50%);
+}
+.vocal-search{
+  width:100%;
+  min-width:0;
+  padding:10px 12px 10px 76px;
+  border:1px solid var(--line-dark);
+  border-radius:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:14px/1.45 var(--sans);
+}
+.vocal-controls{display:flex;gap:6px}
+.vocal-tool-button{
+  padding:9px 10px;
+  border:1px solid var(--line-dark);
+  border-radius:0;
+  background:var(--paper);
+  color:var(--ink);
+  cursor:pointer;
+  font:10px/1.5 var(--mono);
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+.vocal-tool-button:hover,
+.vocal-tool-button[aria-pressed="true"]{
+  border-color:var(--accent);
+  background:var(--accent);
+  color:#fff;
+}
+
+.vocal-shell{
+  width:min(1180px,calc(100% - 40px));
+  margin:34px auto 72px;
+}
+.vocal-masthead{
+  position:relative;
+  display:grid;
+  padding:clamp(25px,5vw,54px);
+  overflow:hidden;
+  border:1px solid var(--line-dark);
+  outline:4px double var(--line);
+  outline-offset:-9px;
+  background:
+    linear-gradient(112deg,transparent 0 64%,rgba(180,33,44,.045) 64% 100%),
+    var(--paper);
+  box-shadow:0 18px 38px var(--shadow);
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:32px;
+  align-items:end;
+}
+.vocal-masthead::after{
+  position:absolute;
+  top:18px;
+  right:22px;
+  color:rgba(180,33,44,.11);
+  content:"VOCAL";
+  font:700 clamp(36px,8vw,92px)/1 var(--mono);
+  letter-spacing:-.06em;
+  transform:rotate(-4deg);
+}
+.vocal-heading,.vocal-status{position:relative;z-index:1}
+.vocal-kicker{
+  margin:0 0 12px;
+  color:var(--accent);
+  font:11px/1.5 var(--mono);
+  letter-spacing:.18em;
+}
+.vocal-masthead h1{
+  max-width:760px;
+  margin:0;
+  font-size:clamp(29px,5.8vw,58px);
+  font-weight:500;
+  letter-spacing:.08em;
+  line-height:1.2;
+}
+.vocal-lead{
+  max-width:680px;
+  margin:18px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+.vocal-status{
+  display:grid;
+  min-width:204px;
+  margin:0;
+  border-top:1px solid var(--line-dark);
+  font:10px/1.5 var(--mono);
+}
+.vocal-status div{
+  display:grid;
+  padding:7px 0;
+  border-bottom:1px solid var(--line);
+  grid-template-columns:92px 1fr;
+  gap:14px;
+}
+.vocal-status dt,.vocal-status dd{margin:0}
+.vocal-status dt{color:var(--muted)}
+.vocal-status dd{text-align:right}
+.vocal-online{color:#426c47}
+.vocal-online::before{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  margin-right:6px;
+  border-radius:50%;
+  background:currentColor;
+  content:"";
+  box-shadow:0 0 8px currentColor;
+}
+
+.vocal-guide{
+  display:grid;
+  margin:34px 0 20px;
+  padding:21px 22px;
+  border-top:2px solid var(--ink);
+  border-bottom:1px solid var(--line);
+  background:rgba(251,250,247,.84);
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:28px;
+  align-items:end;
+}
+.vocal-guide-label{
+  margin:0 0 5px;
+  color:var(--accent);
+  font:10px/1.5 var(--mono);
+  letter-spacing:.16em;
+}
+.vocal-guide h2{margin:0 0 8px;font-size:clamp(18px,3vw,25px)}
+.vocal-guide p{max-width:760px;margin:0;color:var(--muted);font-size:13px}
+.vocal-legend{
+  display:flex;
+  margin:0;
+  padding:0;
+  color:var(--muted);
+  font:10px/1.6 var(--mono);
+  list-style:none;
+  gap:12px;
+  white-space:nowrap;
+}
+.vocal-legend li::before{margin-right:6px;content:"□"}
+.vocal-legend .sample::before{color:var(--accent);content:"■"}
+
+.vocal-catalog{
+  width:auto!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:left!important;
+}
+.vocal-legacy-intro{display:none}
+.body-title{
+  display:flex;
+  width:100%;
+  margin:14px 0 0;
+  padding:13px 15px;
+  border:1px solid var(--line-dark);
+  border-radius:0;
+  background:var(--paper);
+  color:var(--ink);
+  cursor:pointer;
+  font:500 18px/1.5 var(--serif);
+  letter-spacing:.08em;
+  align-items:center;
+  gap:10px;
+  user-select:none;
+}
+.body-title::before{
+  color:var(--accent);
+  content:"−";
+  font:700 15px/1 var(--mono);
+}
+.body-title::after{
+  margin-left:auto;
+  color:var(--muted);
+  content:attr(data-count) " RECORDS";
+  font:9px/1 var(--mono);
+  letter-spacing:.1em;
+}
+.body-title.collapsed::before{content:"＋"}
+.body-content{
+  display:grid;
+  margin:0 0 18px;
+  padding:0;
+  overflow:hidden;
+  border:1px solid var(--line-dark);
+  border-top:0;
+  border-radius:0;
+  background:var(--paper);
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.body-title[hidden],
+.body-content[hidden]{display:none}
+.vocal-subhead{
+  margin:0!important;
+  padding:8px 12px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:var(--paper-soft);
+  color:var(--muted)!important;
+  font:10px/1.5 var(--mono)!important;
+  letter-spacing:.12em;
+  grid-column:1/-1;
+}
+.vocal-subhead:first-child{border-top:0}
+.song-row{
+  position:relative;
+  display:flex;
+  min-width:0;
+  min-height:42px;
+  padding:8px 82px 8px 14px;
+  border-bottom:1px solid var(--line);
+  color:var(--ink);
+  font:13px/1.7 var(--sans);
+  align-items:center;
+}
+.song-row:nth-of-type(odd){border-right:1px solid var(--line)}
+.song-row a{color:var(--ink);text-decoration:none}
+.song-row.has-sample{box-shadow:inset 4px 0 0 var(--accent)}
+.song-row.has-sample a{color:var(--link)}
+.song-row.has-sample::after{
+  position:absolute;
+  right:10px;
+  padding:2px 5px;
+  border:1px solid rgba(180,33,44,.35);
+  color:var(--accent);
+  content:"音源 ↗";
+  font:9px/1.4 var(--mono);
+  letter-spacing:.05em;
+}
+.song-row[hidden],.vocal-subhead[hidden]{display:none}
+mark{padding:0 .12em;border-radius:0;background:#f4d77d;color:var(--ink)}
+.vocal-empty{
+  display:none;
+  padding:34px 18px;
+  border:1px dashed var(--line-dark);
+  background:rgba(251,250,247,.8);
+  color:var(--muted);
+  font:12px/1.7 var(--mono);
+  text-align:center;
+}
+.vocal-empty.visible{display:block}
+
+@media (max-width:900px){
+  .vocal-toolbar-inner{grid-template-columns:auto 1fr}
+  .vocal-controls{grid-column:1/-1;justify-content:flex-end}
+  .vocal-masthead{grid-template-columns:1fr}
+  .vocal-status{width:min(100%,360px)}
+  .vocal-guide{grid-template-columns:1fr}
+}
+
+@media (max-width:680px){
+  .vocal-toolbar-inner,.vocal-shell{width:min(1180px,calc(100% - 28px))}
+  .vocal-toolbar-inner{grid-template-columns:1fr}
+  .vocal-home{padding:0 0 5px;border-right:0}
+  .vocal-controls{grid-column:auto;justify-content:stretch}
+  .vocal-tool-button{flex:1;padding:8px 6px}
+  .vocal-masthead{gap:22px;padding:26px 22px}
+  .vocal-masthead::after{font-size:46px}
+  .vocal-guide{padding:18px 4px;background:transparent}
+  .vocal-legend{flex-wrap:wrap;white-space:normal}
+  .body-content{grid-template-columns:1fr}
+  .song-row:nth-of-type(odd){border-right:0}
+}
