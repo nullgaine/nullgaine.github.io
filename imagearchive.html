@@ -11,7 +11,7 @@
 <body class="records-page">
   <div id="header"></div>
 
-  <main class="records-shell">
+  <main class="records-shell" data-image-protection>
     <section class="records-masthead" aria-labelledby="image-records-title">
       <div class="records-heading">
         <p class="records-kicker">N/A CITY / IMAGE RECORDS DIVISION</p>
@@ -39,13 +39,19 @@
     </section>
 
     <section class="records-footnote" aria-label="画像記録の注意事項">
-      <p><span>NOTICE</span>未整理・権限未確認の画像記録は表示されません。</p>
+      <p><span>NOTICE</span>未整理・権限未確認の画像記録は表示されません。公開画像の保存操作は制限されています。</p>
       <a href="archive.html">記録保管庫へ戻る</a>
     </section>
   </main>
 
+  <div class="records-protection-alert" role="status" aria-live="polite" aria-atomic="true">
+    <strong>READ ONLY</strong>
+    <span>画像記録の保存操作は制限されています。</span>
+  </div>
+
   <div id="footer"></div>
   <script src="common.js"></script>
+  <script src="scripts/protect-images.js"></script>
   <script>
     async function loadPart(id, file) {
       const response = await fetch(file);
