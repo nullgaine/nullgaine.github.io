@@ -77,7 +77,7 @@
       "title": "N/A市画像記録保管庫",
       "url": "imagearchive.html",
       "excerpt": "N/A市で回収・保存された画像記録の保管ページです。",
-      "text": "N/A市画像記録保管庫 N/A市で回収・保存された画像記録の保管ページです。 N/A CITY / IMAGE RECORDS DIVISION 画像記録保管庫 静止画、写真、観測画像および図像資料を保管する区画です。 TERMINAL NA-IM-01 RECORDS 0000 STATUS INDEXING 公開記録 DISPLAYING 0000 / 0000 CATALOG STATUS / PREPARING 公開可能な画像記録は現在整理中です。 記録番号と閲覧区分の割り当てが完了した資料から、順次この保管庫へ登録されます。 NOTICE 未整理・権限未確認の画像記録は表示されません。 記録保管庫へ戻る 画像記録保管庫の状態 画像記録の注意事項"
+      "text": "N/A市画像記録保管庫 N/A市で回収・保存された画像記録の保管ページです。 N/A CITY / IMAGE RECORDS DIVISION 画像記録保管庫 静止画、写真、観測画像および図像資料を保管する区画です。 TERMINAL NA-IM-01 RECORDS 0000 STATUS INDEXING 公開記録 DISPLAYING 0000 / 0000 CATALOG STATUS / PREPARING 公開可能な画像記録は現在整理中です。 記録番号と閲覧区分の割り当てが完了した資料から、順次この保管庫へ登録されます。 NOTICE 未整理・権限未確認の画像記録は表示されません。公開画像の保存操作は制限されています。 記録保管庫へ戻る READ ONLY 画像記録の保存操作は制限されています。 画像記録保管庫の状態 画像記録の注意事項"
     },
     {
       "title": "豎溽クォ譬?クらォ狗キ丞粋逞?劼1000蜿キ螳、",
@@ -166,8 +166,8 @@
     {
       "title": "お知らせ | 江縫栄市立総合病院",
       "url": "news.html",
-      "excerpt": "お知らせ N/A市映像記録保管庫(←NEW!) 蜀??縺ョ縺溘a縺ョ縺雁?ア縺帙〒縺吶 四月馬鹿のお報せ(2023年版) 譛?謔ェ縺ョ轣ス蜴? プロジェクトCと「蝎ィ」螳滄ィ",
-      "text": "お知らせ | 江縫栄市立総合病院 お知らせ N/A市映像記録保管庫(←NEW!) 蜀??縺ョ縺溘a縺ョ縺雁?ア縺帙〒縺吶 四月馬鹿のお報せ(2023年版) 譛?謔ェ縺ョ轣ス蜴? プロジェクトCと「蝎ィ」螳滄ィ"
+      "excerpt": "お知らせ N/A市映像記録保管庫(←NEW!) 四月馬鹿のお報せ(2023年版)",
+      "text": "お知らせ | 江縫栄市立総合病院 お知らせ N/A市映像記録保管庫(←NEW!) 四月馬鹿のお報せ(2023年版)"
     },
     {
       "title": "엔에이 시립 종합병원에서 알려드립니다. (개정판)",
@@ -227,7 +227,7 @@
       "title": "N/A市文章記録保管庫",
       "url": "textarchive.html",
       "excerpt": "N/A市で回収・保存された文章記録の閲覧ページです。",
-      "text": "N/A市文章記録保管庫 N/A市で回収・保存された文章記録の閲覧ページです。 N/A CITY / TEXTUAL RECORDS DIVISION 文章記録保管庫 回収文書、観測報告およびWeb上で検出された文章記録を保管しています。 TERMINAL NA-TX-01 RECORDS 0001 STATUS ONLINE 公開記録 DISPLAYING 0001 / 0001 NA-TX/WEB-EXPUNGED ARCHIVED / ORIGINAL TEXT 削除すべき記録 Webクローラーにより検出・保管された対人間認識汚染記録。原文のまま収録。 → NOTICE 記録中の表記・時系列・曖昧な表現は、回収時の状態を維持しています。 記録保管庫へ戻る 文章記録保管庫の状態 文章記録一覧 文章記録の注意事項"
+      "text": "N/A市文章記録保管庫 N/A市で回収・保存された文章記録の閲覧ページです。 N/A CITY / TEXTUAL RECORDS DIVISION 文章記録保管庫 回収文書、観測報告およびWeb上で検出された文章記録を保管しています。 TERMINAL NA-TX-01 RECORDS 0004 STATUS ONLINE 公開記録 DISPLAYING 0004 / 0004 NA-TX/INSIDE-MAIL-55 INTERNAL MAIL / JP・KO Insidemail55 プロジェクトCの型番005に関して交わされた、研究主任Lと研究補助Tの内部通信記録。 → NA-TX/IRRTUM-DER-WELT REPORT SERIES / JP・KO・EN Irrtum der Welt Nullの影響範囲と「最悪の終焉」を再評価した観察報告。日本語・韓国語・英語版を収録。 → NA-TX/WEB-EXPUNGED ARCHIVED / ORIGINAL TEXT D_archive / 削除すべき記録 Webクローラーにより検出・保管された対人間認識汚染記録。原文のまま収録。 → NA-TX/RED-EYES CONTAINED / MESSAGE Redeyes 新着メッセージとして検出され、閲覧中の変質を伴うため隔離保管された文章記録。 → NOTICE 記録中の表記・時系列・曖昧な表現は、回収時の状態を維持しています。 記録保管庫へ戻る 文章記録保管庫の状態 文章記録一覧 文章記録の注意事項"
     },
     {
       "title": "歌見本",
