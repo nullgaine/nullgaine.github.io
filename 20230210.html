@@ -385,6 +385,15 @@
       });
     }
 
+    function getSuggestedPrompt() {
+      try {
+        const value = new URLSearchParams(window.location.search).get("q") || "";
+        return value.trim().slice(0, 60);
+      } catch (_) {
+        return "";
+      }
+    }
+
     function startProgress(dictionaryLoaded) {
       let progress = 0;
       const progressbar = document.getElementById("progressbar");
@@ -405,10 +414,15 @@
         progressbar.textContent = `>こちら、世界の外側N/A市です。ごきげんよう、内側の方。\n${bar} 100%\n`;
         button.disabled = false;
         input.disabled = false;
+        const suggestedPrompt = getSuggestedPrompt();
+        if (suggestedPrompt) input.value = suggestedPrompt;
         input.focus();
-        status.textContent = dictionaryLoaded
+        const connectionLabel = dictionaryLoaded
           ? "DICTIONARY: ONLINE / CONNECTION: ESTABLISHED / ENTER: SEND"
           : "DICTIONARY: DEGRADED / CONNECTION: ESTABLISHED / ENTER: SEND";
+        status.textContent = suggestedPrompt
+          ? `${connectionLabel} / SUGGESTED INPUT: READY`
+          : connectionLabel;
         document.getElementById("addendum").setAttribute("aria-busy", "false");
         appendLine("Shirase", "ちゃんと届いているかい？", "shirase");
       }
