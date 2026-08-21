@@ -5,17 +5,184 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>縺励ｉ縺帙?邂ｱ | 江縫栄市立総合病院</title>
   <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .gateway-panel{
+      position:relative;
+      overflow:hidden;
+      padding:0;
+      border-color:#ead8df;
+    }
+    .gateway-panel::before{
+      content:"AINOS97 / QUERY ROUTE 04 / RESPONSE NODE";
+      display:block;
+      padding:9px 20px;
+      background:#1c191b;
+      color:#ff91af;
+      font:11px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;
+      letter-spacing:.12em;
+    }
+    .gateway-body{
+      padding:26px 24px 28px;
+    }
+    .gateway-label{
+      margin:0 0 4px;
+      color:#d95d86;
+      font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;
+      letter-spacing:.08em;
+    }
+    .gateway-panel h2{
+      margin:0 0 12px;
+      border:0;
+      padding:0;
+      color:var(--ink);
+      font-size:clamp(22px,4vw,30px);
+    }
+    .gateway-lead{
+      max-width:720px;
+      margin:0;
+      font-size:15px;
+    }
+    .connection-state{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin:20px 0 0;
+      padding:10px 12px;
+      border:1px solid #ead8df;
+      border-radius:8px;
+      background:#fff8fa;
+      color:#8c3c58;
+      font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;
+    }
+    .connection-state::before{
+      content:"";
+      width:8px;
+      height:8px;
+      flex:0 0 auto;
+      border-radius:50%;
+      background:#ff91af;
+      box-shadow:0 0 0 4px rgba(255,145,175,.16);
+    }
+    .prompt-section{
+      margin-top:24px;
+      padding-top:22px;
+      border-top:1px dashed var(--line);
+    }
+    .prompt-section h3{
+      margin:0 0 4px;
+      font-family:"Koruri Light",sans-serif;
+      font-size:17px;
+      font-weight:300;
+      letter-spacing:.05em;
+    }
+    .prompt-help{
+      margin:0 0 12px;
+      color:#666;
+      font-size:13px;
+    }
+    .prompt-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:9px;
+    }
+    .prompt-chip{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      min-height:46px;
+      padding:10px 13px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:#fff;
+      color:var(--ink);
+      font-size:13px;
+      transition:border-color .18s,background .18s,transform .18s;
+    }
+    .prompt-chip::after{
+      content:"→";
+      color:var(--accent-hover);
+      font-family:system-ui,sans-serif;
+    }
+    .prompt-chip:hover{
+      border-color:var(--accent);
+      background:#fff6f9;
+      text-decoration:none;
+      transform:translateY(-1px);
+    }
+    .gateway-caution{
+      margin:18px 0 0;
+      padding-left:12px;
+      border-left:3px solid #d9c7ce;
+      color:#6f6267;
+      font-size:12px;
+    }
+    .gateway-actions{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+    .gateway-button{
+      padding:11px 20px;
+      font-size:14px;
+    }
+    .gateway-button:hover{
+      color:#fff;
+      text-decoration:none;
+    }
+    .back-link{
+      color:#766a6e;
+      font-size:13px;
+    }
+    @media (max-width:560px){
+      .gateway-body{padding:22px 18px 24px;}
+      .prompt-grid{grid-template-columns:1fr;}
+      .gateway-actions{align-items:stretch;flex-direction:column;}
+      .gateway-button{text-align:center;}
+      .back-link{text-align:center;}
+    }
+  </style>
 </head>
 <body>
   <div id="header"></div>
 
 <main>
-    <h1>縺励ｉ縺帙?邂ｱ</h1>
+    <h1 aria-label="第4の窓口">縺励ｉ縺帙?邂ｱ</h1>
 
-    <div class="panel">
-      <p>隨ｬ蝗帙?螢√ｒ郢を繋ぐ窓口です。繧ゅ≧蟆代＠荳也阜隕ｳ縺ｫ豐｡鬆ｭ関するご質問などをお受けします。</p><br>
-      <a href="https://gainenull.org/20230210">窓口</a>
-      <div style="height:10px;"></div>
+    <div class="panel gateway-panel">
+      <div class="gateway-body">
+        <p class="gateway-label">EXTERNAL QUERY INTERFACE</p>
+        <h2>応答窓口《SHIRASE》</h2>
+        <p class="gateway-lead">
+          この先では、AINOS97のAIアシスタント《SHIRASE》へ直接入力できます。質問文でも、気になる名前や単語ひとつでも構いません。
+        </p>
+
+        <p class="connection-state">CONNECTION: STANDBY / RESPONSE NODE: AVAILABLE</p>
+
+        <section class="prompt-section" aria-labelledby="prompt-title">
+          <h3 id="prompt-title">何を入力すればいいですか？</h3>
+          <p class="prompt-help">下の例を選ぶと、入力欄へ言葉を持っていけます。自分の言葉で質問しても構いません。</p>
+          <div class="prompt-grid">
+            <a class="prompt-chip" href="https://gainenull.org/20230210?q=%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AF%E8%AA%B0%EF%BC%9F">あなたは誰？</a>
+            <a class="prompt-chip" href="https://gainenull.org/20230210?q=N%2FA%E5%B8%82">N/A市</a>
+            <a class="prompt-chip" href="https://gainenull.org/20230210?q=%E5%A4%96%E5%B3%AF%E9%9B%B6">外峯零</a>
+            <a class="prompt-chip" href="https://gainenull.org/20230210?q=AI%E3%81%AA%E3%81%AE%EF%BC%9F">AIなの？</a>
+            <a class="prompt-chip" href="https://gainenull.org/20230210?q=PROJECT%20C">PROJECT C</a>
+            <a class="prompt-chip" href="https://gainenull.org/20230210?q=%E8%AA%B0%E3%81%8C%E4%BD%9C%E3%81%A3%E3%81%9F%E3%81%AE%EF%BC%9F">誰が作ったの？</a>
+          </div>
+        </section>
+
+        <p class="gateway-caution">
+          応答は案内・説明・会話の成立を保証しません。質問と返答が噛み合わない場合も、接続異常とは限りません。
+        </p>
+
+        <div class="gateway-actions">
+          <a class="btn gateway-button" href="https://gainenull.org/20230210">SHIRASEに接続する</a>
+          <a class="back-link" href="https://gainenull.org/main">病院案内へ戻る</a>
+        </div>
+      </div>
     </div>
   </main>
 
