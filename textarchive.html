@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="N/A市で回収・保存された文章記録の閲覧ページです。">
+  <title>N/A市文章記録保管庫</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/records.css">
+</head>
+<body class="records-page">
+  <div id="header"></div>
+
+  <main class="records-shell">
+    <section class="records-masthead" aria-labelledby="text-records-title">
+      <div class="records-heading">
+        <p class="records-kicker">N/A CITY / TEXTUAL RECORDS DIVISION</p>
+        <h1 id="text-records-title">文章記録保管庫</h1>
+        <p class="records-lead">回収文書、観測報告およびWeb上で検出された文章記録を保管しています。</p>
+      </div>
+      <dl class="records-status" aria-label="文章記録保管庫の状態">
+        <div><dt>TERMINAL</dt><dd>NA-TX-01</dd></div>
+        <div><dt>RECORDS</dt><dd>0001</dd></div>
+        <div><dt>STATUS</dt><dd class="records-online">ONLINE</dd></div>
+      </dl>
+    </section>
+
+    <div class="records-subheading">
+      <h2>公開記録</h2>
+      <span>DISPLAYING 0001 / 0001</span>
+    </div>
+
+    <section class="records-entry-list" aria-label="文章記録一覧">
+      <a class="records-entry" href="d_archive.html">
+        <div>
+          <p class="records-entry-code">NA-TX/WEB-EXPUNGED</p>
+          <p class="records-entry-state">ARCHIVED / ORIGINAL TEXT</p>
+        </div>
+        <div>
+          <h3>削除すべき記録</h3>
+          <p>Webクローラーにより検出・保管された対人間認識汚染記録。原文のまま収録。</p>
+        </div>
+        <span class="records-entry-arrow" aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <section class="records-footnote" aria-label="文章記録の注意事項">
+      <p><span>NOTICE</span>記録中の表記・時系列・曖昧な表現は、回収時の状態を維持しています。</p>
+      <a href="archive.html">記録保管庫へ戻る</a>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="common.js"></script>
+  <script>
+    async function loadPart(id, file) {
+      const response = await fetch(file);
+      document.getElementById(id).innerHTML = await response.text();
+    }
+    loadPart("header", "partials/header.html");
+    loadPart("footer", "partials/footer.html");
+  </script>
+</body>
+</html>
