@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="N/A市で公開されている文章・画像・映像・歌唱記録の総合保管庫です。">
+  <title>N/A市記録保管庫</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/records.css">
+</head>
+<body class="records-page">
+  <div id="header"></div>
+
+  <main class="records-shell">
+    <section class="records-masthead" aria-labelledby="records-title">
+      <div class="records-heading">
+        <p class="records-kicker">N/A CITY / CENTRAL RECORDS REPOSITORY</p>
+        <h1 id="records-title">N/A市記録保管庫</h1>
+        <p class="records-lead">公開許可が確認された市内記録を、媒体区分ごとに保管・閲覧できます。</p>
+      </div>
+      <dl class="records-status" aria-label="記録保管庫の状態">
+        <div><dt>DIVISIONS</dt><dd>0004</dd></div>
+        <div><dt>ACCESS</dt><dd>PUBLIC</dd></div>
+        <div><dt>STATUS</dt><dd class="records-online">ONLINE</dd></div>
+      </dl>
+    </section>
+
+    <section class="records-intro" aria-labelledby="records-guide-title">
+      <p class="records-notice-label">CLASSIFICATION NOTICE</p>
+      <h2 id="records-guide-title">お報せではなく、保存記録を探す場所です。</h2>
+      <p>更新情報は「お知らせ」、継続して参照する資料は「記録保管庫」に分類されています。閲覧する媒体を選択してください。</p>
+    </section>
+
+    <section class="records-grid" aria-label="記録媒体の一覧">
+      <a class="records-card" href="textarchive.html">
+        <div class="records-card-mark" aria-hidden="true">TEXT</div>
+        <div class="records-card-body">
+          <div class="records-card-top">
+            <span class="records-code">NA-RR / TEXTUAL</span>
+            <span class="records-state">OPEN</span>
+          </div>
+          <h2>文章記録保管庫</h2>
+          <p>回収文書、観測報告、Web上で検出された文章記録。</p>
+          <div class="records-meta"><span>FORMAT: TEXT</span><span>CATALOGUED</span></div>
+          <span class="records-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="records-card" href="imagearchive.html">
+        <div class="records-card-mark" aria-hidden="true">IMAGE</div>
+        <div class="records-card-body">
+          <div class="records-card-top">
+            <span class="records-code">NA-RR / VISUAL</span>
+            <span class="records-state">INDEXING</span>
+          </div>
+          <h2>画像記録保管庫</h2>
+          <p>静止画、写真、観測画像および図像資料。</p>
+          <div class="records-meta"><span>FORMAT: IMAGE</span><span>PREPARING</span></div>
+          <span class="records-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="records-card" href="videoarchive.html">
+        <div class="records-card-mark" aria-hidden="true">VIDEO</div>
+        <div class="records-card-body">
+          <div class="records-card-top">
+            <span class="records-code">NA-RR / AUDIOVISUAL</span>
+            <span class="records-state">OPEN</span>
+          </div>
+          <h2>映像記録保管庫</h2>
+          <p>市内で回収・保存された映像記録。公開記録3件。</p>
+          <div class="records-meta"><span>FORMAT: VIDEO</span><span>RECORDS: 0003</span></div>
+          <span class="records-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="records-card" href="utamihon.html">
+        <div class="records-card-mark" aria-hidden="true">VOCAL</div>
+        <div class="records-card-body">
+          <div class="records-card-top">
+            <span class="records-code">NA-RR / VOCAL REFERENCE</span>
+            <span class="records-state">ACTIVE</span>
+          </div>
+          <h2>歌見本</h2>
+          <p>外峯零の歌唱可能曲および公開済み音源の参照記録。</p>
+          <div class="records-meta"><span>FORMAT: AUDIO LINK</span><span>UPDATING</span></div>
+          <span class="records-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+    </section>
+
+    <section class="records-footnote" aria-label="記録保管庫の注意事項">
+      <p><span>NOTICE</span>非公開・隔離・権限外の記録は、この一覧には表示されません。</p>
+      <a href="main.html">江縫栄市立総合病院へ戻る</a>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="common.js"></script>
+  <script>
+    async function loadPart(id, file) {
+      const response = await fetch(file);
+      document.getElementById(id).innerHTML = await response.text();
+    }
+    loadPart("header", "partials/header.html");
+    loadPart("footer", "partials/footer.html");
+  </script>
+</body>
+</html>

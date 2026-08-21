@@ -98,6 +98,7 @@ function shouldIndex(relativePath) {
   if (!normalized.toLowerCase().endsWith(".html")) return false;
   if (normalized.startsWith("partials/")) return false;
   if (excludedFiles.has(normalized)) return false;
+  if (/-preview\.html$/i.test(basename)) return false;
   if (/^t-[^/]+\.html$/i.test(basename)) return false;
   return true;
 }
