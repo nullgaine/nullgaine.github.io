@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Café Palette</title>
+<meta name="description" content="江縫栄市立総合病院1階外付けカフェ、Café Paletteの入口です。">
 <!-- Koruri font via jsDelivr -->
 <style>
 @font-face{
@@ -13,7 +14,7 @@
   font-weight: 400; font-style: normal; font-display: swap;
 }
 :root{
-  --bg:#faf7f2; --ink:#4c433c; --accent:#9a7a55; --line:#e8ded3;
+  --bg:#faf7f2; --ink:#4c433c; --accent:#9a7a55; --line:#e8ded3; --card:#fffbf7;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -58,6 +59,10 @@ body{
 }
 .btn:hover{ transform: translateY(-1px); box-shadow:0 10px 22px rgba(154,122,85,.28); filter: brightness(1.03); }
 .note{ margin-top:14px; font-size:12.5px; color:#7f766d; }
+.back-link{
+  display:inline-block; margin-top:10px; color:var(--accent);
+  font-size:12.5px; text-underline-offset:3px;
+}
 @keyframes fadeIn{ from{opacity:0; transform: translateY(6px)} to{opacity:1; transform:none}}
 
 /* 既存の .card 背景をトークン化（上書き） */
@@ -68,19 +73,24 @@ body{
 
 /* ダーク自動（青みの夜） */
 @media (prefers-color-scheme: dark){
-  html{
+  html:not(.theme-light){
     --bg:#0f141a;            /* 深い群青 */
     --ink:#e6edf3;           /* 冷たい白 */
     --line:#1e2730;
     --card:#162029;          /* ネイビーがかった黒 */
     --accent:#7ea8ff;        /* 月光の青 */
   }
-  .main::before{ opacity:.22 }   /* 星 */
-  .main::after{ opacity:.7 }     /* 月光の筋 */
+  html:not(.theme-light) .main::before{ opacity:.22 }   /* 星 */
+  html:not(.theme-light) .main::after{ opacity:.7 }     /* 月光の筋 */
 }
 
-/* 手動トグル用（ボタンで強制夜） */
+/* 手動トグル用 */
+html.theme-light{
+  color-scheme:light;
+  --bg:#faf7f2; --ink:#4c433c; --accent:#9a7a55; --line:#e8ded3; --card:#fffbf7;
+}
 html.theme-dark{
+  color-scheme:dark;
   --bg:#0f141a; --ink:#e6edf3; --line:#1e2730; --card:#162029; --accent:#7ea8ff;
   /* 星・月光もON */
 }
@@ -137,22 +147,37 @@ html.theme-dark .main::after{ opacity:.7 }
       <div class="hr"></div>
       <p class="tagline">曖昧が淹れる<ruby>靉靆<rt>あいたい</rt></ruby>の温度を、あなたへ。</p>
       <div class="kissa">—— だるい昼下がりに、色を一杯どうぞ。</div>
-      <a class="btn" href="https://gainenull.org/cafeatsume">☕ 入る</a>
+      <a class="btn" href="cafeatsume">☕ 入る</a>
       <div class="note">クリックすると “かふぇあつめ” の棚へ進みます。</div>
+      <a class="back-link" href="access">← 病院案内へ戻る</a>
     </section>
   </main>
 <button id="themeToggle" aria-pressed="false" title="昼/夜 切替">夜</button>
 <script>
   const btn = document.getElementById('themeToggle');
-  const apply = on => {
-    document.documentElement.classList.toggle('theme-dark', on);
-    btn.setAttribute('aria-pressed', on);
-    btn.textContent = on ? '昼' : '夜';
+  const getSavedTheme = () => {
+    try {
+      const saved = localStorage.getItem('theme');
+      return saved === 'light' || saved === 'dark' ? saved : null;
+    } catch (_) {
+      return null;
+    }
   };
-  apply(localStorage.getItem('theme') === 'dark');
+  const saveTheme = theme => {
+    try { localStorage.setItem('theme', theme); } catch (_) {}
+  };
+  const apply = theme => {
+    const isDark = theme === 'dark';
+    document.documentElement.classList.toggle('theme-dark', isDark);
+    document.documentElement.classList.toggle('theme-light', !isDark);
+    btn.setAttribute('aria-pressed', String(isDark));
+    btn.textContent = isDark ? '昼' : '夜';
+  };
+  apply(getSavedTheme() || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   btn.addEventListener('click', ()=>{
-    const on = !document.documentElement.classList.contains('theme-dark');
-    apply(on); localStorage.setItem('theme', on ? 'dark' : 'light');
+    const theme = document.documentElement.classList.contains('theme-dark') ? 'light' : 'dark';
+    apply(theme);
+    saveTheme(theme);
   });
 </script>
 </body>

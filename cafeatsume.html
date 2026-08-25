@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>かふぇあつめ | 小さな喫茶店の色見本</title>
+<meta name="description" content="Café Paletteが集めた、飲み物とお菓子を思わせる色見本です。">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* Koruri Light (for headings/logo) */
@@ -67,19 +68,29 @@ main{max-width:1100px;margin:0 auto 80px;padding:0 clamp(16px,4vw,32px);}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-top:12px;}
 .card{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;box-shadow:0 6px 14px rgba(0,0,0,.04);cursor:pointer;transition:transform .15s;}
 .card:hover{transform:scale(1.02);}
+.card:focus-visible{outline:3px solid var(--accent);outline-offset:3px;}
 .swatch{height:140px;border-bottom:1px dashed var(--line);}
 .info{padding:14px 14px 16px}
 .name{font-weight:700;letter-spacing:.04em;font-size:16px;margin-bottom:2px;}
 .meta{font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:12.5px;color:#6f665f;}
 .memo{margin-top:8px;font-size:13px;color:#5b524c;}
 footer{max-width:1100px;margin:24px auto 40px;padding:0 clamp(16px,4vw,32px);color:#7a7067;font-size:12.5px;}
+.return-link{display:inline-block;margin-bottom:6px;color:var(--accent);text-underline-offset:3px;}
+.footer-note{display:block;}
+.load-more{
+  display:block; margin:10px 0 0; padding:8px 14px; border-radius:999px;
+  border:1px solid var(--accent); background:transparent; color:var(--accent);
+  font:inherit; font-size:13px; cursor:pointer;
+}
+.load-more:hover{background:color-mix(in srgb, var(--accent) 10%, transparent);}
+.load-more:focus-visible{outline:3px solid var(--accent);outline-offset:3px;}
 /* overlay modal */
 .overlay{
   position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
   background:rgba(0,0,0,.82);animation:fade .25s;z-index:100;
 }
 .popup{
-  width:70vw;height:70vh;border-radius:16px;
+  position:relative;width:70vw;height:70vh;border-radius:16px;
   display:flex;align-items:flex-end;justify-content:center;
   color:#fff;padding:20px;text-align:center;
   box-shadow:0 0 40px rgba(0,0,0,.4);
@@ -87,6 +98,12 @@ footer{max-width:1100px;margin:24px auto 40px;padding:0 clamp(16px,4vw,32px);col
 .popup-info{background:rgba(0,0,0,.35);padding:14px 24px;border-radius:12px;}
 .popup-info h2{margin:0;font-size:28px;letter-spacing:.05em;}
 .popup-info p{margin:6px 0;font-size:14px;}
+.modal-close{
+  position:absolute;top:12px;right:12px;width:38px;height:38px;border:1px solid #fff8;
+  border-radius:50%;background:rgba(0,0,0,.42);color:#fff;font-size:20px;
+  line-height:1;cursor:pointer;
+}
+.modal-close:focus-visible{outline:3px solid #fff;outline-offset:3px;}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 
   :root { color-scheme: light dark; }
@@ -101,7 +118,7 @@ footer{max-width:1100px;margin:24px auto 40px;padding:0 clamp(16px,4vw,32px);col
 
   /* 端末がダーク設定のとき自動適用 */
  @media (prefers-color-scheme: dark){
-  html{
+  html:not(.theme-light){
     --bg:#0f141a;           /* 深い群青ベース */
     --ink:#e6edf3;          /* 少し冷たい白 */
     --line:#1e2730;
@@ -110,11 +127,17 @@ footer{max-width:1100px;margin:24px auto 40px;padding:0 clamp(16px,4vw,32px);col
     --accent:#7ea8ff;       /* アクセントを青寄りに */
     --accent-hover:#98c1ff; /* ホバー時の明るい青 */
   }
-  .badge{ background:#1c2730; border-color:var(--line); color:#c5d3de; }
-  .note{ color:#9fb2c2; }
-  .hero-full .ph{ filter:brightness(.75) contrast(1.1); }
+  html:not(.theme-light) .badge{ background:#1c2730; border-color:var(--line); color:#c5d3de; }
+  html:not(.theme-light) .note{ color:#9fb2c2; }
+  html:not(.theme-light) .hero-full .ph{ filter:brightness(.75) contrast(1.1); }
+}
+html.theme-light{
+  color-scheme:light;
+  --bg:#FAF7F2; --ink:#3A3330; --line:#E8DFD6; --card:#FFFFFF;
+  --link:#FF91AF; --accent:#FF91AF; --accent-hover:#E6799F;
 }
 html.theme-dark{
+  color-scheme:dark;
   --bg:#0f141a;
   --ink:#e6edf3;
   --line:#1e2730;
@@ -252,10 +275,15 @@ html.theme-dark body::before {
 /* Ensure overlay sits above particles */
 .overlay { position: fixed; z-index: 10; }
 
+@media (prefers-reduced-motion: reduce){
+  .card .swatch::after,.section,.logo,html.theme-dark,html.theme-dark body::before{animation:none;}
+}
+
 </style>
 </head>
 <body>
 <header>
+  <a class="return-link" href="cafepalette">← Café Paletteへ戻る</a>
   <div class="brand">
     <div class="logo">かふぇあつめ<span class="dot" id="spectreDot" role="link" aria-label="Fleur de Paix へ" tabindex="0">.</span></div>
     <div class="sub">――小さな喫茶店の色見本</div>
@@ -271,47 +299,49 @@ html.theme-dark body::before {
   <!-- Coffee Section -->
   <h2 class="section">☕ Coffee</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-coffee"></section>
+  <section class="grid section" id="sec-coffee"></section>
 
   <!-- Milk & Latte Section -->
   <h2 class="section">🥛 Milk & Cream</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-milk"></section>
+  <section class="grid section" id="sec-milk"></section>
 
   <!-- Chocolate Section -->
   <h2 class="section">🍫 Chocolate</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-choco"></section>
+  <section class="grid section" id="sec-choco"></section>
 
   <!-- tea Section -->
   <h2 class="section">🍵 Tea</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-tea"></section>
+  <section class="grid section" id="sec-tea"></section>
 
   <!-- ice Section -->
   <h2 class="section">🍨 Ice & Extra</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-ice"></section>
+  <section class="grid section" id="sec-ice"></section>
 
   <!-- Dessert Section -->
   <h2 class="section">🥧 Bakery</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-dessert"></section>
+  <section class="grid section" id="sec-dessert"></section>
 
   <!-- cocktail Section -->
   <h2 class="section">🍹 Cocktail</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-cocktail"></section>
+  <section class="grid section" id="sec-cocktail"></section>
 
   <!-- Cosmic Section -->
   <h2 class="section">🌌 Cosmic</h2>
   <hr class="hr"/>
-  <section class="grid" id="sec-cosmic"></section>
+  <section class="grid section" id="sec-cosmic"></section>
 </main>
 
-<footer>※ カードをクリックすると拡大表示できます。外側クリックで閉じます。</footer>
+<footer>
+  <span class="footer-note">※ カードをクリックすると拡大表示できます。外側クリックまたはEscキーで閉じます。</span>
+</footer>
 
-<script>
+<script data-search-content>
 // Datasets by sections
 const coffee = [
   {name:"Iced Coffee",hex:"#B18F6A",meta:"PANTONE 15-1040 TCX",memo:"氷が鳴る音で今朝も始めます。"},
@@ -452,162 +482,199 @@ const cosmic = [
   {name:"Afterglow",hex:"#F3E6C8",pantone:"PANTONE 11-0510 TCX",memo:"薄明の光。"},
   {name:"Moon Mist",hex:"#80817D",meta:"PANTONE 18-4105 TCX",memo:"朧月の夜。"}
 ];
-
-<!-- cosmic配列のすぐ後ろで一度閉じる -->
 </script>
 
-<!-- テーマ切替ボタンはHTMLとして配置 -->
-<button id="themeToggle" aria-pressed="false">夜</button>
+<button id="themeToggle" aria-pressed="false" title="昼/夜 切替">夜</button>
 
-<!-- ここから再びスクリプト -->
 <script>
-  // テーマトグル
-  const btn = document.getElementById('themeToggle');
-  const apply = on => {
-    document.documentElement.classList.toggle('theme-dark', on);
-    btn.setAttribute('aria-pressed', on);
-    btn.textContent = on ? '昼' : '夜';
-  };
-  apply(localStorage.getItem('theme') === 'dark');
-  btn.addEventListener('click', ()=>{
-    const on = !document.documentElement.classList.contains('theme-dark');
-    apply(on);
-    localStorage.setItem('theme', on ? 'dark' : 'light');
-  });
+const themeButton = document.getElementById('themeToggle');
 
-  // カード生成
-  // 「mount」関数をこの新しいバージョンに差し替える
-function mount(gridId, arr, first=12){
+function getSavedTheme(){
+  try {
+    const saved = localStorage.getItem('theme');
+    return saved === 'light' || saved === 'dark' ? saved : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function saveTheme(theme){
+  try { localStorage.setItem('theme', theme); } catch (_) {}
+}
+
+function applyTheme(theme){
+  const isDark = theme === 'dark';
+  document.documentElement.classList.toggle('theme-dark', isDark);
+  document.documentElement.classList.toggle('theme-light', !isDark);
+  themeButton.setAttribute('aria-pressed', String(isDark));
+  themeButton.setAttribute('aria-label', isDark ? '昼の配色へ切り替える' : '夜の配色へ切り替える');
+  themeButton.textContent = isDark ? '昼' : '夜';
+}
+
+applyTheme(getSavedTheme() || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+themeButton.addEventListener('click', () => {
+  const theme = document.documentElement.classList.contains('theme-dark') ? 'light' : 'dark';
+  applyTheme(theme);
+  saveTheme(theme);
+});
+
+function mount(gridId, items, first=12){
   const grid = document.getElementById(gridId);
-  grid.innerHTML = '';
   let shown = 0;
 
-  const render = (n) => {
-    arr.slice(shown, shown+n).forEach(it => grid.append(cardTemplate(it)));
-    shown += n;
+  const render = count => {
+    items.slice(shown, shown + count).forEach(item => grid.append(cardTemplate(item)));
+    shown = Math.min(shown + count, items.length);
   };
 
   render(first);
 
-  if(arr.length > shown){
+  if(items.length > shown){
     const more = document.createElement('button');
-    more.className = 'btn';
-    more.textContent = `さらに表示（${arr.length - shown}）`;
-    more.style.margin = '10px 0 0';
-    more.onclick = ()=>{
-      render(12);
-      if(shown >= arr.length) more.remove();
-      else more.textContent = `さらに表示（${arr.length - shown}）`;
+    more.type = 'button';
+    more.className = 'load-more';
+
+    const updateLabel = () => {
+      more.textContent = `さらに表示（${items.length - shown}）`;
     };
+
+    updateLabel();
+    more.addEventListener('click', () => {
+      render(12);
+      if(shown >= items.length) more.remove();
+      else updateLabel();
+    });
     grid.after(more);
   }
 }
-  function cardTemplate(it){
-    const card=document.createElement('article');card.className="card";
-    const sw=document.createElement('div');sw.className="swatch";sw.style.backgroundColor=it.hex;
-    const info=document.createElement('div');info.className="info";
-    const name=document.createElement('div');name.className="name";name.textContent=it.name;
-    const meta=document.createElement('div');meta.className="meta";meta.textContent=it.pantone||it.meta||it.hex;
-    const memo=document.createElement('div');memo.className="memo";memo.textContent=it.memo||"";
-    info.append(name,meta,memo);card.append(sw,info);
-    card.addEventListener('click',()=>openModal(it));
-    return card;
-  }
-  function openModal(it){
-    const o=document.createElement('div');o.className="overlay";
-    o.innerHTML=`<div class="popup" style="background:${it.hex}"><div class="popup-info"><h2>${it.name}</h2><p>${it.pantone||it.meta||it.hex}</p><p>${it.memo||""}</p></div></div>`;
-    o.addEventListener('click',()=>o.remove());document.body.append(o);
-  }
 
-  (()=>{
-  const dot = document.getElementById('spectreDot');
-  if(!dot) return;
+function cardTemplate(item){
+  const card = document.createElement('article');
+  card.className = 'card';
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', `${item.name}を拡大表示`);
 
-  let last = 0;
-  dot.addEventListener('click', ()=>{
-    const now = Date.now();
-    if(now - last < 400){ location.href = 'flepaix'; } // 2回タップで遷移
-    last = now;
-  });
+  const swatch = document.createElement('div');
+  swatch.className = 'swatch';
+  swatch.style.backgroundColor = item.hex;
 
-  // キーボードでも
-  dot.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      location.href = 'flepaix';
+  const info = document.createElement('div');
+  info.className = 'info';
+  const name = document.createElement('div');
+  name.className = 'name';
+  name.textContent = item.name;
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+  meta.textContent = item.pantone || item.meta || item.hex;
+  const memo = document.createElement('div');
+  memo.className = 'memo';
+  memo.textContent = item.memo || '';
+
+  info.append(name, meta, memo);
+  card.append(swatch, info);
+  card.addEventListener('click', () => openModal(item));
+  card.addEventListener('keydown', event => {
+    if(event.key === 'Enter' || event.key === ' '){
+      event.preventDefault();
+      openModal(item);
     }
   });
-})();
+  return card;
+}
 
-  // mount all sections
-  mount('sec-coffee', coffee);
-  mount('sec-milk', milk);
-  mount('sec-choco', choco);
-  mount('sec-tea', tea);
-  mount('sec-ice', ice);
-  mount('sec-dessert', dessert);
-  mount('sec-cocktail', cocktail);
-  mount('sec-cosmic', cosmic);
-</script>
+function openModal(item){
+  const previouslyFocused = document.activeElement;
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-labelledby', 'cafeModalTitle');
+  overlay.setAttribute('aria-describedby', 'cafeModalDescription');
 
-<script>
-(function(){
-  // Tag first H1 as .logo if not already
-  const h1 = document.querySelector('h1');
-  if(h1 && !h1.classList.contains('logo')) h1.classList.add('logo');
-  // Tag all sections
-  document.querySelectorAll('section').forEach(sec => {
-    if(!sec.classList.contains('section')) sec.classList.add('section');
-  });
-})();
-</script>
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.style.backgroundColor = item.hex;
 
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.className = 'modal-close';
+  closeButton.setAttribute('aria-label', '閉じる');
+  closeButton.textContent = '×';
 
-<script>
-// Modal close enhancement: add .closing class for afterglow animation
-(function(){
-  function enhanceOverlay(ov){
-    if (!ov) return;
-    const popup = ov.querySelector('.popup');
-    if (!popup) return;
-    // Wrap default close behavior
-    const closeBtns = ov.querySelectorAll('.close');
-    closeBtns.forEach(btn => {
-      if (btn._enhanced) return;
-      btn._enhanced = true;
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        popup.classList.add('closing');
-        setTimeout(() => {
-          // Try to hide overlay gracefully
-          ov.hidden = true;
-          popup.classList.remove('closing');
-        }, 300);
-      });
-    });
-    // Click outside popup
-    if (!ov._bgEnhanced){
-      ov._bgEnhanced = true;
-      ov.addEventListener('click', (e) => {
-        if (e.target === ov){
-          popup.classList.add('closing');
-          setTimeout(() => {
-            ov.hidden = true;
-            popup.classList.remove('closing');
-          }, 300);
-        }
-      });
+  const info = document.createElement('div');
+  info.className = 'popup-info';
+  const title = document.createElement('h2');
+  title.id = 'cafeModalTitle';
+  title.textContent = item.name;
+  const meta = document.createElement('p');
+  meta.textContent = item.pantone || item.meta || item.hex;
+  const memo = document.createElement('p');
+  memo.id = 'cafeModalDescription';
+  memo.textContent = item.memo || '';
+
+  info.append(title, meta, memo);
+  popup.append(closeButton, info);
+  overlay.append(popup);
+  document.body.append(overlay);
+  document.documentElement.style.overflow = 'hidden';
+
+  let closing = false;
+  const finishClose = () => {
+    document.removeEventListener('keydown', handleModalKeydown);
+    overlay.remove();
+    document.documentElement.style.overflow = '';
+    if(previouslyFocused instanceof HTMLElement && previouslyFocused.isConnected){
+      previouslyFocused.focus();
+    }
+  };
+  const closeModal = () => {
+    if(closing) return;
+    closing = true;
+    popup.classList.add('closing');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(finishClose, reducedMotion ? 0 : 300);
+  };
+  function handleModalKeydown(event){
+    if(event.key === 'Escape'){
+      event.preventDefault();
+      closeModal();
+    } else if(event.key === 'Tab'){
+      event.preventDefault();
+      closeButton.focus();
     }
   }
-  // Initial attach (if overlay exists at load)
-  enhanceOverlay(document.querySelector('.overlay'));
 
-  // Observe DOM for overlays appearing dynamically
-  const mo = new MutationObserver(() => {
-    enhanceOverlay(document.querySelector('.overlay'));
+  closeButton.addEventListener('click', closeModal);
+  overlay.addEventListener('click', event => {
+    if(event.target === overlay) closeModal();
   });
-  mo.observe(document.documentElement, {childList: true, subtree: true});
-})();
+  document.addEventListener('keydown', handleModalKeydown);
+  closeButton.focus();
+}
+
+const spectreDot = document.getElementById('spectreDot');
+let lastDotClick = 0;
+spectreDot.addEventListener('click', () => {
+  const now = Date.now();
+  if(now - lastDotClick < 400) location.href = 'flepaix';
+  lastDotClick = now;
+});
+spectreDot.addEventListener('keydown', event => {
+  if(event.key === 'Enter' || event.key === ' '){
+    event.preventDefault();
+    location.href = 'flepaix';
+  }
+});
+
+mount('sec-coffee', coffee);
+mount('sec-milk', milk);
+mount('sec-choco', choco);
+mount('sec-tea', tea);
+mount('sec-ice', ice);
+mount('sec-dessert', dessert);
+mount('sec-cocktail', cocktail);
+mount('sec-cosmic', cosmic);
 </script>
 
 </body>
