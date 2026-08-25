@@ -1,16 +1,16 @@
 document.addEventListener("click", function(e) {
+  if (!(e.target instanceof Element)) return;
 
-  if (e.target.closest(".menu-toggle")) {
+  const toggle = e.target.closest(".menu-toggle");
+  if (!toggle) return;
 
-    console.log("クリックされた");
+  const controlledId = toggle.getAttribute("aria-controls");
+  const navLinks = controlledId
+    ? document.getElementById(controlledId)
+    : document.querySelector(".nav-links");
 
-    const navLinks = document.querySelector(".nav-links");
+  if (!navLinks) return;
 
-    if (navLinks) {
-      navLinks.classList.toggle("open");
-    } else {
-      console.log("nav-linksが見つからない");
-    }
-  }
-
+  const isOpen = navLinks.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(isOpen));
 });
