@@ -128,9 +128,14 @@ function pageFromHtml(html, relativePath) {
     ? `${excerptSource.slice(0, 180).trim()}…`
     : excerptSource;
 
+  const normalizedPath = relativePath.split(path.sep).join("/");
+  const publicUrl = normalizedPath.includes("/") && normalizedPath.endsWith("/index.html")
+    ? normalizedPath.slice(0, -"index.html".length)
+    : normalizedPath.replace(/\.html$/i, "");
+
   return {
     title,
-    url: relativePath.split(path.sep).join("/"),
+    url: publicUrl,
     excerpt,
     text
   };
