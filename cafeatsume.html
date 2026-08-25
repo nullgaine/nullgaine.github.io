@@ -526,7 +526,7 @@ function mount(gridId, arr, first=12){
   let last = 0;
   dot.addEventListener('click', ()=>{
     const now = Date.now();
-    if(now - last < 400){ location.href = 'flepaix.html'; } // 2回タップで遷移
+    if(now - last < 400){ location.href = 'flepaix'; } // 2回タップで遷移
     last = now;
   });
 
@@ -534,7 +534,7 @@ function mount(gridId, arr, first=12){
   dot.addEventListener('keydown', (e)=>{
     if(e.key === 'Enter' || e.key === ' '){
       e.preventDefault();
-      location.href = 'flepaix.html';
+      location.href = 'flepaix';
     }
   });
 })();

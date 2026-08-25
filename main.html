@@ -30,7 +30,7 @@
     document.getElementById('site-search-form').addEventListener('submit', event => {
       event.preventDefault();
       const v = document.getElementById('q').value;
-      location.href = 'search.html?q=' + encodeURIComponent(v);
+      location.href = 'search?q=' + encodeURIComponent(v);
     });
   </script>
  <div style="margin-top:12px; margin-bottom:12px;">
