@@ -60,6 +60,12 @@
       gap: 10px;
     }
     .price{ font-weight: 1000; color: #a31e47; letter-spacing:.02em; }
+    .price.formula{
+      max-width: 68%;
+      text-align: right;
+      font-size: 15px;
+      line-height: 1.35;
+    }
     .badge{
       display:inline-flex;
       align-items:center;
@@ -107,14 +113,16 @@
   <main id="main" class="wrap">
     <h1>MIX（料金・プラン）</h1>
     
-<p class="lead">常に自分の音源は自分でMIXする14年活動中の歌うたいです。実績400+です。</p>
+<p class="lead">常に自分の音源は自分でMIXする15年活動中の歌うたいです。実績400+です。</p>
 <div class="noteBox">
   <b>注意書き</b><br>
   ・基本プラン：ピッチ／タイミング補正・ハモり生成・空間・エフェクト・マスタリング<br>
   ・リテイクを要請する場合がございます。ご了承ください。<br>
-  ・ボーカルデータ提出形式は（MONO/WAV/48000k）にしていただけると嬉しいです。ノイズ除去はしないでください。<br>
+  ・ボーカルデータ提出形式は（MONO / WAV / 48kHz）にしていただけると嬉しいです。ノイズ除去はしないでください。<br>
   ・納期は通常1〜2週間程度。お急ぎの場合は要相談で対応可能です。<br>
-  ・Inst以外の1トラックあたり+2000円で会計致します。<br>
+  ・フルコーラスは、Instを除く<b>提出ボーカル1トラックにつき¥2,000</b>で計算致します。<br>
+  ・ワンコーラスは、フルコーラスの合計料金から<b>30％引き</b>です（1トラックにつき¥1,400）。<br>
+  ・こちらで生成するハモりは基本プラン内のため、提出トラック数には含みません。<br>
   ・ハモリのガイドは致しません。ご了承ください。<br>
 </div>
 
@@ -122,16 +130,16 @@
   <h2>MIX（歌ってみた）</h2>
   <div class="grid">
     <article class="card">
-      <div class="head"><h3>ワンコーラス</h3><p>基本プラン・1分未満</p></div>
-      <div class="foot"><span class="badge">最低</span><span class="price">¥2,000〜</span></div>
+      <div class="head"><h3>ワンコーラス</h3><p>基本プラン。フルコーラス料金から30％引き。</p></div>
+      <div class="foot"><span class="badge">計算式</span><span class="price formula">¥1,400 × 提出Voトラック数</span></div>
     </article>
     <article class="card">
-      <div class="head"><h3>フルコーラス</h3><p>基本コース。実績400+はこちら。</p></div>
-      <div class="foot"><span class="badge">最低</span><span class="price">¥4,000〜</span></div>
+      <div class="head"><h3>フルコーラス</h3><p>基本プラン。Instを除く提出ボーカルトラック数で計算。</p></div>
+      <div class="foot"><span class="badge">計算式</span><span class="price formula">¥2,000 × 提出Voトラック数</span></div>
     </article>
     <article class="card">
-      <div class="head"><h3>コラボ（複数人）</h3><p>人数・素材の状態で変動あり。要相談枠。</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">¥8,000〜</span></div>
+      <div class="head"><h3>コラボ（複数人）</h3><p>人数ではなく、全員分を合計した提出ボーカルトラック数で計算。</p></div>
+      <div class="foot"><span class="badge">計算式</span><span class="price formula">¥2,000 × 提出Voトラック数</span></div>
     </article>
       <article class="card">
       <div class="head"><h3>朗読・演技・ナレーション・ボイスドラマなど</h3><p>整音・空白調節・効果音、背景音配置。長さによって要相談枠。</p></div>
@@ -144,12 +152,20 @@
   <h2>追加オプション</h2>
   <div class="grid">
     <article class="card">
-      <div class="head"><h3>ピッチ補正（強）</h3><p>修正量が多い場合・EDMぽい曲調</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">+¥2,000</span></div>
+      <div class="head"><h3>ピッチ補正（強）</h3><p>修正量が多い場合・意図的に強く補正する曲調。</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">+¥2,000 / 対象トラック</span></div>
     </article>
     <article class="card">
-      <div class="head"><h3>ハモり・コーラス収録</h3><p>私がハモリとコーラスを「収録」致します。ガイドとも生成とも違います。</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">¥2,000～</span></div>
+      <div class="head"><h3>ハモり・コーラス収録</h3><p>私がハモりとコーラスを「収録」致します。ガイドとも生成とも違います。</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">¥2,000〜 / 1パート</span></div>
+    </article>
+    <article class="card">
+      <div class="head"><h3>特急対応</h3><p>通常1〜2週間より短い納期。受付状況・素材量により対応できない場合があります。</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">総額+30％</span></div>
+    </article>
+    <article class="card">
+      <div class="head"><h3>複雑なカットアップ・特殊加工</h3><p>細かなカットアップや多層加工など、基本プランのエフェクト範囲を超える作業。</p></div>
+      <div class="foot"><span class="badge">要相談</span><span class="price">+¥2,000〜</span></div>
     </article>
   </div>
 </section>
