@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fleur de Paix</title>
+<meta name="description" content="テイクアウト専門店Fleur de Paixのドリンクメニューです。">
 <style>
 /* ===== Theme (dark, no bg effects) ===== */
 :root{
@@ -32,6 +33,10 @@ body{
 }
 .header h1{ margin:0; font-size:1.4rem; font-weight:900; letter-spacing:.02em; }
 .header .tag{ margin:2px 0 0; font-weight:700; font-size:.9rem; opacity:.9; }
+.header .back-link{
+  display:inline-block;margin-top:5px;color:#3f0e1f;font-size:.8rem;
+  font-weight:700;text-underline-offset:3px;
+}
 
 /* ===== Grid ===== */
 .grid{
@@ -68,13 +73,14 @@ body{
 .actions{ display:flex; justify-content:flex-end; margin-top:8px; }
 .btn{
   background: var(--pink);
-  color:white; border:0; border-radius:10px; padding:.44em .7em; font-weight:800;
+  color:white; border:0; border-radius:10px; padding:.44em .7em; font-weight:800; cursor:pointer;
 }
+.btn:focus-visible,.close:focus-visible{outline:3px solid #fff;outline-offset:3px;}
 
 /* ===== Modal ===== */
 .overlay[hidden]{ display:none }
 .overlay{
-  position:fixed; inset:0; display:grid; place-items:center; background: rgba(0,0,0,.6);
+  position:fixed; inset:0; display:grid; place-items:center; background: rgba(0,0,0,.6); z-index:100;
 }
 .popup{
   position:relative;
@@ -85,7 +91,7 @@ body{
 .metaBox{ padding:14px 16px 18px; color:#ffb3c7;}
 .close{
   position:absolute; right:10px; top:10px; width:36px; height:36px;
-  border:none; border-radius:50%; background:#3E3A38; color:#2f2b2a; font-size:18px; font-weight:900;
+  border:none; border-radius:50%; background:#2f2b2a; color:#fff; font-size:18px; font-weight:900; cursor:pointer;
 }
 
 /* Small screens */
@@ -99,6 +105,7 @@ body{
 <header class="header">
   <h1>Fleur de Paix</h1>
   <p class="tag">テイクアウト専門店</p>
+  <a class="back-link" href="cafeatsume">← かふぇあつめへ戻る</a>
 </header>
 
 <!-- SVG symbols (glass shapes) -->
@@ -147,8 +154,8 @@ body{
 <main class="grid" id="grid" aria-live="polite"></main>
 
 <!-- Modal -->
-<div class="overlay" id="overlay" hidden>
-  <div class="popup">
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="mName" aria-describedby="mHex mMemo" hidden>
+  <div class="popup" tabindex="-1">
     <button class="close" id="closeBtn" aria-label="閉じる">×</button>
     <div class="preview" id="preview"></div>
     <div class="metaBox">
@@ -159,7 +166,7 @@ body{
   </div>
 </div>
 
-<script>
+<script data-search-content>
 // Shapes per category
 const SHAPE_BY_CATEGORY = {
   coffee:  "mug",
@@ -196,6 +203,7 @@ const pv = document.getElementById('preview');
 const mName = document.getElementById('mName');
 const mHex  = document.getElementById('mHex');
 const mMemo = document.getElementById('mMemo');
+let lastFocused = null;
 
 function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
@@ -241,6 +249,7 @@ function mount(arr){
 }
 
 function openModal(it, idClip, idPaths){
+  lastFocused = document.activeElement;
   pv.innerHTML = `
     <svg viewBox="0 0 120 160" style="width:min(420px, 76vw);height:auto">
       <g clip-path="url(#${idClip})">
@@ -254,13 +263,26 @@ function openModal(it, idClip, idPaths){
   mMemo.textContent = it.memo || "";
   overlay.hidden = false;
   document.documentElement.style.overflow = "hidden";
+  closeBtn.focus();
 }
 function closeModal(){
+  if(overlay.hidden) return;
   overlay.hidden = true;
   document.documentElement.style.overflow = "";
+  if(lastFocused instanceof HTMLElement && lastFocused.isConnected) lastFocused.focus();
 }
 closeBtn.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => {
+  if(overlay.hidden) return;
+  if(e.key === 'Escape'){
+    e.preventDefault();
+    closeModal();
+  } else if(e.key === 'Tab'){
+    e.preventDefault();
+    closeBtn.focus();
+  }
+});
 
 document.addEventListener('DOMContentLoaded', ()=> mount(DRINKS));
 </script>

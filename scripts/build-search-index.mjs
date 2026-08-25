@@ -91,6 +91,25 @@ function extractVisibleText(html) {
   return normalizeText(decodeEntities(`${text} ${attributes.join(" ")}`));
 }
 
+function extractMarkedScriptText(html) {
+  const values = [];
+  const scriptPattern = /<script\b(?=[^>]*\bdata-search-content\b)[^>]*>([\s\S]*?)<\/script>/gi;
+  const fieldPattern = /\b(?:name|hex|meta|pantone|memo|category)\s*:\s*"((?:\\.|[^"\\])*)"/g;
+
+  for (const scriptMatch of html.matchAll(scriptPattern)) {
+    const source = scriptMatch[1];
+    for (const fieldMatch of source.matchAll(fieldPattern)) {
+      try {
+        values.push(JSON.parse(`"${fieldMatch[1]}"`));
+      } catch {
+        values.push(fieldMatch[1]);
+      }
+    }
+  }
+
+  return normalizeText(values.join(" "));
+}
+
 function shouldIndex(relativePath) {
   const normalized = relativePath.split(path.sep).join("/");
   const basename = path.posix.basename(normalized);
@@ -122,7 +141,8 @@ function pageFromHtml(html, relativePath) {
   const title = stripTags(titleMatch?.[1]) || path.basename(relativePath, ".html");
   const description = extractMetaDescription(html);
   const visibleText = extractVisibleText(html);
-  const text = normalizeText([title, description, visibleText].filter(Boolean).join(" "));
+  const scriptedText = extractMarkedScriptText(html);
+  const text = normalizeText([title, description, visibleText, scriptedText].filter(Boolean).join(" "));
   const excerptSource = description || visibleText;
   const excerpt = excerptSource.length > 180
     ? `${excerptSource.slice(0, 180).trim()}…`
