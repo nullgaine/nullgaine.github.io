@@ -14,8 +14,8 @@
   --accent-soft:rgba(180,33,44,.08);
   --danger:#b4212c;
   --shadow:rgba(47,41,35,.12);
-  --serif:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
-  --sans:"Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  --display:"Noto Sans JP","Yu Gothic","Hiragino Sans","Meiryo",system-ui,sans-serif;
+  --sans:"Noto Sans JP","Yu Gothic","Hiragino Sans","Meiryo",system-ui,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono",monospace;
 }
 
@@ -31,7 +31,7 @@ body{
     var(--bg);
   background-size:28px 28px;
   color:var(--ink);
-  font-family:var(--serif);
+  font-family:var(--display);
   line-height:1.75;
 }
 body::before{
@@ -68,7 +68,7 @@ header{
 .brand{
   margin-right:auto;
   color:var(--ink);
-  font-family:var(--serif);
+  font-family:var(--display);
   font-size:18px;
   font-weight:500;
   letter-spacing:.08em;
@@ -121,7 +121,7 @@ main{
 /* ====== タイポ ====== */
 h1,h2{
   color:var(--ink);
-  font-family:var(--serif);
+  font-family:var(--display);
   font-weight:500;
   letter-spacing:.06em;
   overflow-wrap:anywhere;
@@ -283,7 +283,7 @@ h2{
 }
 .hero-caption h1{
   margin:0 0 5px;
-  font-family:var(--serif);
+  font-family:var(--display);
   font-size:clamp(27px,5vw,46px);
   font-weight:500;
   letter-spacing:.08em;

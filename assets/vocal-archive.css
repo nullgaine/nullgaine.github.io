@@ -7,7 +7,7 @@
     var(--bg);
   background-size:28px 28px;
   color:var(--ink);
-  font-family:var(--serif)!important;
+  font-family:var(--display)!important;
   letter-spacing:0;
 }
 
@@ -207,7 +207,7 @@
   background:var(--paper);
   color:var(--ink);
   cursor:pointer;
-  font:500 18px/1.5 var(--serif);
+  font:500 18px/1.5 var(--display);
   letter-spacing:.08em;
   align-items:center;
   gap:10px;
