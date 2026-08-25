@@ -80,7 +80,7 @@
   toolbar.className = "vocal-toolbar";
   toolbar.innerHTML = `
     <div class="vocal-toolbar-inner">
-      <a class="vocal-home" href="archive.html">記録保管庫へ戻る</a>
+      <a class="vocal-home" href="archive">記録保管庫へ戻る</a>
       <label class="vocal-search-wrap">
         <span class="vocal-search-label">SEARCH</span>
         <input id="vocal-search" class="vocal-search" type="search" autocomplete="off" placeholder="曲名を入力（例：砂の惑星）">
