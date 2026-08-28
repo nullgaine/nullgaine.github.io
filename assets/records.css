@@ -104,7 +104,7 @@
   max-width: 780px;
   margin: 0;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: clamp(29px, 5.8vw, 58px);
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -180,7 +180,7 @@
 .records-intro h2 {
   margin: 0 0 8px;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: clamp(18px, 3vw, 25px);
   font-weight: 500;
 }
@@ -270,7 +270,7 @@
 .records-card h2 {
   margin: 20px 0 9px;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: clamp(22px, 3vw, 31px);
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -343,7 +343,7 @@
 .records-subheading h2 {
   margin: 0;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: 20px;
   font-weight: 500;
 }
@@ -396,7 +396,7 @@
 .records-entry h3 {
   margin: 0 0 6px;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: 20px;
   font-weight: 500;
 }
@@ -435,7 +435,7 @@
 .records-empty h2 {
   margin: 0 0 9px;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: clamp(22px, 4vw, 31px);
   font-weight: 500;
 }
@@ -600,7 +600,7 @@
 .image-record-copy h2 {
   margin: 0 0 23px;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: clamp(28px, 4.5vw, 48px);
   font-weight: 500;
   letter-spacing: 0.07em;
@@ -676,7 +676,7 @@
 .image-record-card-copy h3 {
   margin: 20px 0 8px;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: 22px;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -740,7 +740,7 @@
 .image-lightbox-header h2 {
   margin: 0;
   color: var(--records-ink);
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--display);
   font-size: clamp(15px, 2.2vw, 21px);
   font-weight: 500;
   letter-spacing: 0.05em;
