@@ -10,6 +10,7 @@ const outputPath = path.resolve(process.argv[3] || path.join(root, "search-index
 const excludedFiles = new Set([
   "404.html",
   "_main.html",
+  "hours.html",
   "nothing.html",
   "search.html"
 ]);
