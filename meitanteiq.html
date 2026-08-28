@@ -464,6 +464,29 @@
       box-shadow: 0 14px 32px rgba(177, 169, 225, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
+    .return-portal {
+      margin: clamp(3rem, 7vw, 5rem) auto 0;
+      text-align: center;
+    }
+
+    .return-portal a {
+      display: inline-block;
+      padding: 0.72rem 1.35rem;
+      border: 1px solid rgba(212, 218, 255, 0.28);
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      background: rgba(16, 17, 37, 0.6);
+      transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .return-portal a:hover {
+      border-color: rgba(205, 225, 248, 0.55);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+    }
+
     .footer {
       width: min(62rem, 100%);
       margin: clamp(4rem, 10vw, 8rem) auto 0;
@@ -938,6 +961,10 @@
     <iframe src="https://www.youtube.com/embed/tCjQahdj9I0" allowfullscreen></iframe>
   </div>
 </div>
+
+  <nav class="return-portal" aria-label="前のページへ戻る">
+    <a href="links">← 前のページに戻る</a>
+  </nav>
 
   <div class="footer">© 2025 骵温 Unit Page</div>
 
