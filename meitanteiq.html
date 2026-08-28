@@ -5,133 +5,616 @@
   <meta charset="UTF-8">
   <title>鬪ｵ貂ｩ</title>
   <style>
+    :root {
+      color-scheme: dark;
+      --night: #080814;
+      --night-soft: #111226;
+      --ink: #f8f5ff;
+      --muted: #c6c1d9;
+      --cold: #a7dff1;
+      --cold-deep: #7e92e8;
+      --warm: #f5bfd1;
+      --warm-deep: #d996bb;
+      --line: rgba(212, 218, 255, 0.2);
+      --glass: rgba(23, 23, 48, 0.72);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
       margin: 0;
-      padding: 0;
-      font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-      background: radial-gradient(ellipse at top, #0a0f2c 0%, #000 90%);
-      color: #f0f8ff;
+      padding: clamp(2rem, 6vw, 5.5rem) 1rem 0;
       overflow-x: hidden;
+      color: var(--ink);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.9;
+      letter-spacing: 0.025em;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(129, 154, 232, 0.18), transparent 30rem),
+        radial-gradient(circle at 88% 18%, rgba(238, 165, 199, 0.14), transparent 28rem),
+        radial-gradient(circle at 50% 95%, rgba(128, 216, 225, 0.08), transparent 32rem),
+        linear-gradient(155deg, #121329 0%, var(--night) 48%, #090712 100%);
       opacity: 0;
-      animation: fadeIn 2.5s ease-out forwards;
+      animation: fadeIn 1.15s ease-out forwards;
+    }
+
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: 0;
+      width: min(28rem, 72vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+      filter: blur(18px);
+    }
+
+    body::before {
+      top: -13rem;
+      left: -11rem;
+      border: 1px solid rgba(173, 222, 244, 0.1);
+      box-shadow: inset 0 0 8rem rgba(150, 190, 245, 0.05);
+    }
+
+    body::after {
+      right: -13rem;
+      bottom: -12rem;
+      border: 1px solid rgba(246, 185, 211, 0.1);
+      box-shadow: inset 0 0 8rem rgba(240, 171, 205, 0.05);
+    }
+
+    .header,
+    .note,
+    .tabs,
+    .tab-content,
+    .footer {
+      position: relative;
+      z-index: 2;
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
+      0% { opacity: 0; transform: translateY(16px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes contentIn {
+      0% { opacity: 0; transform: translateY(10px) scale(0.992); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translate3d(0, 2rem, 0) scale(0.7); opacity: 0; }
+      12% { opacity: var(--bubble-opacity, 0.22); }
+      88% { opacity: var(--bubble-opacity, 0.22); }
+      100% { transform: translate3d(var(--bubble-drift, 0), -112vh, 0) scale(1.08); opacity: 0; }
+    }
+
     .header {
-      text-align: center;
-      padding: 2rem;
-      font-size: 2rem;
-      color: #ffe;
+      width: fit-content;
+      margin: 0 auto;
+      padding: 0 0.2em;
+      color: transparent;
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: clamp(4.6rem, 16vw, 9.5rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-indent: 0.16em;
+      background: linear-gradient(112deg, #dff8ff 8%, #9bbdf2 38%, #f4d1e1 68%, #fff4fa 92%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      filter: drop-shadow(0 0 22px rgba(178, 204, 246, 0.18));
+    }
+
+    .header::after {
+      position: absolute;
+      right: 8%;
+      bottom: -0.35rem;
+      left: 8%;
+      height: 1px;
+      border-radius: 999px;
+      content: "";
+      background: linear-gradient(90deg, transparent, var(--cold), var(--warm), transparent);
+      box-shadow: 0 0 16px rgba(205, 205, 255, 0.45);
     }
 
     .note {
+      max-width: 52rem;
+      margin: clamp(2.3rem, 5vw, 4rem) auto 0;
+      padding: clamp(1.35rem, 4vw, 2.25rem);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 2rem;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      font-style: normal;
       text-align: center;
-      font-style: italic;
-      color: #aaa;
+      background:
+        linear-gradient(120deg, rgba(163, 214, 239, 0.07), rgba(245, 187, 211, 0.08)),
+        rgba(16, 17, 37, 0.64);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .note::before,
+    .note::after {
+      position: absolute;
+      width: 8rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .note::before {
+      top: -6.5rem;
+      left: -4rem;
+      background: rgba(157, 207, 238, 0.1);
+    }
+
+    .note::after {
+      right: -4rem;
+      bottom: -6.5rem;
+      background: rgba(244, 183, 210, 0.1);
+    }
+
+    .note b {
+      color: #f5e8f2;
+      font-weight: 700;
     }
 
     .tabs {
-      display: flex;
-      justify-content: center;
-      margin-top: 2rem;
+      position: sticky;
+      top: 0.75rem;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.35rem;
+      width: min(52rem, calc(100% - 0.5rem));
+      margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+      padding: 0.4rem;
+      border: 1px solid rgba(212, 218, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(11, 11, 25, 0.72);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .tab {
-      padding: 1rem 2rem;
-      background: #111;
-      border: 1px solid #555;
-      margin: 0 0.5rem;
+      min-width: 0;
+      padding: 0.75rem 0.8rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: #c2bfd5;
+      font-size: clamp(0.72rem, 2vw, 0.93rem);
+      line-height: 1.35;
+      text-align: center;
       cursor: pointer;
+      transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      user-select: none;
+    }
+
+    .tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .tab:focus-visible {
+      outline: 2px solid var(--cold);
+      outline-offset: 3px;
+    }
+
+    .tab.active {
+      color: #171626;
+      font-weight: 700;
+      background: linear-gradient(112deg, #c8eff6, #c6c2ef 48%, #f5cbdc);
+      box-shadow: 0 7px 20px rgba(150, 168, 226, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .tab:active {
+      transform: scale(0.985);
     }
 
     .tab-content {
       display: none;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      margin: 1rem auto;
-      max-width: 800px;
-      border-radius: 8px;
+      width: min(62rem, 100%);
+      margin: 1rem auto 0;
+      padding: clamp(1.35rem, 5vw, 4rem);
+      border: 1px solid var(--line);
+      border-radius: clamp(1.6rem, 5vw, 2.75rem);
+      background:
+        linear-gradient(145deg, rgba(160, 199, 236, 0.045), rgba(238, 176, 207, 0.04)),
+        var(--glass);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .tab-content.active {
       display: block;
+      animation: contentIn 420ms ease both;
     }
 
-    .footer {
+    .tab-content section,
+    .tab-content article {
+      scroll-margin-top: 7rem;
+    }
+
+    .tab-content section + section,
+    .tab-content article + article {
+      margin-top: clamp(2.4rem, 6vw, 4.5rem);
+    }
+
+    .tab-content article {
+      padding: clamp(1.1rem, 3vw, 1.6rem);
+      border: 1px solid rgba(212, 218, 255, 0.12);
+      border-radius: 1.4rem;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      line-height: 1.55;
+      letter-spacing: 0.055em;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      margin: 0 0 2.5rem;
+      color: #f7e7f0;
+      font-size: clamp(1.6rem, 4vw, 2.45rem);
       text-align: center;
-      padding: 1rem;
-      color: #777;
+      text-shadow: 0 0 22px rgba(238, 184, 210, 0.15);
+    }
+
+    h2 {
+      position: relative;
+      margin: 0 0 1.4rem;
+      padding: 0 0 0.72rem;
+      color: #e8f7ff;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      border-bottom: 1px solid rgba(177, 205, 239, 0.2);
+    }
+
+    h2::after {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 5rem;
+      height: 2px;
+      border-radius: 999px;
+      content: "";
+      background: linear-gradient(90deg, var(--cold), var(--warm));
+      box-shadow: 0 0 12px rgba(185, 203, 241, 0.3);
+    }
+
+    h3 {
+      margin: 2rem 0 0.8rem;
+      color: #f1cada;
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+    }
+
+    p,
+    li,
+    dd,
+    dt,
+    th,
+    td {
+      overflow-wrap: anywhere;
+    }
+
+    p {
+      margin: 0.8rem 0 1.15rem;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4rem;
+    }
+
+    li + li {
+      margin-top: 0.35rem;
+    }
+
+    li::marker {
+      color: var(--warm);
+    }
+
+    dt {
+      margin-top: 1.6rem;
+      color: var(--cold);
+      font-weight: 700;
+    }
+
+    dd {
+      margin: 0.55rem 0 0 1.2rem;
+      color: #e5e1ef;
+    }
+
+    strong,
+    b {
+      color: #fff2f8;
+    }
+
+    a {
+      color: #b9e9f4;
+      text-decoration-color: rgba(185, 233, 244, 0.42);
+      text-underline-offset: 0.22em;
+      transition: color 160ms ease, text-decoration-color 160ms ease;
+    }
+
+    a:hover {
+      color: #ffd9e9;
+      text-decoration-color: rgba(255, 217, 233, 0.85);
+    }
+
+    .reference {
+      margin-top: 2.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed rgba(210, 213, 241, 0.18);
+      color: var(--muted);
       font-size: 0.9rem;
-      margin-top: 4rem;
+    }
+
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      border: 0 !important;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 1.15rem;
+      background: rgba(6, 7, 17, 0.3);
+      box-shadow: 0 0 0 1px rgba(212, 218, 255, 0.14);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    th,
+    td {
+      min-width: 10rem;
+      padding: 0.9rem 1rem;
+      border: 0;
+      border-right: 1px solid rgba(212, 218, 255, 0.1);
+      border-bottom: 1px solid rgba(212, 218, 255, 0.1);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      color: #f2e7f4;
+      background: linear-gradient(135deg, rgba(143, 183, 226, 0.13), rgba(224, 158, 195, 0.1));
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
     }
 
     .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
     }
+
     .break {
-      flex-basis: 100%;
-      width: 0;
-      height: 0;
+      display: none;
     }
+
     .gallery iframe {
-      width: 300px;
-      height: 170px;
-      border: none;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(212, 218, 255, 0.16);
+      border-radius: 1.25rem;
+      background: #05050a;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
     }
 
     .playlist-portal {
-  text-align: center;
-  margin: 1.5rem 0;
-}
+      margin: 0 0 2rem;
+      text-align: center;
+    }
 
-.playlist-portal a {
-  display: inline-block;
-  padding: 0.6rem 1.3rem;
-  border: 1px solid #666;
-  border-radius: 6px;
-  font-size: 0.98rem;
-  color: #333;
-  text-decoration: none;
-  background: #fafafa;
-}
+    .playlist-portal a {
+      display: inline-block;
+      padding: 0.78rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      border-radius: 999px;
+      color: #171626;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      background: linear-gradient(112deg, #c7eef5, #d0c5ee 48%, #f6cada);
+      box-shadow: 0 10px 28px rgba(162, 164, 222, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.76);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
 
-.playlist-portal a:hover {
-  background: #f1f1f1;
-}
+    .playlist-portal a:hover {
+      color: #171626;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(177, 169, 225, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .footer {
+      width: min(62rem, 100%);
+      margin: clamp(4rem, 10vw, 8rem) auto 0;
+      padding: 2rem 1rem 3rem;
+      border-top: 1px solid rgba(212, 218, 255, 0.12);
+      color: #8c899f;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+
     .bubble {
       position: fixed;
-      bottom: 0;
+      z-index: 1;
+      bottom: -2rem;
       left: 50%;
       width: 6px;
       height: 6px;
-      background: white;
+      border: 1px solid rgba(231, 241, 255, 0.35);
       border-radius: 50%;
-      opacity: 0.1;
-      animation: floatUp 10s infinite ease-in;
+      pointer-events: none;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9), rgba(173, 209, 241, 0.32) 38%, rgba(238, 184, 212, 0.08) 72%);
+      box-shadow: 0 0 12px rgba(181, 207, 240, 0.16);
+      opacity: 0;
+      animation: floatUp 10s infinite linear;
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 0.1; }
-      100% { transform: translateY(-100vh); opacity: 0; }
+    @media (max-width: 680px) {
+      body {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+        line-height: 1.82;
+      }
+
+      .header {
+        font-size: clamp(4rem, 26vw, 7rem);
+      }
+
+      .note {
+        padding: 1.3rem 1rem;
+        border-radius: 1.5rem;
+        text-align: left;
+      }
+
+      .tabs {
+        top: 0.45rem;
+        width: 100%;
+        gap: 0.2rem;
+        padding: 0.3rem;
+        border-radius: 1.35rem;
+      }
+
+      .tab {
+        display: grid;
+        min-height: 3.4rem;
+        place-items: center;
+        padding: 0.55rem 0.35rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+      }
+
+      .tab-content {
+        padding: 1.35rem 1rem 1.75rem;
+        border-radius: 1.7rem;
+      }
+
+      .tab-content article {
+        padding: 1rem 0.85rem;
+      }
+
+      h1 {
+        font-size: 1.45rem;
+        text-align: left;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      dd {
+        margin-left: 0;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .bubble {
+        display: none;
+      }
     }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const tabs = document.querySelectorAll(".tab");
       const contents = document.querySelectorAll(".tab-content");
+
+      document.querySelector(".tabs").setAttribute("role", "tablist");
+
+      function activateTab(index, moveFocus) {
+        tabs.forEach((tab, tabIndex) => {
+          const isActive = tabIndex === index;
+          tab.classList.toggle("active", isActive);
+          tab.setAttribute("aria-selected", String(isActive));
+          tab.setAttribute("tabindex", isActive ? "0" : "-1");
+          contents[tabIndex].classList.toggle("active", isActive);
+          contents[tabIndex].hidden = !isActive;
+        });
+
+        if (moveFocus) tabs[index].focus();
+      }
+
       tabs.forEach((tab, index) => {
-        tab.addEventListener("click", () => {
-          contents.forEach(c => c.classList.remove("active"));
-          contents[index].classList.add("active");
+        const tabId = `unit-tab-${index}`;
+        const panelId = `unit-panel-${index}`;
+
+        tab.id = tabId;
+        tab.setAttribute("role", "tab");
+        tab.setAttribute("aria-controls", panelId);
+        contents[index].id = panelId;
+        contents[index].setAttribute("role", "tabpanel");
+        contents[index].setAttribute("aria-labelledby", tabId);
+
+        tab.addEventListener("click", () => activateTab(index, false));
+        tab.addEventListener("keydown", event => {
+          let nextIndex = index;
+
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+            nextIndex = (index + 1) % tabs.length;
+          } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+            nextIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if (event.key === "Home") {
+            nextIndex = 0;
+          } else if (event.key === "End") {
+            nextIndex = tabs.length - 1;
+          } else {
+            return;
+          }
+
+          event.preventDefault();
+          activateTab(nextIndex, true);
         });
       });
+
+      activateTab(0, false);
     });
   </script>
 </head>
@@ -455,9 +938,11 @@
       let bubble = document.createElement('div');
       bubble.className = 'bubble';
       bubble.style.left = Math.random() * 100 + 'vw';
-      bubble.style.animationDuration = 5 + Math.random() * 10 + 's';
-      bubble.style.width = bubble.style.height = 4 + Math.random() * 20 + 'px';
-      bubble.style.opacity = 0.1 + Math.random() * 0.2;
+      bubble.style.animationDelay = Math.random() * -16 + 's';
+      bubble.style.animationDuration = 10 + Math.random() * 12 + 's';
+      bubble.style.width = bubble.style.height = 3 + Math.random() * 13 + 'px';
+      bubble.style.setProperty('--bubble-opacity', 0.08 + Math.random() * 0.17);
+      bubble.style.setProperty('--bubble-drift', -30 + Math.random() * 60 + 'px');
       document.body.appendChild(bubble);
     }
   </script>
