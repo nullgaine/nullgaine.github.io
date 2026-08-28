@@ -118,6 +118,16 @@
         <li>歌唱可能</li>
         <li class="sample">公開音源あり</li>
       </ul>
+    </section>
+    <section class="vocal-request" aria-labelledby="vocal-request-title">
+      <div>
+        <p class="vocal-guide-label">REQUEST NOTE / SONG REQUESTS</p>
+        <h2 id="vocal-request-title">ご要望の際</h2>
+      </div>
+      <div class="vocal-request-copy">
+        <p>歌枠の際知らない曲が来てもアレなので、配信中はこのリスト内の曲を申し込んでくださると幸いです。<br>うろ覚え・応えられないはご愛嬌で……。</p>
+        <p>リクエストは常時受け付けております。<br>このリストにない曲でも構いません、色々教えてください。<br>勧めて頂いた曲は全て一通り聴いておりますので、<br>練習してそのうちアップデートされるかもしれません。<br>気長にお待ちくださいね。</p>
+      </div>
     </section>`;
 
   const empty = document.createElement("p");

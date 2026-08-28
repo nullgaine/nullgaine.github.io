@@ -189,6 +189,20 @@
 .vocal-legend li::before{margin-right:6px;content:"□"}
 .vocal-legend .sample::before{color:var(--accent);content:"■"}
 
+.vocal-request{
+  display:grid;
+  margin:0 0 28px;
+  padding:21px 22px;
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  background:rgba(251,250,247,.84);
+  grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr);
+  gap:28px;
+}
+.vocal-request h2{margin:0;font-size:clamp(18px,3vw,25px)}
+.vocal-request-copy{display:grid;gap:12px}
+.vocal-request-copy p{margin:0;color:var(--muted);font-size:13px;line-height:1.9}
+
 .vocal-catalog{
   width:auto!important;
   max-width:none!important;
@@ -295,6 +309,7 @@ mark{padding:0 .12em;border-radius:0;background:#f4d77d;color:var(--ink)}
   .vocal-masthead{grid-template-columns:1fr}
   .vocal-status{width:min(100%,360px)}
   .vocal-guide{grid-template-columns:1fr}
+  .vocal-request{grid-template-columns:1fr}
 }
 
 @media (max-width:680px){
@@ -306,6 +321,7 @@ mark{padding:0 .12em;border-radius:0;background:#f4d77d;color:var(--ink)}
   .vocal-masthead{gap:22px;padding:26px 22px}
   .vocal-masthead::after{font-size:46px}
   .vocal-guide{padding:18px 4px;background:transparent}
+  .vocal-request{padding:18px 16px}
   .vocal-legend{flex-wrap:wrap;white-space:normal}
   .body-content{grid-template-columns:1fr}
   .song-row:nth-of-type(odd){border-right:0}
