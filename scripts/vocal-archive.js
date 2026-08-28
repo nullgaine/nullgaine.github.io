@@ -112,7 +112,7 @@
       <div>
         <p class="vocal-guide-label">USAGE NOTE / PUBLIC REFERENCE</p>
         <h2 id="vocal-guide-title">曲名を検索して、歌唱記録を照合できます。</h2>
-        <p>無印は歌唱可能曲、赤い標識付きは公開音源のある曲です。掲載外の曲もリクエスト受付中。うろ覚え・応えられない場合はご愛嬌で……。</p>
+        <p>無印は歌唱可能曲、赤い標識付きは公開音源のある曲です。</p>
       </div>
       <ul class="vocal-legend" aria-label="記号の説明">
         <li>歌唱可能</li>
