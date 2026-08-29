@@ -71,16 +71,7 @@
     { name: "煇", code: "DO NOT LOOK" }
   ];
 
-  const IMPOSSIBLE_CLOCK_VALUES = [
-    "0:67:50",
-    "99:99:99",
-    "24:60:00",
-    "31:08:72",
-    "72:14:61",
-    "03:88:03",
-    "48:00:66",
-    "██:13:91"
-  ];
+  const BLOCKED_CLOCK_VALUE = "██:13:91";
 
   const GLITCH_CHARACTERS = "!<>-_\\/[]{}—=+*^?#_█▒░";
   const forecastNoiseHandles = new Set();
@@ -109,6 +100,22 @@
 
   function pad(value) {
     return String(value).padStart(2, "0");
+  }
+
+  function randomImpossibleTime() {
+    if (Math.random() < 0.1) return BLOCKED_CLOCK_VALUE;
+
+    let hour;
+    let minute;
+    let second;
+
+    do {
+      hour = Math.floor(Math.random() * 100);
+      minute = Math.floor(Math.random() * 100);
+      second = Math.floor(Math.random() * 100);
+    } while (hour < 24 && minute < 60 && second < 60);
+
+    return `${pad(hour)}:${pad(minute)}:${pad(second)}`;
   }
 
   function slotFor(timestamp) {
@@ -504,24 +511,17 @@
     const clock = document.getElementById("city-clock");
     let clockAnomalyStartsAt = Date.now() + 1800 + Math.random() * 3200;
     let clockAnomalyEndsAt = 0;
-    let clockAnomalyFrame = 0;
-    let clockAnomalyCount = 0;
 
     function updateClock(now) {
       clock.dateTime = new Date(now).toISOString();
 
       if (!clockAnomalyEndsAt && now >= clockAnomalyStartsAt) {
         clockAnomalyEndsAt = now + 3500 + Math.random() * 3500;
-        clockAnomalyFrame = clockAnomalyCount === 0
-          ? 0
-          : Math.floor(Math.random() * IMPOSSIBLE_CLOCK_VALUES.length);
-        clockAnomalyCount += 1;
       }
 
       if (clockAnomalyEndsAt && now < clockAnomalyEndsAt) {
-        const impossibleTime = IMPOSSIBLE_CLOCK_VALUES[clockAnomalyFrame % IMPOSSIBLE_CLOCK_VALUES.length];
+        const impossibleTime = randomImpossibleTime();
         const display = `${impossibleTime} JST`;
-        clockAnomalyFrame += 1;
         clock.textContent = display;
         clock.setAttribute("aria-label", "時刻表示に異常が発生しています");
         return;
@@ -551,14 +551,15 @@
   }
 
   return {
+    BLOCKED_CLOCK_VALUE,
     BROKEN_FORECASTS,
     CONDITIONS,
-    IMPOSSIBLE_CLOCK_VALUES,
     SLOT_LENGTH,
     chooseWeather,
     hash,
     jstParts,
     previewKeyFromSearch,
+    randomImpossibleTime,
     readingFor,
     scrambledText,
     slotFor,
