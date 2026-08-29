@@ -71,6 +71,17 @@
     { name: "煇", code: "DO NOT LOOK" }
   ];
 
+  const IMPOSSIBLE_CLOCK_VALUES = [
+    "0:67:50",
+    "99:99:99",
+    "24:60:00",
+    "31:08:72",
+    "72:14:61",
+    "03:88:03",
+    "48:00:66",
+    "██:13:91"
+  ];
+
   const GLITCH_CHARACTERS = "!<>-_\\/[]{}—=+*^?#_█▒░";
   const forecastNoiseHandles = new Set();
   const ambientNoiseHandles = new Set();
@@ -491,10 +502,48 @@
     renderPreviewNotice(previewKey);
     let renderedSlot = render(Date.now(), previewKey);
     const clock = document.getElementById("city-clock");
+    let clockAnomalyStartsAt = Date.now() + 1800 + Math.random() * 3200;
+    let clockAnomalyEndsAt = 0;
+    let clockAnomalyFrame = 0;
+    let clockAnomalyCount = 0;
+
+    function updateClock(now) {
+      clock.dateTime = new Date(now).toISOString();
+
+      if (!clockAnomalyEndsAt && now >= clockAnomalyStartsAt) {
+        clockAnomalyEndsAt = now + 3500 + Math.random() * 3500;
+        clockAnomalyFrame = clockAnomalyCount === 0
+          ? 0
+          : Math.floor(Math.random() * IMPOSSIBLE_CLOCK_VALUES.length);
+        clockAnomalyCount += 1;
+      }
+
+      if (clockAnomalyEndsAt && now < clockAnomalyEndsAt) {
+        const impossibleTime = IMPOSSIBLE_CLOCK_VALUES[clockAnomalyFrame % IMPOSSIBLE_CLOCK_VALUES.length];
+        const display = `${impossibleTime} JST`;
+        clockAnomalyFrame += 1;
+        clock.textContent = display;
+        clock.dataset.echo = display;
+        clock.classList.add("is-impossible");
+        clock.setAttribute("aria-label", "時刻表示に異常が発生しています");
+        return;
+      }
+
+      if (clockAnomalyEndsAt) {
+        clockAnomalyEndsAt = 0;
+        clockAnomalyStartsAt = now + 6000 + Math.random() * 8000;
+      }
+
+      const actualTime = clockFormatter.format(now);
+      clock.textContent = `${actualTime} JST`;
+      clock.classList.remove("is-impossible");
+      delete clock.dataset.echo;
+      clock.setAttribute("aria-label", `${actualTime} 日本標準時`);
+    }
 
     function tick() {
       const now = Date.now();
-      clock.textContent = `${clockFormatter.format(now)} JST`;
+      updateClock(now);
       const nextSlot = slotFor(now).key;
       if (nextSlot !== renderedSlot) renderedSlot = render(now, previewKey);
     }
@@ -508,6 +557,7 @@
   return {
     BROKEN_FORECASTS,
     CONDITIONS,
+    IMPOSSIBLE_CLOCK_VALUES,
     SLOT_LENGTH,
     chooseWeather,
     hash,

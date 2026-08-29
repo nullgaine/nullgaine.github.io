@@ -168,8 +168,75 @@ a {
 }
 
 .city-clock {
+  position: relative;
+  display: inline-block;
+  min-width: 12.5ch;
   color: var(--ink);
+  text-align: right;
   white-space: nowrap;
+}
+
+.city-clock::before,
+.city-clock::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-echo);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.city-clock.is-impossible {
+  color: var(--warning);
+  text-shadow: 2px 0 rgba(39, 111, 118, 0.55), -2px 0 rgba(189, 40, 54, 0.38);
+  animation: clock-body-desync 220ms steps(2, end) infinite;
+}
+
+.city-clock.is-impossible::before {
+  color: var(--teal);
+  opacity: 0.46;
+  transform: translateX(-3px);
+  animation: clock-echo-left 310ms steps(2, end) infinite;
+}
+
+.city-clock.is-impossible::after {
+  color: var(--warning);
+  opacity: 0.38;
+  transform: translateX(3px);
+  animation: clock-echo-right 270ms steps(2, end) infinite;
+}
+
+@keyframes clock-body-desync {
+  0%, 55%, 100% {
+    transform: translate(0);
+  }
+
+  58% {
+    transform: translate(2px, -1px);
+  }
+
+  76% {
+    transform: translate(-1px, 1px);
+  }
+}
+
+@keyframes clock-echo-left {
+  0%, 100% {
+    clip-path: inset(0 0 58% 0);
+  }
+
+  50% {
+    clip-path: inset(48% 0 0 0);
+  }
+}
+
+@keyframes clock-echo-right {
+  0%, 100% {
+    clip-path: inset(62% 0 0 0);
+  }
+
+  50% {
+    clip-path: inset(0 0 42% 0);
+  }
 }
 
 .weather-main {
@@ -904,5 +971,11 @@ body[data-weather="blank"] .condition-name {
 
   body::after {
     display: none;
+  }
+
+  .city-clock.is-impossible,
+  .city-clock.is-impossible::before,
+  .city-clock.is-impossible::after {
+    animation: none;
   }
 }
