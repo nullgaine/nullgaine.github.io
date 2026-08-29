@@ -49,6 +49,53 @@ body::before {
   background: repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(15, 31, 35, 0.018) 4px);
 }
 
+body::after {
+  position: fixed;
+  top: var(--ambient-noise-y, 50vh);
+  right: 0;
+  left: 0;
+  z-index: 31;
+  height: 5px;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 5%, rgba(39, 111, 118, 0.72) 19%, rgba(255, 255, 255, 0.84) 47% 50%, rgba(189, 40, 54, 0.76) 78%, transparent 96%);
+  box-shadow: 0 -7px rgba(39, 111, 118, 0.1), 0 9px rgba(189, 40, 54, 0.12);
+}
+
+body.is-ambient-noise::after {
+  animation: ambient-signal-tear 330ms steps(2, end) both;
+}
+
+.is-ambient-text-noise {
+  color: var(--warning) !important;
+  filter: blur(0.12px) contrast(1.3);
+  text-shadow: 4px 0 rgba(39, 111, 118, 0.65), -3px 0 rgba(189, 40, 54, 0.55);
+}
+
+@keyframes ambient-signal-tear {
+  0% {
+    opacity: 0;
+    transform: translateX(-7%);
+  }
+
+  18%, 64% {
+    opacity: 0.68;
+    transform: translateX(3%);
+  }
+
+  42% {
+    opacity: 0.28;
+    transform: translateX(-2%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(7%);
+  }
+}
+
 a {
   color: inherit;
 }
@@ -853,5 +900,9 @@ body[data-weather="blank"] .condition-name {
 
   .forecast-card.is-corrupted::after {
     animation: none;
+  }
+
+  body::after {
+    display: none;
   }
 }

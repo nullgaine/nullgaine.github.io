@@ -73,7 +73,9 @@
 
   const GLITCH_CHARACTERS = "!<>-_\\/[]{}—=+*^?#_█▒░";
   const forecastNoiseHandles = new Set();
+  const ambientNoiseHandles = new Set();
   let forecastNoiseGeneration = 0;
+  let ambientNoiseGeneration = 0;
 
   function hash(value) {
     let result = 2166136261;
@@ -319,6 +321,109 @@
     });
   }
 
+  function ambientNoiseTimeout(callback, delay) {
+    const handle = window.setTimeout(() => {
+      ambientNoiseHandles.delete(handle);
+      callback();
+    }, delay);
+    ambientNoiseHandles.add(handle);
+    return handle;
+  }
+
+  function stopAmbientNoise() {
+    ambientNoiseGeneration += 1;
+    ambientNoiseHandles.forEach((handle) => {
+      window.clearTimeout(handle);
+      window.clearInterval(handle);
+    });
+    ambientNoiseHandles.clear();
+
+    document.body.classList.remove("is-ambient-noise");
+    document.querySelectorAll(".is-ambient-text-noise").forEach((element) => {
+      if (element.dataset.ambientOriginal !== undefined) {
+        element.textContent = element.dataset.ambientOriginal;
+        delete element.dataset.ambientOriginal;
+      }
+      element.classList.remove("is-ambient-text-noise");
+    });
+  }
+
+  function startAmbientNoise() {
+    stopAmbientNoise();
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const generation = ambientNoiseGeneration;
+    const targetSelector = [
+      ".city-mark span",
+      ".city-mark strong",
+      ".city-service span",
+      ".city-service strong",
+      ".service-label",
+      "#current-date",
+      ".current-heading h1",
+      "#current-period",
+      ".section-heading p",
+      ".section-heading h2",
+      ".section-heading > span",
+      ".weather-notice strong",
+      ".city-footer span"
+    ].join(", ");
+
+    function scheduleNext(delay) {
+      ambientNoiseTimeout(runAmbientNoise, delay);
+    }
+
+    function runAmbientNoise() {
+      if (generation !== ambientNoiseGeneration) return;
+      if (document.hidden) {
+        scheduleNext(5000);
+        return;
+      }
+
+      const targets = Array.from(document.querySelectorAll(targetSelector)).filter((element) => {
+        if (!element.textContent.trim() || element.closest("[hidden]")) return false;
+        const bounds = element.getBoundingClientRect();
+        return bounds.bottom > 0 && bounds.top < window.innerHeight;
+      });
+
+      if (!targets.length) {
+        scheduleNext(5000);
+        return;
+      }
+
+      const target = targets[Math.floor(Math.random() * targets.length)];
+      const originalText = target.textContent;
+      target.dataset.ambientOriginal = originalText;
+      target.classList.add("is-ambient-text-noise");
+      target.textContent = scrambledText(originalText);
+
+      document.body.style.setProperty("--ambient-noise-y", `${8 + Math.floor(Math.random() * 84)}vh`);
+      document.body.classList.add("is-ambient-noise");
+
+      const interval = window.setInterval(() => {
+        if (generation !== ambientNoiseGeneration || !target.isConnected) return;
+        target.textContent = scrambledText(originalText);
+      }, 60);
+      ambientNoiseHandles.add(interval);
+
+      ambientNoiseTimeout(() => {
+        window.clearInterval(interval);
+        ambientNoiseHandles.delete(interval);
+        target.textContent = originalText;
+        delete target.dataset.ambientOriginal;
+        target.classList.remove("is-ambient-text-noise");
+        document.body.classList.remove("is-ambient-noise");
+
+        if (generation === ambientNoiseGeneration) {
+          scheduleNext(14000 + Math.random() * 18000);
+        }
+      }, 160 + Math.random() * 170);
+    }
+
+    scheduleNext(2500 + Math.random() * 4000);
+  }
+
   function renderAlert(reading) {
     const alert = document.getElementById("weather-alert");
     const visitGuidance = document.getElementById("visit-guidance");
@@ -395,6 +500,8 @@
     }
 
     tick();
+    startAmbientNoise();
+    window.addEventListener("pagehide", stopAmbientNoise, { once: true });
     window.setInterval(tick, 1000);
   }
 
