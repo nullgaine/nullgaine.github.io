@@ -523,8 +523,6 @@
         const display = `${impossibleTime} JST`;
         clockAnomalyFrame += 1;
         clock.textContent = display;
-        clock.dataset.echo = display;
-        clock.classList.add("is-impossible");
         clock.setAttribute("aria-label", "時刻表示に異常が発生しています");
         return;
       }
@@ -536,8 +534,6 @@
 
       const actualTime = clockFormatter.format(now);
       clock.textContent = `${actualTime} JST`;
-      clock.classList.remove("is-impossible");
-      delete clock.dataset.echo;
       clock.setAttribute("aria-label", `${actualTime} 日本標準時`);
     }
 
