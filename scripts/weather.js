@@ -7,7 +7,8 @@
   "use strict";
 
   const JST_OFFSET = 9 * 60 * 60 * 1000;
-  const SLOT_LENGTH = 6 * 60 * 60 * 1000;
+  const SLOT_HOURS = 4;
+  const SLOT_LENGTH = SLOT_HOURS * 60 * 60 * 1000;
 
   const CONDITIONS = {
     clear: {
@@ -120,7 +121,7 @@
 
   function slotFor(timestamp) {
     const parts = jstParts(timestamp);
-    const slotHour = Math.floor(parts.hour / 6) * 6;
+    const slotHour = Math.floor(parts.hour / SLOT_HOURS) * SLOT_HOURS;
     const start = Date.UTC(parts.year, parts.month - 1, parts.day, slotHour) - JST_OFFSET;
     return {
       start,
@@ -159,7 +160,7 @@
     const key = forcedKey && CONDITIONS[forcedKey] ? forcedKey : chooseWeather(roll, slot.month);
     const condition = CONDITIONS[key];
     const abnormal = key === "blank" || key === "distortion" || key === "visit";
-    const hourAdjustment = { 0: -2, 6: 0, 12: 3, 18: 0 }[slot.hour] || 0;
+    const hourAdjustment = { 0: -2, 4: -2, 8: 0, 12: 3, 16: 2, 20: 0 }[slot.hour] || 0;
     const weatherAdjustment = { cloudy: -1, rain: -2, snow: -3 }[key] || 0;
     const summer = slot.month >= 6 && slot.month <= 8;
     const variationRange = summer ? 8 : 5;
