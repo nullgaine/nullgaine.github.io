@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="江縫栄市の6時間ごとの天気・空間状態・來訪情報をお知らせします。">
+  <meta name="theme-color" content="#e9f1f1">
+  <title>江縫栄市お天気予報</title>
+  <link rel="stylesheet" href="assets/weather.css?v=forecast-20260829">
+</head>
+<body class="weather-page" data-weather="loading">
+  <a class="skip-link" href="#weather-main">予報本文へ移動</a>
+
+  <header class="city-header">
+    <div class="city-header-inner">
+      <a class="city-mark" href="https://gainenull.org/access" aria-label="アクセスページへ戻る">
+        <span>ENUEI CITY</span>
+        <strong>江縫栄市</strong>
+      </a>
+      <div class="city-service">
+        <span>WEATHER &amp; SPATIAL FORECAST</span>
+        <strong>気象・時空間情報</strong>
+      </div>
+      <time class="city-clock" id="city-clock">--:--:-- JST</time>
+    </div>
+  </header>
+
+  <main class="weather-main" id="weather-main">
+    <section class="current-panel" aria-labelledby="weather-title">
+      <div class="current-heading">
+        <p class="service-label">CURRENT CONDITIONS / ENUEI OBSERVATORY</p>
+        <p class="current-date" id="current-date">----年--月--日</p>
+        <h1 id="weather-title">江縫栄市のお天気</h1>
+        <p class="current-period" id="current-period">予報を取得しています</p>
+      </div>
+
+      <div class="current-weather" aria-live="polite">
+        <div class="condition-display">
+          <span class="condition-code" id="condition-code">CONNECTING</span>
+          <strong class="condition-name" id="condition-name">取得中</strong>
+          <p class="condition-summary" id="condition-summary">観測室へ接続しています。</p>
+        </div>
+
+        <div class="temperature-display">
+          <span class="temperature-label">OBSERVED</span>
+          <p><strong id="current-temperature">--</strong><span id="temperature-unit">℃</span></p>
+        </div>
+      </div>
+
+      <dl class="current-details">
+        <div>
+          <dt>降水確率</dt>
+          <dd id="current-precipitation">--%</dd>
+        </div>
+        <div>
+          <dt>市内安全区分</dt>
+          <dd id="current-safety">確認中</dd>
+        </div>
+        <div>
+          <dt>次回更新</dt>
+          <dd id="next-update">--:--</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="weather-alert" id="weather-alert" aria-labelledby="alert-title" aria-live="assertive" hidden>
+      <header class="alert-header">
+        <p id="alert-code">SPECIAL WEATHER INFORMATION</p>
+        <h2 id="alert-title">気象情報</h2>
+      </header>
+
+      <div class="alert-safe">
+        <strong>屋内に入ってください。</strong>
+        <p>屋内に入れば大丈夫です。</p>
+      </div>
+
+      <div class="visit-guidance" id="visit-guidance" hidden>
+        <p class="manifestation-note">具現化で存在を確立された個体様は、さらに気をつけてください。</p>
+        <ol class="visit-rules">
+          <li><span>1</span><strong>來客者に声をかけない</strong></li>
+          <li><span>2</span><strong>すぐ担当部に通報</strong></li>
+          <li><span>3</span><strong>ヒト型じゃないなら逃げて！</strong></li>
+        </ol>
+        <div class="visit-footnotes">
+          <p>現世の人と関わることは、双方の心身に異変をもたらします。</p>
+          <p><strong>認識されてはいけません。</strong> 永久的な存在論的障害を負うおそれがあります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="forecast-section" aria-labelledby="forecast-title">
+      <div class="section-heading">
+        <div>
+          <p>6-HOUR OUTLOOK</p>
+          <h2 id="forecast-title">これからの予報</h2>
+        </div>
+        <span>6時間ごとに更新</span>
+      </div>
+      <div class="forecast-grid" id="forecast-grid" aria-live="polite"></div>
+    </section>
+
+    <aside class="weather-notice">
+      <p><strong>市民の皆様へ</strong></p>
+      <p>歪み・來訪の発生時は、画面に表示される警告に従ってください。屋内に入れば安全です。</p>
+    </aside>
+
+    <noscript>
+      <p class="no-script">予報の表示にはJavaScriptが必要です。警報発令時は屋内で待機してください。</p>
+    </noscript>
+  </main>
+
+  <footer class="city-footer">
+    <div>
+      <span>ENUEI CITY WEATHER &amp; SPATIAL OBSERVATION OFFICE</span>
+      <a href="https://gainenull.org/access">← Accessへ戻る</a>
+    </div>
+  </footer>
+
+  <script src="scripts/weather.js?v=forecast-20260829"></script>
+</body>
+</html>
