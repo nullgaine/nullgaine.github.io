@@ -68,7 +68,7 @@
 .entity-section-heading p {
   margin: 0 0 10px;
   color: var(--links-red);
-  font: 700 10px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.18em;
 }
 
@@ -100,7 +100,7 @@
 .links-register span,
 .links-register small {
   color: var(--links-muted);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.13em;
 }
 
@@ -215,7 +215,7 @@
   z-index: 1;
   max-width: calc(100% - 54px);
   color: var(--links-red);
-  font: 700 9px/1.55 var(--mono);
+  font: 700 11px/1.55 var(--mono);
   letter-spacing: 0.13em;
 }
 
@@ -250,7 +250,7 @@
   padding-top: 12px;
   border-top: 1px solid var(--links-line);
   color: var(--links-ink);
-  font: 700 9px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.12em;
   align-items: center;
   justify-content: space-between;

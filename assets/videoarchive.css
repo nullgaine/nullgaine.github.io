@@ -180,7 +180,7 @@
 
 .archive-search span {
   color: var(--archive-muted);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
 }
 
@@ -254,7 +254,7 @@
   padding: 9px 12px 8px 16px;
   border-bottom: 1px solid var(--archive-rule-dark);
   color: var(--archive-muted);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
 }
 
@@ -323,7 +323,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.12em;
 }
 
@@ -338,7 +338,7 @@
 .record-timecode {
   right: 13px;
   bottom: 10px;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
 }
 
@@ -369,7 +369,7 @@
 .record-label {
   margin: 0 0 6px;
   color: var(--archive-red);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.12em;
 }
 
@@ -498,7 +498,7 @@
 
 .dialog-bar span {
   color: #d96770;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   white-space: nowrap;
 }

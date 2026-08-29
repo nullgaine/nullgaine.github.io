@@ -64,7 +64,7 @@
 .contact-section-code {
   margin: 0 0 12px;
   color: var(--contact-red);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
 }
@@ -85,7 +85,7 @@
 .contact-status {
   margin: 0;
   border-top: 1px solid var(--contact-dark);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.07em;
 }
 
@@ -214,7 +214,7 @@
   padding: 2px 5px;
   border: 1px solid var(--contact-red);
   color: var(--contact-red);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.06em;
@@ -294,7 +294,7 @@
 .contact-hint {
   margin: 6px 0 0;
   color: var(--contact-muted);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .contact-consent {
@@ -377,7 +377,7 @@
 .contact-submit-row > p {
   margin: 0;
   color: var(--contact-muted);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .contact-success {
@@ -419,7 +419,7 @@
   padding-top: 16px;
   border-top: 1px solid var(--contact-rule);
   flex-wrap: wrap;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .contact-backlinks a::after {

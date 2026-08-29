@@ -4,7 +4,7 @@
   --paper: #f8faf8;
   --paper-blue: #edf3f2;
   --ink: #1f2d30;
-  --muted: #647579;
+  --muted: #526468;
   --line: #9eb1b4;
   --teal: #276f76;
   --teal-dark: #174f55;
@@ -151,7 +151,7 @@ a {
 .city-service span,
 .city-clock {
   color: var(--teal);
-  font: 700 9px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.14em;
 }
 
@@ -169,6 +169,7 @@ a {
 
 .city-clock {
   color: var(--ink);
+  font-size: 13px;
   white-space: nowrap;
 }
 
@@ -196,7 +197,7 @@ a {
 
 .preview-copy > span {
   color: var(--amber);
-  font: 700 9px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.13em;
 }
 
@@ -208,7 +209,8 @@ a {
 .preview-copy p {
   margin: 1px 0 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .preview-switch {
@@ -222,7 +224,7 @@ a {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.72);
   color: var(--teal-dark);
-  font: 700 9px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.06em;
   text-decoration: none;
 }
@@ -267,14 +269,14 @@ a {
 .section-heading p {
   margin: 0 0 8px;
   color: var(--teal);
-  font: 700 10px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.17em;
 }
 
 .current-date {
   margin: 0;
   color: var(--muted);
-  font: 11px/1.6 var(--mono);
+  font: 500 12px/1.6 var(--mono);
   letter-spacing: 0.08em;
 }
 
@@ -307,7 +309,7 @@ a {
 .condition-code,
 .temperature-label {
   color: var(--teal);
-  font: 700 9px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.15em;
 }
 
@@ -370,7 +372,7 @@ a {
 
 .current-details dt {
   color: var(--muted);
-  font: 9px/1.5 var(--mono);
+  font: 600 11px/1.5 var(--mono);
   letter-spacing: 0.12em;
 }
 
@@ -396,7 +398,7 @@ a {
 
 .alert-header p {
   margin: 0;
-  font: 700 9px/1.5 var(--mono);
+  font: 700 11px/1.5 var(--mono);
   letter-spacing: 0.17em;
 }
 
@@ -556,7 +558,7 @@ body[data-weather="blank"] .condition-name {
 
 .section-heading > span {
   color: var(--muted);
-  font: 9px/1.5 var(--mono);
+  font: 600 11px/1.5 var(--mono);
   letter-spacing: 0.1em;
 }
 
@@ -599,7 +601,7 @@ body[data-weather="blank"] .condition-name {
 .forecast-card .forecast-code {
   display: block;
   color: var(--muted);
-  font: 9px/1.55 var(--mono);
+  font: 600 11px/1.55 var(--mono);
   letter-spacing: 0.1em;
 }
 
@@ -632,7 +634,7 @@ body[data-weather="blank"] .condition-name {
 
 .forecast-card dt {
   color: var(--muted);
-  font: 8px/1.4 var(--mono);
+  font: 600 11px/1.4 var(--mono);
 }
 
 .forecast-card dd {
@@ -772,7 +774,7 @@ body[data-weather="blank"] .condition-name {
   margin: 0 auto;
   padding: 19px 0;
   color: var(--muted);
-  font: 9px/1.6 var(--mono);
+  font: 600 11px/1.6 var(--mono);
   letter-spacing: 0.08em;
   justify-content: space-between;
   gap: 18px;
@@ -795,6 +797,7 @@ body[data-weather="blank"] .condition-name {
 
   .city-clock {
     grid-column: 1 / -1;
+    font-size: 12px;
     padding-top: 8px;
     border-top: 1px solid var(--line);
   }

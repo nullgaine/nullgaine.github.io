@@ -125,7 +125,7 @@ a:focus-visible {
 .terminal-kicker {
   margin: 0 0 10px;
   color: var(--terminal-green);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .terminal-title h1 {
@@ -153,7 +153,7 @@ a:focus-visible {
   display: grid;
   margin: 0;
   border-top: 1px solid var(--terminal-line);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .terminal-meta div {
@@ -227,7 +227,7 @@ a:focus-visible {
 .notice-label {
   margin: 0 0 5px;
   color: var(--terminal-red-bright);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .containment-notice h2 {
@@ -270,7 +270,7 @@ a:focus-visible {
   justify-content: space-between;
   padding: 10px 14px;
   color: var(--terminal-muted);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .console-toolbar {
@@ -316,7 +316,7 @@ a:focus-visible {
 .seal-code {
   margin: 0 0 22px;
   color: var(--terminal-muted);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .open-record {
@@ -346,7 +346,7 @@ a:focus-visible {
 .message-seal > p:last-child {
   margin: 14px 0 0;
   color: var(--terminal-muted);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .message-document {
@@ -416,7 +416,7 @@ a:focus-visible {
   align-items: center;
   justify-content: space-between;
   padding: 22px clamp(20px, 4vw, 42px) 28px;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .record-nav a,
@@ -447,7 +447,7 @@ a:focus-visible {
   border: 1px solid var(--terminal-red-bright);
   background: rgba(13, 17, 16, 0.97);
   color: var(--terminal-ink);
-  font-size: 9px;
+  font-size: 11px;
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
