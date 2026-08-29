@@ -654,6 +654,13 @@ body[data-weather="blank"] .condition-name {
   font-family: var(--mono);
 }
 
+.forecast-card.is-corrupted .is-noising {
+  color: #fff;
+  filter: blur(0.18px);
+  text-shadow: 5px 0 rgba(189, 40, 54, 0.75), -4px 0 rgba(39, 111, 118, 0.78);
+  transform: translateX(1px);
+}
+
 .forecast-card.is-corrupted[data-corruption="1"] {
   transform: translateY(2px) skewY(-0.35deg);
 }

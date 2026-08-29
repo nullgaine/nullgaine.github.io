@@ -71,6 +71,10 @@
     { name: "煇", code: "DO NOT LOOK" }
   ];
 
+  const GLITCH_CHARACTERS = "!<>-_\\/[]{}—=+*^?#_█▒░";
+  const forecastNoiseHandles = new Set();
+  let forecastNoiseGeneration = 0;
+
   function hash(value) {
     let result = 2166136261;
     for (let index = 0; index < value.length; index += 1) {
@@ -238,6 +242,83 @@
     return article;
   }
 
+  function scrambledText(value) {
+    const characters = Array.from(value);
+    const eligibleIndexes = characters
+      .map((character, index) => (/\s/.test(character) ? -1 : index))
+      .filter((index) => index >= 0);
+
+    if (!eligibleIndexes.length) return value;
+
+    const replacements = new Set(eligibleIndexes.filter(() => Math.random() > 0.82));
+    if (!replacements.size) {
+      replacements.add(eligibleIndexes[Math.floor(Math.random() * eligibleIndexes.length)]);
+    }
+
+    return characters.map((character, index) => {
+      if (!replacements.has(index)) return character;
+      return GLITCH_CHARACTERS[Math.floor(Math.random() * GLITCH_CHARACTERS.length)];
+    }).join("");
+  }
+
+  function noiseTimeout(callback, delay) {
+    const handle = window.setTimeout(() => {
+      forecastNoiseHandles.delete(handle);
+      callback();
+    }, delay);
+    forecastNoiseHandles.add(handle);
+    return handle;
+  }
+
+  function stopForecastNoise() {
+    forecastNoiseGeneration += 1;
+    forecastNoiseHandles.forEach((handle) => {
+      window.clearTimeout(handle);
+      window.clearInterval(handle);
+    });
+    forecastNoiseHandles.clear();
+  }
+
+  function startForecastNoise(grid) {
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const generation = forecastNoiseGeneration;
+    const targets = grid.querySelectorAll(
+      ".forecast-card.is-corrupted time, .forecast-card.is-corrupted .forecast-code, .forecast-card.is-corrupted h3"
+    );
+
+    targets.forEach((element, index) => {
+      const originalText = element.textContent;
+
+      function runCycle() {
+        if (generation !== forecastNoiseGeneration || !element.isConnected) return;
+
+        element.classList.add("is-noising");
+        element.textContent = scrambledText(originalText);
+
+        const interval = window.setInterval(() => {
+          if (generation !== forecastNoiseGeneration || !element.isConnected) return;
+          element.textContent = scrambledText(originalText);
+        }, 70);
+        forecastNoiseHandles.add(interval);
+
+        noiseTimeout(() => {
+          window.clearInterval(interval);
+          forecastNoiseHandles.delete(interval);
+          element.textContent = originalText;
+          element.classList.remove("is-noising");
+
+          if (generation === forecastNoiseGeneration && element.isConnected) {
+            noiseTimeout(runCycle, 2000 + Math.random() * 5000);
+          }
+        }, 220 + Math.random() * 280);
+      }
+
+      noiseTimeout(runCycle, 250 + index * 90 + Math.random() * 1700);
+    });
+  }
+
   function renderAlert(reading) {
     const alert = document.getElementById("weather-alert");
     const visitGuidance = document.getElementById("visit-guidance");
@@ -280,6 +361,7 @@
     const grid = document.getElementById("forecast-grid");
     const outlookIsBroken = current.key === "blank" || current.key === "distortion" || current.key === "visit";
     const corruptionOffset = hash(`${current.slot.key}:${current.key}:outlook`) % BROKEN_FORECASTS.length;
+    stopForecastNoise();
     grid.classList.toggle("is-corrupted", outlookIsBroken);
     grid.replaceChildren(...readings.map((reading, index) => {
       const brokenForecast = outlookIsBroken && index > 0
@@ -287,6 +369,7 @@
         : null;
       return forecastCard(reading, index, brokenForecast);
     }));
+    if (outlookIsBroken) startForecastNoise(grid);
 
     return currentSlot.key;
   }
@@ -324,6 +407,7 @@
     jstParts,
     previewKeyFromSearch,
     readingFor,
+    scrambledText,
     slotFor,
     start
   };
