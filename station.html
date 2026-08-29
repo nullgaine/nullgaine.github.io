@@ -6,7 +6,7 @@
   <meta name="description" content="江縫栄駅の帰還列車運行案内。列車到着後10分間のみ乗車案内を表示します。">
   <meta name="theme-color" content="#003153">
   <title>江縫栄駅｜帰還列車運行案内</title>
-  <link rel="stylesheet" href="assets/station.css?v=station-20260829b">
+  <link rel="stylesheet" href="assets/station.css?v=station-20260829c">
 </head>
 <body data-service="loading">
   <a class="skip-link" href="#station-main">運行案内へ移動</a>
@@ -18,7 +18,7 @@
           <span class="line-symbol" aria-hidden="true">境</span>
           <span>
             <small>ENUEI STATION / RETURN SERVICE</small>
-            <strong>江縫栄駅</strong>
+            <strong id="station-brand-name">江縫栄駅</strong>
           </span>
         </a>
         <div class="station-clock-wrap">
@@ -39,7 +39,7 @@
         <div class="nameboard-main">
           <div>
             <h1 id="station-title">江縫栄</h1>
-            <p>Enuei</p>
+            <p id="station-latin-name">Enuei</p>
           </div>
           <span class="boundary-mark">境界線</span>
         </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="service-board-body">
           <div>
-            <p class="service-direction">現世方面・帰還列車</p>
+            <p class="service-direction" id="service-direction">現世方面・帰還列車</p>
             <h2 id="service-title">現在、帰還列車は停車しておりません</h2>
             <p id="service-message">次回の運行時刻は案内されません。</p>
           </div>
@@ -127,14 +127,6 @@
         </section>
       </div>
 
-      <section class="corrupted-service" id="corrupted-service" hidden aria-label="時刻表の表示が破損しています">
-        <div class="corrupted-line"></div>
-        <p class="corrupted-kicker">04:44:44 / RETURN SERVICE</p>
-        <h1>豎溽ｸｫ譬?ｧ?</h1>
-        <p class="hex-line">e4baa1e88085e6a798e381aee3818ae5b8b0e3828ae381afe38193e381a1e38289e381abe381aae3828ae381bee38199e38082</p>
-        <p class="hex-line">e9a785e593a1e381aee588b6e69c8de381aee889b2e38292e7a2bae3818be38281e3819fe4b88ae38081e5ae89e585a8e381abe3818ae98284e3828ae3818fe381a0e38195e38184e381bee3819be38082</p>
-        <div class="corrupted-line"></div>
-      </section>
     </main>
 
     <footer class="station-footer">
@@ -146,6 +138,6 @@
   </div>
 
   <noscript><p class="no-script">運行情報の確認にはJavaScriptが必要です。</p></noscript>
-  <script src="scripts/station.js?v=station-20260829a"></script>
+  <script src="scripts/station.js?v=station-20260829c"></script>
 </body>
 </html>
