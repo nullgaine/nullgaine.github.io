@@ -444,6 +444,7 @@ a { color: inherit; }
 .safety-list li:first-child { border-top: 0; }
 .safety-list span { display: grid; color: #fff; background: var(--prussian); font: 700 15px/1 var(--mono); place-items: center; }
 .safety-list p { margin: 0; padding: 13px 18px; font-size: 14px; }
+.safety-list strong { font-weight: 800; }
 
 .corrupted-service {
   position: relative;
@@ -481,21 +482,10 @@ a { color: inherit; }
 }
 
 .corrupted-service h1 {
-  position: relative;
   margin: 0 0 30px;
   color: var(--prussian);
-  font: 700 clamp(35px, 8vw, 82px)/1.15 var(--mono);
+  font: 700 clamp(30px, 7vw, 68px)/1.2 var(--mono);
   letter-spacing: -0.05em;
-}
-
-.corrupted-service h1::after {
-  position: absolute;
-  inset: 0;
-  color: var(--toki-deep);
-  content: attr(data-text);
-  clip-path: inset(48% 0 25% 0);
-  transform: translateX(5px);
-  animation: broken-title 1.7s steps(2, end) infinite;
 }
 
 .hex-line {
@@ -509,9 +499,10 @@ a { color: inherit; }
 
 .corrupted-line { height: 1px; margin: 18px 0; background: var(--prussian); }
 
-body.is-corrupted .station-app {
-  filter: invert(1);
-}
+body.is-corrupted { background: #000; }
+body.is-corrupted .station-app { filter: invert(1); }
+body.is-corrupted .station-main { width: 100%; min-height: 100vh; margin: 0; }
+body.is-corrupted .corrupted-service { min-height: 100vh; margin: 0; border: 0; }
 
 body.is-corrupted .station-header,
 body.is-corrupted .station-nameboard,
@@ -536,12 +527,6 @@ body.is-corrupted .station-footer { display: none; }
 
 .no-script { margin: 20px; padding: 12px; border: 1px solid var(--prussian); background: var(--paper); }
 
-@keyframes broken-title {
-  0%, 76%, 100% { transform: translateX(5px); }
-  78% { transform: translateX(-7px); }
-  82% { transform: translateX(2px); }
-}
-
 @media (max-width: 760px) {
   .station-header-inner { min-height: 98px; flex-wrap: wrap; padding: 14px 0; gap: 8px 16px; }
   .station-clock-wrap { width: 100%; padding-top: 8px; border-top: 1px solid rgba(244, 179, 194, 0.55); text-align: left; }
@@ -558,6 +543,7 @@ body.is-corrupted .station-footer { display: none; }
   .timetable li:nth-child(4n) { border-right: 1px solid var(--line); }
   .timetable li:nth-child(2n) { border-right: 0; }
   .station-footer div { flex-direction: column; }
+  body.is-corrupted .corrupted-service { padding: 34px 26px; }
 }
 
 @media (max-width: 420px) {
