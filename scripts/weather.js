@@ -63,6 +63,14 @@
 
   const MONTH_BASE_TEMPERATURES = [5, 7, 11, 16, 21, 24, 29, 30, 25, 19, 13, 8];
 
+  const BROKEN_FORECASTS = [
+    { name: "驕√￡繧�", code: "????????" },
+    { name: "蛹ｿ繧後ｋ", code: "????????" },
+    { name: "昊", code: "Y2FlbG█zdGlz" },
+    { name: "甦", code: "█29udHJhZ███dGlvbg" },
+    { name: "煇", code: "DO NOT LOOK" }
+  ];
+
   function hash(value) {
     let result = 2166136261;
     for (let index = 0; index < value.length; index += 1) {
@@ -199,10 +207,15 @@
     return value === null ? "--" : `${value}${suffix || ""}`;
   }
 
-  function forecastCard(reading, index) {
+  function forecastCard(reading, index, brokenForecast) {
     const article = document.createElement("article");
     article.className = "forecast-card";
     article.dataset.weather = reading.key;
+
+    if (brokenForecast) {
+      article.classList.add("is-corrupted");
+      article.dataset.corruption = String(index);
+    }
 
     const date = document.createElement("time");
     date.dateTime = new Date(reading.slot.start).toISOString();
@@ -210,15 +223,15 @@
 
     const code = document.createElement("span");
     code.className = "forecast-code";
-    code.textContent = reading.condition.code;
+    code.textContent = brokenForecast ? brokenForecast.code : reading.condition.code;
 
     const title = document.createElement("h3");
-    title.textContent = reading.condition.name;
+    title.textContent = brokenForecast ? brokenForecast.name : reading.condition.name;
 
     const details = document.createElement("dl");
     details.innerHTML = `
-      <div><dt>気温</dt><dd>${valueOrDash(reading.temperature, "℃")}</dd></div>
-      <div><dt>降水</dt><dd>${valueOrDash(reading.precipitation, "%")}</dd></div>
+      <div><dt>気温</dt><dd>${brokenForecast ? "--" : valueOrDash(reading.temperature, "℃")}</dd></div>
+      <div><dt>降水</dt><dd>${brokenForecast ? "--" : valueOrDash(reading.precipitation, "%")}</dd></div>
     `;
 
     article.append(date, code, title, details);
@@ -265,7 +278,15 @@
     renderAlert(current);
 
     const grid = document.getElementById("forecast-grid");
-    grid.replaceChildren(...readings.map(forecastCard));
+    const outlookIsBroken = current.key === "blank" || current.key === "distortion" || current.key === "visit";
+    const corruptionOffset = hash(`${current.slot.key}:${current.key}:outlook`) % BROKEN_FORECASTS.length;
+    grid.classList.toggle("is-corrupted", outlookIsBroken);
+    grid.replaceChildren(...readings.map((reading, index) => {
+      const brokenForecast = outlookIsBroken && index > 0
+        ? BROKEN_FORECASTS[(corruptionOffset + index - 1) % BROKEN_FORECASTS.length]
+        : null;
+      return forecastCard(reading, index, brokenForecast);
+    }));
 
     return currentSlot.key;
   }
@@ -295,6 +316,7 @@
   }
 
   return {
+    BROKEN_FORECASTS,
     CONDITIONS,
     SLOT_LENGTH,
     chooseWeather,
