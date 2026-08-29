@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="江縫栄駅の帰還列車運行案内。列車到着後10分間のみ乗車案内を表示します。">
+  <meta name="theme-color" content="#003153">
+  <title>江縫栄駅｜帰還列車運行案内</title>
+  <link rel="stylesheet" href="assets/station.css?v=station-20260829a">
+</head>
+<body data-service="loading">
+  <a class="skip-link" href="#station-main">運行案内へ移動</a>
+
+  <div class="station-app">
+    <header class="station-header">
+      <div class="station-header-inner">
+        <a class="station-brand" href="https://gainenull.org/access" aria-label="アクセスページへ戻る">
+          <span class="line-symbol" aria-hidden="true">境</span>
+          <span>
+            <small>ENUEI STATION / RETURN SERVICE</small>
+            <strong>江縫栄駅</strong>
+          </span>
+        </a>
+        <div class="station-clock-wrap">
+          <span>JAPAN STANDARD TIME</span>
+          <time id="station-clock" datetime="">--:--:-- JST</time>
+        </div>
+      </div>
+    </header>
+
+    <main class="station-main" id="station-main">
+      <aside class="preview-notice" id="preview-notice" hidden>
+        <span>CREATOR PREVIEW</span>
+        <strong id="preview-label">表示確認中</strong>
+      </aside>
+
+      <section class="station-nameboard" aria-labelledby="station-title">
+        <div class="nameboard-reading">えぬえい</div>
+        <div class="nameboard-main">
+          <div>
+            <h1 id="station-title">江縫栄</h1>
+            <p>Enuei</p>
+          </div>
+          <span class="boundary-mark">境界線</span>
+        </div>
+        <div class="route-line" aria-hidden="true">
+          <span></span><i></i><span></span>
+        </div>
+        <p class="nameboard-note">到着地・終着点・入口・境界の合間</p>
+      </section>
+
+      <section class="service-board" id="service-board" aria-live="polite">
+        <div class="service-board-heading">
+          <span>運行情報</span>
+          <strong id="service-code">SERVICE STATUS</strong>
+        </div>
+        <div class="service-board-body">
+          <div>
+            <p class="service-direction">現世方面・帰還列車</p>
+            <h2 id="service-title">現在、帰還列車は停車しておりません</h2>
+            <p id="service-message">次回の運行時刻は案内されません。</p>
+          </div>
+          <div class="departure-display" id="departure-display" hidden>
+            <span>発車まで</span>
+            <strong id="departure-countdown">--:--</strong>
+            <small>DEPARTURE</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="closed-notice" id="closed-notice">
+        <p>NO TRAIN IN STATION</p>
+        <strong>駅舎内でお待ちください。</strong>
+        <span>駅を出て踏切を渡らなければ、まだ大丈夫です。</span>
+      </section>
+
+      <div class="active-service" id="active-service" hidden>
+        <section class="arrival-panel">
+          <div class="arrival-heading">
+            <div>
+              <p>RETURN TRAIN HAS ARRIVED</p>
+              <h2>帰還列車が到着しました</h2>
+            </div>
+            <span id="connection-badge" hidden>接続運行</span>
+          </div>
+          <dl class="arrival-details">
+            <div>
+              <dt>到着</dt>
+              <dd id="arrival-time">--:--:--</dd>
+            </div>
+            <div>
+              <dt>行先</dt>
+              <dd>現世方面</dd>
+            </div>
+            <div>
+              <dt>取扱</dt>
+              <dd>乗車扱い中</dd>
+            </div>
+          </dl>
+          <p class="connection-message" id="connection-message" hidden>後続の帰還列車と接続するため、停車時間を延長します。</p>
+        </section>
+
+        <section class="timetable-panel" aria-labelledby="timetable-title">
+          <div class="section-heading">
+            <div>
+              <p>RETURN SERVICE TIMETABLE</p>
+              <h2 id="timetable-title">帰還列車時刻表</h2>
+            </div>
+            <span>毎日運行</span>
+          </div>
+          <ol class="timetable" id="timetable"></ol>
+          <p class="timetable-note">時刻はすべて日本標準時です。各列車は到着後10分間停車します。</p>
+        </section>
+
+        <section class="safety-panel" aria-labelledby="safety-title">
+          <div class="section-heading">
+            <div>
+              <p>FOR YOUR SAFE RETURN</p>
+              <h2 id="safety-title">安全にお帰りいただくために</h2>
+            </div>
+          </div>
+          <ol class="safety-list">
+            <li><span>01</span><p>発車まで駅舎内に留まり、駅員の指示に従ってください。</p></li>
+            <li><span>02</span><p>正しい駅員の制服は、プルシアンブルーと鴇色の組み合わせです。</p></li>
+            <li><span>03</span><p>駅員を装ったものに注意してください。偽物は決して本物になれません。</p></li>
+          </ol>
+        </section>
+      </div>
+
+      <section class="corrupted-service" id="corrupted-service" hidden aria-label="時刻表の表示が破損しています">
+        <div class="corrupted-line"></div>
+        <p class="corrupted-kicker">04:44:44 / RETURN SERVICE</p>
+        <h1 data-text="豎溽ｸｫ譬?ｧ?">豎溽ｸｫ譬?ｧ?</h1>
+        <p class="hex-line">e4baa1e88085e6a798e381aee3818ae5b8b0e3828ae381afe38193e381a1e38289e381abe381aae3828ae381bee38199e38082</p>
+        <p class="hex-line">e9a785e593a1e381aee588b6e69c8de381aee889b2e38292e7a2bae3818be38281e3819fe4b88ae38081e5ae89e585a8e381abe3818ae98284e3828ae3818fe381a0e38195e38184e381bee3819be38082</p>
+        <div class="corrupted-line"></div>
+      </section>
+    </main>
+
+    <footer class="station-footer">
+      <div>
+        <span>ENUEI STATION / BOUNDARY LINE</span>
+        <a href="https://gainenull.org/access">← Accessへ戻る</a>
+      </div>
+    </footer>
+  </div>
+
+  <noscript><p class="no-script">運行情報の確認にはJavaScriptが必要です。</p></noscript>
+  <script src="scripts/station.js?v=station-20260829a"></script>
+</body>
+</html>
