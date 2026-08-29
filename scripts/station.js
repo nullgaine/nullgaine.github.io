@@ -1,7 +1,6 @@
 (function () {
   "use strict";
 
-  const JST_OFFSET = 9 * 60 * 60 * 1000;
   const STOP_DURATION = 10 * 60 * 1000;
   const SPECIAL_TIME = "04:44:44";
   const CORRUPTED_STATION_NAME = "豎溽ｸｫ譬?ｧ?";
@@ -39,7 +38,6 @@
   ];
 
   const clockFormatter = new Intl.DateTimeFormat("ja-JP", {
-    timeZone: "Asia/Tokyo",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
@@ -51,17 +49,17 @@
     return hour * 3600 + minute * 60 + second;
   }
 
-  function jstDayStart(timestamp) {
-    const shifted = new Date(timestamp + JST_OFFSET);
-    return Date.UTC(
-      shifted.getUTCFullYear(),
-      shifted.getUTCMonth(),
-      shifted.getUTCDate()
-    ) - JST_OFFSET;
+  function viewerDayStart(timestamp) {
+    const current = new Date(timestamp);
+    return new Date(
+      current.getFullYear(),
+      current.getMonth(),
+      current.getDate()
+    ).getTime();
   }
 
   function servicesFor(timestamp) {
-    const dayStart = jstDayStart(timestamp);
+    const dayStart = viewerDayStart(timestamp);
     return ARRIVAL_TIMES.map((time) => {
       const arrival = dayStart + secondsFromTime(time) * 1000;
       return { time, arrival, departure: arrival + STOP_DURATION, special: time === SPECIAL_TIME };
@@ -137,6 +135,7 @@
     document.getElementById("station-title").textContent = "江縫栄";
     document.getElementById("station-latin-name").textContent = "Enuei";
     document.getElementById("service-direction").textContent = "現世方面・帰還列車";
+    document.getElementById("arrival-destination").textContent = "現世方面";
   }
 
   function renderClosed() {
@@ -184,6 +183,7 @@
     document.getElementById("station-latin-name").textContent = "????????";
     document.getElementById("service-code").textContent = "04:44:44 / RETURN SERVICE";
     document.getElementById("service-direction").textContent = "RETURN / 04:44:44";
+    document.getElementById("arrival-destination").textContent = "常夜方面";
     document.getElementById("service-title").textContent = CORRUPTED_RETURN_MESSAGE;
     document.getElementById("service-message").textContent = CORRUPTED_SAFETY_MESSAGE;
     document.title = CORRUPTED_STATION_NAME;
@@ -198,7 +198,7 @@
       const clock = document.getElementById("station-clock");
       const actualTime = clockFormatter.format(now);
       clock.dateTime = new Date(now).toISOString();
-      clock.textContent = `${actualTime} JST`;
+      clock.textContent = `${actualTime} YST`;
 
       const active = simulatedServices(now, mode);
       if (active.some((service) => service.special)) {
@@ -219,7 +219,7 @@
     SPECIAL_TIME,
     STOP_DURATION,
     activeServices,
-    jstDayStart,
+    viewerDayStart,
     secondsFromTime,
     servicesFor
   };
