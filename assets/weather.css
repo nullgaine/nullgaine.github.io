@@ -130,6 +130,62 @@ a {
   margin: 38px auto 72px;
 }
 
+.preview-notice {
+  display: flex;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--ink);
+  border-left: 6px solid var(--amber);
+  background: #fff8df;
+  box-shadow: 0 8px 20px rgba(31, 45, 48, 0.08);
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.preview-copy {
+  display: grid;
+}
+
+.preview-copy > span {
+  color: var(--amber);
+  font: 700 9px/1.5 var(--mono);
+  letter-spacing: 0.13em;
+}
+
+.preview-copy strong {
+  margin-top: 2px;
+  font-size: 15px;
+}
+
+.preview-copy p {
+  margin: 1px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.preview-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.preview-switch a {
+  padding: 6px 9px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--teal-dark);
+  font: 700 9px/1.5 var(--mono);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+
+.preview-switch a:hover,
+.preview-switch a:focus-visible {
+  border-color: var(--teal-dark);
+  background: #fff;
+}
+
 .current-panel {
   position: relative;
   padding: clamp(26px, 5vw, 54px);
@@ -630,6 +686,11 @@ body[data-weather="blank"] .condition-name {
 
   .weather-main {
     margin-top: 20px;
+  }
+
+  .preview-notice {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .current-panel {

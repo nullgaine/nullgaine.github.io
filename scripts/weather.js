@@ -122,14 +122,16 @@
     return "visit";
   }
 
-  function readingFor(slot) {
+  function readingFor(slot, forcedKey) {
     const roll = hash(`${slot.key}:weather`) % 100;
-    const key = chooseWeather(roll, slot.month);
+    const key = forcedKey && CONDITIONS[forcedKey] ? forcedKey : chooseWeather(roll, slot.month);
     const condition = CONDITIONS[key];
     const abnormal = key === "blank" || key === "distortion" || key === "visit";
     const hourAdjustment = { 0: -2, 6: 0, 12: 3, 18: 0 }[slot.hour] || 0;
     const weatherAdjustment = { cloudy: -1, rain: -2, snow: -3 }[key] || 0;
-    const variation = (hash(`${slot.key}:temperature`) % 5) - 2;
+    const summer = slot.month >= 6 && slot.month <= 8;
+    const variationRange = summer ? 8 : 5;
+    const variation = (hash(`${slot.key}:temperature`) % variationRange) - 2;
     const temperature = abnormal
       ? null
       : MONTH_BASE_TEMPERATURES[slot.month - 1] + hourAdjustment + weatherAdjustment + variation;
@@ -138,6 +140,27 @@
       : null;
 
     return { slot, key, condition, temperature, precipitation, roll };
+  }
+
+  function previewKeyFromSearch(search) {
+    const value = new URLSearchParams(search || "").get("preview") || "";
+    const aliases = {
+      clear: "clear",
+      cloudy: "cloudy",
+      rain: "rain",
+      snow: "snow",
+      blank: "blank",
+      distortion: "distortion",
+      visit: "visit",
+      "霽れ": "clear",
+      "曇り": "cloudy",
+      "雨": "rain",
+      "雪": "snow",
+      "空白": "blank",
+      "歪み": "distortion",
+      "來訪": "visit"
+    };
+    return aliases[value] || null;
   }
 
   const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
@@ -221,9 +244,10 @@
     }
   }
 
-  function render(now) {
+  function render(now, previewKey) {
     const currentSlot = slotFor(now);
     const readings = Array.from({ length: 4 }, (_, index) => readingFor(slotFor(currentSlot.start + index * SLOT_LENGTH)));
+    if (previewKey) readings[0] = readingFor(currentSlot, previewKey);
     const current = readings[0];
 
     document.body.dataset.weather = current.key;
@@ -246,15 +270,24 @@
     return currentSlot.key;
   }
 
+  function renderPreviewNotice(previewKey) {
+    const notice = document.getElementById("preview-notice");
+    notice.hidden = !previewKey;
+    document.body.classList.toggle("is-preview", Boolean(previewKey));
+    if (previewKey) document.getElementById("preview-condition").textContent = CONDITIONS[previewKey].name;
+  }
+
   function start() {
-    let renderedSlot = render(Date.now());
+    const previewKey = previewKeyFromSearch(window.location.search);
+    renderPreviewNotice(previewKey);
+    let renderedSlot = render(Date.now(), previewKey);
     const clock = document.getElementById("city-clock");
 
     function tick() {
       const now = Date.now();
       clock.textContent = `${clockFormatter.format(now)} JST`;
       const nextSlot = slotFor(now).key;
-      if (nextSlot !== renderedSlot) renderedSlot = render(now);
+      if (nextSlot !== renderedSlot) renderedSlot = render(now, previewKey);
     }
 
     tick();
@@ -267,6 +300,7 @@
     chooseWeather,
     hash,
     jstParts,
+    previewKeyFromSearch,
     readingFor,
     slotFor,
     start

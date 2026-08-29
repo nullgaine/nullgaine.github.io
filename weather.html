@@ -6,7 +6,7 @@
   <meta name="description" content="江縫栄市の6時間ごとの天気・空間状態・來訪情報をお知らせします。">
   <meta name="theme-color" content="#e9f1f1">
   <title>江縫栄市お天気予報</title>
-  <link rel="stylesheet" href="assets/weather.css?v=forecast-20260829">
+  <link rel="stylesheet" href="assets/weather.css?v=forecast-20260829b">
 </head>
 <body class="weather-page" data-weather="loading">
   <a class="skip-link" href="#weather-main">予報本文へ移動</a>
@@ -26,6 +26,20 @@
   </header>
 
   <main class="weather-main" id="weather-main">
+    <aside class="preview-notice" id="preview-notice" hidden>
+      <div class="preview-copy">
+        <span>CREATOR PREVIEW / NOT AN ACTUAL FORECAST</span>
+        <strong>表示確認モード：<span id="preview-condition">--</span></strong>
+        <p>これは実際の予報ではありません。</p>
+      </div>
+      <nav class="preview-switch" aria-label="異常天気の表示確認">
+        <a href="?preview=distortion">歪み</a>
+        <a href="?preview=visit">來訪</a>
+        <a href="?preview=blank">空白</a>
+        <a href="weather">通常予報へ戻る</a>
+      </nav>
+    </aside>
+
     <section class="current-panel" aria-labelledby="weather-title">
       <div class="current-heading">
         <p class="service-label">CURRENT CONDITIONS / ENUEI OBSERVATORY</p>
@@ -116,6 +130,6 @@
     </div>
   </footer>
 
-  <script src="scripts/weather.js?v=forecast-20260829"></script>
+  <script src="scripts/weather.js?v=forecast-20260829b"></script>
 </body>
 </html>
