@@ -567,10 +567,12 @@ body[data-weather="blank"] .condition-name {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 15px;
   gap: 13px;
+  align-items: stretch;
 }
 
 .forecast-card {
   position: relative;
+  height: 100%;
   min-height: 205px;
   padding: 18px;
   overflow: hidden;
@@ -710,18 +712,6 @@ body[data-weather="blank"] .condition-name {
   transform: translateX(1px);
 }
 
-.forecast-card.is-corrupted[data-corruption="1"] {
-  transform: translateY(2px) skewY(-0.35deg);
-}
-
-.forecast-card.is-corrupted[data-corruption="2"] {
-  transform: translateY(-1px) skewY(0.25deg);
-}
-
-.forecast-card.is-corrupted[data-corruption="3"] {
-  transform: translateY(3px) skewY(-0.2deg);
-}
-
 @keyframes forecast-interference {
   0%, 88%, 100% {
     clip-path: inset(0);
@@ -761,6 +751,28 @@ body[data-weather="blank"] .condition-name {
 
 .weather-notice strong {
   color: var(--ink);
+}
+
+@media (min-width: 801px) {
+  .weather-notice {
+    margin-top: 28px;
+    padding: 22px 26px;
+    border-left-width: 5px;
+  }
+
+  .weather-notice p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .weather-notice p:first-child {
+    font-size: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  .weather-notice p + p {
+    margin-top: 6px;
+  }
 }
 
 .city-footer {
