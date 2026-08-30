@@ -669,6 +669,15 @@
   padding: 14px;
 }
 
+.image-record-media--poster {
+  aspect-ratio: 3 / 4;
+  border-bottom: 1px solid var(--records-rule);
+}
+
+.image-record-media--poster img {
+  padding: 18px;
+}
+
 .image-record-card-copy {
   padding: 20px 22px 22px;
 }
