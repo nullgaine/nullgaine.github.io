@@ -72,6 +72,34 @@
     { name: "煇", code: "DO NOT LOOK" }
   ];
 
+  const IMPOSSIBLE_DATES = [
+    "1/0",
+    "1/32",
+    "2/0",
+    "2/30",
+    "2/31",
+    "3/0",
+    "3/33",
+    "4/31",
+    "4/44",
+    "5/0",
+    "5/55",
+    "6/0",
+    "6/31",
+    "7/0",
+    "7/77",
+    "8/32",
+    "8/88",
+    "9/31",
+    "9/99",
+    "10/32",
+    "11/31",
+    "12/0",
+    "12/32"
+  ];
+
+  const WEEKDAY_MARKS = ["日", "月", "火", "水", "木", "金", "土"];
+
   const BLOCKED_CLOCK_VALUE = "██:13:91";
 
   const GLITCH_CHARACTERS = "!<>-_\\/[]{}—=+*^?#_█▒░";
@@ -228,11 +256,19 @@
     return `${timeLabel(slot.start)}–${timeLabel(slot.end)}`;
   }
 
+  function impossibleDateLabel(baseSlot, index) {
+    const dateOffset = hash(`${baseSlot.key}:impossible-calendar`) % IMPOSSIBLE_DATES.length;
+    const impossibleDate = IMPOSSIBLE_DATES[(dateOffset + index - 1) % IMPOSSIBLE_DATES.length];
+    const weekdayOffset = hash(`${baseSlot.key}:impossible-weekday`) % WEEKDAY_MARKS.length;
+    const weekday = WEEKDAY_MARKS[(weekdayOffset + index - 1) % WEEKDAY_MARKS.length];
+    return `${impossibleDate}(${weekday})`;
+  }
+
   function valueOrDash(value, suffix) {
     return value === null ? "--" : `${value}${suffix || ""}`;
   }
 
-  function forecastCard(reading, index, brokenForecast) {
+  function forecastCard(reading, index, brokenForecast, brokenDate) {
     const article = document.createElement("article");
     article.className = "forecast-card";
     article.dataset.weather = reading.key;
@@ -244,7 +280,9 @@
 
     const date = document.createElement("time");
     date.dateTime = new Date(reading.slot.start).toISOString();
-    date.textContent = `${index === 0 ? "現在 / " : ""}${shortDateFormatter.format(reading.slot.start)} ${periodLabel(reading.slot)}`;
+    date.textContent = brokenDate
+      ? `${brokenDate} ${periodLabel(reading.slot)}`
+      : `${index === 0 ? "現在 / " : ""}${shortDateFormatter.format(reading.slot.start)} ${periodLabel(reading.slot)}`;
 
     const code = document.createElement("span");
     code.className = "forecast-code";
@@ -491,7 +529,8 @@
       const brokenForecast = outlookIsBroken && index > 0
         ? BROKEN_FORECASTS[(corruptionOffset + index - 1) % BROKEN_FORECASTS.length]
         : null;
-      return forecastCard(reading, index, brokenForecast);
+      const brokenDate = brokenForecast ? impossibleDateLabel(current.slot, index) : null;
+      return forecastCard(reading, index, brokenForecast, brokenDate);
     }));
     if (outlookIsBroken) startForecastNoise(grid);
 
@@ -555,9 +594,11 @@
     BLOCKED_CLOCK_VALUE,
     BROKEN_FORECASTS,
     CONDITIONS,
+    IMPOSSIBLE_DATES,
     SLOT_LENGTH,
     chooseWeather,
     hash,
+    impossibleDateLabel,
     jstParts,
     previewKeyFromSearch,
     randomImpossibleTime,
