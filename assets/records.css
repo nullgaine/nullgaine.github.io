@@ -712,6 +712,36 @@
   padding: 14px;
 }
 
+.image-record-media--birthday,
+.image-record-media--concept,
+.image-record-media--anniversary,
+.image-record-media--milestone {
+  border-bottom: 1px solid var(--records-rule);
+}
+
+.image-record-media--birthday {
+  aspect-ratio: 1240 / 1754;
+}
+
+.image-record-media--concept {
+  aspect-ratio: 1240 / 900;
+}
+
+.image-record-media--anniversary {
+  aspect-ratio: 984 / 1440;
+}
+
+.image-record-media--milestone {
+  aspect-ratio: 5 / 6;
+}
+
+.image-record-media--birthday img,
+.image-record-media--concept img,
+.image-record-media--anniversary img,
+.image-record-media--milestone img {
+  padding: 14px;
+}
+
 .image-record-card-copy {
   padding: 20px 22px 22px;
 }
