@@ -10,6 +10,8 @@
       <rect x="22" y="57" width="58" height="12" fill="#d7c5a4" opacity=".8"/>
       <path d="M15 20h62M15 32h62" stroke="#c3ad88" stroke-width="2" opacity=".55"/>
     </pattern>
+    <path id="majorRoads" d="M40 335C280 355 445 350 650 345S1130 342 1590 350 M625 0C615 265 642 450 623 690S615 1010 630 1200 M80 870C260 835 380 910 610 940S995 1018 1185 1030S1435 1095 1600 1128 M1115 40C1080 245 1105 480 1130 720S1160 980 1185 1120"/>
+    <path id="localRoads" d="M1160 345H1600 M1160 448H1600 M1160 555H1600 M1160 665H1600 M1160 775H1600 M1160 885H1600 M1215 218V1025 M1320 218V1040 M1428 218V1055 M1530 218V1075 M90 545H625 M110 565L80 775 M350 345V545 M485 345V545 M250 870V1200 M470 870V1200 M250 1045H625 M625 255H1110 M625 520H1120 M625 735H1140 M625 940H1150 M760 255V520 M850 255V520 M980 255V520 M1060 255V520 M735 520V735 M905 520V940 M1040 520V735 M760 735V940 M1010 735V940"/>
     <style>
       .district{stroke:#809294;stroke-width:3}
       .block{fill:#f7f7f2;stroke:#a7b2b1;stroke-width:2}
@@ -17,6 +19,7 @@
       .public{fill:#e2eaec;stroke:#607d83;stroke-width:3}
       .medical{fill:#f3dfe1;stroke:#b65260;stroke-width:3}
       .green{fill:#cbe7d4;stroke:#79a78d;stroke-width:3}
+      .minor-building{fill:#f2f3ef;stroke:#bac3c1;stroke-width:1.5}
       .road-edge{fill:none;stroke:#768d99;stroke-width:40;stroke-linecap:round;stroke-linejoin:round}
       .road{fill:none;stroke:#dbe2e3;stroke-width:32;stroke-linecap:round;stroke-linejoin:round}
       .street-edge{fill:none;stroke:#95a4a6;stroke-width:19;stroke-linecap:round;stroke-linejoin:round}
@@ -47,10 +50,6 @@
   <path d="M0 0H465C400 48 318 75 278 126C225 193 183 225 118 250" fill="none" stroke="#91cfdf" stroke-width="90"/>
   <path d="M5 22C105 70 115 148 88 238M42 430C83 510 42 602 52 700" fill="none" stroke="#d6f0f5" stroke-width="9" opacity=".9"/>
 
-  <path class="street-edge" d="M1215 285V975M1320 250V1010M1428 250V1028M1530 225V1000"/>
-  <path class="street" d="M1215 285V975M1320 250V1010M1428 250V1028M1530 225V1000"/>
-  <path class="street-edge" d="M1188 345H1580M1185 448H1600M1180 555H1600M1180 665H1600M1180 775H1600M1185 885H1585"/>
-  <path class="street" d="M1188 345H1580M1185 448H1600M1180 555H1600M1180 665H1600M1180 775H1600M1185 885H1585"/>
   <path d="M1195 260H1575V986H1195Z" fill="url(#workshopBlocks)" opacity=".78"/>
 
   <g>
@@ -76,19 +75,31 @@
     <path class="block" d="M1420 45H1568V180H1420Z"/>
   </g>
 
-  <path class="road-edge" d="M40 335C280 355 445 350 650 345S1130 342 1590 350"/>
-  <path class="road" d="M40 335C280 355 445 350 650 345S1130 342 1590 350"/>
-  <path class="road-edge" d="M625 0C615 265 642 450 623 690S615 1010 630 1200"/>
-  <path class="road" d="M625 0C615 265 642 450 623 690S615 1010 630 1200"/>
-  <path class="road-edge" d="M80 870C260 835 380 910 610 940S995 1018 1185 1030S1435 1095 1600 1128"/>
-  <path class="road" d="M80 870C260 835 380 910 610 940S995 1018 1185 1030S1435 1095 1600 1128"/>
-  <path class="road-edge" d="M1115 40C1080 245 1105 480 1130 720S1160 980 1185 1120"/>
-  <path class="road" d="M1115 40C1080 245 1105 480 1130 720S1160 980 1185 1120"/>
+  <g opacity=".86">
+    <rect class="minor-building" x="166" y="426" width="70" height="42" rx="2"/>
+    <rect class="minor-building" x="250" y="426" width="72" height="42" rx="2"/>
+    <rect class="minor-building" x="382" y="425" width="76" height="42" rx="2"/>
+    <rect class="minor-building" x="475" y="425" width="78" height="42" rx="2"/>
+    <rect class="minor-building" x="286" y="930" width="68" height="50" rx="2"/>
+    <rect class="minor-building" x="370" y="930" width="78" height="50" rx="2"/>
+    <rect class="minor-building" x="286" y="995" width="96" height="54" rx="2"/>
+    <rect class="minor-building" x="399" y="995" width="112" height="54" rx="2"/>
+    <rect class="minor-building" x="703" y="289" width="50" height="54" rx="2"/>
+    <rect class="minor-building" x="772" y="289" width="58" height="54" rx="2"/>
+    <rect class="minor-building" x="887" y="289" width="74" height="54" rx="2"/>
+    <rect class="minor-building" x="996" y="289" width="80" height="54" rx="2"/>
+    <rect class="minor-building" x="706" y="794" width="52" height="84" rx="2"/>
+    <rect class="minor-building" x="777" y="794" width="92" height="84" rx="2"/>
+    <rect class="minor-building" x="946" y="793" width="54" height="108" rx="2"/>
+    <rect class="minor-building" x="1020" y="793" width="80" height="108" rx="2"/>
+  </g>
 
-  <path class="street-edge" d="M110 545H585M110 565L80 775M350 355V560M485 355V555M250 900V1165M470 870V1160"/>
-  <path class="street" d="M110 545H585M110 565L80 775M350 355V560M485 355V555M250 900V1165M470 870V1160"/>
-  <path class="street-edge" d="M680 255H1080M670 520H1115M675 735H1115M680 940H1125M850 365V520M980 365V515M905 730V940"/>
-  <path class="street" d="M680 255H1080M670 520H1115M675 735H1115M680 940H1125M850 365V520M980 365V515M905 730V940"/>
+  <g id="road-network">
+    <use href="#majorRoads" class="road-edge"/>
+    <use href="#localRoads" class="street-edge"/>
+    <use href="#majorRoads" class="road"/>
+    <use href="#localRoads" class="street"/>
+  </g>
 
   <path class="rail" d="M155 300C395 320 545 310 705 300S1020 285 1168 310S1400 325 1600 310"/>
   <path class="rail-center" d="M155 300C395 320 545 310 705 300S1020 285 1168 310S1400 325 1600 310"/>
