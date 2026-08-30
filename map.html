@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="江縫栄市北司零寺町・南司零寺・朱紗町・潟巣・工房街の公開案内地図。市内施設と関連記録を確認できます。">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f1eee8">
+  <title>江縫栄市案内地図 | 江縫栄市立総合病院</title>
+  <link rel="stylesheet" href="assets/style.css?v=readable-20260829">
+  <link rel="stylesheet" href="assets/city-map.css?v=city-map-20260830b">
+</head>
+<body class="city-map-page">
+  <div id="header"></div>
+
+  <main class="city-map-main" id="main">
+    <header class="map-page-heading">
+      <div>
+        <p class="map-kicker">ENUEI CITY / PUBLIC NAVIGATION SERVICE</p>
+        <h1>江縫栄市案内地図</h1>
+        <p class="map-lead">北司零寺町・南司零寺・朱紗町・潟巣・工房街を収録した公開案内図です。地図を動かし、施設・店舗・街区の地点標識を選択してください。</p>
+      </div>
+      <dl class="map-document-meta">
+        <div><dt>図面番号</dt><dd>N/A-CM-01</dd></div>
+        <div><dt>表示範囲</dt><dd>PUBLIC SECTOR</dd></div>
+        <div><dt>補正</dt><dd>案内用 / 調査済</dd></div>
+      </dl>
+    </header>
+
+    <section class="map-app" aria-label="江縫栄市地図アプリ">
+      <div class="map-workspace">
+        <div class="map-toolbar" aria-label="地図操作">
+          <div class="map-toolbar-copy">
+            <strong>北司零寺町から工房街</strong>
+            <span id="map-scale-status">100%</span>
+          </div>
+          <div class="map-controls">
+            <button type="button" id="map-zoom-out" aria-label="地図を縮小">−</button>
+            <button type="button" id="map-zoom-in" aria-label="地図を拡大">＋</button>
+            <button type="button" id="map-reset">全体表示</button>
+          </div>
+        </div>
+
+        <div class="map-viewport" id="map-viewport" tabindex="0"
+             aria-label="江縫栄市案内地図。ドラッグで移動、ホイールまたはボタンで拡大縮小できます。">
+          <div class="map-canvas" id="map-canvas">
+            <img src="image/city-map.svg?v=city-map-20260830b" alt="江縫栄市公開案内地図" draggable="false">
+
+            <div class="map-pins" id="map-pins" aria-label="地図上の地点"></div>
+          </div>
+
+          <div class="map-orientation" aria-hidden="true">
+            <span>N</span>
+            <i></i>
+          </div>
+          <div class="map-scale" aria-hidden="true"><i></i><span>500 N/A m</span></div>
+          <p class="map-drag-hint" id="map-drag-hint">DRAG / PINCH / SCROLL</p>
+        </div>
+
+        <div class="map-statusbar">
+          <span>原案：map.png</span>
+          <span>既存住所名を基準に市域・道路階層を補正</span>
+          <span>工房街・病院周辺店舗を追加収録</span>
+        </div>
+      </div>
+
+      <aside class="map-inspector" aria-labelledby="place-title">
+        <div class="inspector-index">
+          <span id="place-code">SELECT POINT</span>
+          <span id="place-category">PUBLIC INFORMATION</span>
+        </div>
+        <p class="place-reading" id="place-reading">地点案内</p>
+        <h2 id="place-title">地図上の標識を選択してください</h2>
+        <p class="place-summary" id="place-summary">施設・駅・街区の説明と、関連する公開ページをこちらに表示します。</p>
+        <p class="place-note" id="place-note">この地図は案内用に簡略化されています。表示位置と距離は保証されません。</p>
+        <div class="place-links" id="place-links" aria-label="選択地点の関連リンク"></div>
+
+        <div class="map-place-list-wrap">
+          <p class="inspector-label">REGISTERED POINTS</p>
+          <div class="map-place-list" id="map-place-list" aria-label="登録地点一覧"></div>
+        </div>
+      </aside>
+    </section>
+
+    <nav class="map-record-links" aria-label="関連ページ">
+      <div>
+        <p>RETURN / ACCESS</p>
+        <a href="access">← Accessへ戻る</a>
+      </div>
+      <div>
+        <p>CITY SERVICES</p>
+        <a href="weather">お天気確認</a>
+        <a href="station">江縫栄駅 運行案内</a>
+      </div>
+      <div>
+        <p>RECORD ARCHIVES</p>
+        <a href="archive">記録保管庫</a>
+        <a href="textarchive">文章記録</a>
+        <a href="imagearchive">画像記録</a>
+        <a href="videoarchive">映像記録</a>
+      </div>
+    </nav>
+
+    <p class="map-disclaimer"><strong>NOTICE:</strong> 本図は市内移動の安全性、現在位置、帰還経路を保証するものではありません。</p>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="common.js"></script>
+  <script>
+    async function loadPart(id, file) {
+      const response = await fetch(file);
+      document.getElementById(id).innerHTML = await response.text();
+    }
+    loadPart("header", "partials/header.html?v=96ef6d25");
+    loadPart("footer", "partials/footer.html");
+  </script>
+  <script src="scripts/city-map.js?v=city-map-20260830b"></script>
+</body>
+</html>

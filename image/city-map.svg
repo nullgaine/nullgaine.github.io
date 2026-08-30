@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">江縫栄市公開案内地図</title>
+  <desc id="desc">北司零寺、南司零寺、朱紗通り、潟巣、工房街と、市内の主要施設を示す案内地図。</desc>
+  <defs>
+    <pattern id="minorGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6e8a8c" stroke-width="1" opacity=".12"/>
+    </pattern>
+    <pattern id="workshopBlocks" width="104" height="84" patternUnits="userSpaceOnUse">
+      <rect x="9" y="9" width="74" height="48" rx="2" fill="#eee4ce" stroke="#9c8b71" stroke-width="2"/>
+      <rect x="22" y="57" width="58" height="12" fill="#d7c5a4" opacity=".8"/>
+      <path d="M15 20h62M15 32h62" stroke="#c3ad88" stroke-width="2" opacity=".55"/>
+    </pattern>
+    <style>
+      .district{stroke:#809294;stroke-width:3}
+      .block{fill:#f7f7f2;stroke:#a7b2b1;stroke-width:2}
+      .building{fill:#e9ece8;stroke:#8f9e9d;stroke-width:2}
+      .public{fill:#e2eaec;stroke:#607d83;stroke-width:3}
+      .medical{fill:#f3dfe1;stroke:#b65260;stroke-width:3}
+      .green{fill:#cbe7d4;stroke:#79a78d;stroke-width:3}
+      .road-edge{fill:none;stroke:#768d99;stroke-width:40;stroke-linecap:round;stroke-linejoin:round}
+      .road{fill:none;stroke:#dbe2e3;stroke-width:32;stroke-linecap:round;stroke-linejoin:round}
+      .street-edge{fill:none;stroke:#95a4a6;stroke-width:19;stroke-linecap:round;stroke-linejoin:round}
+      .street{fill:none;stroke:#eef1ef;stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+      .rail{fill:none;stroke:#5f7180;stroke-width:16;stroke-linecap:round;stroke-linejoin:round}
+      .rail-center{fill:none;stroke:#f4efe5;stroke-width:5;stroke-dasharray:16 12}
+      .district-title{fill:#2a5559;font:700 25px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:3px}
+      .district-en{fill:#547376;font:700 11px ui-monospace,monospace;letter-spacing:2px}
+      .label{fill:#274d52;font:700 17px 'Noto Sans JP','Yu Gothic',sans-serif;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px;stroke-linejoin:round}
+      .small{fill:#3f666a;font:700 11px ui-monospace,monospace;letter-spacing:1.4px;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px}
+      .roadname{fill:#49676a;font:600 13px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:2px;paint-order:stroke fill;stroke:#eef1ef;stroke-width:2px}
+      .ward-line{fill:none;stroke:#487176;stroke-width:3;stroke-dasharray:15 9 3 9;opacity:.68}
+      .anomaly{fill:#152e32;opacity:.75}
+    </style>
+  </defs>
+
+  <rect width="1600" height="1200" fill="#e8efef"/>
+
+  <path class="district" fill="#f2ebe0" d="M90 340H625V905L520 1005H70L28 780Z"/>
+  <path class="district" fill="#e8eee5" d="M70 905H620V1200H0V1040Z"/>
+  <path class="district" fill="#f5eddc" d="M625 30H1168V720H625Z"/>
+  <path class="district" fill="#e7ece6" d="M620 720H1168V1200H620Z"/>
+  <path class="district" fill="#eee4ce" d="M1168 218H1600V1025L1515 1115H1168Z"/>
+  <path class="district" fill="#e4ecea" d="M1168 0H1600V218H1168Z"/>
+  <rect width="1600" height="1200" fill="url(#minorGrid)"/>
+
+  <path d="M0 0H165C120 123 190 250 115 375C55 475 102 640 30 770L0 790Z" fill="#91cfdf"/>
+  <path d="M0 0H465C400 48 318 75 278 126C225 193 183 225 118 250" fill="none" stroke="#91cfdf" stroke-width="90"/>
+  <path d="M5 22C105 70 115 148 88 238M42 430C83 510 42 602 52 700" fill="none" stroke="#d6f0f5" stroke-width="9" opacity=".9"/>
+
+  <path class="street-edge" d="M1215 285V975M1320 250V1010M1428 250V1028M1530 225V1000"/>
+  <path class="street" d="M1215 285V975M1320 250V1010M1428 250V1028M1530 225V1000"/>
+  <path class="street-edge" d="M1188 345H1580M1185 448H1600M1180 555H1600M1180 665H1600M1180 775H1600M1185 885H1585"/>
+  <path class="street" d="M1188 345H1580M1185 448H1600M1180 555H1600M1180 665H1600M1180 775H1600M1185 885H1585"/>
+  <path d="M1195 260H1575V986H1195Z" fill="url(#workshopBlocks)" opacity=".78"/>
+
+  <g>
+    <path class="block" d="M150 405H340V555H150Z"/>
+    <path class="block" d="M365 405H570V540H365Z"/>
+    <path class="medical" d="M175 590L465 565L530 790L420 872L160 830Z"/>
+    <rect x="292" y="753" width="125" height="52" rx="4" fill="#f3d8df" stroke="#a86478" stroke-width="3"/>
+    <rect x="430" y="485" width="128" height="50" rx="4" fill="#eadde7" stroke="#86657c" stroke-width="3"/>
+    <path class="green" d="M50 850H230L285 1035H50Z"/>
+    <path class="block" d="M270 900H540V1110H270Z"/>
+    <path class="public" d="M690 72H1008V245H690Z"/>
+    <path class="block" d="M690 276H850V365H690Z"/>
+    <path class="block" d="M875 276H1095V365H875Z"/>
+    <path class="building" d="M733 385H940V505H733Z"/>
+    <path class="public" d="M705 545H965V710H705Z"/>
+    <path class="green" d="M986 542H1138V710H986Z"/>
+    <path class="block" d="M690 770H890V905H690Z"/>
+    <path class="public" d="M915 770H1122V930H915Z"/>
+    <path class="green" d="M690 942H905V1138H690Z"/>
+    <path class="block" d="M930 960H1125V1138H930Z"/>
+    <rect x="947" y="1068" width="132" height="52" rx="3" fill="#dce9ef" stroke="#477c94" stroke-width="3"/>
+    <path class="block" d="M1220 50H1395V180H1220Z"/>
+    <path class="block" d="M1420 45H1568V180H1420Z"/>
+  </g>
+
+  <path class="road-edge" d="M40 335C280 355 445 350 650 345S1130 342 1590 350"/>
+  <path class="road" d="M40 335C280 355 445 350 650 345S1130 342 1590 350"/>
+  <path class="road-edge" d="M625 0C615 265 642 450 623 690S615 1010 630 1200"/>
+  <path class="road" d="M625 0C615 265 642 450 623 690S615 1010 630 1200"/>
+  <path class="road-edge" d="M80 870C260 835 380 910 610 940S995 1018 1185 1030S1435 1095 1600 1128"/>
+  <path class="road" d="M80 870C260 835 380 910 610 940S995 1018 1185 1030S1435 1095 1600 1128"/>
+  <path class="road-edge" d="M1115 40C1080 245 1105 480 1130 720S1160 980 1185 1120"/>
+  <path class="road" d="M1115 40C1080 245 1105 480 1130 720S1160 980 1185 1120"/>
+
+  <path class="street-edge" d="M110 545H585M110 565L80 775M350 355V560M485 355V555M250 900V1165M470 870V1160"/>
+  <path class="street" d="M110 545H585M110 565L80 775M350 355V560M485 355V555M250 900V1165M470 870V1160"/>
+  <path class="street-edge" d="M680 255H1080M670 520H1115M675 735H1115M680 940H1125M850 365V520M980 365V515M905 730V940"/>
+  <path class="street" d="M680 255H1080M670 520H1115M675 735H1115M680 940H1125M850 365V520M980 365V515M905 730V940"/>
+
+  <path class="rail" d="M155 300C395 320 545 310 705 300S1020 285 1168 310S1400 325 1600 310"/>
+  <path class="rail-center" d="M155 300C395 320 545 310 705 300S1020 285 1168 310S1400 325 1600 310"/>
+  <path class="rail" d="M560 350C555 515 565 650 575 815S605 1020 610 1200"/>
+  <path class="rail-center" d="M560 350C555 515 565 650 575 815S605 1020 610 1200"/>
+
+  <path class="ward-line" d="M92 340C320 365 470 355 625 340"/>
+  <path class="ward-line" d="M620 720H1168"/>
+  <path class="ward-line" d="M1168 218V1025"/>
+
+  <g>
+    <rect x="812" y="275" width="118" height="66" rx="4" fill="#f1b8bf" stroke="#a84250" stroke-width="4"/>
+    <rect x="530" y="770" width="96" height="60" rx="4" fill="#f1b8bf" stroke="#a84250" stroke-width="4"/>
+    <rect x="1008" y="975" width="92" height="52" rx="4" fill="#cadde2" stroke="#607d83" stroke-width="4"/>
+  </g>
+
+  <g>
+    <text class="district-title" x="120" y="390">北司零寺町</text><text class="district-en" x="122" y="413">NORTH SHIREIJI</text>
+    <text class="district-title" x="105" y="1075">南司零寺</text><text class="district-en" x="107" y="1098">SOUTH SHIREIJI</text>
+    <text class="district-title" x="690" y="405">朱紗町</text><text class="district-en" x="692" y="428">AKASHIA</text>
+    <text class="district-title" x="682" y="760">潟巣</text><text class="district-en" x="684" y="783">KATASU</text>
+    <text class="district-title" x="1230" y="250">工房街</text><text class="district-en" x="1232" y="273">WORKSHOP QUARTER</text>
+  </g>
+
+  <g>
+    <text class="label" x="205" y="680">江縫栄市立総合病院</text><text class="small" x="206" y="704">N/A CITY GENERAL HOSPITAL</text>
+    <text class="label" x="297" y="781">Café Palette</text><text class="small" x="298" y="801">HOSPITAL 1F</text>
+    <text class="label" x="432" y="515">Fleur de Paix</text><text class="small" x="434" y="535">TAKEOUT ONLY</text>
+    <text class="label" x="695" y="135">江縫栄私立大学</text><text class="small" x="697" y="159">ENUEI PRIVATE UNIVERSITY</text>
+    <text class="label" x="746" y="445">果音スタジオ</text><text class="small" x="748" y="468">KANON STUDIO</text>
+    <text class="label" x="724" y="620">朱紗大型図書館</text><text class="small" x="726" y="644">AKASHIA CENTRAL LIBRARY</text>
+    <text class="label" x="184" y="1002">司零寺</text><text class="small" x="186" y="1025">SHIREI-JI TEMPLE</text>
+    <text class="label" x="934" y="840">潟絡中高一貫校</text><text class="small" x="936" y="864">KATAGARA SCHOOL</text>
+    <text class="label" x="717" y="1034">薄雲霊園</text><text class="small" x="719" y="1058">USUGUMO CEMETERY</text>
+  </g>
+
+  <g>
+    <text class="label" x="816" y="365">江縫栄駅</text><text class="small" x="818" y="387">ENUEI STATION</text>
+    <text class="label" x="402" y="855">江縫栄市立総合病院前駅</text><text class="small" x="452" y="878">HOSPITAL FRONT</text>
+    <text class="label" x="990" y="950">潟巣駅</text><text class="small" x="1014" y="972">KATASU STATION</text>
+    <text class="label" x="958" y="1100">Da' At25</text><text class="small" x="958" y="1122">CONVENIENCE STORE</text>
+  </g>
+
+  <g>
+    <text class="label" x="1230" y="414">硝子・鉱石工房群</text><text class="small" x="1232" y="437">GLASS / MINERAL WORKS</text>
+    <text class="label" x="1230" y="625">染織・服飾工房群</text><text class="small" x="1232" y="648">TEXTILE / COSTUME WORKS</text>
+    <text class="label" x="1230" y="835">製本・修復工房群</text><text class="small" x="1232" y="858">BINDING / RESTORATION WORKS</text>
+  </g>
+
+  <text class="roadname" x="196" y="328">梨宵街道</text>
+  <text class="roadname" x="690" y="337">朱紗通り</text>
+  <text class="roadname" x="792" y="966" transform="rotate(10 792 966)">酒井街路</text>
+  <text class="roadname" x="1110" y="520" transform="rotate(84 1110 520)">糸紗通り</text>
+  <text class="roadname" x="1190" y="1110" transform="rotate(10 1190 1110)">工房環状路</text>
+
+  <g opacity=".62">
+    <rect class="anomaly" x="1485" y="68" width="115" height="11"/>
+    <rect class="anomaly" x="1518" y="84" width="82" height="6"/>
+    <rect class="anomaly" x="16" y="1145" width="172" height="8"/>
+    <rect class="anomaly" x="18" y="1161" width="102" height="5"/>
+    <text class="small" x="1438" y="1128">SECTOR ███ / NO ROUTE</text>
+  </g>
+
+  <g transform="translate(1480 1070)" opacity=".74">
+    <path d="M0 0h80v80H0z" fill="#f7f6f1" stroke="#557275" stroke-width="2"/>
+    <path d="M40 12V65M26 30l14-18 14 18" fill="none" stroke="#a51f2d" stroke-width="4"/>
+    <text class="small" x="34" y="74">N</text>
+  </g>
+</svg>

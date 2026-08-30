@@ -11,6 +11,7 @@ const excludedFiles = new Set([
   "404.html",
   "_main.html",
   "hours.html",
+  "map.html",
   "nothing.html",
   "search.html"
 ]);
