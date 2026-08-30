@@ -672,6 +672,12 @@
   gap: 22px;
 }
 
+.image-record-stack {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+}
+
 .image-record-card {
   overflow: hidden;
   border: 1px solid var(--records-rule-dark);
