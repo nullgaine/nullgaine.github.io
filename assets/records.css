@@ -484,6 +484,25 @@
   transform: translateY(0);
 }
 
+@media (min-width: 821px) {
+  .records-protection-alert {
+    right: 28px;
+    bottom: 28px;
+    gap: 6px;
+    max-width: min(460px, calc(100% - 56px));
+    padding: 18px 22px;
+    border-width: 2px;
+    font-size: 14px;
+    line-height: 1.65;
+    box-shadow: 0 14px 36px rgba(47, 41, 35, 0.24);
+  }
+
+  .records-protection-alert strong {
+    font-size: 13px;
+    letter-spacing: 0.17em;
+  }
+}
+
 /* ========= IMAGE RECORDS ========= */
 .image-record-feature {
   display: grid;
@@ -676,6 +695,15 @@
 
 .image-record-media--poster img {
   padding: 18px;
+}
+
+.image-record-media--artwork {
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid var(--records-rule);
+}
+
+.image-record-media--artwork img {
+  padding: 14px;
 }
 
 .image-record-card-copy {
