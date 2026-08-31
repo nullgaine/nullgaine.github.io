@@ -144,10 +144,13 @@
     document.body.classList.remove("is-corrupted");
     document.getElementById("active-service").hidden = true;
     document.getElementById("closed-notice").hidden = false;
+    document.getElementById("timetable-panel").hidden = false;
+    document.getElementById("safety-panel").hidden = true;
     document.getElementById("departure-display").hidden = true;
     document.getElementById("service-code").textContent = "NO TRAIN IN STATION";
     document.getElementById("service-title").textContent = "現在、帰還列車は停車しておりません";
     document.getElementById("service-message").textContent = "次回の運行時刻は案内されません。";
+    renderTimetable([]);
     document.title = "江縫栄駅｜帰還列車運行案内";
   }
 
@@ -160,6 +163,8 @@
     document.body.classList.remove("is-corrupted");
     document.getElementById("closed-notice").hidden = true;
     document.getElementById("active-service").hidden = false;
+    document.getElementById("timetable-panel").hidden = false;
+    document.getElementById("safety-panel").hidden = false;
     document.getElementById("departure-display").hidden = false;
     document.getElementById("service-code").textContent = isConnection ? "CONNECTION SERVICE" : "NOW BOARDING";
     document.getElementById("service-title").textContent = "帰還列車が停車しています";
@@ -186,6 +191,7 @@
     document.getElementById("arrival-destination").textContent = "常夜方面";
     document.getElementById("service-title").textContent = CORRUPTED_RETURN_MESSAGE;
     document.getElementById("service-message").textContent = CORRUPTED_SAFETY_MESSAGE;
+    document.getElementById("timetable-panel").hidden = true;
     document.title = CORRUPTED_STATION_NAME;
   }
 
