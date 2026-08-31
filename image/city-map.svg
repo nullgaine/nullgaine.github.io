@@ -1,229 +1,171 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
   <title id="title">江縫栄市公開案内地図</title>
-  <desc id="desc">北司零寺町、南司零寺、朱紗町、潟巣、工房街の道路、建物、鉄道と主要施設を示す市街地図。</desc>
+  <desc id="desc">北司零寺、南司零寺、朱紗通り、潟巣、工房街と、市内の主要施設を示す案内地図。</desc>
   <defs>
-    <pattern id="mapGrid" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M32 0H0V32" fill="none" stroke="#738b9a" stroke-width="1" opacity=".045"/>
+    <pattern id="minorGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6e8a8c" stroke-width="1" opacity=".12"/>
     </pattern>
-
-    <g id="residentialRowA">
-      <path class="building" d="M0 6L54 0l8 45-52 8Z"/>
-      <path class="building" d="M73 0h65l5 48-67 3Z"/>
-      <path class="building" d="M153 4l72-3 5 43-70 9Z"/>
-    </g>
-    <g id="residentialRowB">
-      <path class="building" d="M0 0h45l8 62H8Z"/>
-      <path class="building" d="M65 5l58-5 7 54-54 12Z"/>
-      <path class="building" d="M142 0h74l-3 58-66 7Z"/>
-    </g>
-    <g id="workshopRow">
-      <path class="workshop" d="M0 4L54 0l4 42-53 5Z"/>
-      <path class="workshop" d="M69 0h75l-2 42-70 3Z"/>
-      <path class="workshop" d="M157 4l50-3 8 38-55 7Z"/>
-      <path class="workshop" d="M226 0h64l4 43-62 4Z"/>
-    </g>
-
-    <path id="majorRoads" d="M-40 345C170 322 360 338 548 351C760 366 930 324 1120 334C1305 344 1430 390 1640 364 M620-40C606 175 637 310 624 460C611 612 584 762 603 930C615 1032 637 1125 648 1240 M-50 846C165 869 365 928 560 963C760 999 935 1014 1120 1038C1310 1064 1470 1120 1640 1142 M1122-30C1098 165 1110 337 1131 520C1147 676 1158 840 1181 1018C1193 1104 1202 1164 1210 1235"/>
-    <path id="collectorRoads" d="M82 112C215 97 326 77 455 38 M105 268C248 250 375 202 522 122C558 103 588 99 618 101 M80 510C215 503 340 490 468 470C525 461 568 454 614 460 M54 722C183 739 308 748 438 737C505 731 552 724 596 707 M96 1088C234 1052 354 1040 470 1053C532 1061 582 1072 631 1083 M624 158C762 145 890 145 1112 157 M627 274C770 276 924 265 1120 270 M622 520C772 514 928 521 1132 532 M604 714C774 706 929 711 1150 724 M614 890C755 886 906 896 1165 906 M1134 177C1258 174 1391 193 1590 219 M1144 460C1274 451 1410 452 1600 474 M1153 697C1291 692 1445 702 1605 730 M1171 905C1306 917 1453 939 1590 975 M124 845C218 790 287 728 329 648C363 585 408 529 480 477 M1060 336C1003 385 965 435 945 520 M867 718C830 767 801 823 788 889 M1374 207C1360 317 1361 399 1374 454 M1390 477C1376 560 1383 631 1402 699 M1412 729C1401 812 1417 891 1435 938"/>
-    <path id="localRoads" d="M110 184C233 174 343 145 485 82 M161 120L180 271 M292 89L310 236 M420 51L441 199 M150 415C260 420 372 412 512 397 M209 350L216 503 M349 352L358 487 M486 360L488 466 M118 590C230 594 328 581 424 560 M142 682C264 689 374 682 488 660 M197 511L197 585 M312 496L318 580 M427 477L432 558 M197 745L191 846 M340 737L339 891 M471 726L477 947 M100 995C242 982 355 984 486 1004 M185 871L182 987 M357 927L355 989 M705 31L716 150 M838 20L842 145 M969 25L970 145 M682 204C809 197 942 199 1116 206 M754 157L758 273 M895 151L897 269 M1033 154L1034 268 M694 345C800 337 910 340 1003 355 M717 277L721 512 M843 274L846 516 M985 270L984 521 M685 602C822 597 954 603 1138 612 M734 526L736 704 M898 524L899 709 M1047 528L1048 715 M684 801C825 794 951 800 1159 811 M714 716L716 886 M958 721L959 893 M1082 726L1082 898 M689 962C810 957 951 970 1168 988 M737 893L740 961 M912 899L914 966 M1061 903L1064 979 M1212 78C1328 84 1443 94 1574 111 M1200 286C1327 282 1440 295 1591 313 M1191 375C1328 370 1463 383 1598 404 M1203 548C1337 546 1456 559 1600 581 M1198 626C1320 627 1452 642 1602 661 M1209 785C1339 788 1463 808 1603 831 M1219 857C1351 869 1462 883 1588 909 M1228 1041C1350 1056 1460 1072 1587 1098 M1244 30L1232 174 M1309 178L1298 284 M1486 215L1474 456 M1246 461L1238 695 M1317 466L1311 697 M1492 476L1485 706 M1260 703L1253 909 M1331 707L1327 918 M1510 731L1507 950 M1285 929L1279 1050 M1376 946L1372 1066 M1501 966L1496 1088 M776 760L776 882 M897 761L897 888 M1020 760L1021 891"/>
-
+    <pattern id="workshopBlocks" width="104" height="84" patternUnits="userSpaceOnUse">
+      <rect x="9" y="9" width="74" height="48" rx="2" fill="#eee4ce" stroke="#9c8b71" stroke-width="2"/>
+      <rect x="22" y="57" width="58" height="12" fill="#d7c5a4" opacity=".8"/>
+      <path d="M15 20h62M15 32h62" stroke="#c3ad88" stroke-width="2" opacity=".55"/>
+    </pattern>
+    <path id="majorRoads" d="M40 335C280 355 445 350 650 345S1130 342 1590 350 M625 0C615 265 642 450 623 690S615 1010 630 1200 M80 870C260 835 380 910 610 940S995 1018 1185 1030S1435 1095 1600 1128 M1115 40C1080 245 1105 480 1130 720S1160 980 1185 1120"/>
+    <path id="localRoads" d="M1160 345H1600 M1160 448H1600 M1160 555H1600 M1160 665H1600 M1160 775H1600 M1160 885H1600 M1215 218V1025 M1320 218V1040 M1428 218V1055 M1530 218V1075 M90 545H625 M110 565L80 775 M350 345V545 M485 345V545 M250 870V1200 M470 870V1200 M250 1045H625 M625 255H1110 M625 520H1120 M625 735H1140 M625 940H1150 M760 255V520 M850 255V520 M980 255V520 M1060 255V520 M735 520V735 M905 520V940 M1040 520V735 M760 735V940 M1010 735V940"/>
     <style>
-      .zone-line{fill:none;stroke:#8fa5ad;stroke-width:2;stroke-dasharray:9 7;opacity:.48}
-      .building{fill:#e9ebef;stroke:#cbd1d9;stroke-width:2;stroke-linejoin:round}
-      .building-dark{fill:#dfe4e8;stroke:#bcc7cf;stroke-width:2;stroke-linejoin:round}
-      .public{fill:#d9e4ec;stroke:#aabac7;stroke-width:3;stroke-linejoin:round}
-      .medical{fill:#f4dfe1;stroke:#e3b7bd;stroke-width:3;stroke-linejoin:round}
-      .workshop{fill:#ece8df;stroke:#d2c7b7;stroke-width:2;stroke-linejoin:round}
-      .park{fill:#c8eed8;stroke:#aad9bd;stroke-width:2;stroke-linejoin:round}
-      .water{fill:#b7d6e7;stroke:#91bed4;stroke-width:3}
-      .major-edge{fill:none;stroke:#aab8c4;stroke-width:72;stroke-linecap:round;stroke-linejoin:round}
-      .major-road{fill:none;stroke:#bdcad6;stroke-width:62;stroke-linecap:round;stroke-linejoin:round}
-      .collector-edge{fill:none;stroke:#b1bdc6;stroke-width:45;stroke-linecap:round;stroke-linejoin:round}
-      .collector-road{fill:none;stroke:#cbd5dd;stroke-width:37;stroke-linecap:round;stroke-linejoin:round}
-      .local-edge{fill:none;stroke:#c2cbd2;stroke-width:27;stroke-linecap:round;stroke-linejoin:round}
-      .local-road{fill:none;stroke:#dce2e7;stroke-width:21;stroke-linecap:round;stroke-linejoin:round}
-      .rail-edge{fill:none;stroke:#8e999f;stroke-width:12;stroke-linecap:round}
-      .rail{fill:none;stroke:#e7e1d8;stroke-width:7;stroke-dasharray:24 12;stroke-linecap:butt}
-      .district-title{fill:#667a85;font:700 28px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:2px;paint-order:stroke fill;stroke:#f7f8f9;stroke-width:3px;stroke-linejoin:round}
-      .district-en{fill:#7e8f99;font:700 10px ui-monospace,monospace;letter-spacing:2px;paint-order:stroke fill;stroke:#f7f8f9;stroke-width:1.5px}
-      .label{fill:#405c69;font:700 16px 'Noto Sans JP','Yu Gothic',sans-serif;paint-order:stroke fill;stroke:#f7f8f9;stroke-width:2.5px;stroke-linejoin:round}
-      .small{fill:#607985;font:700 10px ui-monospace,monospace;letter-spacing:1.2px;paint-order:stroke fill;stroke:#f7f8f9;stroke-width:1.5px}
-      .roadname{fill:#536d7a;font:700 15px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:1px;paint-order:stroke fill;stroke:#eef2f5;stroke-width:3px;stroke-linejoin:round}
-      .road-en{fill:#657e8a;font:700 10px ui-monospace,monospace;letter-spacing:1.3px;paint-order:stroke fill;stroke:#eef2f5;stroke-width:2px}
-      .station{fill:#b7cfe1;stroke:#6f8ea2;stroke-width:3}
-      .anomaly{fill:#1b333b;opacity:.7}
+      .district{stroke:#809294;stroke-width:3}
+      .block{fill:#f7f7f2;stroke:#a7b2b1;stroke-width:2}
+      .building{fill:#e9ece8;stroke:#8f9e9d;stroke-width:2}
+      .public{fill:#e2eaec;stroke:#607d83;stroke-width:3}
+      .medical{fill:#f3dfe1;stroke:#b65260;stroke-width:3}
+      .green{fill:#cbe7d4;stroke:#79a78d;stroke-width:3}
+      .minor-building{fill:#f2f3ef;stroke:#bac3c1;stroke-width:1.5}
+      .road-edge{fill:none;stroke:#768d99;stroke-width:40;stroke-linecap:round;stroke-linejoin:round}
+      .road{fill:none;stroke:#dbe2e3;stroke-width:32;stroke-linecap:round;stroke-linejoin:round}
+      .street-edge{fill:none;stroke:#95a4a6;stroke-width:19;stroke-linecap:round;stroke-linejoin:round}
+      .street{fill:none;stroke:#eef1ef;stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+      .rail{fill:none;stroke:#5f7180;stroke-width:16;stroke-linecap:round;stroke-linejoin:round}
+      .rail-center{fill:none;stroke:#f4efe5;stroke-width:5;stroke-dasharray:16 12}
+      .district-title{fill:#2a5559;font:700 25px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:3px}
+      .district-en{fill:#547376;font:700 11px ui-monospace,monospace;letter-spacing:2px}
+      .label{fill:#274d52;font:700 17px 'Noto Sans JP','Yu Gothic',sans-serif;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px;stroke-linejoin:round}
+      .small{fill:#3f666a;font:700 11px ui-monospace,monospace;letter-spacing:1.4px;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px}
+      .roadname{fill:#49676a;font:600 13px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:2px;paint-order:stroke fill;stroke:#eef1ef;stroke-width:2px}
+      .ward-line{fill:none;stroke:#487176;stroke-width:3;stroke-dasharray:15 9 3 9;opacity:.68}
+      .anomaly{fill:#152e32;opacity:.75}
     </style>
   </defs>
 
-  <rect width="1600" height="1200" fill="#f7f8f9"/>
-  <path fill="#f9f8f5" d="M64 345H618V1200H0V880Z"/>
-  <path fill="#faf7ef" d="M620 0H1135V1200H620Z"/>
-  <path fill="#f8f4eb" d="M1135 0H1600V1200H1135Z"/>
-  <rect width="1600" height="1200" fill="url(#mapGrid)"/>
+  <rect width="1600" height="1200" fill="#e8efef"/>
 
-  <!-- Water and open ground -->
-  <path class="water" d="M0 0H188C176 98 143 182 91 252C55 301 39 377 54 456C76 565 49 650 0 714Z"/>
-  <path fill="#e5f5fa" d="M0 34H139C123 111 94 181 49 241C31 265 15 294 0 330Z" opacity=".75"/>
-  <path class="park" d="M28 877L179 860L293 929L268 1180H0V1014Z"/>
-  <path class="park" d="M981 552L1125 546L1138 703L991 701Z"/>
-  <path class="park" d="M704 947L912 952L915 1180L693 1172Z"/>
-  <path class="park" d="M1459 63L1600 73V207L1492 193Z"/>
-  <path class="park" d="M1495 492L1600 500V703L1511 692Z"/>
+  <path class="district" fill="#f2ebe0" d="M90 340H625V905L520 1005H70L28 780Z"/>
+  <path class="district" fill="#e8eee5" d="M70 905H620V1200H0V1040Z"/>
+  <path class="district" fill="#f5eddc" d="M625 30H1168V720H625Z"/>
+  <path class="district" fill="#e7ece6" d="M620 720H1168V1200H620Z"/>
+  <path class="district" fill="#eee4ce" d="M1168 218H1600V1025L1515 1115H1168Z"/>
+  <path class="district" fill="#e4ecea" d="M1168 0H1600V218H1168Z"/>
+  <rect width="1600" height="1200" fill="url(#minorGrid)"/>
 
-  <!-- Dense city fabric: north and station side -->
+  <path d="M0 0H165C120 123 190 250 115 375C55 475 102 640 30 770L0 790Z" fill="#91cfdf"/>
+  <path d="M0 0H465C400 48 318 75 278 126C225 193 183 225 118 250" fill="none" stroke="#91cfdf" stroke-width="90"/>
+  <path d="M5 22C105 70 115 148 88 238M42 430C83 510 42 602 52 700" fill="none" stroke="#d6f0f5" stroke-width="9" opacity=".9"/>
+
+  <path d="M1195 260H1575V986H1195Z" fill="url(#workshopBlocks)" opacity=".78"/>
+
   <g>
-    <use href="#residentialRowA" transform="translate(117 137) rotate(-7)"/>
-    <use href="#residentialRowA" transform="translate(152 222) rotate(-10) scale(.88)"/>
-    <path class="building-dark" d="M379 78l112-38 45 103-119 42Z"/>
-    <path class="building" d="M474 205l103-45 31 96-112 37Z"/>
-    <path class="building" d="M102 381l89-4 7 79-94 3Z"/>
-    <path class="building" d="M228 378h97l2 82-102-2Z"/>
-    <path class="building" d="M370 370l91-8 9 81-93 13Z"/>
-    <path class="building" d="M505 368l87-5-2 77-91 12Z"/>
-
-    <path class="public" d="M694 37L809 22l4 106-116 11Z"/>
-    <path class="public" d="M848 26h105l4 102-109 4Z"/>
-    <path class="public" d="M982 28l111 4 7 102-112-7Z"/>
-    <path class="public" d="M677 173l126-6 7 81-130 6Z"/>
-    <path class="public" d="M837 165l105 3 1 81-107 3Z"/>
-    <path class="public" d="M975 166l128 1 3 82-132 1Z"/>
-    <path class="building" d="M667 294l72-3 4 45-75 4Z"/>
-    <path class="building" d="M771 293l61-2 2 44-63 4Z"/>
-    <path class="building" d="M866 291l72-1 2 46-72 1Z"/>
-    <path class="building" d="M973 292l114 2-2 47-112-2Z"/>
-    <path class="building-dark" d="M704 378l118-9 8 110-125 12Z"/>
-    <path class="building" d="M862 367l90 4-1 113-90-1Z"/>
-    <path class="building" d="M1000 372l91 1 13 112-100 4Z"/>
+    <path class="block" d="M150 405H340V555H150Z"/>
+    <path class="block" d="M365 405H570V540H365Z"/>
+    <path class="medical" d="M175 590L465 565L530 790L420 872L160 830Z"/>
+    <rect x="292" y="753" width="125" height="52" rx="4" fill="#f3d8df" stroke="#a86478" stroke-width="3"/>
+    <rect x="430" y="485" width="128" height="50" rx="4" fill="#eadde7" stroke="#86657c" stroke-width="3"/>
+    <path class="green" d="M50 850H230L285 1035H50Z"/>
+    <path class="block" d="M270 900H540V1110H270Z"/>
+    <path class="public" d="M690 72H1008V245H690Z"/>
+    <path class="block" d="M690 276H850V365H690Z"/>
+    <path class="block" d="M875 276H1095V365H875Z"/>
+    <path class="building" d="M733 385H940V505H733Z"/>
+    <path class="public" d="M705 545H965V710H705Z"/>
+    <path class="green" d="M986 542H1138V710H986Z"/>
+    <path class="block" d="M690 770H890V905H690Z"/>
+    <path class="public" d="M915 770H1122V930H915Z"/>
+    <path class="green" d="M690 942H905V1138H690Z"/>
+    <path class="block" d="M930 960H1125V1138H930Z"/>
+    <rect x="947" y="1068" width="132" height="52" rx="3" fill="#dce9ef" stroke="#477c94" stroke-width="3"/>
+    <path class="block" d="M1220 50H1395V180H1220Z"/>
+    <path class="block" d="M1420 45H1568V180H1420Z"/>
   </g>
 
-  <!-- Hospital and northern Shireiji neighbourhood -->
-  <g>
-    <use href="#residentialRowA" transform="translate(105 528) rotate(-4) scale(.95)"/>
-    <use href="#residentialRowA" transform="translate(108 617) rotate(-2) scale(.92)"/>
-    <path class="medical" d="M178 527L471 493L542 646L505 810L376 873L188 816L135 694Z"/>
-    <path fill="#f9eded" stroke="#e0b6bc" stroke-width="3" d="M218 562l206-22 26 91-58 20 26 106-151 34-34-111-50 8Z"/>
-    <path fill="#eecfd4" d="M288 592h73v72h-73Z"/>
-    <path class="medical" d="M291 785l124-17 12 55-126 23Z"/>
-    <path class="building" d="M475 516l93-7 12 49-94 11Z"/>
-    <path class="building" d="M86 765l75 11-17 61-70-17Z"/>
-    <path class="building" d="M455 868l93 16-14 70-98-18Z"/>
-    <path class="building" d="M296 910l104 18-9 63-110-21Z"/>
-    <path class="building" d="M425 953l118 17-6 77-122-22Z"/>
-    <path class="building-dark" d="M119 1013l123-18 20 86-131 25Z"/>
-    <path class="building" d="M291 1049l96-13 12 86-101 14Z"/>
-    <path class="building" d="M423 1064l103 6-4 90-105-8Z"/>
+  <g opacity=".86">
+    <rect class="minor-building" x="166" y="426" width="70" height="42" rx="2"/>
+    <rect class="minor-building" x="250" y="426" width="72" height="42" rx="2"/>
+    <rect class="minor-building" x="382" y="425" width="76" height="42" rx="2"/>
+    <rect class="minor-building" x="475" y="425" width="78" height="42" rx="2"/>
+    <rect class="minor-building" x="286" y="930" width="68" height="50" rx="2"/>
+    <rect class="minor-building" x="370" y="930" width="78" height="50" rx="2"/>
+    <rect class="minor-building" x="286" y="995" width="96" height="54" rx="2"/>
+    <rect class="minor-building" x="399" y="995" width="112" height="54" rx="2"/>
+    <rect class="minor-building" x="703" y="289" width="50" height="54" rx="2"/>
+    <rect class="minor-building" x="772" y="289" width="58" height="54" rx="2"/>
+    <rect class="minor-building" x="887" y="289" width="74" height="54" rx="2"/>
+    <rect class="minor-building" x="996" y="289" width="80" height="54" rx="2"/>
+    <rect class="minor-building" x="706" y="794" width="52" height="84" rx="2"/>
+    <rect class="minor-building" x="777" y="794" width="92" height="84" rx="2"/>
+    <rect class="minor-building" x="946" y="793" width="54" height="108" rx="2"/>
+    <rect class="minor-building" x="1020" y="793" width="80" height="108" rx="2"/>
   </g>
 
-  <!-- Akashia / Katasu urban blocks -->
-  <g>
-    <path class="public" d="M694 546l170-7 8 145-177 11Z"/>
-    <path class="public" d="M903 548l73 2-2 142-77-1Z"/>
-    <path class="building" d="M662 744l98-2 4 50-101 5Z"/>
-    <path class="building" d="M796 744l77-1 4 49-79 2Z"/>
-    <path class="building" d="M914 746l98 3-2 48-98-3Z"/>
-    <path class="building" d="M1052 752l77 1 2 47-79-1Z"/>
-    <use href="#residentialRowB" transform="translate(659 823) scale(.96 .9)"/>
-    <use href="#residentialRowB" transform="translate(916 824) scale(.92 .9)"/>
-    <path class="public" d="M926 934l176 9 13 80-179-15Z"/>
-    <path class="building" d="M657 1012l76 2-1 95-75-3Z"/>
-    <path class="building" d="M760 1016l117 5-2 90-115-5Z"/>
-    <path class="building" d="M934 1042l81 8-5 91-85-8Z"/>
-    <path class="building-dark" d="M1040 1054l100 9-3 95-103-12Z"/>
-    <path class="station" d="M986 969l105 8 3 44-109-9Z"/>
-  </g>
-
-  <!-- Workshop quarter: many independent town workshops -->
-  <g>
-    <use href="#workshopRow" transform="translate(1194 115) rotate(4) scale(1.25 1)"/>
-    <use href="#workshopRow" transform="translate(1207 235) rotate(4) scale(1.22 1)"/>
-    <use href="#workshopRow" transform="translate(1194 328) rotate(4) scale(1.27 1)"/>
-    <use href="#workshopRow" transform="translate(1208 496) rotate(3) scale(1.25 1)"/>
-    <use href="#workshopRow" transform="translate(1199 584) rotate(3) scale(1.28 1)"/>
-    <use href="#workshopRow" transform="translate(1212 746) rotate(6) scale(1.25 1)"/>
-    <use href="#workshopRow" transform="translate(1218 839) rotate(7) scale(1.23 1)"/>
-    <use href="#workshopRow" transform="translate(1240 1000) rotate(7) scale(1.13 1)"/>
-    <path class="workshop" d="M1165 33l104-9 4 66-106 8Z"/>
-    <path class="workshop" d="M1301 26l121 9-5 69-122-8Z"/>
-    <path class="workshop" d="M1217 386l90-2 5 54-92 4Z"/>
-    <path class="workshop" d="M1340 389l105 4 1 53-106-3Z"/>
-    <path class="workshop" d="M1480 399l105 6 1 48-107-4Z"/>
-    <path class="workshop" d="M1218 651l92 2-2 43-91-3Z"/>
-    <path class="workshop" d="M1339 660l111 5-1 38-110-4Z"/>
-    <path class="workshop" d="M1479 676l105 8-3 36-103-9Z"/>
-    <path class="workshop" d="M1235 1080l104 8-1 73-108-12Z"/>
-    <path class="workshop" d="M1370 1093l99 11-6 69-102-13Z"/>
-    <path class="workshop" d="M1495 1110l94 10-4 68-97-11Z"/>
-  </g>
-
-  <!-- Roads are painted as continuous surfaces: borders first, then all road interiors. -->
   <g id="road-network">
-    <use href="#majorRoads" class="major-edge"/>
-    <use href="#collectorRoads" class="collector-edge"/>
-    <use href="#localRoads" class="local-edge"/>
-    <use href="#majorRoads" class="major-road"/>
-    <use href="#collectorRoads" class="collector-road"/>
-    <use href="#localRoads" class="local-road"/>
+    <use href="#majorRoads" class="road-edge"/>
+    <use href="#localRoads" class="street-edge"/>
+    <use href="#majorRoads" class="road"/>
+    <use href="#localRoads" class="street"/>
   </g>
 
-  <!-- Railway and stations -->
-  <path class="rail-edge" d="M-30 410C185 393 370 401 558 420C760 440 962 418 1157 430C1330 441 1475 467 1620 470"/>
-  <path class="rail" d="M-30 410C185 393 370 401 558 420C760 440 962 418 1157 430C1330 441 1475 467 1620 470"/>
-  <path class="rail-edge" d="M556 420C546 570 559 720 574 870C587 999 609 1106 615 1220"/>
-  <path class="rail" d="M556 420C546 570 559 720 574 870C587 999 609 1106 615 1220"/>
-  <path class="station" d="M805 382h126v55H805Z"/>
-  <path class="station" d="M519 776l83 5-2 58-85-8Z"/>
+  <path class="rail" d="M155 300C395 320 545 310 705 300S1020 285 1168 310S1400 325 1600 310"/>
+  <path class="rail-center" d="M155 300C395 320 545 310 705 300S1020 285 1168 310S1400 325 1600 310"/>
+  <path class="rail" d="M560 350C555 515 565 650 575 815S605 1020 610 1200"/>
+  <path class="rail-center" d="M560 350C555 515 565 650 575 815S605 1020 610 1200"/>
 
-  <!-- District boundaries and geographic labels -->
-  <path class="zone-line" d="M70 350C265 329 436 342 620 354M620 704C800 701 962 708 1151 719M1135 0C1120 310 1148 662 1170 1200"/>
+  <path class="ward-line" d="M92 340C320 365 470 355 625 340"/>
+  <path class="ward-line" d="M620 720H1168"/>
+  <path class="ward-line" d="M1168 218V1025"/>
+
   <g>
-    <text class="district-title" x="92" y="487">北司零寺町</text><text class="district-en" x="94" y="510">NORTH SHIREIJI</text>
-    <text class="district-title" x="95" y="1165">南司零寺</text><text class="district-en" x="97" y="1187">SOUTH SHIREIJI</text>
-    <text class="district-title" x="675" y="504">朱紗町</text><text class="district-en" x="677" y="525">AKASHIA</text>
-    <text class="district-title" x="676" y="930">潟巣</text><text class="district-en" x="678" y="952">KATASU</text>
-    <text class="district-title" x="1221" y="277">工房街</text><text class="district-en" x="1223" y="298">WORKSHOP QUARTER</text>
+    <rect x="812" y="275" width="118" height="66" rx="4" fill="#f1b8bf" stroke="#a84250" stroke-width="4"/>
+    <rect x="530" y="770" width="96" height="60" rx="4" fill="#f1b8bf" stroke="#a84250" stroke-width="4"/>
+    <rect x="1008" y="975" width="92" height="52" rx="4" fill="#cadde2" stroke="#607d83" stroke-width="4"/>
   </g>
 
-  <!-- Facility labels -->
   <g>
-    <text class="label" x="224" y="636">江縫栄市立総合病院</text><text class="small" x="226" y="656">ENUEI CITY GENERAL HOSPITAL</text>
-    <text class="label" x="298" y="815">Café Palette</text><text class="small" x="299" y="835">HOSPITAL 1F</text>
-    <text class="label" x="462" y="547">Fleur de Paix</text><text class="small" x="464" y="566">TAKEOUT ONLY</text>
-    <text class="label" x="723" y="89">江縫栄私立大学</text><text class="small" x="725" y="110">ENUEI PRIVATE UNIVERSITY</text>
-    <text class="label" x="709" y="440">果音スタジオ</text><text class="small" x="711" y="460">KANON STUDIO</text>
-    <text class="label" x="715" y="625">朱紗大型図書館</text><text class="small" x="717" y="646">AKASHIA CENTRAL LIBRARY</text>
-    <text class="label" x="112" y="1115">司零寺</text><text class="small" x="114" y="1135">SHIREI-JI TEMPLE</text>
-    <text class="label" x="935" y="983">潟絡中高一貫校</text><text class="small" x="937" y="1004">KATAGARA SCHOOL</text>
-    <text class="label" x="730" y="1096">薄雲霊園</text><text class="small" x="732" y="1117">USUGUMO CEMETERY</text>
-    <text class="label" x="816" y="421">江縫栄駅</text><text class="small" x="818" y="442">ENUEI STATION</text>
-    <text class="label" x="398" y="862">江縫栄市立総合病院前駅</text><text class="small" x="468" y="883">HOSPITAL FRONT</text>
-    <text class="label" x="991" y="1045">潟巣駅</text><text class="small" x="993" y="1065">KATASU STATION</text>
-    <text class="label" x="1010" y="1137">Da' At25</text><text class="small" x="1011" y="1157">CONVENIENCE STORE</text>
-    <text class="label" x="1252" y="404">硝子・鉱石工房群</text>
-    <text class="label" x="1250" y="668">染織・服飾工房群</text>
-    <text class="label" x="1260" y="955">製本・修復工房群</text>
+    <text class="district-title" x="120" y="390">北司零寺町</text><text class="district-en" x="122" y="413">NORTH SHIREIJI</text>
+    <text class="district-title" x="105" y="1075">南司零寺</text><text class="district-en" x="107" y="1098">SOUTH SHIREIJI</text>
+    <text class="district-title" x="690" y="405">朱紗町</text><text class="district-en" x="692" y="428">AKASHIA</text>
+    <text class="district-title" x="682" y="760">潟巣</text><text class="district-en" x="684" y="783">KATASU</text>
+    <text class="district-title" x="1230" y="250">工房街</text><text class="district-en" x="1232" y="273">WORKSHOP QUARTER</text>
   </g>
 
-  <!-- Road names and directional markings -->
   <g>
-    <text class="roadname" x="170" y="326" transform="rotate(2 170 326)">梨宵街道</text><text class="road-en" x="171" y="342">NASHIYO HWY.</text>
-    <text class="roadname" x="743" y="340" transform="rotate(-2 743 340)">朱紗通り</text>
-    <text class="roadname" x="745" y="1015" transform="rotate(8 745 1015)">酒井街路</text>
-    <text class="roadname" x="1124" y="594" transform="rotate(84 1124 594)">糸紗通り</text>
-    <text class="roadname" x="1312" y="1100" transform="rotate(10 1312 1100)">工房環状路</text>
-    <path d="M1042 343l18-10-2 20ZM1180 840l10 18-20 1ZM630 668l-10 18 20-1Z" fill="#83949f" opacity=".9"/>
+    <text class="label" x="205" y="680">江縫栄市立総合病院</text><text class="small" x="206" y="704">N/A CITY GENERAL HOSPITAL</text>
+    <text class="label" x="297" y="781">Café Palette</text><text class="small" x="298" y="801">HOSPITAL 1F</text>
+    <text class="label" x="432" y="515">Fleur de Paix</text><text class="small" x="434" y="535">TAKEOUT ONLY</text>
+    <text class="label" x="695" y="135">江縫栄私立大学</text><text class="small" x="697" y="159">ENUEI PRIVATE UNIVERSITY</text>
+    <text class="label" x="746" y="445">果音スタジオ</text><text class="small" x="748" y="468">KANON STUDIO</text>
+    <text class="label" x="724" y="620">朱紗大型図書館</text><text class="small" x="726" y="644">AKASHIA CENTRAL LIBRARY</text>
+    <text class="label" x="184" y="1002">司零寺</text><text class="small" x="186" y="1025">SHIREI-JI TEMPLE</text>
+    <text class="label" x="934" y="840">潟絡中高一貫校</text><text class="small" x="936" y="864">KATAGARA SCHOOL</text>
+    <text class="label" x="717" y="1034">薄雲霊園</text><text class="small" x="719" y="1058">USUGUMO CEMETERY</text>
   </g>
 
-  <!-- A small amount of ordinary municipal corruption remains visible. -->
-  <g opacity=".66">
-    <rect class="anomaly" x="1500" y="23" width="100" height="8"/>
-    <rect class="anomaly" x="1538" y="38" width="62" height="5"/>
-    <rect class="anomaly" x="8" y="1181" width="152" height="6"/>
-    <text class="small" x="1426" y="1182">SECTOR ███ / NO ROUTE</text>
+  <g>
+    <text class="label" x="816" y="365">江縫栄駅</text><text class="small" x="818" y="387">ENUEI STATION</text>
+    <text class="label" x="402" y="855">江縫栄市立総合病院前駅</text><text class="small" x="452" y="878">HOSPITAL FRONT</text>
+    <text class="label" x="990" y="950">潟巣駅</text><text class="small" x="1014" y="972">KATASU STATION</text>
+    <text class="label" x="958" y="1100">Da' At25</text><text class="small" x="958" y="1122">CONVENIENCE STORE</text>
   </g>
 
-  <g transform="translate(1510 1080)" opacity=".78">
-    <circle cx="35" cy="35" r="31" fill="#fff" stroke="#aab8c4" stroke-width="2"/>
-    <path d="M35 10V54M24 28l11-18 11 18" fill="none" stroke="#6e818c" stroke-width="4"/>
-    <text class="small" x="30" y="66">N</text>
+  <g>
+    <text class="label" x="1230" y="414">硝子・鉱石工房群</text><text class="small" x="1232" y="437">GLASS / MINERAL WORKS</text>
+    <text class="label" x="1230" y="625">染織・服飾工房群</text><text class="small" x="1232" y="648">TEXTILE / COSTUME WORKS</text>
+    <text class="label" x="1230" y="835">製本・修復工房群</text><text class="small" x="1232" y="858">BINDING / RESTORATION WORKS</text>
+  </g>
+
+  <text class="roadname" x="196" y="328">梨宵街道</text>
+  <text class="roadname" x="690" y="337">朱紗通り</text>
+  <text class="roadname" x="792" y="966" transform="rotate(10 792 966)">酒井街路</text>
+  <text class="roadname" x="1110" y="520" transform="rotate(84 1110 520)">糸紗通り</text>
+  <text class="roadname" x="1190" y="1110" transform="rotate(10 1190 1110)">工房環状路</text>
+
+  <g opacity=".62">
+    <rect class="anomaly" x="1485" y="68" width="115" height="11"/>
+    <rect class="anomaly" x="1518" y="84" width="82" height="6"/>
+    <rect class="anomaly" x="16" y="1145" width="172" height="8"/>
+    <rect class="anomaly" x="18" y="1161" width="102" height="5"/>
+    <text class="small" x="1438" y="1128">SECTOR ███ / NO ROUTE</text>
+  </g>
+
+  <g transform="translate(1480 1070)" opacity=".74">
+    <path d="M0 0h80v80H0z" fill="#f7f6f1" stroke="#557275" stroke-width="2"/>
+    <path d="M40 12V65M26 30l14-18 14 18" fill="none" stroke="#a51f2d" stroke-width="4"/>
+    <text class="small" x="34" y="74">N</text>
   </g>
 </svg>
