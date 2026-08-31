@@ -26,11 +26,11 @@
       .street{fill:none;stroke:#eef1ef;stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
       .rail{fill:none;stroke:#5f7180;stroke-width:16;stroke-linecap:round;stroke-linejoin:round}
       .rail-center{fill:none;stroke:#f4efe5;stroke-width:5;stroke-dasharray:16 12}
-      .district-title{fill:#2a5559;font:700 25px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:3px}
-      .district-en{fill:#547376;font:700 11px ui-monospace,monospace;letter-spacing:2px}
-      .label{fill:#274d52;font:700 17px 'Noto Sans JP','Yu Gothic',sans-serif;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px;stroke-linejoin:round}
-      .small{fill:#3f666a;font:700 11px ui-monospace,monospace;letter-spacing:1.4px;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px}
-      .roadname{fill:#49676a;font:600 13px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:2px;paint-order:stroke fill;stroke:#eef1ef;stroke-width:2px}
+      .district-title{fill:#2a5559;font:700 29px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:3px}
+      .district-en{fill:#547376;font:700 14px ui-monospace,monospace;letter-spacing:2px}
+      .label{fill:#274d52;font:700 21px 'Noto Sans JP','Yu Gothic',sans-serif;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px;stroke-linejoin:round}
+      .small{fill:#3f666a;font:700 14px ui-monospace,monospace;letter-spacing:1.2px;paint-order:stroke fill;stroke:#f7f6f1;stroke-width:2px}
+      .roadname{fill:#49676a;font:600 16px 'Noto Sans JP','Yu Gothic',sans-serif;letter-spacing:1.5px;paint-order:stroke fill;stroke:#eef1ef;stroke-width:2px}
       .ward-line{fill:none;stroke:#487176;stroke-width:3;stroke-dasharray:15 9 3 9;opacity:.68}
       .anomaly{fill:#152e32;opacity:.75}
     </style>
