@@ -14,6 +14,7 @@
     clear: {
       name: "霽れ",
       code: "CLEAR",
+      icon: "image/weather/hare.png",
       summary: "視界良好。市内の移動に問題はありません。",
       safety: "平常",
       precipitation: [0, 10]
@@ -21,6 +22,7 @@
     cloudy: {
       name: "曇り",
       code: "CLOUDY",
+      icon: "image/weather/kumori.png",
       summary: "雲の多い空模様です。現在、異常気象情報はありません。",
       safety: "平常",
       precipitation: [10, 30]
@@ -28,6 +30,7 @@
     rain: {
       name: "雨",
       code: "RAIN",
+      icon: "image/weather/ame.png",
       summary: "雨具をお持ちください。足元と視界にご注意ください。",
       safety: "平常",
       precipitation: [70, 100]
@@ -35,6 +38,7 @@
     snow: {
       name: "雪",
       code: "SNOW / WINTER ONLY",
+      icon: "image/weather/yuki.png",
       summary: "降雪が予想されます。路面の凍結にご注意ください。",
       safety: "注意",
       precipitation: [60, 90]
@@ -49,6 +53,7 @@
     distortion: {
       name: "歪み",
       code: "SPATIAL DISTORTION",
+      icon: "image/weather/yugami.png",
       summary: "局地的な空間歪曲が観測されています。屋内へ移動してください。",
       safety: "屋内安全",
       precipitation: null
@@ -56,6 +61,7 @@
     visit: {
       name: "來訪",
       code: "VISITATION DETECTED",
+      icon: "image/weather/raihou.png",
       summary: "來客者が観測されています。警告事項を確認してください。",
       safety: "屋内安全",
       precipitation: null
@@ -268,6 +274,31 @@
     return value === null ? "--" : `${value}${suffix || ""}`;
   }
 
+  function weatherIcon(condition, className, lazy) {
+    if (!condition.icon) return null;
+
+    const icon = document.createElement("img");
+    icon.className = className;
+    icon.src = condition.icon;
+    icon.alt = "";
+    icon.setAttribute("aria-hidden", "true");
+    icon.decoding = "async";
+    if (lazy) icon.loading = "lazy";
+    return icon;
+  }
+
+  function renderCurrentIcon(condition) {
+    const icon = document.getElementById("current-weather-icon");
+    if (!condition.icon) {
+      icon.hidden = true;
+      icon.removeAttribute("src");
+      return;
+    }
+
+    icon.src = condition.icon;
+    icon.hidden = false;
+  }
+
   function forecastCard(reading, index, brokenForecast, brokenDate) {
     const article = document.createElement("article");
     article.className = "forecast-card";
@@ -291,13 +322,21 @@
     const title = document.createElement("h3");
     title.textContent = brokenForecast ? brokenForecast.name : reading.condition.name;
 
+    const conditionRow = document.createElement("div");
+    conditionRow.className = "forecast-condition";
+    conditionRow.append(title);
+    if (!brokenForecast) {
+      const icon = weatherIcon(reading.condition, "weather-pictogram weather-pictogram-forecast", true);
+      if (icon) conditionRow.append(icon);
+    }
+
     const details = document.createElement("dl");
     details.innerHTML = `
       <div><dt>気温</dt><dd>${brokenForecast ? "--" : valueOrDash(reading.temperature, "℃")}</dd></div>
       <div><dt>降水</dt><dd>${brokenForecast ? "--" : valueOrDash(reading.precipitation, "%")}</dd></div>
     `;
 
-    article.append(date, code, title, details);
+    article.append(date, code, conditionRow, details);
     return article;
   }
 
@@ -512,6 +551,7 @@
     document.getElementById("condition-code").textContent = current.condition.code;
     document.getElementById("condition-name").textContent = current.condition.name;
     document.getElementById("condition-summary").textContent = current.condition.summary || "　";
+    renderCurrentIcon(current.condition);
     document.getElementById("current-temperature").textContent = current.temperature === null ? "--" : current.temperature;
     document.getElementById("temperature-unit").textContent = current.temperature === null ? "" : "℃";
     document.getElementById("current-precipitation").textContent = valueOrDash(current.precipitation, "%");

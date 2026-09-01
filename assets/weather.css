@@ -1,13 +1,13 @@
 :root {
-  --sky: #dfe9e9;
-  --sky-deep: #b9cdcf;
-  --paper: #f8faf8;
-  --paper-blue: #edf3f2;
-  --ink: #1f2d30;
-  --muted: #526468;
-  --line: #9eb1b4;
-  --teal: #276f76;
-  --teal-dark: #174f55;
+  --sky: #f3dfe7;
+  --sky-deep: #d8b7c5;
+  --paper: #fffafa;
+  --paper-blue: #f9edf2;
+  --ink: #35232b;
+  --muted: #6d5961;
+  --line: #c6aab5;
+  --teal: #b34f73;
+  --teal-dark: #743149;
   --warning: #bd2836;
   --warning-dark: #7f1722;
   --visit: #505b90;
@@ -33,8 +33,8 @@ body {
   font-family: var(--sans);
   line-height: 1.75;
   background:
-    linear-gradient(rgba(31, 45, 48, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(31, 45, 48, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(53, 35, 43, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 35, 43, 0.025) 1px, transparent 1px),
     var(--sky);
   background-size: 32px 32px;
   transition: background-color 220ms ease, color 220ms ease;
@@ -60,8 +60,8 @@ body::after {
   opacity: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, transparent 0 5%, rgba(39, 111, 118, 0.72) 19%, rgba(255, 255, 255, 0.84) 47% 50%, rgba(189, 40, 54, 0.76) 78%, transparent 96%);
-  box-shadow: 0 -7px rgba(39, 111, 118, 0.1), 0 9px rgba(189, 40, 54, 0.12);
+    linear-gradient(90deg, transparent 0 5%, rgba(179, 79, 115, 0.72) 19%, rgba(255, 255, 255, 0.84) 47% 50%, rgba(189, 40, 54, 0.76) 78%, transparent 96%);
+  box-shadow: 0 -7px rgba(179, 79, 115, 0.1), 0 9px rgba(189, 40, 54, 0.12);
 }
 
 body.is-ambient-noise::after {
@@ -71,7 +71,7 @@ body.is-ambient-noise::after {
 .is-ambient-text-noise {
   color: var(--warning) !important;
   filter: blur(0.12px) contrast(1.3);
-  text-shadow: 4px 0 rgba(39, 111, 118, 0.65), -3px 0 rgba(189, 40, 54, 0.55);
+  text-shadow: 4px 0 rgba(179, 79, 115, 0.65), -3px 0 rgba(189, 40, 54, 0.55);
 }
 
 @keyframes ambient-signal-tear {
@@ -121,8 +121,8 @@ a {
 
 .city-header {
   border-bottom: 1px solid var(--ink);
-  background: rgba(248, 250, 248, 0.94);
-  box-shadow: 0 7px 24px rgba(31, 45, 48, 0.08);
+  background: rgba(255, 250, 252, 0.94);
+  box-shadow: 0 7px 24px rgba(53, 35, 43, 0.08);
 }
 
 .city-header-inner {
@@ -185,7 +185,7 @@ a {
   border: 1px solid var(--ink);
   border-left: 6px solid var(--amber);
   background: #fff8df;
-  box-shadow: 0 8px 20px rgba(31, 45, 48, 0.08);
+  box-shadow: 0 8px 20px rgba(53, 35, 43, 0.08);
   align-items: center;
   justify-content: space-between;
   gap: 20px;
@@ -242,16 +242,16 @@ a {
   border: 1px solid var(--line);
   border-top: 4px solid var(--teal-dark);
   background:
-    linear-gradient(120deg, transparent 0 69%, rgba(39, 111, 118, 0.07) 69% 100%),
-    rgba(248, 250, 248, 0.96);
-  box-shadow: 0 18px 42px rgba(31, 45, 48, 0.13);
+    linear-gradient(120deg, transparent 0 69%, rgba(179, 79, 115, 0.08) 69% 100%),
+    rgba(255, 250, 252, 0.96);
+  box-shadow: 0 18px 42px rgba(53, 35, 43, 0.13);
 }
 
 .current-panel::after {
   position: absolute;
   top: 4px;
   right: 18px;
-  color: rgba(31, 45, 48, 0.045);
+  color: rgba(53, 35, 43, 0.045);
   content: "FORECAST";
   font: 800 clamp(48px, 10vw, 112px)/1 var(--mono);
   letter-spacing: -0.08em;
@@ -306,6 +306,33 @@ a {
   display: grid;
 }
 
+.condition-primary {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: clamp(18px, 3.5vw, 42px);
+}
+
+.condition-copy {
+  display: grid;
+  min-width: 0;
+}
+
+.weather-pictogram {
+  display: block;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.weather-pictogram-current {
+  width: clamp(118px, 16vw, 180px);
+  height: clamp(118px, 16vw, 180px);
+  padding: clamp(13px, 2vw, 22px);
+  border: 1px solid var(--line);
+  background: rgba(249, 237, 242, 0.82);
+  box-shadow: 8px 8px 0 rgba(179, 79, 115, 0.1);
+}
+
 .condition-code,
 .temperature-label {
   color: var(--teal);
@@ -333,7 +360,7 @@ a {
   min-width: 165px;
   padding: 14px 18px;
   border: 1px solid var(--line);
-  background: rgba(237, 243, 242, 0.8);
+  background: rgba(249, 237, 242, 0.8);
 }
 
 .temperature-display p {
@@ -523,12 +550,12 @@ body[data-weather="distortion"] .current-panel {
 }
 
 body[data-weather="distortion"] .condition-name {
-  text-shadow: 2px 0 rgba(181, 106, 32, 0.24), -2px 0 rgba(39, 111, 118, 0.2);
+  text-shadow: 2px 0 rgba(181, 106, 32, 0.24), -2px 0 rgba(179, 79, 115, 0.2);
 }
 
 body[data-weather="blank"] .condition-name {
   color: transparent;
-  background: rgba(31, 45, 48, 0.055);
+  background: rgba(53, 35, 43, 0.055);
   user-select: none;
 }
 
@@ -577,8 +604,8 @@ body[data-weather="blank"] .condition-name {
   padding: 18px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: rgba(248, 250, 248, 0.94);
-  box-shadow: 0 8px 20px rgba(31, 45, 48, 0.07);
+  background: rgba(255, 250, 252, 0.94);
+  box-shadow: 0 8px 20px rgba(53, 35, 43, 0.07);
 }
 
 .forecast-card::before {
@@ -625,6 +652,22 @@ body[data-weather="blank"] .condition-name {
   line-height: 1.4;
 }
 
+.forecast-condition {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.weather-pictogram-forecast {
+  width: 68px;
+  height: 68px;
+  padding: 8px;
+  border: 1px solid rgba(198, 170, 181, 0.78);
+  background: rgba(249, 237, 242, 0.86);
+}
+
 .forecast-card dl {
   display: grid;
   margin: 23px 0 0;
@@ -649,10 +692,10 @@ body[data-weather="blank"] .condition-name {
   border-color: #343d40;
   color: #eef3f2;
   background:
-    linear-gradient(101deg, transparent 0 18%, rgba(189, 40, 54, 0.17) 18% 20%, transparent 20% 72%, rgba(39, 111, 118, 0.2) 72% 75%, transparent 75%),
+    linear-gradient(101deg, transparent 0 18%, rgba(189, 40, 54, 0.17) 18% 20%, transparent 20% 72%, rgba(179, 79, 115, 0.2) 72% 75%, transparent 75%),
     repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 5px),
     #182023;
-  box-shadow: 5px 0 rgba(189, 40, 54, 0.12), -4px 0 rgba(39, 111, 118, 0.13);
+  box-shadow: 5px 0 rgba(189, 40, 54, 0.12), -4px 0 rgba(179, 79, 115, 0.13);
   isolation: isolate;
 }
 
@@ -670,7 +713,7 @@ body[data-weather="blank"] .condition-name {
   pointer-events: none;
   background:
     linear-gradient(to bottom, transparent 0 31%, rgba(255, 255, 255, 0.08) 31% 33%, transparent 33% 67%, rgba(189, 40, 54, 0.12) 67% 70%, transparent 70%),
-    linear-gradient(90deg, rgba(39, 111, 118, 0.15), transparent 30% 78%, rgba(189, 40, 54, 0.12));
+    linear-gradient(90deg, rgba(179, 79, 115, 0.15), transparent 30% 78%, rgba(189, 40, 54, 0.12));
   animation: forecast-interference 2.4s steps(2, end) infinite;
 }
 
@@ -681,7 +724,7 @@ body[data-weather="blank"] .condition-name {
 .forecast-card.is-corrupted .forecast-code {
   color: #ff7c83;
   overflow-wrap: anywhere;
-  text-shadow: 2px 0 rgba(39, 111, 118, 0.75), -1px 0 rgba(255, 255, 255, 0.26);
+  text-shadow: 2px 0 rgba(179, 79, 115, 0.75), -1px 0 rgba(255, 255, 255, 0.26);
 }
 
 .forecast-card.is-corrupted h3 {
@@ -689,7 +732,7 @@ body[data-weather="blank"] .condition-name {
   font-family: var(--mono);
   letter-spacing: 0.04em;
   overflow-wrap: anywhere;
-  text-shadow: 3px 0 rgba(189, 40, 54, 0.5), -3px 0 rgba(39, 111, 118, 0.56);
+  text-shadow: 3px 0 rgba(189, 40, 54, 0.5), -3px 0 rgba(179, 79, 115, 0.56);
 }
 
 .forecast-card.is-corrupted dl {
@@ -708,7 +751,7 @@ body[data-weather="blank"] .condition-name {
 .forecast-card.is-corrupted .is-noising {
   color: #fff;
   filter: blur(0.18px);
-  text-shadow: 5px 0 rgba(189, 40, 54, 0.75), -4px 0 rgba(39, 111, 118, 0.78);
+  text-shadow: 5px 0 rgba(189, 40, 54, 0.75), -4px 0 rgba(179, 79, 115, 0.78);
   transform: translateX(1px);
 }
 
@@ -734,7 +777,7 @@ body[data-weather="blank"] .condition-name {
   margin: 22px 0 0;
   padding: 16px 19px;
   border-left: 4px solid var(--teal);
-  background: rgba(248, 250, 248, 0.7);
+  background: rgba(255, 250, 252, 0.7);
 }
 
 .weather-notice p,
@@ -777,7 +820,7 @@ body[data-weather="blank"] .condition-name {
 
 .city-footer {
   border-top: 1px solid var(--ink);
-  background: rgba(248, 250, 248, 0.88);
+  background: rgba(255, 250, 252, 0.88);
 }
 
 .city-footer div {
@@ -862,6 +905,16 @@ body[data-weather="blank"] .condition-name {
   .current-weather {
     grid-template-columns: 1fr;
     margin-top: 38px;
+  }
+
+  .condition-primary {
+    align-items: flex-start;
+  }
+
+  .weather-pictogram-current {
+    width: 104px;
+    height: 104px;
+    padding: 12px;
   }
 
   .temperature-display {
