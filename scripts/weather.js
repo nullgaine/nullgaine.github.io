@@ -508,7 +508,7 @@
 
     document.body.dataset.weather = current.key;
     document.getElementById("current-date").textContent = dateFormatter.format(currentSlot.start);
-    document.getElementById("current-period").textContent = `${periodLabel(currentSlot)}の予報 / 日本標準時`;
+    document.getElementById("current-period").textContent = `${periodLabel(currentSlot)}の予報 / 貴方標準時`;
     document.getElementById("condition-code").textContent = current.condition.code;
     document.getElementById("condition-name").textContent = current.condition.name;
     document.getElementById("condition-summary").textContent = current.condition.summary || "　";
@@ -516,7 +516,7 @@
     document.getElementById("temperature-unit").textContent = current.temperature === null ? "" : "℃";
     document.getElementById("current-precipitation").textContent = valueOrDash(current.precipitation, "%");
     document.getElementById("current-safety").textContent = current.condition.safety;
-    document.getElementById("next-update").textContent = `${timeLabel(currentSlot.end)} JST`;
+    document.getElementById("next-update").textContent = `${timeLabel(currentSlot.end)} YST`;
 
     renderAlert(current);
 
@@ -561,7 +561,7 @@
 
       if (clockAnomalyEndsAt && now < clockAnomalyEndsAt) {
         const impossibleTime = randomImpossibleTime();
-        const display = `${impossibleTime} JST`;
+        const display = `${impossibleTime} YST`;
         clock.textContent = display;
         clock.setAttribute("aria-label", "時刻表示に異常が発生しています");
         return;
@@ -573,8 +573,8 @@
       }
 
       const actualTime = clockFormatter.format(now);
-      clock.textContent = `${actualTime} JST`;
-      clock.setAttribute("aria-label", `${actualTime} 日本標準時`);
+      clock.textContent = `${actualTime} YST`;
+      clock.setAttribute("aria-label", `${actualTime} 貴方標準時`);
     }
 
     function tick() {
