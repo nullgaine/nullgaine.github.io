@@ -4,6 +4,7 @@
   --prussian-soft: #dce8ef;
   --toki: #f4b3c2;
   --toki-deep: #c96f86;
+  --na-red: #bd2635;
   --cream: #fffaf1;
   --paper: #fffdf8;
   --ink: #142b3a;
@@ -106,7 +107,8 @@ a { color: inherit; }
   border: 3px solid var(--toki);
   border-radius: 50%;
   color: #fff;
-  font-size: 17px;
+  font: 800 14px/1 var(--mono);
+  letter-spacing: 0.03em;
   font-weight: 700;
   place-items: center;
 }
@@ -212,12 +214,12 @@ a { color: inherit; }
   align-items: center;
 }
 
-.route-line span { height: 8px; background: var(--toki); }
+.route-line span { height: 8px; background: var(--na-red); }
 
 .route-line i {
   width: 18px;
   height: 18px;
-  border: 5px solid var(--toki);
+  border: 5px solid var(--na-red);
   border-radius: 50%;
   background: var(--paper);
 }
