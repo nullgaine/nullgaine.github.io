@@ -3,6 +3,7 @@
 
   const STOP_DURATION = 10 * 60 * 1000;
   const SPECIAL_TIME = "04:44:44";
+  const SPECIAL_TIMES = new Set([SPECIAL_TIME, "16:44:44"]);
   const CORRUPTED_STATION_NAME = "豎溽ｸｫ譬?ｧ?";
   const CORRUPTED_RETURN_MESSAGE = "e4baa1e88085e6a798e381aee3818ae5b8b0e3828ae381afe38193e381a1e38289e381abe381aae3828ae381bee38199e38082";
   const CORRUPTED_SAFETY_MESSAGE = "e9a785e593a1e381aee588b6e69c8de381aee889b2e38292e7a2bae3818be38281e3819fe4b88ae38081e5ae89e585a8e381abe3818ae98284e3828ae3818fe381a0e38195e38184e381bee3819be38082";
@@ -62,7 +63,7 @@
     const dayStart = viewerDayStart(timestamp);
     return ARRIVAL_TIMES.map((time) => {
       const arrival = dayStart + secondsFromTime(time) * 1000;
-      return { time, arrival, departure: arrival + STOP_DURATION, special: time === SPECIAL_TIME };
+      return { time, arrival, departure: arrival + STOP_DURATION, special: SPECIAL_TIMES.has(time) };
     });
   }
 
@@ -181,13 +182,14 @@
 
   function renderCorrupted(active, timestamp) {
     renderOpen(active, timestamp);
+    const specialTime = active.find((service) => service.special)?.time || SPECIAL_TIME;
     document.body.dataset.service = "corrupted";
     document.body.classList.add("is-corrupted");
     document.getElementById("station-brand-name").textContent = CORRUPTED_STATION_NAME;
     document.getElementById("station-title").textContent = CORRUPTED_STATION_NAME;
     document.getElementById("station-latin-name").textContent = "????????";
-    document.getElementById("service-code").textContent = "04:44:44 / RETURN SERVICE";
-    document.getElementById("service-direction").textContent = "RETURN / 04:44:44";
+    document.getElementById("service-code").textContent = `${specialTime} / RETURN SERVICE`;
+    document.getElementById("service-direction").textContent = `RETURN / ${specialTime}`;
     document.getElementById("arrival-destination").textContent = "常夜方面";
     document.getElementById("service-title").textContent = CORRUPTED_RETURN_MESSAGE;
     document.getElementById("service-message").textContent = CORRUPTED_SAFETY_MESSAGE;
@@ -223,6 +225,7 @@
   const api = {
     ARRIVAL_TIMES,
     SPECIAL_TIME,
+    SPECIAL_TIMES,
     STOP_DURATION,
     activeServices,
     viewerDayStart,
