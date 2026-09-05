@@ -463,6 +463,25 @@ a:focus-visible {
   transform: translateY(0);
 }
 
+@media (min-width: 821px) {
+  .system-alert {
+    right: 28px;
+    bottom: 28px;
+    gap: 6px;
+    max-width: min(460px, calc(100% - 56px));
+    padding: 18px 22px;
+    border-width: 2px;
+    font-size: 14px;
+    line-height: 1.65;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.42);
+  }
+
+  .system-alert strong {
+    font-size: 13px;
+    letter-spacing: 0.17em;
+  }
+}
+
 @keyframes infection-progress {
   0% { width: 0; background: var(--terminal-green); }
   31% { width: 18%; background: var(--terminal-green); }
