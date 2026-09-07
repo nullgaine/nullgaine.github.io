@@ -3,183 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MIX（料金・プラン） | 江縫栄市立総合病院</title>
-
+  <meta name="description" content="外峯零のMIXメニュー、料金計算、入稿方法、ご依頼の流れをご案内します。">
+  <title>MIX（料金・ご依頼） | 江縫栄市立総合病院</title>
   <link rel="stylesheet" href="assets/style.css?v=readable-20260829">
-  <style>
-    :root{
-      --accent:#b4212c;
-      --accent2:rgba(180,33,44,.10);
-      --line:#bbb4aa;
-      --panel:rgba(251,250,247,.95);
-      --ink:#272522;
-      --muted:#716c65;
-      --radius:0;
-      --shadow:0 10px 22px rgba(47,41,35,.10);
-      --max: 1040px;
-    }
-    body{ color:var(--ink); }
-    .wrap{ max-width:var(--max); margin:0 auto; padding: 16px 16px 64px; }
-    .lead{ color:var(--muted); margin:.5rem 0 0; }
-    .noteBox{
-      margin: 12px 0 0;
-      padding: 12px 14px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 0;
-      box-shadow: 0 2px 14px rgba(0,0,0,.04);
-    }
-    .grid{
-      margin-top: 14px;
-      display:grid;
-      gap: 14px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    @media (max-width: 960px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr; } }
-
-    .card{
-      background: var(--panel);
-      border: 1px solid var(--line-dark);
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: var(--shadow);
-    }
-    .card .head{
-      padding: 14px 14px 12px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(0deg, rgba(251,250,247,.96), rgba(180,33,44,.07));
-    }
-    .card h3{ margin:0; font-size: 16px; font-weight: 900; letter-spacing:.02em; }
-    .card p{ margin: 8px 0 0; color: var(--muted); font-size: 14px; }
-    .card .foot{
-      padding: 12px 14px 14px;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .price{ font-weight: 1000; color: var(--accent); letter-spacing:.02em; }
-    .price.formula{
-      max-width: 68%;
-      text-align: right;
-      font-size: 15px;
-      line-height: 1.35;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 10px;
-      border-radius: 0;
-      border: 1px solid var(--line);
-      background: var(--paper-soft);
-      font-weight: 900;
-      font-size: 13px;
-      color: var(--accent-hover);
-      white-space: nowrap;
-    }
-    .links{
-      display:flex;
-      gap:10px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
-    .btnLink{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 0;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      text-decoration:none;
-      font-weight: 900;
-      color: var(--ink);
-      box-shadow: 0 2px 12px rgba(0,0,0,.04);
-    }
-    .btnLink:hover{ border-color: var(--accent); background:var(--accent-soft); }
-    .dot{ width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent2); }
-    .section{ margin-top: 20px; }
-    .section h2{ margin: 0 0 10px; padding-left:10px; border-left:4px solid var(--accent); font-size: 20px; font-weight: 900; }
-    .mini{ font-size: 13px; color: var(--muted); }
-    .hr{ height:1px; background: var(--line); border:0; margin: 18px 0; }
-  </style>
-
+  <link rel="stylesheet" href="assets/illustration-pricing.css?v=20260907-services">
 </head>
 <body>
   <div id="header"></div>
+  <main id="main" class="mix-page">
+    <section class="commission-hero" aria-labelledby="commission-title">
+      <div class="commission-hero__copy">
+        <p class="eyebrow">AUDIO MIXING COMMISSION / ORDER SHEET</p>
+        <h1 id="commission-title">MIXのご依頼</h1>
+        <p class="commission-hero__lead">歌ってみたのピッチ・タイミング補正から、空間づくり、エフェクト、マスタリングまで。15年の活動と400件以上の制作経験をもとに、声と曲に合わせて仕上げます。</p>
+        <div class="commission-hero__actions"><a class="commission-button commission-button--primary" href="#price-list">料金を見る</a><a class="commission-button" href="contact">MIXを相談する</a></div>
+      </div>
+      <dl class="commission-summary" aria-label="ご依頼の基本情報">
+        <div class="commission-summary__status"><dt>STATUS</dt><dd><span class="status-lamp" aria-hidden="true"></span>ご相談受付中</dd></div>
+        <div><dt>STARTING AT</dt><dd>¥1,400 × Vo</dd></div>
+        <div><dt>LEAD TIME</dt><dd>通常1〜2週間</dd></div>
+        <div><dt>VOCAL DATA</dt><dd>MONO / WAV / 48kHz</dd></div>
+      </dl>
+    </section>
 
-  <main id="main" class="wrap">
-    <h1>MIX（料金・プラン）</h1>
-    
-<p class="lead">常に自分の音源は自分でMIXする15年活動中の歌うたいです。実績400+です。</p>
-<div class="noteBox">
-  <b>注意書き</b><br>
-  ・基本プラン：ピッチ／タイミング補正・ハモり生成・空間・エフェクト・マスタリング<br>
-  ・リテイクを要請する場合がございます。ご了承ください。<br>
-  ・ボーカルデータ提出形式は（MONO / WAV / 48kHz）にしていただけると嬉しいです。ノイズ除去はしないでください。<br>
-  ・納期は通常1〜2週間程度。お急ぎの場合は要相談で対応可能です。<br>
-  ・フルコーラスは、Instを除く<b>提出ボーカル1トラックにつき¥2,000</b>で計算致します。<br>
-  ・ワンコーラスは、フルコーラスの合計料金から<b>30％引き</b>です（1トラックにつき¥1,400）。<br>
-  ・こちらで生成するハモりは基本プラン内のため、提出トラック数には含みません。<br>
-  ・ハモリのガイドは致しません。ご了承ください。<br>
-</div>
+    <nav class="commission-index" aria-label="ページ内目次"><a href="#price-list">料金</a><a href="#options">追加料金</a><a href="#data-guide">入稿</a><a href="#guide">依頼の流れ</a><a href="#terms">注意事項</a></nav>
 
-<section class="section">
-  <h2>MIX（歌ってみた）</h2>
-  <div class="grid">
-    <article class="card">
-      <div class="head"><h3>ワンコーラス</h3><p>基本プラン。フルコーラス料金から30％引き。</p></div>
-      <div class="foot"><span class="badge">計算式</span><span class="price formula">¥1,400 × 提出Voトラック数</span></div>
-    </article>
-    <article class="card">
-      <div class="head"><h3>フルコーラス</h3><p>基本プラン。Instを除く提出ボーカルトラック数で計算。</p></div>
-      <div class="foot"><span class="badge">計算式</span><span class="price formula">¥2,000 × 提出Voトラック数</span></div>
-    </article>
-    <article class="card">
-      <div class="head"><h3>コラボ（複数人）</h3><p>人数ではなく、全員分を合計した提出ボーカルトラック数で計算。</p></div>
-      <div class="foot"><span class="badge">計算式</span><span class="price formula">¥2,000 × 提出Voトラック数</span></div>
-    </article>
-      <article class="card">
-      <div class="head"><h3>朗読・演技・ナレーション・ボイスドラマなど</h3><p>整音・空白調節・効果音、背景音配置。長さによって要相談枠。</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">¥6,000〜</span></div>
-    </article>
-  </div>
-</section>
+    <section class="commission-section" id="price-list" aria-labelledby="price-list-title">
+      <header class="section-heading"><p>01 / BASE MENU</p><div><h2 id="price-list-title">料金の目安</h2><p>Instを除く、提出ボーカルトラック数を基準に計算します。こちらで生成するハモりはトラック数に含みません。</p></div></header>
+      <div class="price-grid">
+        <article class="price-card price-card--featured"><div class="price-card__flag">SHORT</div><div class="price-card__number">01</div><div class="price-card__body"><p class="price-card__type">ONE CHORUS</p><h3>ワンコーラス</h3><p>基本プラン。フルコーラスの合計料金から30％引きです。</p><div class="price-card__bottom"><p class="price-card__price price-card__price--formula"><span>¥</span>1,400 <small>× 提出Voトラック数</small></p></div></div></article>
+        <article class="price-card"><div class="price-card__number">02</div><div class="price-card__body"><p class="price-card__type">FULL CHORUS</p><h3>フルコーラス</h3><p>基本プラン。Instを除く提出ボーカルトラック数で計算します。</p><div class="price-card__bottom"><p class="price-card__price price-card__price--formula"><span>¥</span>2,000 <small>× 提出Voトラック数</small></p></div></div></article>
+        <article class="price-card"><div class="price-card__number">03</div><div class="price-card__body"><p class="price-card__type">COLLABORATION</p><h3>コラボ・複数人</h3><p>人数ではなく、全員分を合計した提出ボーカルトラック数で計算します。</p><div class="price-card__bottom"><p class="price-card__price price-card__price--formula"><span>¥</span>2,000 <small>× 提出Voトラック数</small></p></div></div></article>
+        <article class="price-card"><div class="price-card__number">04</div><div class="price-card__body"><p class="price-card__type">VOICE WORK</p><h3>朗読・演技・ナレーション・ボイスドラマ</h3><p>整音、空白調節、効果音・背景音の配置。収録時間と作業量に応じてお見積りします。</p><div class="price-card__bottom"><p class="price-card__price"><span>¥</span>6,000<small>〜</small></p></div></div></article>
+      </div>
+    </section>
 
-<section class="section">
-  <h2>追加オプション</h2>
-  <div class="grid">
-    <article class="card">
-      <div class="head"><h3>ピッチ補正（強）</h3><p>修正量が多い場合・意図的に強く補正する曲調。</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">+¥2,000 / 対象トラック</span></div>
-    </article>
-    <article class="card">
-      <div class="head"><h3>ハモり・コーラス収録</h3><p>私がハモりとコーラスを「収録」致します。ガイドとも生成とも違います。</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">¥2,000〜 / 1パート</span></div>
-    </article>
-    <article class="card">
-      <div class="head"><h3>特急対応</h3><p>通常1〜2週間より短い納期。受付状況・素材量により対応できない場合があります。</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">総額+30％</span></div>
-    </article>
-    <article class="card">
-      <div class="head"><h3>複雑なカットアップ・特殊加工</h3><p>細かなカットアップや多層加工など、基本プランのエフェクト範囲を超える作業。</p></div>
-      <div class="foot"><span class="badge">要相談</span><span class="price">+¥2,000〜</span></div>
-    </article>
-  </div>
-</section>
+    <section class="commission-section" id="options" aria-labelledby="options-title">
+      <header class="section-heading"><p>02 / OPTIONS</p><div><h2 id="options-title">追加料金</h2><p>基本プランの範囲を超える補正・収録・加工をご希望の場合に加算します。</p></div></header>
+      <div class="option-list">
+        <article><div><span>PITCH CORRECTION</span><h3>ピッチ補正・強</h3><p>修正量が多い場合、または意図的に強く補正する曲調。</p></div><strong>+ ¥2,000 / 対象トラック</strong></article>
+        <article><div><span>RECORDED HARMONY</span><h3>ハモり・コーラス収録</h3><p>ハモりやコーラスをこちらで収録します。生成ハモりとは異なる追加作業です。</p></div><strong>¥2,000〜 / 1パート</strong></article>
+        <article><div><span>EXPRESS</span><h3>特急対応</h3><p>通常1〜2週間より短い納期。受付状況や素材量により承れないことがあります。</p></div><strong>総額 + 30%</strong></article>
+        <article><div><span>SPECIAL PROCESSING</span><h3>複雑なカットアップ・特殊加工</h3><p>細かなカットアップや多層加工など、基本プランを超える作業。</p></div><strong>+ ¥2,000〜</strong></article>
+      </div>
+    </section>
 
-<div class="links" style="margin-top:18px">
-  <a class="btnLink" href="yesican"><span class="dot" aria-hidden="true"></span>「できる」に戻る</a>
-  <a class="btnLink" href="illustlist"><span class="dot" aria-hidden="true"></span>絵の依頼ページへ</a>
-  <a class="btnLink" href="videolist"><span class="dot" aria-hidden="true"></span>動画ページへ</a>
-</div>
+    <section class="commission-section" id="data-guide" aria-labelledby="data-guide-title">
+      <header class="section-heading"><p>03 / DATA GUIDE</p><div><h2 id="data-guide-title">入稿データ</h2><p>作業を正確に始めるため、書き出し前に形式とデータの状態をご確認ください。</p></div></header>
+      <div class="terms-grid mix-data-grid">
+        <ul><li><strong>ボーカル形式：</strong>MONO / WAV / 48kHz</li><li><strong>ノイズ処理：</strong>除去せず、そのままお送りください。</li><li><strong>トラック数：</strong>Instを除く提出ボーカルを数えます。</li></ul>
+        <ul><li><strong>生成ハモり：</strong>基本プラン内。提出トラック数には含みません。</li><li><strong>ハモリガイド：</strong>ご用意しておりません。</li><li><strong>録音状態：</strong>状態によりリテイクをお願いする場合があります。</li></ul>
+      </div>
+    </section>
 
+    <section class="commission-section commission-guide" id="guide" aria-labelledby="guide-title">
+      <header class="section-heading"><p>04 / ORDER FLOW</p><div><h2 id="guide-title">ご依頼の流れ</h2><p>曲名、提出トラック数、ご希望の納期が分かると、確認がスムーズです。</p></div></header>
+      <ol class="flow-list">
+        <li><span>01</span><h3>ご相談</h3><p>曲名、コーラス区分、トラック数、納期をお知らせください。</p></li>
+        <li><span>02</span><h3>データ確認</h3><p>入稿形式と録音状態を確認し、必要に応じてリテイクをご相談します。</p></li>
+        <li><span>03</span><h3>MIX・ご確認</h3><p>補正、空間、エフェクト、マスタリングを行い、仕上がりをご確認いただきます。</p></li>
+        <li><span>04</span><h3>納品</h3><p>確認後、完成音源をお渡しします。</p></li>
+      </ol>
+    </section>
+
+    <section class="commission-section" id="terms" aria-labelledby="terms-title">
+      <header class="section-heading"><p>05 / TERMS</p><div><h2 id="terms-title">ご依頼前の確認</h2><p>料金計算と対応範囲について、特に大切な点をまとめています。</p></div></header>
+      <div class="terms-grid">
+        <ul><li>基本プランには、ピッチ・タイミング補正、ハモり生成、空間・エフェクト、マスタリングが含まれます。</li><li>フルコーラスは、Instを除く提出ボーカル1トラックにつき¥2,000です。</li><li>ワンコーラスはフルコーラス合計から30％引き、1トラックにつき¥1,400です。</li></ul>
+        <ul><li>納期は通常1〜2週間程度です。お急ぎの場合は事前にご相談ください。</li><li>こちらで生成するハモりは基本料金内です。</li><li>強い補正、収録ハモり、複雑な加工は追加オプションとしてお見積りします。</li></ul>
+      </div>
+    </section>
+
+    <section class="commission-cta" aria-labelledby="mix-contact-title">
+      <p>MIX REQUEST DESK / ENUEI CITY GENERAL HOSPITAL</p>
+      <h2 id="mix-contact-title">声と曲に合う仕上がりを、一緒に決めましょう。</h2>
+      <p>曲名、コーラス区分、提出予定のVoトラック数、希望納期を添えてご相談ください。</p>
+      <a class="commission-button commission-button--primary" href="contact">お問い合わせへ</a>
+    </section>
+    <nav class="service-links" aria-label="ほかの制作メニュー"><a href="yesican">「できる」に戻る</a><a href="illustlist">イラスト制作</a><a href="videolist">動画制作</a></nav>
   </main>
-
   <div id="footer"></div>
-
   <script src="common.js"></script>
   <script>
     async function loadPart(id, file){
@@ -189,6 +92,5 @@
     loadPart("header","partials/header.html");
     loadPart("footer","partials/footer.html");
   </script>
-
 </body>
 </html>

@@ -9,7 +9,7 @@
   --illust-line:#bbb4aa;
 }
 
-.illust-page{width:min(1180px,calc(100% - 40px));margin:32px auto 72px;color:var(--illust-ink);font-size:16px}
+.illust-page,.mix-page{width:min(1180px,calc(100% - 40px));margin:32px auto 72px;color:var(--illust-ink);font-size:16px}
 .commission-hero{position:relative;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.75fr);min-height:390px;border:1px solid var(--illust-blue);background:linear-gradient(90deg,transparent 0 68%,rgba(180,33,44,.035) 68% 100%),var(--illust-paper);box-shadow:0 12px 26px rgba(47,41,35,.12);overflow:hidden}
 .commission-hero::after{position:absolute;right:24px;bottom:-22px;color:rgba(180,33,44,.055);content:"N/A";font:900 clamp(7rem,16vw,12rem)/1 var(--mono);letter-spacing:-.12em;pointer-events:none}
 .commission-hero__copy{position:relative;z-index:1;display:flex;padding:54px clamp(26px,6vw,72px);flex-direction:column;justify-content:center}
@@ -47,6 +47,7 @@
 .price-card__bottom{display:flex;gap:14px;margin-top:auto;align-items:end;justify-content:space-between}
 .price-card__price{margin:0!important;color:var(--illust-pink-dark)!important;font:900 clamp(1.8rem,4vw,2.55rem)/1 var(--mono)!important;letter-spacing:-.05em}
 .price-card__price span{margin-right:4px;font-size:.55em}.price-card__price small{margin-left:4px;font:800 .45em/1 var(--display);letter-spacing:0}
+.price-card__price--formula{font-size:clamp(1.45rem,3vw,2rem)!important;line-height:1.25!important;letter-spacing:-.03em!important}.price-card__price--formula small{display:block;margin:8px 0 0;font-size:.5em;line-height:1.35}.mix-data-grid strong{color:var(--illust-blue)}
 .sample-button{min-height:42px;padding:8px 13px;border:1px solid var(--illust-blue);background:transparent;color:var(--illust-blue);cursor:pointer;font:800 .875rem/1.4 var(--display);white-space:nowrap}
 .sample-button:hover{background:var(--illust-blue);color:#fff}.sample-button:focus-visible,.commission-button:focus-visible,.commission-index a:focus-visible{outline:3px solid rgba(180,33,44,.3);outline-offset:3px}
 .option-list{border-top:1px solid var(--illust-blue)}
@@ -68,6 +69,7 @@
 }
 
 @media (max-width:680px){
+  .mix-page{width:min(100% - 24px,1180px);margin-top:18px}
   .illust-page{width:min(100% - 24px,1180px);margin-top:18px}.commission-hero{box-shadow:0 8px 20px rgba(47,41,35,.12)}.commission-hero__copy{padding:38px 22px}.commission-hero h1{font-size:clamp(2.5rem,15vw,4rem)}.commission-hero__lead{font-size:1rem}.commission-hero__actions{display:grid;grid-template-columns:1fr}.commission-summary{grid-template-columns:1fr}.commission-summary>div:nth-child(odd){border-right:0}.commission-summary>div:nth-child(2){border-top:1px solid var(--illust-line)}.commission-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.commission-index a{border-top:1px solid var(--illust-line);border-left:1px solid var(--illust-line)}.commission-index a:nth-child(odd){border-left:0}.commission-index a:nth-child(-n+2){border-top:0}.commission-index a:last-child{grid-column:1/-1;border-left:0}.commission-section{margin-top:48px}.section-heading{display:block;padding:20px 18px 18px}.section-heading>p{margin:0 0 8px}.section-heading h2{font-size:1.75rem}.price-grid{grid-template-columns:1fr}.price-card--wide{grid-column:auto}.price-card{min-height:0;grid-template-columns:48px minmax(0,1fr);box-shadow:0 8px 18px rgba(47,41,35,.1)}.price-card__body{padding:20px 17px}.price-card__bottom{align-items:flex-start;flex-direction:column}.price-card__price{font-size:2rem!important}.sample-button{width:100%}.option-list article{grid-template-columns:1fr;gap:14px;padding:19px 17px}.option-list strong{text-align:left}.animated-grid article>div{align-items:flex-start;flex-direction:column}.flow-list{grid-template-columns:1fr}.flow-list li{border-left:1px solid var(--illust-blue)}.flow-list li:nth-child(n+2){border-top:0}.flow-list li::after{display:none}.terms-grid{grid-template-columns:1fr}.terms-grid ul{padding:22px 22px 22px 41px}.terms-grid ul+ul{border-top:1px solid var(--illust-line);border-left:0}.commission-cta{padding:34px 22px}.commission-cta .commission-button{width:100%}
 }
 
