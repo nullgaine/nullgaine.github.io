@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="assets/style.css?v=readable-20260829">
   <style>
     :root{
-      --accent:#ff6c97;
-      --accent2:#ffd3e1;
-      --line: rgba(255,108,151,.22);
-      --panel: rgba(255,255,255,.92);
-      --ink: #2b2b2b;
-      --muted:#6a5a58;
-      --radius: 16px;
-      --shadow: 0 10px 28px rgba(20,10,10,.08);
+      --accent:#b4212c;
+      --accent2:rgba(180,33,44,.10);
+      --line:#bbb4aa;
+      --panel:rgba(251,250,247,.95);
+      --ink:#272522;
+      --muted:#716c65;
+      --radius:0;
+      --shadow:0 10px 22px rgba(47,41,35,.10);
       --max: 1040px;
     }
     body{ color:var(--ink); }
@@ -26,7 +26,7 @@
       padding: 12px 14px;
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 0;
       box-shadow: 0 2px 14px rgba(0,0,0,.04);
     }
     .grid{
@@ -40,7 +40,7 @@
 
     .card{
       background: var(--panel);
-      border: 1px solid var(--line);
+      border: 1px solid var(--line-dark);
       border-radius: var(--radius);
       overflow:hidden;
       box-shadow: var(--shadow);
@@ -48,7 +48,7 @@
     .card .head{
       padding: 14px 14px 12px;
       border-bottom: 1px solid var(--line);
-      background: linear-gradient(0deg, rgba(255,255,255,.96), rgba(255,211,225,.35));
+      background: linear-gradient(0deg, rgba(251,250,247,.96), rgba(180,33,44,.07));
     }
     .card h3{ margin:0; font-size: 16px; font-weight: 900; letter-spacing:.02em; }
     .card p{ margin: 8px 0 0; color: var(--muted); font-size: 14px; }
@@ -59,7 +59,7 @@
       justify-content: space-between;
       gap: 10px;
     }
-    .price{ font-weight: 1000; color: #a31e47; letter-spacing:.02em; }
+    .price{ font-weight: 1000; color: var(--accent); letter-spacing:.02em; }
     .price.formula{
       max-width: 68%;
       text-align: right;
@@ -71,12 +71,12 @@
       align-items:center;
       gap:8px;
       padding: 6px 10px;
-      border-radius: 999px;
+      border-radius: 0;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
+      background: var(--paper-soft);
       font-weight: 900;
       font-size: 13px;
-      color: #7a2941;
+      color: var(--accent-hover);
       white-space: nowrap;
     }
     .links{
@@ -90,18 +90,18 @@
       align-items:center;
       gap:10px;
       padding: 10px 12px;
-      border-radius: 999px;
+      border-radius: 0;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.92);
       text-decoration:none;
       font-weight: 900;
-      color: #5a2b3a;
+      color: var(--ink);
       box-shadow: 0 2px 12px rgba(0,0,0,.04);
     }
-    .btnLink:hover{ border-color: rgba(255,108,151,.55); }
+    .btnLink:hover{ border-color: var(--accent); background:var(--accent-soft); }
     .dot{ width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent2); }
     .section{ margin-top: 20px; }
-    .section h2{ margin: 0 0 8px; font-size: 18px; font-weight: 1000; }
+    .section h2{ margin: 0 0 10px; padding-left:10px; border-left:4px solid var(--accent); font-size: 20px; font-weight: 900; }
     .mini{ font-size: 13px; color: var(--muted); }
     .hr{ height:1px; background: var(--line); border:0; margin: 18px 0; }
   </style>
