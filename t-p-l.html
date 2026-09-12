@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="C-PROJECT研究主任L、Dr. Laurenceの暫定人員記録。">
+  <title>研究主任 L / C-PROJECT PERSONNEL FILE</title>
+  <link rel="stylesheet" href="assets/archivestyle.css">
+  <style>
+    .researcher-page .container {
+      max-width: 980px;
+    }
+
+    .researcher-page .section {
+      padding: 24px;
+    }
+
+    .personnel-roster {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .personnel-roster a,
+    .personnel-roster .roster-pending {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      min-height: 74px;
+      padding: 12px;
+      border: 1px solid var(--border-soft);
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(0, 0, 0, .12);
+    }
+
+    .personnel-roster a:hover,
+    .personnel-roster a:focus-visible {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .roster-initial {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font: 700 20px/1 monospace;
+    }
+
+    .roster-name {
+      display: block;
+      font-size: 15px;
+    }
+
+    .roster-meta {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 0 0 20px;
+      background: transparent;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .person-code {
+      margin: 0 0 6px;
+      color: var(--accent);
+      font: 700 12px/1.4 monospace;
+      letter-spacing: .1em;
+    }
+
+    .profile-header h2 {
+      margin: 0;
+      font-size: 26px;
+      color: var(--text);
+      letter-spacing: .02em;
+    }
+
+    .person-role {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .status-badge {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font: 700 11px/1.2 monospace;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr);
+      gap: 24px;
+      margin-top: 22px;
+    }
+
+    .profile-facts {
+      display: grid;
+      grid-template-columns: minmax(92px, .7fr) minmax(0, 1.3fr);
+      gap: 0;
+      margin: 0;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .profile-facts dt,
+    .profile-facts dd {
+      margin: 0;
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 14px;
+    }
+
+    .profile-facts dt {
+      color: var(--accent);
+      font-family: monospace;
+    }
+
+    .profile-facts dd {
+      color: var(--text);
+    }
+
+    .profile-block {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .profile-block h3 {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 15px;
+      letter-spacing: .05em;
+    }
+
+    .profile-block p,
+    .profile-block li {
+      font-size: 15px;
+    }
+
+    .profile-block ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    .ethics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .ethics-item {
+      min-height: 142px;
+      padding: 14px;
+      border: 1px solid var(--border-soft);
+      background: rgba(0, 0, 0, .12);
+    }
+
+    .ethics-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .ethics-item p {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .evidence {
+      margin: 24px 0 0;
+      padding: 14px 16px;
+      border-left: 3px solid var(--accent);
+      color: var(--text);
+      background: var(--accent-soft);
+      font-size: 15px;
+    }
+
+    .evidence cite {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-style: normal;
+    }
+
+    .pending-note {
+      border-style: dashed;
+    }
+
+    .profile-l-page #researcher-t {
+      display: none;
+    }
+
+    @media (max-width: 720px) {
+      .personnel-roster,
+      .profile-grid,
+      .ethics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-header {
+        display: block;
+      }
+
+      .status-badge {
+        display: inline-block;
+        margin-top: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .researcher-page .section {
+        padding: 18px;
+      }
+
+      .profile-header h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body class="researcher-page profile-l-page">
+  <header>
+    <h1>■ C-PROJECT / PERSONNEL L</h1>
+  </header>
+
+  <nav class="research-nav" aria-label="研究所内ナビゲーション">
+    <a class="research-home-link" href="t-iui">← 研究所ホームへ戻る</a>
+  </nav>
+
+  <main class="container">
+    <section class="section">
+      <div class="meta">
+        分類：C-PROJECT / PERSONNEL FILES<br>
+        状態：暫定照合 / 研究班内記録
+      </div>
+      <h2>研究主任・研究補助</h2>
+      <p>
+        研究記録に残る役職名とイニシャルをもとに、当該計画に関わった人員を照合する。<br>
+        本名、所属歴、年齢の一部は記録欠損のため、確認済みの記述と推定を分けて保存している。
+      </p>
+      <p class="log">人物像のうち「推定」と記した箇所は、Insidemail55その他の記録からの暫定的な読み取りである。</p>
+
+      <div class="personnel-roster" aria-label="研究者一覧">
+        <a href="t-p-l" aria-current="page">
+          <span class="roster-initial" aria-hidden="true">L</span>
+          <span><strong class="roster-name">Dr. Laurence</strong><small class="roster-meta">研究主任 / RETIRED・LOCATED</small></span>
+        </a>
+        <a href="t-p-t">
+          <span class="roster-initial" aria-hidden="true">T</span>
+          <span><strong class="roster-name">高嶋 瑞紘</strong><small class="roster-meta">研究補助 T / DECEASED・IDENTIFIED</small></span>
+        </a>
+      </div>
+    </section>
+
+    <article class="section researcher-profile" id="researcher-l">
+      <header class="profile-header">
+        <div>
+          <p class="person-code">PERSONNEL / L</p>
+          <h2>Dr. Laurence</h2>
+          <p class="person-role">研究主任 L / Research Director</p>
+        </div>
+        <span class="status-badge">RETIRED / ALIVE</span>
+      </header>
+
+      <div class="profile-grid">
+        <dl class="profile-facts">
+          <dt>国籍</dt>
+          <dd>イギリス</dd>
+          <dt>年齢</dt>
+          <dd>50代（PROJECT C当時） / 80代（現在）</dd>
+          <dt>専門</dt>
+          <dd>発生生物学 / 細胞再構成 / 概念核仮説</dd>
+          <dt>担当</dt>
+          <dd>PROJECT C 立案・研究総括</dd>
+          <dt>現況</dt>
+          <dd>公的研究から引退 / 所属なし</dd>
+          <dt>居住</dt>
+          <dd>日本・神奈川県沿岸部</dd>
+          <dt>署名</dt>
+          <dd>研究主任 L</dd>
+          <dt>本名</dt>
+          <dd>Laurence（姓未復元）</dd>
+        </dl>
+
+        <div>
+          <div class="profile-block" style="margin-top:0;padding-top:0;border-top:0">
+            <h3>学歴・研究歴（暫定照合）</h3>
+            <ul>
+              <li>University of Cambridge / Natural Sciences Tripos（生理学・発生学）</li>
+              <li>University of Oxford / DPhil in Developmental Biology</li>
+              <li>英国の生殖医療研究班にて、体外受精黎明期の細胞発生研究に従事</li>
+              <li>後年、遺伝情報以外の情報構造を扱う私設研究計画へ移籍</li>
+            </ul>
+            <p class="log">※記録欠損および英国研究機関の履歴断片をもとにした暫定記載。</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="profile-block">
+        <h3>現在の照合状況</h3>
+        <p>
+          PROJECT C終了後も英国へ帰国せず、日本国内に残留。公的研究からは完全に退き、現在は研究機関・大学のいずれにも所属していない。<br>
+          年金の継続受給記録により生存を確認。神奈川県沿岸部の古い戸建てに居住している。
+        </p>
+        <p>
+          特別な警備設備および監視設備は確認されていない。眼科・内科・整形外科への通院、地域図書館の利用、園芸店の会員登録、スーパーマーケットのポイントカードなど、生活記録はいずれも一般的な高齢者の範囲に収まる。
+        </p>
+        <p class="log">現在の研究活動：確認されず / 接触記録：なし / 所在：確認済み</p>
+      </section>
+
+      <section class="profile-block">
+        <h3>メールから読める人物像</h3>
+        <p>
+          返信は深夜帯でも落ち着いており、相手を責める言葉をほとんど使わない。まず相手の処置を評価し、次に説明不足を認め、それから自分の理論へ話を移す。<br>
+          丁寧さと柔らかさはあるが、相手の不安を共有するためのものではなく、研究を続けるための秩序を保つためのものに見える。
+        </p>
+        <p>
+          「君が心配する問題ではない」と線を引く一方で、外峯夫妻には説明済みだと答え、最低限の手続きは守ろうとしている。責任を無視する人ではない。ただし、責任を「説明したか」「処置を終えたか」という手続きに置き換える癖がある。
+        </p>
+      </section>
+
+      <section class="profile-block">
+        <h3>倫理観・価値観（メールからの推定）</h3>
+        <div class="ethics-grid">
+          <div class="ethics-item">
+            <strong>概念は個体より長く残る</strong>
+            <p>Nullが消滅しても「空白」は消えない、と考える。個体の損失を、概念全体の損失とは見なさない。</p>
+          </div>
+          <div class="ethics-item">
+            <strong>実体化は観測の責務</strong>
+            <p>想像を見てとれる形にすることを、危険な越境ではなく研究者の仕事として受け止めている。</p>
+          </div>
+          <div class="ethics-item">
+            <strong>待つことも介入である</strong>
+            <p>すぐに結論を出さず、少なくとも20年は様子を見る。観察者であり続けることで、判断の責任を先送りする面もある。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-block">
+        <h3>対人姿勢</h3>
+        <p>
+          部下には「君」と呼びかける、古い英国紳士めいた態度。謝罪はできるが、謝罪によって計画を止めることはない。研究補助Tの疑問を無知として切り捨てず、説明不足だった新人として扱うところに、教育者としての自負が残っている。
+        </p>
+        <p class="log">ただし、相手を対等な意思決定者として扱っているかは別問題である。</p>
+      </section>
+
+      <blockquote class="evidence">
+        「想像を現実に変える、見てとれるカタチに仕上げることが肝心だ。」
+        <cite>19██年10月23日 / 研究補助T宛返信</cite>
+      </blockquote>
+    </article>
+
+    <article class="section researcher-profile" id="researcher-t">
+      <header class="profile-header">
+        <div>
+          <p class="person-code">PERSONNEL / T</p>
+          <h2>高嶋 瑞紘</h2>
+          <p class="person-role">たかしま みずひろ / 研究補助 T / Research Assistant</p>
+        </div>
+        <span class="status-badge">DECEASED / NATURAL</span>
+      </header>
+
+      <div class="profile-grid">
+        <dl class="profile-facts">
+          <dt>国籍</dt>
+          <dd>日本</dd>
+          <dt>年齢</dt>
+          <dd>40代（PROJECT C当時） / 存命なら70代（2026年）</dd>
+          <dt>専門</dt>
+          <dd>発生生物学 / 胚培養 / 実験工程管理</dd>
+          <dt>担当</dt>
+          <dd>型番005引き渡し / 001〜004廃棄処置</dd>
+          <dt>所属</dt>
+          <dd>研究主任L直属 / PROJECT C実験班</dd>
+          <dt>現況</dt>
+          <dd>死亡（自然死）</dd>
+          <dt>署名</dt>
+          <dd>研究補助 T</dd>
+          <dt>本名</dt>
+          <dd>高嶋 瑞紘</dd>
+        </dl>
+
+        <div>
+          <div class="profile-block" style="margin-top:0;padding-top:0;border-top:0">
+            <h3>学歴・研究歴（暫定照合）</h3>
+            <ul>
+              <li>東北大学 理学部生物学科</li>
+              <li>東京医科歯科大学大学院 医学研究科（発生・生殖生物学）</li>
+              <li>生殖医療系研究施設にて、胚培養および試料管理に従事</li>
+              <li>19██年、PROJECT Cへ途中参加。研究主任L直属の研究補助となる</li>
+            </ul>
+            <p class="log">※学歴・所属歴は研究班内記録および署名照合をもとにした暫定記載。</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="profile-block">
+        <h3>死亡記録</h3>
+        <p>
+          2026年現在、死亡を確認。長期療養、自死、事故、PROJECT Cに由来する異常の記録はいずれもない。死因は老衰による自然死とされ、晩年まで日常生活を維持したのち、天寿を全うした。
+        </p>
+        <p>
+          生存していた場合の年齢は70代。退職後の研究活動および計画関係者との継続的接触は確認されていない。
+        </p>
+        <p class="log">死亡年月日：記録欠損 / 事件性：なし / 計画との因果関係：なし</p>
+      </section>
+
+      <section class="profile-block">
+        <h3>メールから読める人物像</h3>
+        <p>
+          型番005の引き渡しと001〜004の廃棄処置を完了したうえで、実験目的と危険性を研究主任Lへ問い直している。疑問を理由に職務を放棄する人物ではなく、与えられた処置を正確に遂行してから、記録に残る形で異議を提出する実務家だった。
+        </p>
+        <p>
+          懸念は「空白」という巨大な概念が流失した場合の影響だけでなく、遺伝子提供者である外峯夫妻へ事実が伝えられているかにも及ぶ。研究の成否より先に、危険を誰が引き受け、当事者が何を知らされているかを確かめようとする姿勢が見える。
+        </p>
+      </section>
+
+      <section class="profile-block">
+        <h3>倫理観・価値観（メールからの推定）</h3>
+        <div class="ethics-grid">
+          <div class="ethics-item">
+            <strong>説明責任も実験工程である</strong>
+            <p>提供者への告知を研究外の事務とは見なさず、計画の正当性を支える条件として確認している。</p>
+          </div>
+          <div class="ethics-item">
+            <strong>疑問があっても職務は遂行する</strong>
+            <p>処置を終えてから異議を申し立てる。責任感の強さであると同時に、計画への加担を止められない弱点でもある。</p>
+          </div>
+          <div class="ethics-item">
+            <strong>個人と人類の双方を見る</strong>
+            <p>一組の提供者への配慮と、概念流失が人類へ及ぼす規模の危険を、同じ問いの中で扱っている。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-block">
+        <h3>研究主任Lとの関係</h3>
+        <p>
+          高嶋はLの直属であり、困難な引き渡しと廃棄処置を任される程度には実務能力を信頼されていた。Lも返信でその迅速な処置を評価している。一方、計画の根幹に関する判断からは「君が心配する問題ではない」と明確に遠ざけられていた。
+        </p>
+        <p>
+          高嶋は上下関係そのものを崩そうとはせず、内部の正式な経路から疑問を提出した。従順だったのではなく、組織の中に留まったまま倫理を働かせようとした人物と考えられる。
+        </p>
+        <p class="log">関係区分：直属 / 信頼：実務上は高い / 意思決定権：限定的</p>
+      </section>
+
+      <blockquote class="evidence">
+        「なぜ我々は概念に『器』を与える試みをしているのでしょう。」
+        <cite>19██年10月22日 / 研究主任L宛</cite>
+      </blockquote>
+    </article>
+  </main>
+</body>
+</html>
