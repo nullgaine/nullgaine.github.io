@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <meta name="description" content="C-PROJECT研究補助T、高嶋瑞紘の暫定人員記録。">
-  <title>研究補助 T / C-PROJECT PERSONNEL FILE</title>
+  <meta name="description" content="C-PROJECT遺伝子提供者、外峯明・外峯環夫妻の人員記録。">
+  <title>外峯夫妻 / C-PROJECT PERSONNEL FILE</title>
   <link rel="stylesheet" href="assets/archivestyle.css">
   <style>
     .researcher-page .container {
@@ -208,14 +208,47 @@
       border-style: dashed;
     }
 
-    .profile-t-page #researcher-l {
+    .profile-l-page #researcher-t {
       display: none;
+    }
+
+    .profile-s-page #researcher-l,
+    .profile-s-page #researcher-t {
+      display: none;
+    }
+
+    .couple-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .couple-card {
+      padding: 18px;
+      border: 1px solid var(--border-soft);
+      background: rgba(0, 0, 0, .12);
+    }
+
+    .couple-card h3 {
+      margin: 0 0 4px;
+      color: var(--text);
+      font-size: 21px;
+    }
+
+    .couple-card .person-role {
+      margin-bottom: 15px;
+    }
+
+    .couple-card .profile-facts {
+      grid-template-columns: minmax(78px, .6fr) minmax(0, 1.4fr);
     }
 
     @media (max-width: 720px) {
       .personnel-roster,
       .profile-grid,
-      .ethics-grid {
+      .ethics-grid,
+      .couple-grid {
         grid-template-columns: 1fr;
       }
 
@@ -241,9 +274,9 @@
   </style>
 </head>
 
-<body class="researcher-page profile-t-page">
+<body class="researcher-page profile-s-page">
   <header>
-    <h1>■ C-PROJECT / PERSONNEL T</h1>
+    <h1>■ C-PROJECT / PERSONNEL S</h1>
   </header>
 
   <nav class="research-nav" aria-label="研究所内ナビゲーション">
@@ -268,11 +301,11 @@
           <span class="roster-initial" aria-hidden="true">L</span>
           <span><strong class="roster-name">Dr. Laurence</strong><small class="roster-meta">研究主任 / RETIRED・LOCATED</small></span>
         </a>
-        <a href="t-p-t" aria-current="page">
+        <a href="t-p-t">
           <span class="roster-initial" aria-hidden="true">T</span>
           <span><strong class="roster-name">高嶋 瑞紘</strong><small class="roster-meta">研究補助 T / DECEASED・IDENTIFIED</small></span>
         </a>
-        <a href="t-p-s">
+        <a href="t-p-s" aria-current="page">
           <span class="roster-initial" aria-hidden="true">S</span>
           <span><strong class="roster-name">外峯夫妻</strong><small class="roster-meta">遺伝子提供者 / ALIVE・IDENTIFIED</small></span>
         </a>
@@ -475,6 +508,110 @@
       <blockquote class="evidence">
         「なぜ我々は概念に『器』を与える試みをしているのでしょう。」
         <cite>19██年10月22日 / 研究主任L宛</cite>
+      </blockquote>
+    </article>
+
+    <article class="section researcher-profile" id="researcher-s">
+      <header class="profile-header">
+        <div>
+          <p class="person-code">PERSONNEL / S</p>
+          <h2>外峯 明・外峯 環</h2>
+          <p class="person-role">そとみね あきら・そとみね たまき / 遺伝子提供者・対象個体005保護者</p>
+        </div>
+        <span class="status-badge">ALIVE / ACTIVE</span>
+      </header>
+
+      <div class="couple-grid">
+        <section class="couple-card" aria-labelledby="akira-name">
+          <h3 id="akira-name">外峯 明</h3>
+          <p class="person-role">そとみね あきら / 父</p>
+          <dl class="profile-facts">
+            <dt>生年月日</dt>
+            <dd>1961年8月14日</dd>
+            <dt>年齢</dt>
+            <dd>31〜32歳（1993年） / 65歳（2026年）</dd>
+            <dt>職業</dt>
+            <dd>自営業</dd>
+            <dt>学歴</dt>
+            <dd>高等学校卒業</dd>
+            <dt>続柄</dt>
+            <dd>対象個体005・外峯零の父</dd>
+            <dt>現況</dt>
+            <dd>存命 / 現役</dd>
+          </dl>
+        </section>
+
+        <section class="couple-card" aria-labelledby="tamaki-name">
+          <h3 id="tamaki-name">外峯 環</h3>
+          <p class="person-role">そとみね たまき / 母</p>
+          <dl class="profile-facts">
+            <dt>生年月日</dt>
+            <dd>1964年6月9日</dd>
+            <dt>年齢</dt>
+            <dd>28〜29歳（1993年） / 62歳（2026年）</dd>
+            <dt>職業</dt>
+            <dd>自営業</dd>
+            <dt>学歴</dt>
+            <dd>高等学校卒業 / 大学中途退学</dd>
+            <dt>続柄</dt>
+            <dd>対象個体005・外峯零の母</dd>
+            <dt>現況</dt>
+            <dd>存命 / 現役</dd>
+          </dl>
+        </section>
+      </div>
+
+      <section class="profile-block">
+        <h3>1993年来訪記録</h3>
+        <p>
+          夫妻は子を迎えることを希望し、生殖補助計画について相談するため研究班を訪れた。研究主任Lは、夫妻の希望とPROJECT C側の実験目的を結びつける形で参加を提示した。
+        </p>
+        <p class="log">来訪目的：挙児希望に伴う生殖補助計画の相談 / 接触担当：研究主任L</p>
+      </section>
+
+      <section class="profile-block">
+        <h3>事前説明と同意</h3>
+        <p>
+          Lは、研究班が胎児へ「概念格」を付与する実験を計画していること、概念格が個体の形成へ及ぼし得る作用、および先行事例について一定範囲の説明を行った。夫妻は、通常の生殖補助ではなく実験を伴う計画であることを理解したうえで、遺伝情報の提供と計画への参加を了承した。
+        </p>
+        <p>
+          説明された先行事例は研究上「失敗」に分類されていたが、個体は出生していた。夫妻にとって、子が生まれた事実は失敗ではなく成功だった。このため、研究班と夫妻の間では「成功」の定義が当初から一致していなかったと考えられる。
+        </p>
+        <p class="log">概念格：説明あり / 実験目的：説明あり / 先行出生例：説明あり / 参加同意：両名とも確認</p>
+      </section>
+
+      <section class="profile-block">
+        <h3>倫理観・価値観（記録からの推定）</h3>
+        <div class="ethics-grid">
+          <div class="ethics-item">
+            <strong>出生は研究評価に優先する</strong>
+            <p>研究班が失敗と判定した事例でも、子が生まれたこと自体を成功として受け止めた。</p>
+          </div>
+          <div class="ethics-item">
+            <strong>危険を理解して選択する</strong>
+            <p>概念格の説明を受け、実験性を承知したうえで参加した。情報を伏せられた受動的な提供者ではない。</p>
+          </div>
+          <div class="ethics-item">
+            <strong>個体ではなく娘として見る</strong>
+            <p>PROJECT Cの分類や出生経緯にかかわらず、外峯零を一貫して自分たちの娘として認識している。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-block">
+        <h3>現在の照合状況</h3>
+        <p>
+          2026年現在、夫妻はいずれも存命。自営業を継続しており、現役で生活している。PROJECT C終了後の研究活動への参加は確認されていない。
+        </p>
+        <p>
+          夫妻にとって外峯零は、概念格を付与された対象個体である以前に、自分たちが望み、迎え、育てた娘である。この認識は現在まで変化していない。
+        </p>
+        <p class="log">生存：両名確認 / 就業：継続 / 対象個体005との関係：実親・娘</p>
+      </section>
+
+      <blockquote class="evidence">
+        研究班にとっての「失敗」は、夫妻にとっての「出生」だった。
+        <cite>1993年来訪記録および事前説明内容からの照合</cite>
       </blockquote>
     </article>
   </main>
