@@ -289,6 +289,14 @@
 .character-relation span { color: var(--hospital-red); font: 700 14px/1.5 var(--mono); letter-spacing: 0.1em; }
 .character-file-station .character-relation span { color: var(--station-navy); }
 .character-relation p { margin: 0; font-size: 16px; line-height: 1.8; }
+.character-relation a {
+  display: block;
+  margin-top: 7px;
+  color: inherit;
+  font-family: var(--mono);
+  font-size: 13px;
+  text-underline-offset: 3px;
+}
 
 .visitor-notice {
   display: grid;
