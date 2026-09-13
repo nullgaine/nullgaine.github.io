@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="外峯零の週間配信予定表。定時配信は15時30分からです。">
+  <title>配信予定表 | 外峯零</title>
+  <link rel="stylesheet" href="assets/style.css?v=readable-20260829">
+  <link rel="stylesheet" href="assets/schedule.css?v=schedule-20260913">
+</head>
+<body class="schedule-page">
+  <div id="header"></div>
+
+  <main class="schedule-shell">
+    <section class="schedule-masthead" aria-labelledby="schedule-title">
+      <div class="schedule-heading">
+        <p class="schedule-kicker">GAINE NULL / WEEKLY SERVICE</p>
+        <h1 id="schedule-title">外峯零<br>配信予定表</h1>
+        <p class="schedule-reading">WEEKLY STREAM SCHEDULE / 目安</p>
+      </div>
+      <div class="schedule-clock">
+        <span>REGULAR SERVICE</span>
+        <strong>15:30</strong>
+        <small>YOUR STANDARD TIME</small>
+      </div>
+    </section>
+
+    <section class="schedule-board" aria-labelledby="weekly-title">
+      <header class="schedule-board-heading">
+        <div>
+          <p>THIS WEEK / 運行予定</p>
+          <h2 id="weekly-title">今週の配信</h2>
+        </div>
+        <p id="schedule-period" class="schedule-period" aria-live="polite">----</p>
+      </header>
+
+      <div class="schedule-route-wrap">
+        <div class="schedule-route" id="schedule-route">
+          <div class="schedule-rail" aria-hidden="true"></div>
+          <div class="schedule-train" aria-hidden="true">
+            <span></span><span></span>
+          </div>
+
+          <article class="schedule-stop is-stream" data-weekday="0">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>SUNDAY / 日曜日</span>
+              <h3>定時配信</h3>
+              <p>15:30 START</p>
+            </div>
+          </article>
+
+          <article class="schedule-stop is-stream" data-weekday="1">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>MONDAY / 月曜日</span>
+              <h3>定時配信</h3>
+              <p>15:30 START</p>
+            </div>
+          </article>
+
+          <article class="schedule-stop is-rest" data-weekday="2">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>TUESDAY / 火曜日</span>
+              <h3>定休日</h3>
+              <p>NO SERVICE</p>
+            </div>
+          </article>
+
+          <article class="schedule-stop is-rest" data-weekday="3">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>WEDNESDAY / 水曜日</span>
+              <h3>定休日</h3>
+              <p>NO SERVICE</p>
+            </div>
+          </article>
+
+          <article class="schedule-stop is-rest" data-weekday="4">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>THURSDAY / 木曜日</span>
+              <h3>定休日</h3>
+              <p>NO SERVICE</p>
+            </div>
+          </article>
+
+          <article class="schedule-stop is-stream" data-weekday="5">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>FRIDAY / 金曜日</span>
+              <h3>定時配信</h3>
+              <p>15:30 START</p>
+            </div>
+          </article>
+
+          <article class="schedule-stop is-stream" data-weekday="6">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>SATURDAY / 土曜日</span>
+              <h3>定時配信</h3>
+              <p>15:30 START</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <aside class="schedule-notice">
+      <span>OPERATION NOTICE</span>
+      <p>こちらは通常の運行予定です。体調や関係者の日程により、時刻・内容を変更または運休する場合があります。</p>
+    </aside>
+
+    <nav class="schedule-links" aria-label="関連ページ">
+      <a href="https://www.youtube.com/@Gaine_0" target="_blank" rel="noopener noreferrer"><span>WATCH</span>YouTube ↗</a>
+      <a href="news"><span>INFORMATION</span>お知らせへ戻る</a>
+    </nav>
+  </main>
+
+  <div id="footer"></div>
+  <script src="common.js"></script>
+  <script src="scripts/schedule.js?v=schedule-20260913"></script>
+  <script>
+  async function loadPart(id, file){
+    const res = await fetch(file);
+    document.getElementById(id).innerHTML = await res.text();
+  }
+  loadPart("header", "partials/header.html?v=96ef6d25");
+  loadPart("footer", "partials/footer.html");
+  </script>
+</body>
+</html>
