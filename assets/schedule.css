@@ -169,9 +169,16 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 4px;
   padding: 8px 6px 16px;
+  opacity: 0;
   transform: translate(-50%, -50%);
-  animation: schedule-train-route 22s linear infinite;
+  transition:
+    top 1.35s cubic-bezier(0.22, 0.78, 0.28, 1),
+    opacity 0.2s ease;
+  will-change: top;
 }
+
+.schedule-train.is-positioned { opacity: 1; }
+.schedule-train.is-setting-position { transition: none; }
 
 .schedule-train::before,
 .schedule-train::after {
@@ -344,16 +351,6 @@
 .schedule-links a:hover,
 .schedule-links a:focus-visible { border-color: var(--schedule-red); }
 
-@keyframes schedule-train-route {
-  0%, 5% { top: 66px; }
-  14%, 19% { top: calc(16.67% + 44px); }
-  28%, 33% { top: calc(33.33% + 22px); }
-  42%, 47% { top: 50%; }
-  56%, 61% { top: calc(66.67% - 22px); }
-  70%, 75% { top: calc(83.33% - 44px); }
-  89%, 100% { top: calc(100% - 66px); }
-}
-
 @media (max-width: 700px) {
   .schedule-shell { width: calc(100% - 24px); margin-top: 18px; }
   .schedule-masthead { min-height: 330px; grid-template-columns: 1fr; }
@@ -376,5 +373,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .schedule-train { animation: none; }
+  .schedule-train { transition: none; }
 }
