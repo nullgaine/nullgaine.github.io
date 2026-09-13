@@ -200,6 +200,9 @@
   grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);
   gap:clamp(36px,7vw,90px);
 }
+.profile-about .profile-section-heading h2{
+  font-size:clamp(28px,3.5vw,42px);
+}
 .profile-story{
   padding-left:clamp(24px,4vw,52px);
   border-left:4px solid var(--profile-red);
@@ -391,6 +394,7 @@
   .profile-model-number strong{font-size:27px}
   .profile-section{padding:26px 20px}
   .profile-section-heading h2{font-size:31px}
+  .profile-about .profile-section-heading h2{font-size:25px}
   .profile-story{padding-left:18px;font-size:17px;line-height:1.9}
   .profile-section-heading-inline{display:block}
   .profile-section-heading-inline h2{margin-top:8px;text-align:left}
