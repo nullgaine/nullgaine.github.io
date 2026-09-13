@@ -6,7 +6,7 @@
   <meta name="description" content="外峯零の週間配信予定表。定時配信は日本時間15時30分からです。">
   <title>配信予定表 | 外峯零</title>
   <link rel="stylesheet" href="assets/style.css?v=readable-20260829">
-  <link rel="stylesheet" href="assets/schedule.css?v=schedule-20260913-dailytrain">
+  <link rel="stylesheet" href="assets/schedule.css?v=schedule-20260914-weekly">
 </head>
 <body class="schedule-page">
   <div id="header"></div>
@@ -35,33 +35,23 @@
       </header>
 
       <div class="schedule-route-wrap">
-        <div class="schedule-route" id="schedule-route">
+        <div class="schedule-route" id="schedule-route" data-week-start="2026-09-14">
           <div class="schedule-rail" aria-hidden="true"></div>
           <div class="schedule-train" aria-hidden="true">
             <span></span><span></span>
           </div>
 
-          <article class="schedule-stop is-stream" data-weekday="0">
-            <div class="schedule-station" aria-hidden="true"></div>
-            <time datetime=""><b>---</b><strong>--</strong></time>
-            <div class="schedule-service">
-              <span>SUNDAY / 日曜日</span>
-              <h3>定時配信</h3>
-              <p>15:30 START</p>
-            </div>
-          </article>
-
-          <article class="schedule-stop is-stream" data-weekday="1">
+          <article class="schedule-stop is-stream" data-day-offset="0">
             <div class="schedule-station" aria-hidden="true"></div>
             <time datetime=""><b>---</b><strong>--</strong></time>
             <div class="schedule-service">
               <span>MONDAY / 月曜日</span>
-              <h3>定時配信</h3>
+              <h3>縦枠雑談</h3>
               <p>15:30 START</p>
             </div>
           </article>
 
-          <article class="schedule-stop is-rest" data-weekday="2">
+          <article class="schedule-stop is-rest" data-day-offset="1">
             <div class="schedule-station" aria-hidden="true"></div>
             <time datetime=""><b>---</b><strong>--</strong></time>
             <div class="schedule-service">
@@ -71,7 +61,7 @@
             </div>
           </article>
 
-          <article class="schedule-stop is-rest" data-weekday="3">
+          <article class="schedule-stop is-rest" data-day-offset="2">
             <div class="schedule-station" aria-hidden="true"></div>
             <time datetime=""><b>---</b><strong>--</strong></time>
             <div class="schedule-service">
@@ -81,7 +71,7 @@
             </div>
           </article>
 
-          <article class="schedule-stop is-rest" data-weekday="4">
+          <article class="schedule-stop is-rest" data-day-offset="3">
             <div class="schedule-station" aria-hidden="true"></div>
             <time datetime=""><b>---</b><strong>--</strong></time>
             <div class="schedule-service">
@@ -91,22 +81,32 @@
             </div>
           </article>
 
-          <article class="schedule-stop is-stream" data-weekday="5">
+          <article class="schedule-stop is-stream" data-day-offset="4">
             <div class="schedule-station" aria-hidden="true"></div>
             <time datetime=""><b>---</b><strong>--</strong></time>
             <div class="schedule-service">
               <span>FRIDAY / 金曜日</span>
-              <h3>定時配信</h3>
+              <h3>存在/しないあなた、と私 #2</h3>
               <p>15:30 START</p>
             </div>
           </article>
 
-          <article class="schedule-stop is-stream" data-weekday="6">
+          <article class="schedule-stop is-stream" data-day-offset="5">
             <div class="schedule-station" aria-hidden="true"></div>
             <time datetime=""><b>---</b><strong>--</strong></time>
             <div class="schedule-service">
               <span>SATURDAY / 土曜日</span>
-              <h3>定時配信</h3>
+              <h3>縦枠雑談</h3>
+              <p>15:30 START</p>
+            </div>
+          </article>
+
+          <article class="schedule-stop is-stream" data-day-offset="6">
+            <div class="schedule-station" aria-hidden="true"></div>
+            <time datetime=""><b>---</b><strong>--</strong></time>
+            <div class="schedule-service">
+              <span>SUNDAY / 日曜日</span>
+              <h3>未定</h3>
               <p>15:30 START</p>
             </div>
           </article>
@@ -127,7 +127,7 @@
 
   <div id="footer"></div>
   <script src="common.js"></script>
-  <script src="scripts/schedule.js?v=schedule-20260913-dailytrain"></script>
+  <script src="scripts/schedule.js?v=schedule-20260914-weekly"></script>
   <script>
   async function loadPart(id, file){
     const res = await fetch(file);

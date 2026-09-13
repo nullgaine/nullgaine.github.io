@@ -2,8 +2,7 @@
   const SOURCE_HOUR = 15;
   const SOURCE_MINUTE = 30;
   const SOURCE_UTC_OFFSET = 9;
-  const SOURCE_TIME_ZONE = "Asia/Tokyo";
-  const stops = Array.from(document.querySelectorAll(".schedule-stop[data-weekday]"));
+  const stops = Array.from(document.querySelectorAll(".schedule-stop[data-day-offset]"));
   const period = document.getElementById("schedule-period");
   const clockTime = document.querySelector(".schedule-clock strong");
   const clockZone = document.querySelector(".schedule-clock small");
@@ -17,13 +16,6 @@
       .filter(({ type }) => type !== "literal")
       .map(({ type, value }) => [type, value])
   );
-
-  const tokyoDateFormatter = new Intl.DateTimeFormat("en-US", {
-    timeZone: SOURCE_TIME_ZONE,
-    year: "numeric",
-    month: "numeric",
-    day: "numeric"
-  });
 
   const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   const localDateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -49,15 +41,10 @@
     const parts = localDateParts(date);
     return `${parts.year}.${String(parts.month).padStart(2, "0")}.${String(parts.day).padStart(2, "0")}`;
   };
-  const sourceWeekFor = (date) => {
-    const tokyoDate = partsOf(tokyoDateFormatter, date);
-    const tokyoCalendarDate = new Date(Date.UTC(
-      Number(tokyoDate.year),
-      Number(tokyoDate.month) - 1,
-      Number(tokyoDate.day)
-    ));
-    tokyoCalendarDate.setUTCDate(tokyoCalendarDate.getUTCDate() - tokyoCalendarDate.getUTCDay());
-    return tokyoCalendarDate;
+  const parseWeekStart = (value) => {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || "");
+    if (!match) return null;
+    return new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
   };
   const sourceSlot = (weekStart, weekday) => new Date(Date.UTC(
     weekStart.getUTCFullYear(),
@@ -92,14 +79,9 @@
 
   const renderSchedule = (now, animateTrain = false) => {
     const todayKey = localDateKey(now);
-    let sourceWeekStart = sourceWeekFor(now);
-    let slots = stops.map((stop) => sourceSlot(sourceWeekStart, Number(stop.dataset.weekday)));
-
-    const firstLocalDate = localDateKey(slots[0]);
-    const lastLocalDate = localDateKey(slots[slots.length - 1]);
-    if (todayKey < firstLocalDate) sourceWeekStart.setUTCDate(sourceWeekStart.getUTCDate() - 7);
-    if (todayKey > lastLocalDate) sourceWeekStart.setUTCDate(sourceWeekStart.getUTCDate() + 7);
-    slots = stops.map((stop) => sourceSlot(sourceWeekStart, Number(stop.dataset.weekday)));
+    const sourceWeekStart = parseWeekStart(route?.dataset.weekStart);
+    if (!sourceWeekStart) return;
+    const slots = stops.map((stop) => sourceSlot(sourceWeekStart, Number(stop.dataset.dayOffset)));
 
     stops.forEach((stop, index) => {
       const slot = slots[index];
