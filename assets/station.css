@@ -334,13 +334,43 @@ a { color: inherit; }
 
 .arrival-panel,
 .timetable-panel,
-.safety-panel {
+.safety-panel,
+.uniform-panel {
   border: 1px solid var(--line);
   background: rgba(255, 253, 248, 0.94);
   box-shadow: 0 12px 28px rgba(0, 49, 83, 0.09);
 }
 
 .arrival-panel { border-top: 8px solid var(--toki); }
+
+.uniform-panel { margin-top: 24px; scroll-margin-top: 24px; }
+.uniform-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+  padding: 0 24px 24px;
+  align-items: center;
+}
+.uniform-sample { margin: 0; }
+.uniform-sample img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+.uniform-sample figcaption {
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+.uniform-label { color: var(--muted); font-size: 12px; letter-spacing: 0.12em; }
+.uniform-description h3 { margin: 0; color: var(--prussian); font-size: 26px; }
+.uniform-description a { text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  .uniform-layout { grid-template-columns: minmax(0, 1fr); padding: 0 18px 24px; }
+  .uniform-sample { width: min(100%, 420px); margin-inline: auto; }
+}
 
 .arrival-heading,
 .section-heading {
