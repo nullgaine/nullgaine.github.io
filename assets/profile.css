@@ -411,3 +411,6 @@
   .profile-links{grid-template-columns:1fr}
   .profile-links a{min-height:92px}
 }
+
+/* Self-introduction video heading */
+#intro-video-title { font-size: clamp(24px, 3vw, 34px); }
