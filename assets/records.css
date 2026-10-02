@@ -983,3 +983,8 @@ body.image-lightbox-open {
     transition: none;
   }
 }
+
+/* Distribution images explicitly permit native save menus. */
+[data-image-protection] img[data-image-download] {
+  -webkit-touch-callout: default;
+}

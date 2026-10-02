@@ -17,14 +17,16 @@
   }
 
   protectedArea.addEventListener("contextmenu", (event) => {
-    if (!event.target.closest("img")) return;
+    const image = event.target.closest("img");
+    if (!image || image.hasAttribute("data-image-download")) return;
 
     event.preventDefault();
     showProtectionAlert();
   });
 
   protectedArea.addEventListener("dragstart", (event) => {
-    if (!event.target.closest("img")) return;
+    const image = event.target.closest("img");
+    if (!image || image.hasAttribute("data-image-download")) return;
 
     event.preventDefault();
     showProtectionAlert();

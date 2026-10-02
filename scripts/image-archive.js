@@ -11,6 +11,7 @@
 
   function openLightbox(button) {
     returnFocus = button;
+    image.toggleAttribute("data-image-download", button.hasAttribute("data-image-download"));
     image.src = button.dataset.imageSrc || "";
     image.alt = button.querySelector("img")?.alt || "画像記録";
     title.textContent = button.dataset.imageTitle || "画像記録";
@@ -24,6 +25,7 @@
     if (lightbox.hidden) return;
     lightbox.hidden = true;
     image.src = "";
+    image.removeAttribute("data-image-download");
     document.body.classList.remove("image-lightbox-open");
     returnFocus?.focus();
     returnFocus = null;
