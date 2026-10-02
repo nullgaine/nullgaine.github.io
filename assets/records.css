@@ -853,9 +853,11 @@
 
 .image-lightbox-stage img {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0 auto;
 }
 
 .image-lightbox-help {

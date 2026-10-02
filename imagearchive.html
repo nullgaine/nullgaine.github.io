@@ -6,7 +6,7 @@
   <meta name="description" content="N/A市で回収・保存された画像記録の保管ページです。">
   <title>N/A市画像記録保管庫</title>
   <link rel="stylesheet" href="assets/style.css?v=readable-20260829">
-  <link rel="stylesheet" href="assets/records.css?v=imagearchive-20261002">
+  <link rel="stylesheet" href="assets/records.css?v=imagearchive-original-20261002">
 </head>
 <body class="records-page" data-image-protection>
   <div id="header"></div>
@@ -579,10 +579,10 @@
         </div>
         <button class="image-lightbox-close" type="button" data-image-close aria-label="拡大表示を閉じる">×</button>
       </header>
-      <div class="image-lightbox-stage">
+      <div class="image-lightbox-stage" tabindex="0" role="region" aria-label="原寸画像・縦横にスクロールできます">
         <img data-image-lightbox-image src="" alt="" draggable="false">
       </div>
-      <p class="image-lightbox-help">CLICK OUTSIDE OR PRESS ESC TO CLOSE</p>
+      <p class="image-lightbox-help">原寸表示 / スクロールで全体を見る / 背景クリック・ESCで閉じる</p>
     </section>
   </div>
 
@@ -594,7 +594,7 @@
   <div id="footer"></div>
   <script src="common.js"></script>
   <script src="scripts/protect-images.js?v=20261002"></script>
-  <script src="scripts/image-archive.js?v=20261002"></script>
+  <script src="scripts/image-archive.js?v=original-20261002"></script>
   <script>
     async function loadPart(id, file) {
       const response = await fetch(file);

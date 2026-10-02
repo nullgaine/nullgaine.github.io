@@ -3,6 +3,7 @@
   if (!lightbox) return;
 
   const image = lightbox.querySelector("[data-image-lightbox-image]");
+  const stage = lightbox.querySelector(".image-lightbox-stage");
   const title = lightbox.querySelector("[data-image-lightbox-title]");
   const code = lightbox.querySelector("[data-image-lightbox-code]");
   const closeButton = lightbox.querySelector(".image-lightbox-close");
@@ -17,6 +18,8 @@
     title.textContent = button.dataset.imageTitle || "画像記録";
     code.textContent = button.dataset.imageCode || "NA-IM";
     lightbox.hidden = false;
+    stage.scrollTop = 0;
+    stage.scrollLeft = 0;
     document.body.classList.add("image-lightbox-open");
     closeButton.focus();
   }
