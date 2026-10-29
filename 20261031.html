@@ -40,8 +40,8 @@ let targetTime=0;
 function draw(t,dt){
 const a=surfaces[0],c=a.ctx,w=a.w,h=a.h;c.clearRect(0,0,w,h);c.strokeStyle='#201419';c.lineWidth=.5;
 for(let y=0;y<h;y+=24){c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke()}
-c.beginPath();for(let x=0;x<w;x++){const y=h*.62-wave(t*1.2-(w-x)/90)*h*.43;x?c.lineTo(x,y):c.moveTo(x,y)}c.strokeStyle='#ed3348';c.lineWidth=1.4;c.shadowBlur=5;c.shadowColor='#a51a30';c.stroke();c.shadowBlur=0;
-c.beginPath();c.arc(w-2,h*.62-wave(t*1.2)*h*.43,2,0,Math.PI*2);c.fillStyle='#ff6571';c.fill();
+c.beginPath();for(let x=0;x<w;x++){const y=h*.62-wave(t*1.2-(w-x)/90)*h*.43;x?c.lineTo(x,y):c.moveTo(x,y)}c.strokeStyle='#FF0000';c.lineWidth=1.4;c.shadowBlur=5;c.shadowColor='#FF0000';c.stroke();c.shadowBlur=0;
+c.beginPath();c.arc(w-2,h*.62-wave(t*1.2)*h*.43,2,0,Math.PI*2);c.fillStyle='#FF0000';c.fill();
 const b=surfaces[1],bc=b.ctx;bc.clearRect(0,0,b.w,b.h);
 if(t>targetTime){targets.forEach((_,i)=>targets[i]=.06+Math.random()*.89);targetTime=t+.18+Math.random()*.4}
 heights.forEach((v,i)=>{heights[i]+=(targets[i]-v)*Math.min(1,dt*7);const step=b.w/12,rows=18,n=Math.round(heights[i]*rows);for(let j=0;j<rows;j++){bc.fillStyle=j<n?'#fff8e7':'#191813';bc.fillRect(i*step+2,b.h-(j+1)*(b.h/rows),Math.max(1,step-4),Math.max(1,b.h/rows-3))}});
