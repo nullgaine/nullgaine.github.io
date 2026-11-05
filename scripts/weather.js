@@ -14,7 +14,7 @@
     clear: {
       name: "霽れ",
       code: "CLEAR",
-      icon: "image/weather/hare.png",
+      icon: "image/weather/weatherSunny.png",
       summary: "視界良好。市内の移動に問題はありません。",
       safety: "平常",
       precipitation: [0, 10]
@@ -22,7 +22,7 @@
     cloudy: {
       name: "曇り",
       code: "CLOUDY",
-      icon: "image/weather/kumori.png",
+      icon: "image/weather/weatherCloudy.png",
       summary: "雲の多い空模様です。現在、異常気象情報はありません。",
       safety: "平常",
       precipitation: [10, 30]
@@ -30,7 +30,7 @@
     rain: {
       name: "雨",
       code: "RAIN",
-      icon: "image/weather/ame.png",
+      icon: "image/weather/weatherRain.png",
       summary: "雨具をお持ちください。足元と視界にご注意ください。",
       safety: "平常",
       precipitation: [70, 100]
@@ -38,7 +38,7 @@
     snow: {
       name: "雪",
       code: "SNOW / WINTER ONLY",
-      icon: "image/weather/yuki.png",
+      icon: "image/weather/weatherSnow.png",
       summary: "降雪が予想されます。路面の凍結にご注意ください。",
       safety: "注意",
       precipitation: [60, 90]
@@ -53,7 +53,7 @@
     distortion: {
       name: "歪み",
       code: "SPATIAL DISTORTION",
-      icon: "image/weather/yugami.png",
+      icon: "image/weather/weatherDistortion.png",
       summary: "局地的な空間歪曲が観測されています。屋内へ移動してください。",
       safety: "屋内安全",
       precipitation: null
@@ -61,7 +61,7 @@
     visit: {
       name: "來訪",
       code: "VISITATION DETECTED",
-      icon: "image/weather/raihou.png",
+      icon: "image/weather/weatherVisitor.png",
       summary: "來客者が観測されています。警告事項を確認してください。",
       safety: "屋内安全",
       precipitation: null
