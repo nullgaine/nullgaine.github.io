@@ -17,12 +17,13 @@
   <link rel="stylesheet" href="assets/style.css?v=readable-20260829">
   <link rel="stylesheet" href="assets/records.css?v=imagearchive-original-20261002">
 <style>
-.image-record-grid--illustrations{grid-template-columns:minmax(0,1fr)}
-.image-record-row{display:grid;gap:22px;align-items:start;min-width:0}
-.image-record-media--square{aspect-ratio:1;border-bottom:1px solid var(--records-rule)}.image-record-media--square img{padding:14px}
-.image-record-row--pair{grid-template-columns:repeat(2,minmax(0,1fr))}
-.image-record-row--triple{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media(max-width:820px){.image-record-row--pair,.image-record-row--triple{grid-template-columns:minmax(0,1fr)}}
+.image-record-grid--illustrations{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.image-record-grid--illustrations>.image-record-card{min-width:0;align-self:start}
+.image-record-grid--illustrations .image-record-media{aspect-ratio:auto;border-bottom:1px solid var(--records-rule)}
+.image-record-grid--illustrations .image-record-open{height:auto}
+.image-record-grid--illustrations .image-record-media img{height:auto;max-height:none;object-fit:contain;padding:14px}
+.image-record-grid--illustrations.illustration-masonry{grid-auto-rows:1px;grid-auto-flow:dense;column-gap:22px;row-gap:0}
+@media(max-width:820px){.image-record-grid--illustrations{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body class="records-page" data-image-protection>
@@ -447,7 +448,7 @@
     </div>
 
     <section class="image-record-grid image-record-grid--illustrations" aria-label="外峯零イラスト記録">
-<div class="image-record-row image-record-row--pair"><article class="image-record-card">
+<article class="image-record-card">
           <div class="image-record-media image-record-media--birthday">
             <button
               class="image-record-open"
@@ -478,27 +479,29 @@
             <p>moca様より贈られた誕生日記念イラスト。</p>
           </div>
         </article>
+
 <article class="image-record-card">
         <div class="image-record-media image-record-media--artwork">
-          <button class="image-record-open" type="button" data-image-src="image/ytori.jpg" data-image-title="初期SDイラスト" data-image-code="NA-IM/ILLUST-06" aria-label="Ytori様による外峯零の初期SDイラストを拡大表示">
+          <button class="image-record-open" type="button" data-image-src="image/ytori.jpg" data-image-title="初期SDイラスト" data-image-code="NA-IM/ILLUST-02" aria-label="Ytori様による外峯零の初期SDイラストを拡大表示">
             <img src="image/ytori.jpg" width="2039" height="1378" alt="Ytori様による外峯零の初期SDイラスト" draggable="false" loading="lazy" decoding="async">
             <span class="image-record-zoom" aria-hidden="true">VIEW / EXPAND</span>
           </button>
         </div>
         <div class="image-record-card-copy">
-          <div class="image-record-register"><span>NA-IM/ILLUST-06</span><span>CONTRIBUTED</span></div>
+          <div class="image-record-register"><span>NA-IM/ILLUST-02</span><span>CONTRIBUTED</span></div>
           <h3>初期SDイラスト</h3>
           <p>Ytori様描き下ろしのイラスト。</p>
         </div>
-      </article></div>
-<div class="image-record-row image-record-row--triple"><article class="image-record-card">
+      </article>
+
+<article class="image-record-card">
           <div class="image-record-media image-record-media--concept">
             <button
               class="image-record-open"
               type="button"
               data-image-src="image/nullConceptArtTea.png"
               data-image-title="コンセプトアート"
-              data-image-code="NA-IM/ILLUST-02"
+              data-image-code="NA-IM/ILLUST-03"
               aria-label="コンセプトアートを拡大表示"
             >
               <img
@@ -515,47 +518,50 @@
           </div>
           <div class="image-record-card-copy">
             <div class="image-record-register">
-              <span>NA-IM/ILLUST-02</span>
+              <span>NA-IM/ILLUST-03</span>
               <span>ARCHIVED</span>
             </div>
             <h3>コンセプトアート</h3>
             <p>外峯零のコンセプトを描いた図像資料。</p>
           </div>
         </article>
+
 <article class="image-record-card">
         <div class="image-record-media image-record-media--artwork">
-          <button class="image-record-open" type="button" data-image-src="image/seraillust.png" data-image-title="コンセプトアート" data-image-code="NA-IM/ILLUST-07" aria-label="瀬来様による外峯零のコンセプトアートを拡大表示">
-            <img src="image/seraillust.png" width="1920" height="1077" alt="瀬来様による外峯零のコンセプトアート" draggable="false" loading="lazy" decoding="async">
+          <button class="image-record-open" type="button" data-image-src="image/seraillust.png" data-image-title="『神の名前に墜ちる者』イラスト" data-image-code="NA-IM/ILLUST-04" aria-label="瀬來様による『神の名前に墜ちる者』イラストを拡大表示">
+            <img src="image/seraillust.png" width="1920" height="1077" alt="瀬來様による外峯零の『神の名前に墜ちる者』イラスト" draggable="false" loading="lazy" decoding="async">
             <span class="image-record-zoom" aria-hidden="true">VIEW / EXPAND</span>
           </button>
         </div>
         <div class="image-record-card-copy">
-          <div class="image-record-register"><span>NA-IM/ILLUST-07</span><span>CONTRIBUTED</span></div>
-          <h3>コンセプトアート</h3>
-          <p>瀬来様描き下ろしイラスト。</p>
+          <div class="image-record-register"><span>NA-IM/ILLUST-04</span><span>CONTRIBUTED</span></div>
+          <h3>『神の名前に墜ちる者』イラスト</h3>
+          <p>瀬來様描き下ろしイラスト。</p>
         </div>
       </article>
+
 <article class="image-record-card">
         <div class="image-record-media image-record-media--square">
-          <button class="image-record-open" type="button" data-image-src="image/sd20230310.png" data-image-title="SDイラスト" data-image-code="NA-IM/ILLUST-08" aria-label="宮廷絵師 様より贈られた外峯零のSDイラストを拡大表示">
+          <button class="image-record-open" type="button" data-image-src="image/sd20230310.png" data-image-title="SDイラスト" data-image-code="NA-IM/ILLUST-05" aria-label="宮廷絵師 様より贈られた外峯零のSDイラストを拡大表示">
             <img src="image/sd20230310.png" width="700" height="700" alt="宮廷絵師 様より贈られた外峯零のSDイラスト" draggable="false" loading="lazy" decoding="async">
             <span class="image-record-zoom" aria-hidden="true">VIEW / EXPAND</span>
           </button>
         </div>
         <div class="image-record-card-copy">
-          <div class="image-record-register"><span>NA-IM/ILLUST-08</span><span>CONTRIBUTED</span></div>
+          <div class="image-record-register"><span>NA-IM/ILLUST-05</span><span>CONTRIBUTED</span></div>
           <h3>SDイラスト</h3>
           <p>宮廷絵師 様より贈られたSDイラスト。</p>
         </div>
-      </article></div>
-<div class="image-record-row image-record-row--triple"><article class="image-record-card">
+      </article>
+
+<article class="image-record-card">
           <div class="image-record-media image-record-media--poster">
             <button
               class="image-record-open"
               type="button"
               data-image-src="image/nullKimonoZhideneco01.png"
               data-image-title="和服"
-              data-image-code="NA-IM/ILLUST-05"
+              data-image-code="NA-IM/ILLUST-06"
               aria-label="和服の姿絵を拡大表示"
             >
               <img
@@ -570,13 +576,14 @@
           </div>
           <div class="image-record-card-copy">
             <div class="image-record-register">
-              <span>NA-IM/ILLUST-05</span>
+              <span>NA-IM/ILLUST-06</span>
               <span>CONTRIBUTED</span>
             </div>
             <h3>和服</h3>
             <p><a href="https://x.com/zhideneco" target="_blank" rel="noopener noreferrer">猫肉</a>様描き下ろしの姿絵。</p>
           </div>
         </article>
+
 <article class="image-record-card">
           <div class="image-record-media image-record-media--anniversary">
             <button
@@ -584,7 +591,7 @@
               type="button"
               data-image-src="image/debutAnniversary01Illustration.png"
               data-image-title="デビュー1周年記念イラスト"
-              data-image-code="NA-IM/ILLUST-03"
+              data-image-code="NA-IM/ILLUST-07"
               aria-label="デビュー1周年記念イラストを拡大表示"
             >
               <img
@@ -601,13 +608,14 @@
           </div>
           <div class="image-record-card-copy">
             <div class="image-record-register">
-              <span>NA-IM/ILLUST-03</span>
+              <span>NA-IM/ILLUST-07</span>
               <span>ARCHIVED</span>
             </div>
             <h3>デビュー1周年記念</h3>
             <p>デビュー1周年を記念して制作されたイラスト。</p>
           </div>
         </article>
+
 <article class="image-record-card">
           <div class="image-record-media image-record-media--milestone">
             <button
@@ -615,7 +623,7 @@
               type="button"
               data-image-src="image/subscribers1000Illustration.png"
               data-image-title="チャンネル登録者数1000人記念イラスト"
-              data-image-code="NA-IM/ILLUST-04"
+              data-image-code="NA-IM/ILLUST-08"
               aria-label="チャンネル登録者数1000人記念イラストを拡大表示"
             >
               <img
@@ -632,13 +640,13 @@
           </div>
           <div class="image-record-card-copy">
             <div class="image-record-register">
-              <span>NA-IM/ILLUST-04</span>
+              <span>NA-IM/ILLUST-08</span>
               <span>ARCHIVED</span>
             </div>
             <h3>チャンネル登録者数1000人記念</h3>
             <p>チャンネル登録者数1000人達成を記念したイラスト。</p>
           </div>
-        </article></div>
+        </article>
     </section>
 
     <section class="records-footnote" aria-label="画像記録の注意事項">
@@ -681,5 +689,31 @@
     loadPart("header", "partials/header.html?v=96ef6d25");
     loadPart("footer", "partials/footer.html");
   </script>
+<script>
+(() => {
+  const gallery = document.querySelector('.image-record-grid--illustrations');
+  if (!gallery) return;
+  const cards = Array.from(gallery.children);
+  const mobile = window.matchMedia('(max-width:820px)');
+  let frame;
+  function arrange() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      gallery.classList.toggle('illustration-masonry', !mobile.matches);
+      cards.forEach(card => {
+        card.style.gridRowEnd = mobile.matches ? '' : 'span ' + Math.ceil(card.getBoundingClientRect().height + 22);
+      });
+    });
+  }
+  const observer = new ResizeObserver(arrange);
+  cards.forEach(card => {
+    observer.observe(card);
+    card.querySelectorAll('img').forEach(img => img.addEventListener('load', arrange));
+  });
+  window.addEventListener('resize', arrange);
+  if (document.fonts) document.fonts.ready.then(arrange);
+  arrange();
+})();
+</script>
 </body>
 </html>
