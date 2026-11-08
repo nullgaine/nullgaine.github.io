@@ -317,3 +317,15 @@
     transition: none;
   }
 }
+
+/* Keep unit cards readable in rows of three on desktop. */
+@media (min-width: 861px) {
+  .entity-section[aria-labelledby="unit-list-title"] .entity-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .entity-section[aria-labelledby="unit-list-title"] .entity-copy h3 {
+    font-size: clamp(20px, 2.2vw, 28px);
+    white-space: nowrap;
+  }
+}
