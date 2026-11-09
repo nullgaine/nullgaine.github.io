@@ -189,9 +189,50 @@
     return "visit";
   }
 
+  const TREND_ENDPOINT = "https://enuei-weather-relay.null-rei.chatgpt.site/weather.json";
+  const TREND_STORAGE_KEY = "enuei-weather-trend-v1";
+  let externalTrend = null;
+
+  function validTrend(value, now) {
+    return Boolean(value && value.version === 1 && value.available === true
+      && ["clear", "cloudy", "rain"].includes(value.tendency)
+      && Number.isFinite(value.temperatureBand) && value.temperatureBand >= -40 && value.temperatureBand <= 50
+      && Number.isFinite(value.validUntil) && value.validUntil > now && value.validUntil <= now + 48 * 60 * 60 * 1000);
+  }
+
+  function setTrend(value, now) {
+    externalTrend = validTrend(value, now) ? {
+      version: 1, available: true, tendency: value.tendency,
+      temperatureBand: value.temperatureBand, validUntil: value.validUntil
+    } : null;
+    return Boolean(externalTrend);
+  }
+
+  async function refreshTrend() {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 6000);
+    try {
+      const response = await fetch(TREND_ENDPOINT, { signal: controller.signal, credentials: "omit", referrerPolicy: "no-referrer" });
+      if (!response.ok) return false;
+      const value = await response.json();
+      if (!validTrend(value, Date.now())) return false;
+      setTrend(value, Date.now());
+      try { localStorage.setItem(TREND_STORAGE_KEY, JSON.stringify(externalTrend)); } catch (_) {}
+      return true;
+    } catch (_) { return false; }
+    finally { clearTimeout(timeout); }
+  }
+
   function readingFor(slot, forcedKey) {
     const roll = hash(`${slot.key}:weather`) % 100;
-    const key = forcedKey && CONDITIONS[forcedKey] ? forcedKey : chooseWeather(roll, slot.month);
+    let key = forcedKey && CONDITIONS[forcedKey] ? forcedKey : chooseWeather(roll, slot.month);
+    const trend = validTrend(externalTrend, Date.now()) ? externalTrend : null;
+    if (trend && !forcedKey && ["clear", "cloudy", "rain", "snow"].includes(key)) {
+      const influence = hash(`${slot.key}:outside`) % 100;
+      // Abnormal conditions keep their original frequency; ordinary weather follows a broad tendency.
+      if (influence < 75) key = trend.tendency;
+      else if (trend.tendency === "rain") key = "cloudy";
+    }
     const condition = CONDITIONS[key];
     const abnormal = key === "blank" || key === "distortion" || key === "visit";
     const hourAdjustment = { 0: -2, 4: -2, 8: 0, 12: 3, 16: 2, 20: 0 }[slot.hour] || 0;
@@ -199,13 +240,18 @@
     const summer = slot.month >= 6 && slot.month <= 8;
     const variationRange = summer ? 8 : 5;
     const variation = (hash(`${slot.key}:temperature`) % variationRange) - 2;
-    const temperature = abnormal
+    let temperature = abnormal
       ? null
       : MONTH_BASE_TEMPERATURES[slot.month - 1] + hourAdjustment + weatherAdjustment + variation;
-    const precipitation = condition.precipitation
+    let precipitation = condition.precipitation
       ? condition.precipitation[0] + (hash(`${slot.key}:precipitation`) % (condition.precipitation[1] - condition.precipitation[0] + 1))
       : null;
 
+    if (trend && !forcedKey && !abnormal) {
+      temperature = Math.round(trend.temperatureBand * 0.65
+        + MONTH_BASE_TEMPERATURES[slot.month - 1] * 0.35 + hourAdjustment + variation);
+      precipitation = Math.min(100, Math.max(0, Math.round(precipitation / 10) * 10));
+    }
     return { slot, key, condition, temperature, precipitation, roll };
   }
 
@@ -587,7 +633,19 @@
   function start() {
     const previewKey = previewKeyFromSearch(window.location.search);
     renderPreviewNotice(previewKey);
+    try { setTrend(JSON.parse(localStorage.getItem(TREND_STORAGE_KEY)), Date.now()); } catch (_) {}
     let renderedSlot = render(Date.now(), previewKey);
+    let trendRefreshAt = Date.now() + 60 * 60 * 1000;
+    let trendBusy = false;
+    async function updateTrend() {
+      if (trendBusy) return;
+      trendBusy = true;
+      try {
+        await refreshTrend();
+        renderedSlot = render(Date.now(), previewKey);
+      } finally { trendBusy = false; }
+    }
+    updateTrend();
     const clock = document.getElementById("city-clock");
     let clockAnomalyStartsAt = Date.now() + 1800 + Math.random() * 3200;
     let clockAnomalyEndsAt = 0;
@@ -620,6 +678,14 @@
     function tick() {
       const now = Date.now();
       updateClock(now);
+      if (now >= trendRefreshAt) {
+        trendRefreshAt = now + 60 * 60 * 1000;
+        updateTrend();
+      }
+      if (externalTrend && !validTrend(externalTrend, now)) {
+        externalTrend = null;
+        renderedSlot = render(now, previewKey);
+      }
       const nextSlot = slotFor(now).key;
       if (nextSlot !== renderedSlot) renderedSlot = render(now, previewKey);
     }
@@ -643,6 +709,8 @@
     previewKeyFromSearch,
     randomImpossibleTime,
     readingFor,
+    setTrend,
+    validTrend,
     scrambledText,
     slotFor,
     start
