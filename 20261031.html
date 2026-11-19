@@ -23,7 +23,8 @@ main{display:grid;grid-template-columns:minmax(220px,1fr) minmax(280px,1.65fr) m
 @media(max-width:900px){.shell{padding:20px 16px}main{grid-template-columns:minmax(160px,1fr) minmax(200px,1.4fr);height:auto;max-height:none;min-height:0;margin-top:28px}.left,.subject{height:520px}.log-window{grid-column:1/-1;height:300px}header{letter-spacing:.06em}}
 @media(max-width:480px){main{grid-template-columns:minmax(120px,1fr) minmax(160px,1.2fr);gap:10px}.shell{padding:15px 10px}.left{gap:16px}.left,.subject{height:440px}.censor strong{font-size:18px;padding:10px 0}.censor small{font-size:12px;letter-spacing:.05em}.subject-label{left:20px;font-size:12px}.subject-bottom{left:20px;right:20px;font-size:12px}.readout{font-size:12px;padding:8px 6px}.titlebar{font-size:12px;padding:0 6px}.plot{margin:10px 5px 0}.marks{display:none}header{font-size:12px}footer{font-size:12px;letter-spacing:.03em}}
 @media(prefers-reduced-motion:reduce){.entry{animation:none}}
-</style></head><body>
+</style><link rel="stylesheet" href="/assets/site-copyright.css?v=20261119">
+</head><body>
 <div class="shell"><header><span class="identity"><span class="led"></span>N/A CITY / OBSERVATION TERMINAL</span><span>ARCHIVE : 2026.10.31</span></header>
 <main>
 <div class="left">
@@ -64,4 +65,6 @@ function addLog(){const box=$('logs'),follow=box.scrollHeight-box.scrollTop-box.
 function updateButton(){$('pause').textContent=paused?'再生':'一時停止';$('pause').setAttribute('aria-pressed',String(paused))}
 $('pause').onclick=()=>{paused=!paused;updateButton()};updateButton();addLog();draw(0,0);noise();
 function frame(now){const dt=last?Math.min((now-last)/1000,.1):0;last=now;if(!paused&&!document.hidden){elapsed+=dt;draw(elapsed,dt);if(elapsed-lastLog>3.1){addLog();lastLog=elapsed}$('clock').textContent=stamp(new Date());$('pulse').textContent=String(72+Math.round(Math.sin(elapsed*.3)*2)).padStart(3,'0')+' BPM'}requestAnimationFrame(frame)}requestAnimationFrame(frame);
-</script></body></html>
+</script>
+<footer id="site-copyright" class="site-copyright" lang="ja" aria-label="著作権表記">© 2011 CU1000 N/A City General Hospital, All rights reserved.　本サイトは一部フィクション……です。</footer>
+</body></html>

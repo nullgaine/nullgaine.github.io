@@ -1,0 +1,49 @@
+/* Copyright notices for pages without the shared hospital footer. */
+#site-copyright {
+  display: block;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  clear: both;
+  float: none;
+  width: 100%;
+  max-width: none;
+  margin: 28px 0 0;
+  padding: 18px 20px;
+  border: 0;
+  border-top: 1px solid rgba(128, 128, 128, .35);
+  background: transparent;
+  color: inherit;
+  font: 400 12px/1.8 "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, system-ui, sans-serif;
+  letter-spacing: normal;
+  text-align: center;
+  text-transform: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  flex-shrink: 0;
+}
+body.site-copyright-map-page,
+body.site-copyright-release-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+}
+body.site-copyright-map-page > .app,
+body.site-copyright-release-page > .crt {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  width: 100%;
+}
+body.site-copyright-map-page > #site-copyright,
+body.site-copyright-release-page > #site-copyright {
+  flex: 0 0 auto;
+  margin-top: 0;
+  padding: 8px 12px;
+}
+body.site-copyright-map-page > .app { position: relative; }
+body.site-copyright-map-page .map-area { height: 100%; min-height: 0; }
+@media (max-width: 650px) {
+  body.site-copyright-map-page > .app > .sidebar { height: 100%; max-height: 100%; }
+}
