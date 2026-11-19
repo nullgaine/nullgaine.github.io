@@ -22,9 +22,9 @@
   <main>
     <section class="panel" role="search">
       <h1>サイト内検索</h1>
-      <p class="note">ページタイトルや本文中のキーワードで検索できます。</p>
+      <p class="note" id="site-search-guide">施設名・資料名・計画名など、ページタイトルや本文中のキーワードで検索できます。</p>
       <div class="searchbox" style="margin-top:12px">
-        <input id="q" type="search" placeholder="キーワードを入力" aria-label="検索語" autocomplete="off">
+        <input id="q" type="search" placeholder="キーワードを入力" aria-label="検索語" aria-describedby="site-search-guide" autocomplete="off">
         <button class="btn" onclick="doSearch()">検索</button>
       </div>
     </section>
