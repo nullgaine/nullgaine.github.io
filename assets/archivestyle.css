@@ -81,9 +81,19 @@ p{
 .highlight{
   color: var(--accent);
 }
-.a {
-  color: #e8d8df;
-  text-decoration: none;
+a:any-link {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+a:any-link:hover,
+a:any-link:focus-visible {
+  color: #ffc1d2;
+}
+
+a:any-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* ========= INPUT ========= */
@@ -214,7 +224,7 @@ hr{
 }
 
 .timeline a {
-  color: #e8d8df;
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -302,7 +312,7 @@ hr{
   min-height: 38px;
   padding: 7px 12px;
   border: 1px solid var(--border-soft);
-  color: var(--text);
+  color: var(--accent);
   background: rgba(0, 0, 0, 0.16);
   font-size: 13px;
   text-decoration: none;
